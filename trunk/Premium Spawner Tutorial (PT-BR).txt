@@ -1,0 +1,501 @@
+               +-----------------------------------+
+               | PREMIUM SPAWNER - Tutorial básico |
+               +-----------------------------------+
+
+                                               ------------------------
+					       Última revisão: Dez/2010
+                                               ------------------------
+
+	Premium Spawner nasceu como um "mod" do script Ultimate Spawner,
+criado por um Scripter brasileiro chamado Atomic, que possuia um Shard
+chamado AtomicShard. Ele se baseia num script que lê as informações dos
+spawns num "mapa" e então os gera no mundo. O script original foi
+modificado por Nerun (eu mesmo) e quando o número de  modificações ao
+script original se tornou grande, mudei o nome da minha versão. O
+Premium Spawner é o sucessor do Ultimate Spawner v4.0 R5 (até então, a
+simples adição do R, seguido por um número diferenciava a minha versão
+do script original concebido por Atomic). As diferenças fundamentais
+são:
+
+ - O "Premium" possui novas propriedades:
+	1. SpawnID - ID de spawners, usado para remover spawns
+	2. OverrideMap - sobrescreve todas as informações da facet na qual
+		o spawner vai aparecer
+	3. OverrideID - funciona como OverrideMap, mas para SpawnID
+	4. OverrideMinTime - funciona como OverrideMap, mas para MinDelay
+	5. OverrideMaxTime - funciona como OverrideMap, mas para MaxDelay
+
+ - O "Premium" possui uma engine própria, não utilizando mais o spawner
+   padrão que vem com o RunUO, ele utiliza ao invés, o "PremiumSpawner".
+   Você pode usar ambos os sistemas simultaneamente.
+
+	O básico do básico que é preciso saber, é que este Sistema de
+spawner é útil para se manter "salvo" em um arquivo (o mapa) os spawners
+que você criou até agora. Pois supomos que você tenha de apagar tudo e
+recomeçar o mundo do zero. Terá de colocar mais de dez mil spawns denovo?!
+NÃO! Apenas usa um comando e pronto, tudo gerado denovo, e sem esforço,
+que se dá apenas no processo de criação do mapa.
+	O sistema atual está na versão 5.2.x, e é considerada bastante
+madura (do ponto de vista da estabilidade, recursos e facilidade de uso)
+e completa (do ponto de vista do povoamento do mundo).
+
+
+ÍNDICE:
+	1. INSTALANDO O PREMIUM SPAWNER
+	2. PARTE I - O Menu Principal
+	3. PARTE II - Criando um Mapa (Básico)
+	4. PARTE III - Usando os Mapas "In-Game" (Básico)
+	5. PARTE IV - Criando um Mapa (Avançado)
+	6. PARTE V - Usando os Mapas "In-Game" (Avançado)
+	7. PARTE VI - Opções de Edição
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+INSTALANDO O PREMIUM SPAWNER
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+	O sistema de criação de spawners, Premium Spawner, é composto por
+uma coleção de scripts. Como já somam muitos scripts, não irei
+enumerá-los aqui. Atualmente este sistema de spawner é distribuído num
+pacote chamado "Nerun's Distro". Eram diversos pacotes no começo, mas
+para facilidade eu os agrupei numa única distribuição. Este pacote também
+inclui outros recursos, como mapas de spawns para serem usados com esse
+sistema. Assim como gumps (menus) fáceis de usar para facilitar ainda
+mais o povoamento do seu mundo. Esta distro pode ser encontrada no forum
+do RunUO: http://www.runuo.com/.
+
+Para instalar a distro:
+
+1) Dezip "Nerun's Distro v5.2.x".
+2) Depois você verá duas pastas: "Data" e "Scripts". E alguns arquivos.
+3) Corte as pastas "Data" e "Scripts".
+4) Vá para "c:\RunUO 2.1\" (diretório raiz do RunUO) e cole-as lá, o
+   Windows Explorer perguntará se você deseja sobrescrever, clique "sim
+   para todos".
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>
+PARTE I - O Menu Principal
+<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+	Você pode acessar o menu principal do sistema digitando [spawner.
+Há muitas opções no menu, com duas páginas. As opções costumam ser auto-
+explicativas e/ou conter dicas. Mas vou listá-las aqui:
+
+
+USO ATRAVÉS DO MENU                        LINHA DE COMANDO
+===========================================================
+WORLD CREATION OPTIONS:
+	Create World Gump ------------------ [createworld
+SPAWN OPTIONS:
+	Spawn Trammel/Felucca -------------- [spawntrammel or [spawnfelucca
+	Spawn Ilshenar --------------------- [spawnilshenar
+	Spawn Malas ------------------------ [spawnmalas
+	Spawn Tokuno ----------------------- [spawntokuno
+UNLOAD SPAWNS
+	Unload Trammel/Felucca spawns ------ [unloadtrammel or [unloadfelucca
+	Unload Ilshenar spawns ------------- [unloadilshenar
+	Unload Malas spawns ---------------- [unloadmalas
+	Unload Tokuno spawns --------------- [unloadtokuno
+SAVE OPTIONS:
+	Save All spawns (spawns.map) ------- [spawngen save
+	Save 'By Hand' spawns (byhand.map) - [spawngen savebyhand
+	Save spawns inside region ---------- [spawngen save RegionName
+	Save spawns by coordinates --------- [spawngen save x1 y1 x2 y2
+REMOVE OPTIONS:
+	Remove All spawners (all facets) --- [spawngen remove
+	Remove All spawners (current map) -- [spawnrem
+	Remove spawners by ID -------------- [spawngen unload SpawnID
+	Remove spawners by Coordinates ----- [spawngen remove x1 y1 x2 y2
+	Remove spawners inside Region ------ [spawngen remove RegionName
+EDITION OPTIONS:
+	Spawn Editor ----------------------- [editor
+	Clear All Facets ------------------- [clearall
+	Set my own body to GM Style -------- [gmbody
+CONVERSION UTILITY:
+	RunUO Spawns to PremiumSpawner ----- [rse
+SMART PLAYER RANGE SENSITIVE
+	Enable ----------------------------- sem equivalente
+	Disable ---------------------------- sem equivalente
+
+
+	Como vocês podem ver, ele centraliza num único menu todos os
+comandos do sistema, você não precisa saber como se escreve cada comando
+para poder usá-los, basta clicar, seguir as instruções e pronto. Os
+capítulos seguintes irão descrever como criar um mapa, e como usar a
+linha de comando ao invés do Menu "[spawner".
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+PARTE II - Criando um Mapa (Básico)
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+	O Bloco de Notas pode ser usado para criar os mapas. Você verá as
+seguintes informações num mapa básico:
+
+## Britain Graveyard:
+*|Spectre:Wraith|Skeleton|Zombie||||1369|1475|10|2|5|10|30|20|1|2|3|4|0|0|0
+
+	Este é um mapa que fornece as informações de todos os spawns do
+cemitério de Britain. Vamos analisá-lo:
+
+ - A primeira linha começa com um "##", esse duplo "sharp" marca o início
+   de um comentário, isto é, o que vier depois dele não será lido pelo
+   script. Geralmente é usado para fornecer informações sobre o script:
+   de qual dungeon é o mapa, qual revisão está etc.
+
+ - As linhas subsequentes são os spawners em si. Cada linha é um spawner,
+   mas a vantagem do PremiumSpawner é que ele comporta até 6 FakeSpawners
+   dentro de si, que nada mais são do que spawners com os mesmos
+   atributos de distância, tempo etc, mas com lista de criaturas e
+   quantidades diferentes:
+
+	*|Spectre:Wraith|Skeleton|Zombie||||1369|1475|10|2|5|10|30|20|1|2|3|
+	4|0|0|0
+
+-  Todo spawner começa com um "*", seguido por uma "|". Esta "|" separa
+   as informações dentro da linha. Os primeiros 6 espaços são os nomes
+   das criaturas, que no caso são:
+
+	Spawner 1: Spectre OU Wraith (o ":" serve para adicionar varias
+   criaturas numa lista aleatória)
+	Spawner 2: Skeleton
+	Spawner 3: Zombie
+	Spawner 4: Nenhum (vazio)
+	Spawner 5: Nenhum (vazio)
+	Spawner 6: Nenhum (vazio)
+
+-  Os três números que vem depois do nome da criatura definem o lugar
+   onde irá ser criado o spawner. Seguindo o formato X Y Z (todas as
+   informações do spawner são separadas por uma "|"). No caso, o spawner
+   vai aparecer nas coordenadas 1369|1475|10, i. e., X = 1369, Y = 1475
+   e Z = 10. Se você digitar "[go 1369 1475 10" você irá para o lugar
+   onde vai aparecer este spawner.
+
+-  O quarto número diz qual é o mapa onde irá ser colocado este spawner.
+   Perceba que o referido número é 2. A definição dos mapas segue este
+   padrão:
+	0 = spawner vai aparecer em Felucca & Trammel
+	1 = spawner vai aparecer somente em Felucca
+	2 = spawner vai aparecer somente em Trammel
+	3 = spawner vai aparecer somente em Ilshenar
+	4 = spawner vai aparecer somente em Malas
+	5 = spawner vai aparecer somente em Tokuno
+
+   Logo, deduzimos que o spawner vai aparecer em Trammel, pois o quarto
+   número (o do mapa) é o número 2.
+
+-  Os próximos dois números após o do mapa definem respectivamente o
+   tempo mínimo e o tempo máximo para o respawn. Isto é, as criaturas
+   daquele spawner vão "dar respawn" num intervalo de tempo escolhido
+   aleatoriamente entre o tempo mínimo e o máximo. No caso temos "5|10|"
+   , com uma "|" os dois números (sempre uma "|"). O tempo está em
+   minutos, logo os spawners vão dar respawn entre 5 e 10 min após
+   terem sido mortos pelos players.
+
+-  Os próximos dois números após os números do tempo, são respectiva-
+   mente o WalkingRange e o HomeRange. No caso, 30 de WalkingRange e 20 de
+   HomeRange. As criaturas se afastarão portanto a até 30 "quadradinhos"
+   (aqueles que a gente vê quando dá um zoom máximo no jogo) de distân-
+   cia do spawner. Mas eles "darão respawn" aleatoriamente dentro de
+   um raio de até 20 "quadradinhos" de distância do spawner. Perceba
+   que o HomeRange é sempre MENOR ou IGUAL ao WalkingRange, NUNCA MAIOR.
+
+-  O próximo número, identifica o spawner, é uma "SpawnID", ela diz
+   a que conjunto de spawners aquele spawner em particular pertence.
+   Por default, é sempre 1. Ou seja, qualquer spawner criado em jogo
+   utilizando-se do "[add premiumspawner..." terá como SpawnID o número 1.
+   Isto identifica os spawns criados "by hand", na mão. Mas os mapas,
+   podem ter qualquer número para o SpawnID. E é aconselhável que
+   todos os spawns de um mesmo mapa, tenham o mesmo SpawnID. Veremos
+   o porque disto depois.
+
+-  Os últimos 6 números, também importantes, dizem QUANTOS monstros
+   daquele tipo que foi definido no começo do spawner (os 6 primeiros
+   espaços), irão ser gerados por aquele spawner. No caso os números são
+   "2|3|4|0|0|0", logo serão criados 2 spectres ou wraiths, 3 skeletons
+   e 4 zombies. Já os últimos números são 0, ou seja, nada será gerado
+   nos 3 últimos spawners, mesmo que você definisse algum valor, nada
+   seria gerado, pois nenhuma criatura foi listada neles.
+
+	Como observação, perceba que a maioria das propriedades de um
+spawner, descritas acima, podem ser definidas sem a necessidade de "ver"
+onde o spawner irá aparecer, mas as coordenadas será necessário "ver".
+Isto porque se você escolher coordenadas aleatoriamente, corre o risco de
+criar um spawner num lugar inacessível, como por exemplo, no meio do
+oceano!!! De forma que é necessário ir até o lugar onde você gostaria que
+o spawner aparecesse e usar o comando "[get location" no lugar. E então
+anotar as coordenadas que vão aparecer na tela. Outro comando é "[where",
+que diz o lugar onde você está, neste caso fique sobre o lugar onde você
+deseja que o spawner apareça.
+	Feito o mapa, é só salvá-lo no diretório Data/Monsters (se não
+houver uma pasta Monsters dentro de Data, é hora de criar uma. Clique em
+"Salvar Como", selecione em Salvar como Tipo, "Todos os Arquivos" e então
+digite um nome para o mapa, não esquecendo de colocar o ".map" no fim do
+nome. No exemplo acima, se tivéssemos feito aquele mapa, poderíamos
+dar-lhe o nome de "graveyard.map".
+
+RESUMINDO
+	O formato padrão de um spawner é:
+
+*|Lista1|Lista2|Lista3|Lista4|Lista5|Lista6|X|Y|Z|mapa|TempoMín|TempoMáx|
+WalkingRange|HomeRange|SpawnID|Count1|Count2|Count3|Count4|Count5|Count6
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+PARTE III - Usando os Mapas "In-Game"
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+	Esta parte é simples, são apenas a lista de comandos que se deve
+utilizar dentro do jogo para que o script gere os spawners a partir dos
+mapas criados. Partindo do pressuposto que você já instalou os scripts
+necessários no diretório do RunUO, você pode usar os seguintes comandos:
+
+ - [spawngen nomedomapa.map
+	Este lê o mapa e gera os spawns. No nosso exemplo poderia ser algo
+      como "[spawngen graveyard.map".
+
+ - [spawngen remove
+	Este comando é perigoso, porque APAGA TODOS os spawners de todos
+      os mundos do UO! Indiferente de você tê-los feito a mão ou usando a
+      técnica dos mapas.
+
+ - [spawngen save
+	Comando útil, ele SALVA num arquivo chamado "Spawns.map" TODOS os
+      spawners que existirem em seu mundo! É útil para não ter que usar
+      20 vezes o comando de criação de spawners pra CADA mapa que você
+      fez, se tiver que povoar o seu mundo de novo... com a vantagem de
+      salvar tanto os spawners feitos a mão quanto os feitos pela
+      técnica dos mapas.
+
+ - [spawnrem
+	Remove todos os spawners do mapa atual (o mapa no qual foi
+      executado o comando).
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+PARTE IV - Criando um Mapa (Avançado)
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+	Você já aprendeu a criar mapas usando o método de classe, i. e,
+você digita o nome da criatura e depois as estatísticas. Mas e se você
+quiser mais de um tipo de criatura no mesmo spawner?
+
+	Use o método dos pontos. Neste caso, bastaria separar as criaturas
+que você gostaria que aparecessem naquele spawner por ":", como no
+exemplo abaixo:
+
+*|Spectre:Wraith||||||1369|1475|10|2|5|10|30|20|1|10|0|0|0|0|0
+
+	Como resultado final você terá o spawner selecionando aleatoriamente
+dentro da quantidade indicada, entre as criaturas na lista, separadas por
+ponto. Lembrando que você pode colocar quantas criaturas quiser, todas
+separadas pelo ":". No exemplo, poderíamos ter 7 Spectre e 3 Wraith, ou
+5 de cada, este número vai variar.
+
+
+Sobrescrevendo Mapas
+--------------------
+
+	Já pensou em fazer um mapa que sirva tanto para Trammel quanto
+para Felucca? Pois é, ao invés de usar apagar o número do mapa de cada
+linha de spawner de seu mapa para fazer com que ele funcione em outro
+mundo, simplesmente, sobrescreva o número do mapa com uma única linha,
+como você fez com as IDs acima. Assim poderíamos usar o mapa do exemplo
+acima, que gera spawns em Trammel apenas, para gerar spawns tanto em
+Trammel quanto em Felucca, adicionando "overridemap":
+
+overridemap 0
+overrideid 14
+## Britain Graveyard:
+*|Spectre:Wraith|Skeleton|Zombie||||1369|1475|10|2|5|10|30|20|1|2|3|4|0|0|0
+
+	Aqui ele faz com que o "2" do mapa, seja lido como "0" pelo gerador
+de spawners. Os números dos mapas são os mesmos usados e descritos em
+"PARTE II - Criando um Mapa (Básico)".
+
+
+Sobrescrevendo SpawnID
+----------------------
+
+	O mesmo que para OverrideMap, mas para SpawnID. SpawnID "1" será
+lido como "14", como abaixo:
+
+overrideid 14
+overridemap 0
+## Britain Graveyard:
+*|Spectre:Wraith|Skeleton|Zombie||||1369|1475|10|2|5|10|30|20|1|2|3|4|0|0|0
+
+
+Sobrescrevendo DelayTime
+------------------------
+
+	Não gostou do tempo mínimo e máximo para o respawn dos NPCs que
+vem como padrão na distro? Quer mudar? Aumentar ou diminuir o tempo?
+Faça exatamente como para OverrideID ou OverrideMap, mas ao invés,
+utilize:
+
+	overridemintime
+
+	e/ou
+
+	overridemaxtime
+
+Exemplo:
+
+overridemintime 10
+overridemaxtime 20
+overridemap 0
+overrideid 14
+## Britain Graveyard:
+*|Spectre:Wraith|Skeleton|Zombie||||1369|1475|10|2|5|10|30|20|1|2|3|4|0|0|0
+
+	Aqui ele faz com que o "2" do mapa, seja lido como "0", o "1" da ID
+seja lido como "14", e o "5" e "10" do delay sejam lidos como "10" e "20"
+respectivamente pelo gerador de spawners. Os números dos mapas são os
+mesmos usados e descritos em "PARTE II - Criando um Mapa (Básico)".
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+PARTE V - Usando os Mapas "In-Game" (Avançado)
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+Povoamento In-Game
+------------------
+
+	Outra forma de povoar o mundo é ir "in-game" e adicionar os
+spawners manualmente, com o comando [add premiumspawner <nomedacriatura>.
+E depois setar os atributos (x = número):
+
+[set count x homerange x spawnrange x maxdelay x mindelay x
+
+
+Comandos para Salvar e Remover Spawns
+-------------------------------------
+
+	Depois que terminar de povoar a área desejada, use o comando
+[spawngen save, mas espere, vou ensinar-lhe algumas opções avançadas
+deste comando.
+
+[spawngen savebyhand
+	Use este comando para salvar todos os spawns que você fez "na mão"
+      (SpawnID = 1) para um arquivo de nome "byhand.map".
+
+[spawngen save x1 y1 x2 y2
+	Com isto você salva para o arquivo spawns.map todos os spawners que
+      estiverem dentro do retângulo definido pelos valores x1 y1 x2 y2.
+      Mais uma vez, x e y aqui são coordenadas, como no exemplo:
+
+ (x1,y1)------+      	Todos os spawners entre o primeiro grupo
+   |          |      de coordenadas (x1,y1) e o segundo grupo (x2,y2)
+   |          |      formam um retângulo, e tudo que estiver nesta
+   |          |      área definida será salvo para o arquivo. A
+   |          |      coordenada Z neste caso, não é necessária.
+   +---------(x2,y2)
+
+[spawngen save <region>
+	Este é bom também, salva arquivos numa região definida pelo RunUO.
+	A lista completa das regiões varia de mapa para mapa, e você pode
+	achá-la no arquivo que está em c:/RunUO/Data/, chamado Regions.xml.
+	Por exemplo, podemos ver em Regions.xml o seguinte trecho:
+
+<region priority="50" name="Minoc">
+	<rect x="2411" y="366" width="135" height="241" />
+	<rect x="2548" y="495" width="72" height="55" />
+	<rect x="2564" y="585" width="3" height="42" />
+	<rect x="2567" y="585" width="61" height="61" />
+	<rect x="2499" y="627" width="68" height="63" />
+	<inn x="2457" y="397" width="40" height="8" />
+	<inn x="2465" y="405" width="8" height="8" />
+	<inn x="2481" y="405" width="8" height="8" />
+	<go location="(2466,544,0)" />
+	<music name="Minoc" />
+</region>
+
+	Isto define os limite da cidade de Minoc, e cria um monte de
+retângulos, logo, tudo que estiver dentro destes retângulos será salvo
+para "o spawns.map". Ás vezes é útil. Como observação, o "[spawngen
+remove", pode ser usado com as mesmas opções do "[spawngen save" descritas
+acima, com a diferença que os spawners dentro do retângulo serão apagados.
+Outra opção é digitar [where, e a região onde você se encontra vai
+aparecer na tela do jogo, é só copiar o nome.
+	Para encerrar, ao salvar spawners que ficam salvos no spawns.map,
+vá até Data/Monsters e renomeie o arquivo para o nome que você quiser,
+pois se você der outro "[spawngen save", você corre o risco de perder
+seus spawners. Por exemplo, poderíamos renomear o spawns.map gerado pelo
+"[spawngen save minoc" para Minoc.map.
+
+
+Removendo mapas - o método Unload (recomendado)
+-----------------------------------------------
+
+	Outra possibilidade é remover um determinado mapa, sem ter que
+apagar os demais (através do [spawngen remove), e este método que irei
+falar agora, é o melhor método para remover mapas que não se deseja. Em
+jogo use:
+
+[spawngen unload SpawnID
+
+	Por isso que cada mapa deve ter a mesma ID para todos os seus
+spawners, pois se você der uma ID diferente para cada spawner do mapa,
+você não conseguirá remover todo ele. Vamos ver o caso do Graveyards.map
+discutido acima. Todos os spawns dele tem como SpawnID o valor 1 (se
+lembre de dar valores diferentes para cada mapa). Vejamos:
+
+## Britain Graveyard:
+*|Spectre:Wraith|Skeleton|Zombie||||1369|1475|10|2|5|10|30|20|1|2|3|4|0|0|0
+
+	Mas aí tem um problema, pois 1 é o número default para mapas
+feitos "na mão", em jogo. Então temos que dar uma ID diferente para este
+mapa. No exemplo acima bastaria alterar cada uma das linhas. Mas e se o
+mapa tivesse 100 ou talvez 1000 spawners? Seria trabalho demais não? Por
+isso existe o "overrideid", que é um recurso que configura todas as IDs
+do mapa para a mesma ID, com a simples adição de uma linha ao topo do
+arquivo. Bom, para exemplificar eu irei configurar a ID deste mapa para
+"14", que é um bom número.
+
+overrideid 14
+## Britain Graveyard:
+*|Spectre:Wraith|Skeleton|Zombie||||1369|1475|10|2|5|10|30|20|1|2|3|4|0|0|0
+
+	Sútil diferença não? Apesar de cada spawner ainda ter o valor 1 como
+ID em cada linha, o "overrideid 14" fará com que o gerador de spawners
+leia aquele "1" como se fosse "14". Depois em jogo, se eu quiser remover
+este mapa é só digitar "[spawngen unload 14", e pronto. Nenhum dos seus
+outros spawns será alterado ou removido.
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+PARTE VI - Opções de Edição
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+[editor
+	Isto vai abrir o editor de spawns. Será listado todos os spawners
+	do mapa em que você estiver, na coluna da esquerda. Na coluna da
+	direita você pode selecionar para exibição obedecendo certos
+	critérios, tais como: apenas os spawns dentro certa distância de
+	onde você estiver, ou apenas spawns com determinada ID, ou apenas
+	aqueles que tiverem certa criatura. Uma vez selecionado o spawner
+	a editar, você pode: dar um [props, alterar qualquer atributo dele,
+	criaturas etc.
+
+[clearall
+	Quer apagar tudo e começar do zero? Isto funciona como o
+	[Clearfacet, só que apaga todos os mapas, e não apenas aquele no
+	qual você estiver. Seja cauteloso ao usá-lo.
+
+[GMbody
+	Esta distro configurou certas características comuns aos GMs, e
+	criou um comando que quando usado em si mesmo, configura o
+	personagem com uma série de itens, incluindo Robe, spellbooks, cor
+	de cabelo, títulos diferentes para cada nível da hierarquia
+	([Owner], [Developer], [Admin], [Seer], [GM] e [Counselor]). Além
+	de setar o seu corpo para o corpo humano, caso você tenha se
+	modificado para uma quest.
