@@ -1,0 +1,41 @@
+#########################################
+# Nerun's Universal Uninstallation File #
+#               for RunUO               #
+# - don't remove it!                    #
+# - don't edit it!                      #
+#                                       #
+#########################################
+rm/Data/signs.cfg
+rn/Data/signs.cfg.bak
+rm/Data/treasure.cfg
+rn/Data/treasure.cfg.bak
+rm/Data/Decoration/Britannia/NERUN-BritainSewers.cfg
+sh/Data/Decoration/Mondain's Legacy
+rm/Data/Decoration/Trammel/_haven additions.cfg
+rn/Data/Decoration/Trammel/_haven additions.cfg.bak
+rm/Data/Decoration/Trammel/collector quest.cfg
+rn/Data/Decoration/Trammel/collector quest.cfg.bak
+rm/Data/Decoration/Trammel/haven.cfg
+rn/Data/Decoration/Trammel/haven.cfg.bak
+rm/Data/Decoration/Trammel/NERUN-HavenIsland.cfg
+rm/Data/Decoration/Trammel/NERUN-NewHaven.cfg
+rm/Data/Decoration/Trammel/NERUN-OldHaven.cfg
+rm/Data/Decoration/Trammel/uzeraan turmoil quest.cfg
+rn/Data/Decoration/Trammel/uzeraan turmoil quest.cfg.bak
+rm/Data/Locations/felucca.xml
+rn/Data/Locations/felucca.xml.bak
+rm/Data/Locations/termur.xml
+rm/Data/Locations/trammel.xml
+rn/Data/Locations/trammel.xml.bak
+sh/Data/Monsters
+sh/Scripts/Customs/Nerun's Distro
+rm/Scripts/Engines/Quests/Core/QuestSystem.cs
+rn/Scripts/Engines/Quests/Core/QuestSystem.cs.bak
+rm/Scripts/Gumps/Go/GoGump.cs
+rn/Scripts/Gumps/Go/GoGump.cs.bak
+rm/Scripts/Items/Special/MonsterStatuette.cs
+rn/Scripts/Items/Special/MonsterStatuette.cs.bak
+rm/Scripts/Mobiles/BaseCreature.cs
+rn/Scripts/Mobiles/BaseCreature.cs.bak
+rm/Scripts/Mobiles/AI/BaseAI.cs
+rn/Scripts/Mobiles/AI/BaseAI.cs.bak
