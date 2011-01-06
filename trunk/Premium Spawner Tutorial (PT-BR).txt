@@ -3,7 +3,7 @@
                +-----------------------------------+
 
                                                ------------------------
-					       Última revisão: Dez/2010
+					       Última revisão: Jan/2011
                                                ------------------------
 
 	Premium Spawner nasceu como um "mod" do script Ultimate Spawner,
@@ -67,7 +67,7 @@ do RunUO: http://www.runuo.com/.
 
 Para instalar a distro:
 
-1) Dezip "Nerun's Distro v5.2.x".
+1) Descompacte com WinRAR o arquivo "Distro SVN x.rar".
 2) Depois você verá duas pastas: "Data" e "Scripts". E alguns arquivos.
 3) Corte as pastas "Data" e "Scripts".
 4) Vá para "c:\RunUO 2.1\" (diretório raiz do RunUO) e cole-as lá, o
@@ -94,11 +94,13 @@ SPAWN OPTIONS:
 	Spawn Ilshenar --------------------- [spawnilshenar
 	Spawn Malas ------------------------ [spawnmalas
 	Spawn Tokuno ----------------------- [spawntokuno
+	Spawn Ter Mur ---------------------- [spawntermur
 UNLOAD SPAWNS
 	Unload Trammel/Felucca spawns ------ [unloadtrammel or [unloadfelucca
 	Unload Ilshenar spawns ------------- [unloadilshenar
 	Unload Malas spawns ---------------- [unloadmalas
 	Unload Tokuno spawns --------------- [unloadtokuno
+	Unload Ter Mur Spawns -------------- [unloadtermur
 SAVE OPTIONS:
 	Save All spawns (spawns.map) ------- [spawngen save
 	Save 'By Hand' spawns (byhand.map) - [spawngen savebyhand
@@ -116,10 +118,6 @@ EDITION OPTIONS:
 	Set my own body to GM Style -------- [gmbody
 CONVERSION UTILITY:
 	RunUO Spawns to PremiumSpawner ----- [rse
-SMART PLAYER RANGE SENSITIVE
-	Enable ----------------------------- sem equivalente
-	Disable ---------------------------- sem equivalente
-
 
 	Como vocês podem ver, ele centraliza num único menu todos os
 comandos do sistema, você não precisa saber como se escreve cada comando
