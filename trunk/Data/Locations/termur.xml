@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<places>
+	<parent name="Ter Mur">
+		<parent name="Dungeons">
+			<child name="Tomb of Kings" x="35" y="208" z="0" />
+		</parent>
+		<parent name="Sites">
+			<child name="Lava Arena" x="724" y="3691" z="-43" />
+			<child name="Raptor Fields" x="795" y="3827" z="-19" />
+			<child name="The Volcano" x="444" y="3156" z="37" />
+			<child name="Toxic Desert" x="1060" y="3006" z="62" />
+		</parent>
+		<parent name="Stygian Abyss">
+			<child name="Slasher of Veils" x="749" y="475" z="-17" />
+			<child name="Exit to Tomb of Kings" x="946" y="84" z="72" />
+			<child name="Exit to Underworld" x="529" y="920" z="-2" />
+		</parent>
+		<parent name="Towns">
+			<child name="Eastern Refuge" x="1112" y="3619" z="-45" />
+			<child name="Fisherman Village" x="640" y="3059" z="38" />
+			<child name="Holy City" x="996" y="3869" z="-42" />
+			<child name="Royal City" x="748" y="3448" z="-20" />
+		</parent>
+		<parent name="Underworld">
+			<child name="Exit to Britannia" x="1128" y="1201" z="-2" />
+			<child name="Exit to Stygian Abyss" x="1144" y="1086" z="-40" />
+		</parent>
+	</parent>
+</places>
