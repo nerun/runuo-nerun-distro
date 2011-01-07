@@ -67,7 +67,7 @@ do RunUO: http://www.runuo.com/.
 
 Para instalar a distro:
 
-1) Descompacte com WinRAR o arquivo "Distro SVN x.rar".
+1) Descompacte com WinRAR o arquivo "NerunsDistro-rx.rar".
 2) Depois você verá duas pastas: "Data" e "Scripts". E alguns arquivos.
 3) Corte as pastas "Data" e "Scripts".
 4) Vá para "c:\RunUO 2.1\" (diretório raiz do RunUO) e cole-as lá, o
