@@ -70,7 +70,7 @@ RunUO forum at http://www.runuo.com/.
 
 To install the distro:
 
-1) Unrar "Distro SVN x.rar".
+1) Unrar "NerunsDistro-rx.rar".
 
 2) You will se two folders inside: "Data" and "Scripts". Plus some files
    (including this tutiorial, changes history, benchmark tests, SpawnsID of
