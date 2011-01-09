@@ -41,4 +41,5 @@ overridemaxtime 10
 ## Hanse's Hotel
 ##
 *|innkeeper||||||1056|1434|-85|4|2|10|5|0|402|1|0|0|0|0|0
-*|tavernkeeper|waiter|cook|barkeeper|||1051|1434|-85|4|2|10|5|0|402|1|1|1|1|0|0
+*|waiter|cook|barkeeper||||1050|1434|-85|4|2|10|5|0|402|1|1|1|0|0|0
+*|animaltrainer|veterinarian|||||1042|1444|-90|4|5|10|6|4|1|1|1|0|0|0|0
