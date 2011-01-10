@@ -18,12 +18,32 @@ overridemaxtime 10
 *|mongbat|sandvortex|scorpion|snake|spectre||1641|1797|-110|4|5|10|100|100|1|2|1|1|2|1|0
 *|mongbat|sandvortex|scorpion|snake|||1899|1609|-110|4|5|10|100|100|1|6|5|6|5|0|0
 *|mongbat|sandvortex|scorpion|snake|spectre||1741|1487|-110|4|5|10|100|100|1|3|2|3|3|2|0
-*|pixie||||||881|927|-90|4|5|10|30|30|1|6|0|0|0|0|0
-*|titan|horse|||||769|1277|-90|4|5|10|220|220|1|3|6|0|0|0|0
-*|eagle||||||761|1283|-90|4|5|10|200|200|1|1|0|0|0|0|0
-*|evilhealer||||||743|1280|-90|4|5|10|100|100|1|1|0|0|0|0|0
 *|evilhealer||||||2304|1258|-86|4|5|10|70|70|1|1|0|0|0|0|0
-*|hind|sheep|ettin|harpy|||771|1277|-90|4|5|10|220|220|1|8|7|7|7|0|0
 *|sheep|horse|hind||||1347|1739|-110|4|5|10|130|130|1|5|1|3|0|0|0
-## Brigand Camp
+## Brigand Camp (NW from Hanse's Hotel)
 *|brigand||||||943|1150|-90|4|5|10|20|10|1|6|0|0|0|0|0
+## Snowy forest behind Hanse's Hotel
+*|hind:greathart|vampirebat|skitteringhopper||||900|1494|-90|4|5|10|26|26|1|1|1|1|0|0|0
+*|hind:greathart|vampirebat|skitteringhopper||||829|1474|-85|4|5|10|30|30|1|1|1|1|0|0|0
+*|hind:greathart|vampirebat|skitteringhopper||||989|1419|-82|4|5|10|50|40|1|1|1|1|0|0|0
+*|hind:greathart|vampirebat|skitteringhopper||||913|1335|-90|4|5|10|36|36|1|1|1|1|0|0|0
+## Pixies Tree
+*|pixie||||||881|927|-90|4|5|10|30|15|1|6|0|0|0|0|0
+*|pixie||||||882|1000|-90|4|5|10|40|15|1|6|0|0|0|0|0
+*|pixie||||||989|1420|-82|4|5|10|40|15|1|6|0|0|0|0|0
+## Snowy Forest north of the Five Floating Islands archipelago
+*|greathart:hind|skitteringhopper|vampirebat||||790|948|-90|4|5|10|140|120|1|3|1|2|0|0|0
+## Five Floating Islands Archipelago
+*|greathart:hind|skitteringhopper|vampirebat||||766|1364|-90|4|5|10|60|50|1|1|1|1|0|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||656|1431|-90|4|5|10|60|50|1|1|1|1|0|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||805|1232|-90|4|5|10|75|65|1|1|1|1|2|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||672|1237|-90|4|5|10|60|50|1|2|1|1|0|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||684|1109|-90|4|5|10|60|50|1|1|1|1|0|0|0
+## Through path to hanse's hotel
+*|greathart:hind|skitteringhopper|vampirebat||||1079|1440|-90|4|5|10|50|35|1|1|1|1|0|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||966|1213|-90|4|5|10|60|50|1|1|1|1|0|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||925|1105|-90|4|5|10|60|50|1|1|1|1|0|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||1049|1332|-90|4|5|10|60|50|1|1|1|1|0|0|0
+## Behind mountains through path to hanse's hotel
+*|greathart:hind|skitteringhopper|vampirebat||||1086|1067|-90|4|5|10|60|30|1|1|1|1|0|0|0
+*|greathart:hind|skitteringhopper|vampirebat||||1062|988|-90|4|5|10|60|30|1|1|1|1|0|0|0
