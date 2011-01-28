@@ -40,3 +40,5 @@ rm/Scripts/Mobiles/BaseCreature.cs
 rn/Scripts/Mobiles/BaseCreature.cs.bak
 rm/Scripts/Mobiles/AI/BaseAI.cs
 rn/Scripts/Mobiles/AI/BaseAI.cs.bak
+rm/Scripts/Skills/Stealth.cs
+rn/Scripts/Skills/Stealth.cs.bak
