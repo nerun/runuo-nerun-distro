@@ -16,7 +16,8 @@ namespace Server.Mobiles
 		public override void InitSBInfo()
 		{		
 		}
-		
+
+		[Constructable]
 		public Aluniol() : base( "the healer" )
 		{			
 			Name = "Aluniol";

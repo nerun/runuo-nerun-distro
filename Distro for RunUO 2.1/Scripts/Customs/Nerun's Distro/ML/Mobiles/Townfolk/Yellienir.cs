@@ -16,7 +16,8 @@ namespace Server.Mobiles
 		public override void InitSBInfo()
 		{		
 		}
-		
+
+		[Constructable]
 		public Yellienir() : base( "the bark weaver" )
 		{			
 			Name = "Yellienir";

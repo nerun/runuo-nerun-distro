@@ -16,7 +16,8 @@ namespace Server.Mobiles
 		public override void InitSBInfo()
 		{		
 		}
-		
+
+		[Constructable]
 		public Daelas() : base( "the aborist" )
 		{			
 			Name = "Daelas";
