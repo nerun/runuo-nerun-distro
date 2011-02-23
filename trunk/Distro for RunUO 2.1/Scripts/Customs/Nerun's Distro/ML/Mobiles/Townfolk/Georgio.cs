@@ -9,6 +9,7 @@ namespace Server.Mobiles
 	{				
 		public override bool InitialInnocent{ get{ return true; } }
 		
+		[Constructable]
 		public Georgio() : base()
 		{			
 			Name = "Georgio";

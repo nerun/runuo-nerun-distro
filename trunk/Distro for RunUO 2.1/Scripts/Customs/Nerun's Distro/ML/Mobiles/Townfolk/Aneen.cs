@@ -16,7 +16,8 @@ namespace Server.Mobiles
 		public override void InitSBInfo()
 		{		
 		}
-		
+
+		[Constructable]
 		public Aneen() : base( "the keeper of tradition" )
 		{			
 			Name = "Lorekeeper Aneen";

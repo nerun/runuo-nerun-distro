@@ -16,7 +16,8 @@ namespace Server.Mobiles
 		public override void InitSBInfo()
 		{		
 		}
-		
+
+		[Constructable]
 		public Nythalia() : base( "the student" )
 		{			
 			Name = "Nythalia";
