@@ -1,7 +1,7 @@
-///////////////////////////
-//       By Nerun        //
-//    Engine v5.2.2      //
-///////////////////////////
+/////////////////////////
+//       By Nerun      //
+// Engine r12 (v5.3.7) //
+/////////////////////////
 
 using System;
 using System.Collections;
@@ -440,7 +440,13 @@ namespace Server
 							case "*":
 								PlaceNPC( split[2].Split(':'), split[3].Split(':'), split[4].Split(':'), split[5].Split(':'), split[6].Split(':'), split[7], split[8], split[9], split[10], split[11], split[12], split[14], split[13], split[15], split[16], split[17], split[18], split[19], split[20], split[21], split[1].Split(':') );
 								break;
-						}
+
+							//Place By Type
+
+							case "r":
+								PlaceNPC( split[2].Split(':'), split[3].Split(':'), split[4].Split(':'), split[5].Split(':'), split[6].Split(':'), split[7], split[8], split[9], split[10], split[11], split[12], split[14], split[13], split[15], split[16], split[17], split[18], split[19], split[20], split[1], "bloodmoss", "sulfurousash", "spiderssilk", "mandrakeroot", "gravedust", "nightshade", "ginseng", "garlic", "batwing", "pigiron", "noxcrystal", "daemonblood", "blackpearl");
+								break;
+							}
 					}
 				}
 
