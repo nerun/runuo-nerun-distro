@@ -100,13 +100,13 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 222, 10003 );
-			AddImageTiled( 163, 25, 2, 222, 10003 );
-			AddImageTiled( 218, 25, 2, 222, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -158,13 +158,13 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 222, 10003 );
-			AddImageTiled( 163, 25, 2, 222, 10003 );
-			AddImageTiled( 218, 25, 2, 222, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -217,13 +217,13 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 222, 10003 );
-			AddImageTiled( 163, 25, 2, 222, 10003 );
-			AddImageTiled( 218, 25, 2, 222, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -276,18 +276,18 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 97, 10003 );
-			AddImageTiled( 163, 25, 2, 97, 10003 );
-			AddImageTiled( 218, 25, 2, 97, 10003 );
+			//AddImageTiled( 20, 25, 2, 97, 10003 );
+			//AddImageTiled( 163, 25, 2, 97, 10003 );
+			//AddImageTiled( 218, 25, 2, 97, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
 			AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			AddImageTiled( 20, 145, 200, 2, 10001 );
 			//AddImageTiled( 20, 170, 200, 2, 10001 );
 			//AddImageTiled( 20, 195, 200, 2, 10001 );
 			//AddImageTiled( 20, 220, 200, 2, 10001 );
@@ -297,7 +297,7 @@ namespace Server.Gumps
 			AddLabel( 35, 51, 200, "Vendors" );
 			AddLabel( 35, 76, 200, "Wild Life" );
 			AddLabel( 35, 101, 200, "Wrong" );
-			//AddLabel( 35, 126, 200, "28" );
+			AddLabel( 35, 126, 200, "Reagents" );
 			//AddLabel( 35, 151, 200, "29" );
 			//AddLabel( 35, 176, 200, "30" );
 			//AddLabel( 35, 201, 200, "31" );
@@ -307,7 +307,7 @@ namespace Server.Gumps
 			AddCheck( 182, 48, 210, 211, true, 125 );
 			AddCheck( 182, 73, 210, 211, true, 126 );
 			AddCheck( 182, 98, 210, 211, true, 127 );
-			//AddCheck( 182, 123, 210, 211, true, 128 );
+			AddCheck( 182, 123, 210, 211, true, 128 );
 			//AddCheck( 182, 148, 210, 211, true, 129 );
 			//AddCheck( 182, 173, 210, 211, true, 130 );
 			//AddCheck( 182, 198, 210, 211, true, 131 );
@@ -452,6 +452,10 @@ namespace Server.Gumps
 						{
 							CommandSystem.Handle( from, String.Format( "{0}Spawngen trammel/Wrong.map", prefix ) );
 						}
+						if( Selections.Contains( 128 ) == true )
+						{
+							CommandSystem.Handle( from, String.Format( "{0}Spawngen trammel/Reagents.map", prefix ) );
+						}
 					}
 
 					from.Say( "Spawn generation completed!" );
@@ -488,13 +492,13 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 222, 10003 );
-			AddImageTiled( 163, 25, 2, 222, 10003 );
-			AddImageTiled( 218, 25, 2, 222, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -546,13 +550,13 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 222, 10003 );
-			AddImageTiled( 163, 25, 2, 222, 10003 );
-			AddImageTiled( 218, 25, 2, 222, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -605,13 +609,13 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 222, 10003 );
-			AddImageTiled( 163, 25, 2, 222, 10003 );
-			AddImageTiled( 218, 25, 2, 222, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -664,19 +668,19 @@ namespace Server.Gumps
 
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 122, 10003 );
-			AddImageTiled( 163, 25, 2, 122, 10003 );
-			AddImageTiled( 218, 25, 2, 122, 10003 );
+			//AddImageTiled( 20, 25, 2, 122, 10003 );
+			//AddImageTiled( 163, 25, 2, 122, 10003 );
+			//AddImageTiled( 218, 25, 2, 122, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
 			AddImageTiled( 20, 120, 200, 2, 10001 );
 			AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			AddImageTiled( 20, 170, 200, 2, 10001 );
 			//AddImageTiled( 20, 195, 200, 2, 10001 );
 			//AddImageTiled( 20, 220, 200, 2, 10001 );
 			//AddImageTiled( 20, 245, 200, 2, 10001 );
@@ -686,7 +690,7 @@ namespace Server.Gumps
 			AddLabel( 35, 76, 200, "Vendors" );
 			AddLabel( 35, 101, 200, "Wild Life" );
 			AddLabel( 35, 126, 200, "Wrong" );
-			//AddLabel( 35, 151, 200, "29" );
+			AddLabel( 35, 151, 200, "Reagents" );
 			//AddLabel( 35, 176, 200, "30" );
 			//AddLabel( 35, 201, 200, "31" );
 			//AddLabel( 35, 226, 200, "32" );
@@ -696,7 +700,7 @@ namespace Server.Gumps
 			AddCheck( 182, 73, 210, 211, true, 126 );
 			AddCheck( 182, 98, 210, 211, true, 127 );
 			AddCheck( 182, 123, 210, 211, true, 128 );
-			//AddCheck( 182, 148, 210, 211, true, 129 );
+			AddCheck( 182, 148, 210, 211, true, 129 );
 			//AddCheck( 182, 173, 210, 211, true, 130 );
 			//AddCheck( 182, 198, 210, 211, true, 131 );
 			//AddCheck( 182, 223, 210, 211, true, 132 );
@@ -844,6 +848,10 @@ namespace Server.Gumps
 						{
 							CommandSystem.Handle( from, String.Format( "{0}Spawngen felucca/Wrong.map", prefix ) );
 						}
+						if( Selections.Contains( 129 ) == true )
+						{
+							CommandSystem.Handle( from, String.Format( "{0}Spawngen felucca/Reagents.map", prefix ) );
+						}
 					}
 
 					from.Say( "Spawn generation completed!" );
@@ -874,15 +882,16 @@ namespace Server.Gumps
 			//----------
 			AddLabel( 30, 27, 200, "Map name" );
 			AddLabel( 167, 27, 200, "Spawn It" );
+
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 222, 10003 );
-			AddImageTiled( 163, 25, 2, 222, 10003 );
-			AddImageTiled( 220, 25, 2, 222, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 220, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -928,15 +937,16 @@ namespace Server.Gumps
 			//----------
 			AddLabel( 30, 27, 200, "Map name" );
 			AddLabel( 167, 27, 200, "Spawn It" );
+
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 171, 10003 );
-			AddImageTiled( 163, 25, 2, 171, 10003 );
-			AddImageTiled( 220, 25, 2, 171, 10003 );
+			//AddImageTiled( 20, 25, 2, 171, 10003 );
+			//AddImageTiled( 163, 25, 2, 171, 10003 );
+			//AddImageTiled( 220, 25, 2, 171, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -1089,15 +1099,17 @@ namespace Server.Gumps
 			//----------
 			AddLabel( 30, 27, 200, "Map name" );
 			AddLabel( 167, 27, 200, "Spawn It" );
+
 			//colunas
 			//x, y, comprimento, ?, item
 			//comp era 222
-			AddImageTiled( 20, 25, 2, 196, 10003 );
-			AddImageTiled( 163, 25, 2, 196, 10003 );
-			AddImageTiled( 220, 25, 2, 196, 10003 );
+			//AddImageTiled( 20, 25, 2, 196, 10003 );
+			//AddImageTiled( 163, 25, 2, 196, 10003 );
+			//AddImageTiled( 220, 25, 2, 196, 10003 );
+
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -1214,14 +1226,16 @@ namespace Server.Gumps
 			//----------
 			AddLabel( 30, 27, 200, "Map name" );
 			AddLabel( 167, 27, 200, "Spawn It" );
+
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 172, 10003 );
-			AddImageTiled( 163, 25, 2, 172, 10003 );
-			AddImageTiled( 220, 25, 2, 172, 10003 );
+			//AddImageTiled( 20, 25, 2, 172, 10003 );
+			//AddImageTiled( 163, 25, 2, 172, 10003 );
+			//AddImageTiled( 220, 25, 2, 172, 10003 );
+
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
 			AddImageTiled( 20, 95, 200, 2, 10001 );
@@ -1331,36 +1345,39 @@ namespace Server.Gumps
 			//----------
 			AddLabel( 30, 27, 200, "Map name" );
 			AddLabel( 167, 27, 200, "Spawn It" );
+
 			//colunas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 2, 172, 10003 );
-			AddImageTiled( 163, 25, 2, 172, 10003 );
-			AddImageTiled( 220, 25, 2, 172, 10003 );
+			//AddImageTiled( 20, 25, 2, 172, 10003 );
+			//AddImageTiled( 163, 25, 2, 172, 10003 );
+			//AddImageTiled( 220, 25, 2, 172, 10003 );
+
 			//Linhas
 			//x, y, comprimento, ?, item
-			AddImageTiled( 20, 25, 200, 2, 10001 );
+			//AddImageTiled( 20, 25, 200, 2, 10001 );
 			AddImageTiled( 20, 45, 200, 2, 10001 );
 			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+
 			//Map names
 			AddLabel( 35, 51, 200, "Vendors" );
-			AddLabel( 35, 76, 200, "none" );
-			AddLabel( 35, 101, 200, "none" );
-			AddLabel( 35, 126, 200, "none" );
-			AddLabel( 35, 151, 200, "none" );
-			AddLabel( 35, 176, 200, "none" );
+			//AddLabel( 35, 76, 200, "none" );
+			//AddLabel( 35, 101, 200, "none" );
+			//AddLabel( 35, 126, 200, "none" );
+			//AddLabel( 35, 151, 200, "none" );
+			//AddLabel( 35, 176, 200, "none" );
 
 			//Options
 			AddCheck( 182, 48, 210, 211, true, 101 );
-			AddCheck( 182, 73, 210, 211, false, 102 );
-			AddCheck( 182, 98, 210, 211, false, 103 );
-			AddCheck( 182, 123, 210, 211, false, 104 );
-			AddCheck( 182, 148, 210, 211, false, 105 );
-			AddCheck( 182, 173, 210, 211, false, 106 );
+			//AddCheck( 182, 73, 210, 211, false, 102 );
+			//AddCheck( 182, 98, 210, 211, false, 103 );
+			//AddCheck( 182, 123, 210, 211, false, 104 );
+			//AddCheck( 182, 148, 210, 211, false, 105 );
+			//AddCheck( 182, 173, 210, 211, false, 106 );
 
 			//Ok, Cancel
 			// alt era 280
