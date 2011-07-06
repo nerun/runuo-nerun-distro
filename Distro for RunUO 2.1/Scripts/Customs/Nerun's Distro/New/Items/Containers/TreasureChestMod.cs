@@ -1,5 +1,6 @@
-// Treasure Chest Pack - Version 0.99I
-// By Nerun
+// Treasure Chest Pack - Version 1.0
+// Version 0.99I By Nerun
+// Version 1.0 By Obsidian Fire (Gump Fixes)
 
 using Server;
 using Server.Items;
@@ -10,15 +11,15 @@ using System;
 namespace Server.Items
 {
 
-// ---------- [Level 1] ----------
+//----------------------------------------------------------------------------------------------------------- [Level 1] -----------------------------
 // Large, Medium and Small Crate
-	[FlipableAttribute( 0xe3e, 0xe3f )] 
+	[FlipableAttribute( 0xE3E, 0xE3F )] 
 	public class TreasureLevel1 : BaseTreasureChestMod 
 	{ 
-		public override int DefaultGumpID{ get{ return 0x49; } }
+		public override int DefaultGumpID{ get{ return 0x44; } }
 
 		[Constructable] 
-		public TreasureLevel1() : base( Utility.RandomList( 0xE3C, 0xE3E, 0x9a9 ) )
+		public TreasureLevel1() : base( Utility.RandomList( 0xE3C, 0xE3D, 0xE3E, 0xE3F, 0x9a9, 0xE7E ) )
 		{ 
 			RequiredSkill = 52;
 			LockLevel = this.RequiredSkill - Utility.Random( 1, 10 );
@@ -35,7 +36,7 @@ namespace Server.Items
 
 			for (int i = Utility.Random(3) + 1; i > 0; i--) // random 1 to 3
 				DropItem( Loot.RandomGem() );
-	}
+		}
 
 		public TreasureLevel1( Serial serial ) : base( serial ) 
 		{ 
@@ -56,15 +57,15 @@ namespace Server.Items
 		} 
 	}
 
-// ---------- [Level 1 Hybrid] ----------
+//----------------------------------------------------------------------------------------------------------- [Level 1 Hybrid] ----------------------
 // Large, Medium and Small Crate
 	[FlipableAttribute( 0xe3e, 0xe3f )] 
 	public class TreasureLevel1h : BaseTreasureChestMod 
 	{ 
-		public override int DefaultGumpID{ get{ return 0x49; } }
+		public override int DefaultGumpID{ get{ return 0x44; } }
 
 		[Constructable] 
-		public TreasureLevel1h() : base( Utility.RandomList( 0xE3C, 0xE3E, 0x9a9 ) ) 
+		public TreasureLevel1h() : base( Utility.RandomList( 0xE3C, 0xE3D, 0xE3E, 0xE3F, 0x9a9, 0xE7E ) )
 		{ 
 			RequiredSkill = 56;
 			LockLevel = this.RequiredSkill - Utility.Random( 1, 10 );
@@ -116,16 +117,67 @@ namespace Server.Items
 		} 
 	}
 
-// ---------- [Level 2] ----------
+//----------------------------------------------------------------------------------------------------------- [Level 2] -----------------------------
 // Large, Medium and Small Crate
 // Wooden, Metal and Metal Golden Chest
 // Keg and Barrel
-	[FlipableAttribute( 0xe43, 0xe42 )] 
+	[FlipableAttribute( 0xE43, 0xE42 )] 
 	public class TreasureLevel2 : BaseTreasureChestMod 
 	{
+		private void SetChestAppearance()
+		{
+			bool UseFirstItemId = Utility.RandomBool();
+
+			switch( Utility.RandomList( 0, 1, 2, 3, 4, 5, 6, 7 ) )
+			{
+
+				case 0:// Large Crate
+					this.ItemID = ( UseFirstItemId ? 0xE3C : 0xE3D );
+					this.GumpID = 0x44;
+					break;
+
+				case 1:// Medium Crate
+					this.ItemID = ( UseFirstItemId ? 0xE3E : 0xE3F );
+					this.GumpID = 0x44;
+					break;
+
+				case 2:// Small Crate
+					this.ItemID = ( UseFirstItemId ? 0x9A9 : 0xE7E );
+					this.GumpID = 0x44;
+					break;
+
+				case 3:// Wooden Chest
+					this.ItemID = ( UseFirstItemId ? 0xE42 : 0xE43 );
+					this.GumpID = 0x49;
+					break;
+
+				case 4:// Metal Chest
+					this.ItemID = ( UseFirstItemId ? 0x9AB : 0xE7C );
+					this.GumpID = 0x4A;
+					break;
+
+				case 5:// Metal Golden Chest
+					this.ItemID = ( UseFirstItemId ? 0xE40 : 0xE41 );
+					this.GumpID = 0x42;
+					break;
+
+				case 6:// Keg
+					this.ItemID = ( UseFirstItemId ? 0xE7F : 0xE7F );
+					this.GumpID = 0x3e;
+					break;
+
+				case 7:// Barrel
+					this.ItemID = ( UseFirstItemId ? 0xE77 : 0xE77 );
+					this.GumpID = 0x3e;
+					break;
+			}
+		}
+
 		[Constructable] 
-		public TreasureLevel2() : base( Utility.RandomList( 0xe3c, 0xE3E, 0x9a9, 0xe42, 0x9ab, 0xe40, 0xe7f, 0xe77 ) ) 
-		{ 
+		public TreasureLevel2() : base ( Utility.RandomList( 0xE3C, 0xE3E, 0x9A9, 0xE42, 0x9AB, 0xE40, 0xE7F, 0xE77 )) 
+		{
+			this.SetChestAppearance();
+			Movable = false;
 			RequiredSkill = 72;
 			LockLevel = this.RequiredSkill - Utility.Random( 1, 10 );
 			MaxLockLevel = this.RequiredSkill;
@@ -169,16 +221,38 @@ namespace Server.Items
 		} 
 	} 
 
-// ---------- [Level 3] ----------
+//----------------------------------------------------------------------------------------------------------- [Level 3] -----------------------------
 // Wooden, Metal and Metal Golden Chest
-	[FlipableAttribute( 0x9ab, 0xe7c )] 
+	[FlipableAttribute( 0x9AB, 0xE7C )] 
 	public class TreasureLevel3 : BaseTreasureChestMod 
 	{ 
-		public override int DefaultGumpID{ get{ return 0x4A; } }
+		private void SetChestAppearance()
+		{
+			bool UseFirstItemId = Utility.RandomBool();
+			switch( Utility.RandomList( 0, 1, 2 ) )
+			{
+				case 0:// Wooden Chest
+					this.ItemID = ( UseFirstItemId ? 0xE42 : 0xE43 );
+					this.GumpID = 0x49;
+					break;
+
+				case 1:// Metal Chest
+					this.ItemID = ( UseFirstItemId ? 0x9AB : 0xE7C );
+					this.GumpID = 0x4A;
+					break;
+
+				case 2:// Metal Golden Chest
+					this.ItemID = ( UseFirstItemId ? 0xE40 : 0xE41 );
+					this.GumpID = 0x42;
+					break;
+			}
+		}
 
 		[Constructable] 
-		public TreasureLevel3() : base( Utility.RandomList( 0x9ab, 0xe40, 0xe42 ) ) 
-		{ 
+		public TreasureLevel3() : base( Utility.RandomList( 0xE42, 0x9AB, 0xE40 ) ) 
+		{
+			this.SetChestAppearance();
+			Movable = false;
 			RequiredSkill = 84;
 			LockLevel = this.RequiredSkill - Utility.Random( 1, 10 );
 			MaxLockLevel = this.RequiredSkill;
@@ -263,14 +337,38 @@ namespace Server.Items
 		} 
 	} 
 
-// ---------- [Level 4] ----------
+//----------------------------------------------------------------------------------------------------------- [Level 4] -----------------------------
 // Wooden, Metal and Metal Golden Chest
-	[FlipableAttribute( 0xe41, 0xe40 )] 
+	[FlipableAttribute( 0xE41, 0xE40 )] 
 	public class TreasureLevel4 : BaseTreasureChestMod 
-	{ 
+	{
+		private void SetChestAppearance()
+		{
+			bool UseFirstItemId = Utility.RandomBool();
+			switch( Utility.RandomList( 0, 1, 2 ) )
+			{
+				case 0:// Wooden Chest
+					this.ItemID = ( UseFirstItemId ? 0xE42 : 0xE43 );
+					this.GumpID = 0x49;
+					break;
+
+				case 1:// Metal Chest
+					this.ItemID = ( UseFirstItemId ? 0x9AB : 0xE7C );
+					this.GumpID = 0x4A;
+					break;
+
+				case 2:// Metal Golden Chest
+					this.ItemID = ( UseFirstItemId ? 0xE40 : 0xE41 );
+					this.GumpID = 0x42;
+					break;
+			}
+		}
+
 		[Constructable] 
-		public TreasureLevel4() : base( Utility.RandomList( 0xe40, 0xe42, 0x9ab ) )
-		{ 
+		public TreasureLevel4() : base( Utility.RandomList( 0xE42, 0x9AB, 0xE40 ) )
+		{
+			this.SetChestAppearance();
+			Movable = false;
 			RequiredSkill = 92;
 			LockLevel = this.RequiredSkill - Utility.Random( 1, 10 );
 			MaxLockLevel = this.RequiredSkill;
@@ -355,6 +453,5 @@ namespace Server.Items
 
 			int version = reader.ReadInt(); 
 		} 
-	} 
-
+	}
 }
