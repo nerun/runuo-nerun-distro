@@ -95,8 +95,8 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
@@ -107,15 +107,15 @@ namespace Server.Gumps
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
-			AddImageTiled( 20, 245, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 246, "Blighted Grove" );
@@ -153,8 +153,8 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
@@ -165,15 +165,15 @@ namespace Server.Gumps
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
-			AddImageTiled( 20, 245, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 200, "Hythloth" );
@@ -212,8 +212,8 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
@@ -224,15 +224,15 @@ namespace Server.Gumps
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
-			AddImageTiled( 20, 245, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 246, "Sanctuary" );
@@ -271,23 +271,23 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 97, 10003 );
-			//AddImageTiled( 163, 25, 2, 97, 10003 );
-			//AddImageTiled( 218, 25, 2, 97, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
 			//AddImageTiled( 20, 170, 200, 2, 10001 );
 			//AddImageTiled( 20, 195, 200, 2, 10001 );
 			//AddImageTiled( 20, 220, 200, 2, 10001 );
@@ -487,8 +487,8 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
@@ -499,15 +499,15 @@ namespace Server.Gumps
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
-			AddImageTiled( 20, 245, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 246, "Blighted Grove" );
@@ -545,8 +545,8 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
@@ -557,15 +557,15 @@ namespace Server.Gumps
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
-			AddImageTiled( 20, 245, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 200, "Hythloth" );
@@ -604,8 +604,8 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
@@ -616,15 +616,15 @@ namespace Server.Gumps
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
-			AddImageTiled( 20, 245, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 246, "Prism of Light" );
@@ -663,24 +663,24 @@ namespace Server.Gumps
 			AddImageTiled( 10, 20, 220, 232, 3004 );
 
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 122, 10003 );
-			//AddImageTiled( 163, 25, 2, 122, 10003 );
-			//AddImageTiled( 218, 25, 2, 122, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
 			//AddImageTiled( 20, 195, 200, 2, 10001 );
 			//AddImageTiled( 20, 220, 200, 2, 10001 );
 			//AddImageTiled( 20, 245, 200, 2, 10001 );
@@ -879,28 +879,29 @@ namespace Server.Gumps
 			//fundo branco
 			//x, y, largura, altura, item
 			AddImageTiled( 10, 20, 220, 232, 3004 );
+
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 2, 222, 10003 );
 			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 220, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
-			AddImageTiled( 20, 245, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 200, "Ancient Lair" );
@@ -934,26 +935,27 @@ namespace Server.Gumps
 			//fundo branco
 			//x, y, largura, altura, item
 			AddImageTiled( 10, 20, 220, 232, 3004 );
+
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 171, 10003 );
-			//AddImageTiled( 163, 25, 2, 171, 10003 );
-			//AddImageTiled( 220, 25, 2, 171, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
 			//AddImageTiled( 20, 220, 200, 2, 10001 );
 			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
@@ -1096,28 +1098,30 @@ namespace Server.Gumps
 			//x, y, largura, altura, item
 			//alt era 232
 			AddImageTiled( 10, 20, 220, 215, 3004 );
+
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
-			//comp era 222
-			//AddImageTiled( 20, 25, 2, 196, 10003 );
-			//AddImageTiled( 163, 25, 2, 196, 10003 );
-			//AddImageTiled( 220, 25, 2, 196, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
-			AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
+
 			//Map names
 			AddLabel( 35, 51, 200, "Doom" );
 			AddLabel( 35, 76, 200, "North" );
@@ -1223,26 +1227,30 @@ namespace Server.Gumps
 			//fundo branco
 			//x, y, largura, altura, item
 			AddImageTiled( 10, 20, 220, 183, 3004 );
+
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 172, 10003 );
-			//AddImageTiled( 163, 25, 2, 172, 10003 );
-			//AddImageTiled( 220, 25, 2, 172, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
-			AddImageTiled( 20, 95, 200, 2, 10001 );
-			AddImageTiled( 20, 120, 200, 2, 10001 );
-			AddImageTiled( 20, 145, 200, 2, 10001 );
-			AddImageTiled( 20, 170, 200, 2, 10001 );
-			AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 95, 200, 2, 10001 );
+			//AddImageTiled( 20, 120, 200, 2, 10001 );
+			//AddImageTiled( 20, 145, 200, 2, 10001 );
+			//AddImageTiled( 20, 170, 200, 2, 10001 );
+			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
+
 			//Map names
 			AddLabel( 35, 51, 200, "Fan Dancers Dojo" );
 			AddLabel( 35, 76, 200, "Outdoors" );
@@ -1342,26 +1350,29 @@ namespace Server.Gumps
 			//fundo branco
 			//x, y, largura, altura, item
 			AddImageTiled( 10, 20, 220, 183, 3004 );
+
 			//----------
-			AddLabel( 30, 27, 200, "Map name" );
-			AddLabel( 167, 27, 200, "Spawn It" );
+			AddLabel( 30, 27, 200, "MAP NAME" );
+			AddLabel( 167, 27, 200, "SPAWN" );
 
 			//colunas
 			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 172, 10003 );
-			//AddImageTiled( 163, 25, 2, 172, 10003 );
-			//AddImageTiled( 220, 25, 2, 172, 10003 );
+			//AddImageTiled( 20, 25, 2, 222, 10003 );
+			//AddImageTiled( 163, 25, 2, 222, 10003 );
+			//AddImageTiled( 218, 25, 2, 222, 10003 );
 
 			//Linhas
 			//x, y, comprimento, ?, item
 			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			AddImageTiled( 20, 45, 200, 2, 10001 );
-			AddImageTiled( 20, 70, 200, 2, 10001 );
+			//AddImageTiled( 20, 45, 200, 2, 10001 );
+			//AddImageTiled( 20, 70, 200, 2, 10001 );
 			//AddImageTiled( 20, 95, 200, 2, 10001 );
 			//AddImageTiled( 20, 120, 200, 2, 10001 );
 			//AddImageTiled( 20, 145, 200, 2, 10001 );
 			//AddImageTiled( 20, 170, 200, 2, 10001 );
 			//AddImageTiled( 20, 195, 200, 2, 10001 );
+			//AddImageTiled( 20, 220, 200, 2, 10001 );
+			//AddImageTiled( 20, 245, 200, 2, 10001 );
 
 			//Map names
 			AddLabel( 35, 51, 200, "Vendors" );
