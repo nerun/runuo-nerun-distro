@@ -11,7 +11,7 @@ namespace Server.Mobiles
 		public Squirrel() : base( AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
 		{
 			Name = "a squirrel";
-			Body = 0x116;			
+			Body = 0x116;
 
 			SetStr( 44, 50 );
 			SetDex( 35 );
@@ -48,14 +48,14 @@ namespace Server.Mobiles
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			
+
 			writer.Write( (int) 0 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
-			
+
 			int version = reader.ReadInt();
 		}
 	}

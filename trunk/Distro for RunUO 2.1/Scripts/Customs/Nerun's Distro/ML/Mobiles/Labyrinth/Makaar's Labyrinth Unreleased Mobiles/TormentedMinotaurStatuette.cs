@@ -5,17 +5,14 @@ namespace Server.Items
 {
 	public class TormentedMinotaurStatuette : MonsterStatuette
 	{
-	      
-
 		[Constructable]
 		public TormentedMinotaurStatuette() : base( MonsterStatuetteType.TormentedMinotaur )
- 
 		{
 			Name = "Tormented Minotaur Statuette";
 			ItemID = 0x2D88;
-                  Weight = 1.0;			
-		      LootType = LootType.Blessed;
-            }
+			Weight = 1.0;			
+			LootType = LootType.Blessed;
+		}
 
 		public TormentedMinotaurStatuette( Serial serial ) : base( serial )
 		{
@@ -49,4 +46,3 @@ namespace Server.Items
 		}
 	}
 }
-
