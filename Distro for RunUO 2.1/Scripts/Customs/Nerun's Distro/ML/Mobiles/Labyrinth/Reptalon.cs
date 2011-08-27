@@ -4,13 +4,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "a reptalon corpse" )]	
+	[CorpseName( "a reptalon corpse" )]
 	public class Reptalon : BaseMount
 	{
 		[Constructable]
-		public Reptalon() : base( "a reptalon", 0x114, 0x2D95, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.1, 0.2 )
+		public Reptalon() : base( "a reptalon", 0x114, 0x3E90, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.35 )
 		{
-			BaseSoundID = 0x16A; // TODO check			
+			BaseSoundID = 0x16A; // TODO check
 
 			SetStr( 1001, 1025 );
 			SetDex( 152, 164 );
@@ -37,19 +37,19 @@ namespace Server.Mobiles
 			
 			Tamable = true;
 			ControlSlots = 4;
-			MinTameSkill = 101.1;		
+			MinTameSkill = 101.1;
 		}
-				
+
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.AosUltraRich, 3 );
 		}
-		
+
 		public override WeaponAbility GetWeaponAbility()
 		{
 			return WeaponAbility.ParalyzingBlow;
 		}
-		
+
 		public override int TreasureMapLevel{ get{ return 5; } }
 		public override int Meat{ get{ return 5; } }
 		public override int Hides{ get{ return 10; } }
@@ -65,14 +65,14 @@ namespace Server.Mobiles
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			
+
 			writer.Write( (int) 0 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
-			
+
 			int version = reader.ReadInt();
 		}
 	}
