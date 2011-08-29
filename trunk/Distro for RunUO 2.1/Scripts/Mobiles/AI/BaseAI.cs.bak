@@ -180,7 +180,7 @@ namespace Server.Mobiles
 					list.Add( new InternalEntry( from, 6112, 14, m_Mobile, this, OrderType.Stop ) );   // Command: Stop
 					list.Add( new InternalEntry( from, 6114, 14, m_Mobile, this, OrderType.Stay ) );   // Command: Stay
 
-					if( !m_Mobile.Summoned && !( m_Mobile is GrizzledMare ) )
+					if( !m_Mobile.Summoned )
 					{
 						list.Add( new InternalEntry( from, 6110, 14, m_Mobile, this, OrderType.Friend ) ); // Add Friend
 						list.Add( new InternalEntry( from, 6099, 14, m_Mobile, this, OrderType.Unfriend ) ); // Remove Friend
@@ -620,7 +620,7 @@ namespace Server.Mobiles
 
 								if( WasNamed( speech ) && m_Mobile.CheckControlChance( e.Mobile ) )
 								{
-									if( m_Mobile.Summoned  || ( m_Mobile is GrizzledMare ) )
+									if( m_Mobile.Summoned )
 										e.Mobile.SendLocalizedMessage( 1005481 ); // Summoned creatures are loyal only to their summoners.
 									else if( e.Mobile.HasTrade )
 										e.Mobile.SendLocalizedMessage( 1070947 ); // You cannot friend a pet with a trade pending
@@ -714,7 +714,7 @@ namespace Server.Mobiles
 
 								if( !m_Mobile.IsDeadPet && WasNamed( speech ) && m_Mobile.CheckControlChance( e.Mobile ) )
 								{
-									if( m_Mobile.Summoned || ( m_Mobile is GrizzledMare ) )
+									if( m_Mobile.Summoned )
 										e.Mobile.SendLocalizedMessage( 1005487 ); // You cannot transfer ownership of a summoned creature.
 									else if( e.Mobile.HasTrade )
 										e.Mobile.SendLocalizedMessage( 1010507 ); // You cannot transfer a pet with a trade pending
@@ -1548,10 +1548,10 @@ namespace Server.Mobiles
 			m_Mobile.IsBonded = false;
 
 			SpawnEntry se = m_Mobile.Spawner as SpawnEntry;
-			if( se != null && se.HomeLocation != Point3D.Zero )
+			if( se != null && se.Home != Point3D.Zero )
 			{
-				m_Mobile.Home = se.HomeLocation;
-				m_Mobile.RangeHome = se.HomeRange;
+				m_Mobile.Home = se.Home;
+				m_Mobile.RangeHome = se.Range;
 			}
 
 			if( m_Mobile.DeleteOnRelease || m_Mobile.IsDeadPet )
@@ -1619,12 +1619,10 @@ namespace Server.Mobiles
 				{
 					Name = creature.Name;
 				}
-				else if( this.ItemID == ShrinkTable.DefaultItemID || creature.GetType().IsDefined( typeof( FriendlyNameAttribute ), false ) || creature is Reptalon )
+				else if( this.ItemID == ShrinkTable.DefaultItemID ||  creature.GetType().IsDefined( typeof( FriendlyNameAttribute ), false ) )
 					Name = FriendlyNameAttribute.GetFriendlyNameFor( creature.GetType() ).ToString();
 
 				//(As Per OSI)No name.  Normally, set by the ItemID of the Shrink Item unless we either explicitly set it with an Attribute, or, no lookup found
-				
-				Hue = creature.Hue & 0x0FFF;
 			}
 
 			public TransferItem( Serial serial )
@@ -1958,19 +1956,16 @@ namespace Server.Mobiles
 				delay -= 0.075;
 			}
 
-			if ( m_Mobile.ReduceSpeedWithDamage || m_Mobile.IsSubdued )
-			{
-				double offset = (double) m_Mobile.Hits / m_Mobile.HitsMax;
+			double offset = (double)m_Mobile.Hits / m_Mobile.HitsMax;
 
-				if ( offset < 0.0 )
-					offset = 0.0;
-				else if ( offset > 1.0 )
-					offset = 1.0;
+			if( offset < 0.0 )
+				offset = 0.0;
+			else if( offset > 1.0 )
+				offset = 1.0;
 
-				offset = 1.0 - offset;
+			offset = 1.0 - offset;
 
-				delay += ( offset * 0.8 );
-			}
+			delay += (offset * 0.8);
 
 			if( delay < 0.0 )
 				delay = 0.0;
@@ -2623,14 +2618,14 @@ namespace Server.Mobiles
 
 				if( se != null && se.ReturnOnDeactivate && !m_Mobile.Controlled )
 				{
-					if( se.HomeLocation == Point3D.Zero )
+					if( se.Home == Point3D.Zero )
 					{
 						if( !m_Mobile.Region.AcceptsSpawnsFrom( se.Region ) )
 						{
 							Timer.DelayCall( TimeSpan.Zero, new TimerCallback( ReturnToHome ) );
 						}
 					}
-					else if( !m_Mobile.InRange( se.HomeLocation, se.HomeRange ) )
+					else if( !m_Mobile.InRange( se.Home, se.Range ) )
 					{
 						Timer.DelayCall( TimeSpan.Zero, new TimerCallback( ReturnToHome ) );
 					}
