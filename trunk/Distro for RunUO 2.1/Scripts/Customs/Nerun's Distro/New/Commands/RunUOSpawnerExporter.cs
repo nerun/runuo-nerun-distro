@@ -32,10 +32,10 @@ namespace Server.Commands
 			ArrayList list = new ArrayList();
 			ArrayList entries = new ArrayList();
 
-			if ( !Directory.Exists( @".\Export\" ) )
-				Directory.CreateDirectory( @".\Export\" );
+			if ( !Directory.Exists( @".\Data\Monsters\" ) )
+				Directory.CreateDirectory( @".\Data\Monsters\" );
 
-			using ( StreamWriter op = new StreamWriter( String.Format( @".\Export\{0}.map", map ) ) )
+			using ( StreamWriter op = new StreamWriter( String.Format( @".\Data\Monsters\{0}-exported.map", map ) ) )
 			{
 
 				if ( map == null || map == Map.Internal )
@@ -57,65 +57,75 @@ namespace Server.Commands
 						list.Add( item );
 				}
 
-				foreach ( Item item in World.Items.Values )
+				foreach ( Spawner spawner in list )
 				{
-					if ( item.Map == map && item.Parent == null && item is Spawner )
+					string mapfinal = "";
+
+					string walkrange = "";
+
+					if(map == Map.Maps[0])
 					{
-						string mapfinal = "";
+						mapfinal = "1";
+					}
+					else if(map == Map.Maps[1])
+					{
+						mapfinal = "2";
+					}
+					else if(map == Map.Maps[2])
+					{
+						mapfinal = "3";
+					}
+					else if(map == Map.Maps[3])
+					{
+						mapfinal = "4";
+					}
+					else if(map == Map.Maps[4])
+					{
+						mapfinal = "5";
+					}
+					else
+					{
+						mapfinal = "6";
+					}
 
-						if(map == Map.Maps[0])
+					if( spawner.WalkingRange == -1 )
+					{
+						walkrange = spawner.HomeRange.ToString();
+					}
+					else
+					{
+						walkrange = spawner.WalkingRange.ToString();
+					}
+
+					if ( spawner.CreaturesName.Count > 0 )
+					{
+						int MinDelay = ConvertToInt(spawner.MinDelay);
+
+						if (MinDelay < 1)
 						{
-							mapfinal = "1";
-						}
-						if(map == Map.Maps[1])
-						{
-							mapfinal = "2";
-						}
-						if(map == Map.Maps[2])
-						{
-							mapfinal = "3";
-						}
-						if(map == Map.Maps[3])
-						{
-							mapfinal = "4";
-						}
-						if(map == Map.Maps[4])
-						{
-							mapfinal = "5";
-						}
-
-						Spawner spawner = ((Spawner)item);
-
-						if ( spawner.CreaturesName.Count > 0 )
-						{
-							int MinDelay = ConvertToInt(spawner.MinDelay);
-
-							if (MinDelay < 1)
-							{
-								MinDelay = 1;
-							}
-
-							int MaxDelay = ConvertToInt(spawner.MaxDelay);
-
-							if (MaxDelay < MinDelay)
-							{
-								MaxDelay = MinDelay;
-							}
-
-							string towrite = "*|" + spawner.CreaturesName[0];
-
-							for ( int i = 1; i < spawner.CreaturesName.Count; ++i )
-							{
-								towrite = towrite + ":" + spawner.CreaturesName[i].ToString();
-							}
-
-							op.WriteLine( "{0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, spawner.WalkingRange, spawner.HomeRange, spawner.Count);
+							MinDelay = 1;
 						}
 
-						else
+						int MaxDelay = ConvertToInt(spawner.MaxDelay);
+
+						if (MaxDelay < MinDelay)
 						{
-							op.WriteLine( "## No creatures in spawner at: {0} {1} {2}, map: {3}", spawner.X, spawner.Y, spawner.Z, mapfinal);
+							MaxDelay = MinDelay;
 						}
+
+						string towrite = "*|" + spawner.CreaturesName[0];
+
+						for ( int i = 1; i < spawner.CreaturesName.Count; ++i )
+						{
+							towrite = towrite + ":" + spawner.CreaturesName[i].ToString();
+						}
+
+						op.WriteLine( "{0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, walkrange, spawner.HomeRange, spawner.Count);
+					}
+
+					else
+					{
+						op.WriteLine( "## No creatures in spawner at: {0} {1} {2}, map: {3}", spawner.X, spawner.Y, spawner.Z, mapfinal);
 					}
 				}
 
