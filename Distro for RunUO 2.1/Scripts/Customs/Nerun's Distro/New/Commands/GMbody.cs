@@ -152,6 +152,7 @@ namespace Server.Commands
 							PackItem( book3 );
 							PackItem( book4 );
 							PackItem( book5 );
+
 							from.RawStr = 100;
 							from.RawDex = 100;
 							from.RawInt = 100;
@@ -184,6 +185,11 @@ namespace Server.Commands
 							from.Title = "[Seer]";
 						}
 
+						if(from.AccessLevel >= AccessLevel.Administrator)
+						{
+							PackItem( new StaffCloak() );
+						}
+						
 						if(from.AccessLevel == AccessLevel.Administrator)
 						{
 							EquipItem( new AdminRobe() );

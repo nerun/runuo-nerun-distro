@@ -3,7 +3,7 @@
                +----------------------------------+
 
                                         -------------------------------
-					English last revision: Jan/2011
+					English last revision: Sep/2011
                                         -------------------------------
 
 	Premium Spawner project was born as a "mod" of "Ultimate Spawner"
@@ -53,6 +53,7 @@ INDEX:
 	5. PART IV - Writing a Map File (Advanced)
 	6. PART V - Using Maps "In-Game" (Advanced)
 	7. PART VI - Edition Options
+	8. PART VII - Spawns' Overseer
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -518,3 +519,28 @@ PART VI - Edition Options
 	items, skills, stats, robes, full spellbooks etc, will appear in
 	your backpack. You always set your body to human body. You add
 	titles to [GM], [Admin], etc.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+PART VII - SPAWNS' OVERSEER
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Revision 22 has added Spawners’ Overseer engine, the new incarnation of
+Smart Player Range Sensitive.
+
+How it works:
+It has a range, that can be set by a GM or higher. It checks players in
+range every time the clock time ticks. If there is a player in range (or
+a non-hidden Staff Member) it will check players again only after 30 min
+(this time can be changed). If there is no players in range (or if Staff
+Members are hidden, but in range) it will disable all PremiumSpawners in
+range, deleting mobiles and items in range, and it will check for
+players every 5 seconds.
+
+[GenSeers – generates Overseers crystal by reading configuration files
+            at Data\Monsters\Overseers.
+
+[RemSeers – removes all Overseers.
+
+[add SpawnsOverseer – adds an Overseer crystal.
+
+PS.: there is no Overseers in the configuration files yet.

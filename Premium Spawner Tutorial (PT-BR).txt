@@ -3,7 +3,7 @@
                +-----------------------------------+
 
                                                ------------------------
-					       Última revisão: Jan/2011
+					       Última revisão: Set/2011
                                                ------------------------
 
 	Premium Spawner nasceu como um "mod" do script Ultimate Spawner,
@@ -48,7 +48,7 @@ e completa (do ponto de vista do povoamento do mundo).
 	5. PARTE IV - Criando um Mapa (Avançado)
 	6. PARTE V - Usando os Mapas "In-Game" (Avançado)
 	7. PARTE VI - Opções de Edição
-
+	8. PARTE VII - Spawns' Overseer
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -497,3 +497,30 @@ PARTE VI - Opções de Edição
 	([Owner], [Developer], [Admin], [Seer], [GM] e [Counselor]). Além
 	de setar o seu corpo para o corpo humano, caso você tenha se
 	modificado para uma quest.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+PART VII - SPAWNS' OVERSEER
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+A Revisão 22 adicionou o "Spawners’ Overseer": a nova encarnação do
+"Smart Player Range Sensitive", que permitia reduzir o lag, o uso da CPU,
+o tempo de save do jogo, e o tamanho dos arquivos salvos.
+
+Como funciona:
+Ele tem um "range" (alcance), que pode ser editado por um GM ou superior.
+Ele procura por players dentro deste range a cada vez que o timer zera.
+Se houver um jogador neste raiod e alcance (ou um membro da Staff que não
+esteja oculto) ele verificará por players novamente apenas depois 30 min
+(este tempo pode ser alterado). Se não houver jogadores ao alcance (ou se
+os membros da staff estiverem ao alcance, mas ocultos) ele desabilitará
+todos os PremiumSpawners ao alcance, apagando mobiles e itens, e
+voltará a checar por players a cada 5 segundos.
+
+[GenSeers – gera Overseers lendo arquivos de configuração em
+            Data\Monsters\Overseers.
+
+[RemSeers – remove todos os Overseers.
+
+[add SpawnsOverseer – adiciona um Overseer no mapa, onde você clicar.
+
+PS.: atualmente o arquivo de configuração está vazio.
