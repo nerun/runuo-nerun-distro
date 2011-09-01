@@ -4,7 +4,7 @@ using System.IO;
 using Server;
 using Server.Mobiles;
 using Server.Items;
-using Server.Commands; 
+using Server.Commands;
 using Server.Network;
 using Server.Gumps;
 
@@ -53,7 +53,7 @@ namespace Server.Gumps
 
 			AddBackground( 0, 0, 267, 450, 5054 );
 
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.23", true, false );
+			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.24", true, false );
 
 			AddBlackAlpha( 8, 58, 250, 50 );
 
@@ -115,7 +115,7 @@ namespace Server.Gumps
 
 			AddBackground( 0, 0, 267, 450, 5054 );
 
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.23", true, false );
+			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.24", true, false );
 
 			AddBlackAlpha( 8, 58, 250, 110 );
 
@@ -173,25 +173,31 @@ namespace Server.Gumps
 
 			AddBackground( 0, 0, 267, 450, 5054 );
 
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.23", true, false );
+			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.24", true, false );
 
 			AddBlackAlpha( 8, 58, 250, 50 );
 
-			//AddBlackAlpha( 8, 116, 250, 70 );
+			AddBlackAlpha( 8, 116, 250, 70 );
+
+			AddBlackAlpha( 8, 194, 250, 50 );
 
 			AddButton( 220, 405, 0x158A, 0x158B, 10000, GumpButtonType.Reply, 1 ); //Quit Button
 //Options---------------------
 			AddLabel( 10, 60, 52, "CONVERSION UTILITY" );
-			//AddLabel( 10, 118, 52, "SMART PLAYER RANGE SENSITIVE" );
+			AddLabel( 10, 118, 52, "SMART PLAYER RANGE SENSITIVE" );
+			AddLabel( 10, 196, 52, "CUSTOM REGIONS IN A BOX" );
 
 			AddLabel( 45, 80, 52, "RunUO Spawns to PremiumSpawner" );
 			AddButton( 25, 80, 0x845, 0x846, 10200, GumpButtonType.Reply, 0 );
 
-			//AddLabel( 45, 138, 52, "Turn on" );
-			//AddButton( 25, 138, 0x845, 0x846, 10301, GumpButtonType.Reply, 0 );
+			AddLabel( 45, 138, 52, "Generate Spawn's Overseers" );
+			AddButton( 25, 138, 0x845, 0x846, 10301, GumpButtonType.Reply, 0 );
 
-			//AddLabel( 45, 158, 52, "Turn off" );
-			//AddButton( 25, 158, 0x845, 0x846, 10302, GumpButtonType.Reply, 0 );
+			AddLabel( 45, 158, 52, "Remove Overseers" );
+			AddButton( 25, 158, 0x845, 0x846, 10302, GumpButtonType.Reply, 0 );
+
+			AddLabel( 45, 216, 52, "Add a Region Controller" );
+			AddButton( 25, 216, 0x845, 0x846, 10303, GumpButtonType.Reply, 0 );
 
 			AddLabel( 120, 410, 200, "3/3" );
 			AddButton( 100, 410, 0x15E3, 0x15E7, 0, GumpButtonType.Page, 2 );
@@ -362,6 +368,24 @@ namespace Server.Gumps
 				case 10200:
 				{
 					CommandSystem.Handle( from, String.Format( "{0}rse", prefix ) );
+					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					break;
+				}
+				case 10301:
+				{
+					CommandSystem.Handle( from, String.Format( "{0}GenSeers", prefix ) );
+					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					break;
+				}
+				case 10302:
+				{
+					CommandSystem.Handle( from, String.Format( "{0}RemSeers", prefix ) );
+					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					break;
+				}
+				case 10303:
+				{
+					CommandSystem.Handle( from, String.Format( "{0}Add RegionControl", prefix ) );
 					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
 					break;
 				}

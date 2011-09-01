@@ -317,17 +317,18 @@ namespace Joeku
 				case 0: // Player
 					break;
 				case 1: // Counselor
-					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[SpeedBoost"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[who");
+					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[SpeedBoost"); entries.Add("[M Tele"); for( int j = 0; j < 5; j++ ){entries.Add("-*UNUSED*-");}
+					entries.Add("[Where"); entries.Add("[who"); entries.Add("[Self Hide"); entries.Add("[Self Unhide");
 					break;
 				case 2: // GameMaster
-					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Who"); entries.Add("[Tele"); entries.Add("[M Tele"); entries.Add("[Add"); for( int j = 0; j < 3; j++ ){entries.Add("-*UNUSED*-");}
-					entries.Add("[SpawnEditor"); entries.Add("[SpeedBoost"); entries.Add("[Move"); entries.Add("[Delete"); entries.Add("[Wipe"); entries.Add("[Kill");
+					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[SpeedBoost"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 2; j++ ){entries.Add("-*UNUSED*-");}
+					entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Kill"); entries.Add("[Recover"); entries.Add("[Self Unhide");
 					break;
 				case 3: // Seer
 					goto case 2;
 				case 4: // Administrator
-					entries.Add("[Admin"); entries.Add("[PremiumSpawner"); entries.Add("[Props"); entries.Add("[SpeedBoost"); entries.Add("[Self Hide"); entries.Add("[Self Unhide"); for( int j = 0; j < 3; j++ ){entries.Add("-*UNUSED*-");}
-					entries.Add("[StaffRunebook"); entries.Add("[M Tele"); entries.Add("[Go"); entries.Add("[Where"); entries.Add("[Move"); entries.Add("[M Remove");
+					entries.Add("[Admin"); entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[SpeedBoost"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 1; j++ ){entries.Add("-*UNUSED*-");}
+					entries.Add("[PremiumSpawner"); entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Kill"); entries.Add("[Recover"); entries.Add("[Self Unhide");
 					break;
 				case 5: // Developer
 					goto case 4;
@@ -346,15 +347,15 @@ namespace Joeku
 					dimensions.Add(0); dimensions.Add(0);
 					break;
 				case 1: // Counselor
-					dimensions.Add(6); dimensions.Add(1);
+					dimensions.Add(4); dimensions.Add(2);
 					break;
 				case 2: // GameMaster
-					dimensions.Add(6); dimensions.Add(2);
+					dimensions.Add(7); dimensions.Add(2);
 					break;
 				case 3: // Seer
 					goto case 2;
 				case 4: // Administrator
-					dimensions.Add(6); dimensions.Add(2);
+					dimensions.Add(8); dimensions.Add(2);
 					break;
 				case 5: // Developer
 					goto case 4;

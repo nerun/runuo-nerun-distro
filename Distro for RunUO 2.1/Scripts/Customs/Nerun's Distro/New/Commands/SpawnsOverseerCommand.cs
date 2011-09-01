@@ -9,7 +9,7 @@ using System.Text;
 using System.Collections;
 using System.Net;
 
-namespace Server
+namespace Server.Commands
 {
 	public static class GenOverseer
 	{	
