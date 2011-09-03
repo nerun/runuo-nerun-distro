@@ -1,5 +1,5 @@
 // By Nerun
-// Engine 5.1.5
+// Engine r25
 using System;
 using System.Collections;
 using System.IO;
@@ -79,8 +79,8 @@ namespace Server.Gumps
 			Mobile from = e.Mobile;
 
 			AddPage(1);
-
-			AddBackground( 0, 0, 170, 210, 5054 );
+			//x, y, width, hight
+			AddBackground( 0, 0, 232, 210, 5054 );
 
 			AddImageTiled( 15, 30, 120, 20, 3004 );
 			AddTextEntry( 15, 30, 120, 20, 0, 0, @"region to save");
@@ -88,7 +88,7 @@ namespace Server.Gumps
 			AddButton( 140, 32, 0x15E1, 0x15E5, 101, GumpButtonType.Reply, 0 );
 
 			AddLabel( 15, 60, 52, "Tip:" );
-			AddHtml( 15, 80, 140, 110, "This will SAVE the spawners, in a specified region, to Data/Monsters /spawns.map. Type [where if you don't know the region you are. Copy to the text box the name of the region.<BR>Example: you type [where and appear 'your region is town of Britain'. Type 'Britain' in text box.<BR>You also can open Data/Regions.xml to a full list of regions.", true, true );
+			AddHtml( 15, 80, 200, 110, "This will SAVE the spawners, in a specified region, to Data/Monsters/'region name'.map. Type [where if you don't know the region you are. Copy to the text box the name of the region. You also can open Data/Regions.xml to a full list of regions.<BR>Example: you type [where and appear 'your region is town of Britain'. Type 'Britain' in text box.", true, true );
 		}
 
 		public override void OnResponse(NetState state, RelayInfo info)
@@ -136,7 +136,7 @@ namespace Server.Gumps
 
 			AddPage(1);
 
-			AddBackground( 0, 0, 170, 210, 5054 );
+			AddBackground( 0, 0, 232, 210, 5054 );
 
 			AddImageTiled( 15, 30, 120, 20, 3004 );
 			AddTextEntry( 15, 30, 120, 20, 0, 0, @"region to remove");
@@ -144,7 +144,7 @@ namespace Server.Gumps
 			AddButton( 140, 32, 0x15E1, 0x15E5, 101, GumpButtonType.Reply, 0 );
 
 			AddLabel( 15, 60, 52, "Tip:" );
-			AddHtml( 15, 80, 140, 110, "This will REMOVE the spawners, in a specified region. Type [where if you don't know the region you are. Copy to the text box the name of the region.<BR>Example: you type [where and appear 'your region is town of Britain'. Type 'Britain' in text box.<BR>You also can open Data/Regions.xml to a full list of regions.", true, true );
+			AddHtml( 15, 80, 200, 110, "This will REMOVE the spawners, in a specified region. Type [where if you don't know the region you are. Copy to the text box the name of the region. You also can open Data/Regions.xml to a full list of regions.<BR>Example: you type [where and appear 'your region is town of Britain'. Type 'Britain' in text box.", true, true );
 		}
 
 		public override void OnResponse(NetState state, RelayInfo info)
@@ -192,7 +192,7 @@ namespace Server.Gumps
 
 			AddPage(1);
 
-			AddBackground( 0, 0, 170, 210, 5054 );
+			AddBackground( 0, 0, 232, 210, 5054 );
 
 			AddImageTiled( 15, 30, 120, 20, 3004 );
 			AddTextEntry( 15, 30, 120, 20, 0, 0, @"SpawnID to remove");
@@ -200,7 +200,7 @@ namespace Server.Gumps
 			AddButton( 140, 32, 0x15E1, 0x15E5, 101, GumpButtonType.Reply, 0 );
 
 			AddLabel( 15, 60, 52, "Tip:" );
-			AddHtml( 15, 80, 140, 110, "This command was made to UNLOAD your own custom maps. This will REMOVE the spawners with the specified ID. Type '[get spawnid' in a spawner to know your ID. Remember: 'By Hand' spawns, i.e., those done with '[add premiumspawner...', has ID = 1.", true, true );
+			AddHtml( 15, 80, 200, 110, "This command was made to UNLOAD your own custom maps. This will REMOVE the spawners with the specified ID. Type '[get spawnid' in a spawner to know your ID. Remember: 'By Hand' spawns, i.e., those done with '[add premiumspawner' have ID = 1.", true, true );
 		}
 
 		public override void OnResponse(NetState state, RelayInfo info)
@@ -259,7 +259,7 @@ namespace Server.Gumps
 
 			AddPage(1);
 
-			AddBackground( 0, 0, 170, 235, 5054 );
+			AddBackground( 0, 0, 232, 235, 5054 );
 
 			AddImageTiled( 15, 30, 37, 20, 3004 );
 			AddTextEntry( 15, 30, 37, 20, 0, 0, @"X1");
@@ -277,7 +277,7 @@ namespace Server.Gumps
 			AddButton( 140, 32, 0x15E1, 0x15E5, 101, GumpButtonType.Reply, 0 );
 
 			AddLabel( 15, 85, 52, "Tip:" );
-			AddHtml( 15, 105, 140, 110, "This will SAVE spawners inside specified coordinates. You can use [where in the first point and again [where in the second point to get the X and Y coordinates. You need 2: X1, Y1 for first point and X2, Y2 for the second point. The objective is determine a 'box'. This command will save all spawners inside this box.", true, true );
+			AddHtml( 15, 105, 200, 110, "This will SAVE spawners inside specified coordinates. You can use [where in the first point and again [where in the second point to get the X and Y coordinates. You need 2: X1, Y1 for first point and X2, Y2 for the second point. The objective is determine a 'box'. This command will save all spawners inside this box.", true, true );
 		}
 
 		public override void OnResponse(NetState state, RelayInfo info)
@@ -345,7 +345,7 @@ namespace Server.Gumps
 
 			AddPage(1);
 
-			AddBackground( 0, 0, 170, 235, 5054 );
+			AddBackground( 0, 0, 232, 235, 5054 );
 
 			AddImageTiled( 15, 30, 37, 20, 3004 );
 			AddTextEntry( 15, 30, 37, 20, 0, 0, @"X1");
@@ -363,7 +363,7 @@ namespace Server.Gumps
 			AddButton( 140, 32, 0x15E1, 0x15E5, 101, GumpButtonType.Reply, 0 );
 
 			AddLabel( 15, 85, 52, "Tip:" );
-			AddHtml( 15, 105, 140, 110, "This will REMOVE spawners inside specified coordinates. You can use [where in the first point and again [where in the second point to get the X and Y coordinates. You need 2: X1, Y1 for first point and X2, Y2 for the second point. The objective is determine a 'box'. This command will remove all spawners inside this box.", true, true );
+			AddHtml( 15, 105, 200, 110, "This will REMOVE spawners inside specified coordinates. You can use [where in the first point and again [where in the second point to get the X and Y coordinates. You need 2: X1, Y1 for first point and X2, Y2 for the second point. The objective is determine a 'box'. This command will remove all spawners inside this box.", true, true );
 		}
 
 		public override void OnResponse(NetState state, RelayInfo info)

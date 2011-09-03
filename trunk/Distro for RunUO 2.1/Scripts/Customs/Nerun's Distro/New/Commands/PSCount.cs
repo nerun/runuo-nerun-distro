@@ -2,7 +2,7 @@ using System;
 using System.IO; 
 using Server; 
 using System.Text; 
-using System.Collections; 
+using System.Collections.Generic; 
 using System.Net; 
 using Server.Mobiles; 
 using Server.Network;
@@ -29,7 +29,7 @@ namespace Server.Commands
 			Mobile from = e.Mobile; 
 			DateTime time = DateTime.Now;
 
-			ArrayList pspawnerlist = new ArrayList();
+			List<Item> pspawnerlist = new List<Item>();
 
 			foreach ( Item pspawner in World.Items.Values )
 			{

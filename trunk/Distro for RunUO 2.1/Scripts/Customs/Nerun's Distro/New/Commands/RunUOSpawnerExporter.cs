@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Collections;
+using System.Collections.Generic;
 using Server;
 using Server.Mobiles;
 using Server.Items;
@@ -29,8 +29,7 @@ namespace Server.Commands
 		public static void RunUOSpawnerExporter_OnCommand( CommandEventArgs e )
 		{
 			Map map = e.Mobile.Map;
-			ArrayList list = new ArrayList();
-			ArrayList entries = new ArrayList();
+			List<Item> list = new List<Item>();
 
 			if ( !Directory.Exists( @".\Data\Monsters\" ) )
 				Directory.CreateDirectory( @".\Data\Monsters\" );

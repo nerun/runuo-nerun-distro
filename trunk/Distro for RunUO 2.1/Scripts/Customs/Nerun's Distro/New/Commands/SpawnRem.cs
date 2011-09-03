@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using Server;
 using Server.Mobiles;
@@ -30,11 +30,11 @@ namespace Server.Commands
 			World.Broadcast( 0x35, true, "PremiumSpawners are being removed, please wait." );
 			DateTime startTime = DateTime.Now;
 			int count = 0;
-			ArrayList itemsremove = new ArrayList();
+			List<Item> itemsremove = new List<Item>();
 
 			foreach ( Item itemremove in World.Items.Values )
 			{ 
-				if ( itemremove.Name == "PremiumSpawner" && itemremove.Map == from.Map && itemremove.Parent == null )
+				if ( itemremove is PremiumSpawner && itemremove.Map == from.Map && itemremove.Parent == null )
 				{
 					itemsremove.Add( itemremove );
 					count +=1;

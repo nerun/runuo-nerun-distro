@@ -6,7 +6,7 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using System.Text;
-using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Server.Commands
@@ -54,11 +54,11 @@ namespace Server.Commands
 			World.Broadcast( 0x35, true, "Spawns' Overseers are being removed, please wait." );
 			DateTime startTime = DateTime.Now;
 			int count = 0;
-			ArrayList itemsremove = new ArrayList();
+			List<Item> itemsremove = new List<Item>();
 
 			foreach ( Item itemremove in World.Items.Values )
 			{ 
-				if ( itemremove.Name == "Spawns' Overseer" && itemremove.Parent == null )
+				if ( itemremove is SpawnsOverseer && itemremove.Parent == null )
 				{
 					itemsremove.Add( itemremove );
 					count +=1;
