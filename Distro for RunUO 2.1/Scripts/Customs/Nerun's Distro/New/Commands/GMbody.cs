@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using Server;
 using Server.Targeting;
@@ -97,7 +97,7 @@ namespace Server.Commands
 
 						Container pack = from.Backpack;
 
-						ArrayList ItemsToDelete = new ArrayList();
+						List<Item> ItemsToDelete = new List<Item>();
 
 						foreach (Item item in from.Items)
 						{

@@ -1,8 +1,7 @@
 /////////////////////////
 //       By Nerun      //
-// Engine r12 (v5.3.7) //
+//      Engine r25     //
 /////////////////////////
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,47 +36,56 @@ namespace Server
 		[Description( "Generates spawners from Data/Monsters/*.map" )]
 		private static void SpawnGen_OnCommand( CommandEventArgs e )
 		{
+			//wrog use
 			if ( e.ArgString == null || e.ArgString == "" )
 			{
 				e.Mobile.SendMessage( "Usage: SpawnGen [<filename>]|[remove <region>|<rect>|<ID>]|[save <region>|<rect>|<ID>]" );
 			}
+			//[spawngen remove region
 			else if ( e.Arguments[0].ToLower() == "remove" && e.Arguments.Length == 2 )
 			{
 				Remove( e.Mobile, e.Arguments[1].ToLower() );
 			}
+			//[spawngen remove x1 y1 x2 y2
 			else if ( e.Arguments[0].ToLower() == "remove" && e.Arguments.Length == 5 )
 			{
 				int x1 = Utility.ToInt32( e.Arguments[1] );
 				int y1 = Utility.ToInt32( e.Arguments[2] );
 				int x2 = Utility.ToInt32( e.Arguments[3] );
 				int y2 = Utility.ToInt32( e.Arguments[4] );
-				Remove( e.Mobile, x1, y1, x2, y2 );
+				RemoveByCoord( e.Mobile, x1, y1, x2, y2 );
 			}
+			//[spawngen remove
 			else if ( e.ArgString.ToLower() == "remove" )
 			{
 				Remove( e.Mobile, ""  );
 			}
+			//[spawngen save region
 			else if ( e.Arguments[0].ToLower() == "save" && e.Arguments.Length == 2 )
 			{
 				Save( e.Mobile, e.Arguments[1].ToLower() );
 			}
+			//[spawngen unload SpawnID 
 			else if ( e.Arguments[0].ToLower() == "unload" && e.Arguments.Length == 2 )
 			{
 				int ID = Utility.ToInt32( e.Arguments[1] );
-				Remove( ID );
+				Unload( ID );
 			}
+			//[spawngen savebyhand
 			else if ( e.Arguments[0].ToLower() == "savebyhand" )
 			{
 				SaveByHand();
 			}
+			////[spawngen save x1 y1 x2 y2
 			else if ( e.Arguments[0].ToLower() == "save" && e.Arguments.Length == 5 )
 			{
 				int x1 = Utility.ToInt32( e.Arguments[1] );
 				int y1 = Utility.ToInt32( e.Arguments[2] );
 				int x2 = Utility.ToInt32( e.Arguments[3] );
 				int y2 = Utility.ToInt32( e.Arguments[4] );
-				Save( e.Mobile, x1, y1, x2, y2 );
+				SaveByCoord( e.Mobile, x1, y1, x2, y2 );
 			}
+			//[spawngen save
 			else if ( e.ArgString.ToLower() == "save" )
 			{
 				Save( e.Mobile, "" );
@@ -88,170 +96,180 @@ namespace Server
 			}
 		}
 
+		public static void Talk( string alfa )
+		{
+			World.Broadcast( 0x35, true, "Spawns are being {0}, please wait.", alfa );
+		}
+		
+		public static string GetRegion(Item item)
+		{
+			Region re = Region.Find(item.Location, item.Map);
+			string regname = re.ToString().ToLower();
+			return regname;
+		}
+
+		//[spawngen remove and [spawngen remove region
 		private static void Remove( Mobile from, string region )
 		{
-			World.Broadcast( 0x35, true, "Spawns are being removed, please wait." );
-			DateTime startTime = DateTime.Now;
+			Talk("removed");
+			DateTime aTime = DateTime.Now;
 			int count = 0;
-			ArrayList itemsdel = new ArrayList();
-			string prefix = Server.Commands.CommandSystem.Prefix;
+			List<Item> itemtodo = new List<Item>();
 
-			if ( region == null || region == "" )
+			string prefix = Server.Commands.CommandSystem.Prefix;
+		
+			if( region == null || region == "" )
 			{
 				CommandSystem.Handle( from, String.Format( "{0}Global remove where premiumspawner", prefix ) );
 			}
 			else
 			{
-				foreach ( Item itemdel in World.Items.Values )
+				foreach( Item itemdel in World.Items.Values )
 				{
-					Region re = Region.Find(itemdel.Location, itemdel.Map);
-					string regname = re.ToString().ToLower();
-
-					if ( itemdel is PremiumSpawner && itemdel.Map == from.Map )
+					if( itemdel is PremiumSpawner && itemdel.Map == from.Map )
 					{
-						if (regname == region )
+						if( GetRegion(itemdel) == region )
 						{
-							itemsdel.Add(itemdel);
+							itemtodo.Add(itemdel);
 							count += 1;
 						}
 					}
 				}
 
-				foreach ( Item itemdel2 in itemsdel )
-				{
-					itemdel2.Delete();
-				}
-
-				DateTime endTime = DateTime.Now;
-				World.Broadcast( 0x35, true, "{0} spawns have been removed in {1:F1} seconds.", count, (endTime - startTime).TotalSeconds );
+				GenericRemove( itemtodo, count, aTime);
 			}
 		}
 
-		private static void Save( Mobile from, string region )
+		//[spawngen unload SpawnID
+		private static void Unload( int ID )
 		{
-			World.Broadcast( 0x35, true, "Spawns are being saved, please wait." );
-			DateTime startTime = DateTime.Now;
+			Talk("removed");
+			DateTime aTime = DateTime.Now;
 			int count = 0;
-			ArrayList itemssave = new ArrayList();
-			string mapanome = "spawns";
-
-			foreach ( Item itemsave in World.Items.Values )
-			{
-				Region re = Region.Find(itemsave.Location, itemsave.Map);
-				string regname = re.ToString().ToLower();
-
-				if ( itemsave is PremiumSpawner && ( region == null || region == "" ) )
-				{
-					itemssave.Add( itemsave );
-					count +=1;
-				}
-
-				else if ( itemsave is PremiumSpawner && itemsave.Map == from.Map )
-				{
-					if ( regname == region )
-					{
-						itemssave.Add( itemsave );
-						count += 1;
-					}
-				}
-			}
-
-			GenericSave( itemssave, mapanome, count, startTime );
-		}
-
-		private static void Remove( int ID )
-		{
-			World.Broadcast( 0x35, true, "Spawns are being removed, please wait." );
-			DateTime startTime = DateTime.Now;
-			int count = 0;
-			ArrayList itemsremove = new ArrayList();
+			List<Item> itemtodo = new List<Item>();
 
 			foreach ( Item itemremove in World.Items.Values )
 			{ 
 				if ( itemremove is PremiumSpawner && ((PremiumSpawner)itemremove).SpawnID == ID )
 				{
-					itemsremove.Add( itemremove );
+					itemtodo.Add( itemremove );
 					count +=1;
 				}
 			}
 
-			foreach ( Item itemremove2 in itemsremove )
-			{
-				itemremove2.Delete();
-			}
-
-			DateTime endTime = DateTime.Now;
-			World.Broadcast( 0x35, true, "{0} spawns have been removed in {1:F1} seconds.", count, (endTime - startTime).TotalSeconds );
+			GenericRemove( itemtodo, count, aTime);
 		}
 
-		private static void SaveByHand()
+		//[spawngen remove x1 y1 x2 y2
+		private static void RemoveByCoord( Mobile from, int x1, int y1, int x2, int y2 )
 		{
-			World.Broadcast( 0x35, true, "Spawns are being saved, please wait." );
-			DateTime startTime = DateTime.Now;
+			Talk("removed");
+			DateTime aTime = DateTime.Now;
 			int count = 0;
-			ArrayList itemssave = new ArrayList();
-			string mapanome = "byhand";
-
-			foreach ( Item itemsave in World.Items.Values )
-			{ 
-				if ( itemsave is PremiumSpawner && ((PremiumSpawner)itemsave).SpawnID == 1 )
-				{
-					itemssave.Add( itemsave );
-					count +=1;
-				}
-			}
-
-			GenericSave( itemssave, mapanome, count, startTime );
-		}
-
-		private static void Remove( Mobile from, int x1, int y1, int x2, int y2 )
-		{
-			World.Broadcast( 0x35, true, "Spawns are being removed, please wait." );
-			DateTime startTime = DateTime.Now;
-			int count = 0;
-			ArrayList itemsremove = new ArrayList();
+			List<Item> itemtodo = new List<Item>();
 
 			foreach ( Item itemremove in World.Items.Values )
 			{ 
 				if ( itemremove is PremiumSpawner && ( ( itemremove.X >= x1 && itemremove.X <= x2 ) && ( itemremove.Y >= y1 && itemremove.Y <= y2 ) && itemremove.Map == from.Map ) )
 				{
-					itemsremove.Add( itemremove );
+					itemtodo.Add( itemremove );
 					count +=1;
 				}
 			}
 
-			foreach ( Item itemremove2 in itemsremove )
-			{
-				itemremove2.Delete();
-			}
-
-			DateTime endTime = DateTime.Now;
-			World.Broadcast( 0x35, true, "{0} spawns have been removed. The entire process took {1:F1} seconds.", count, (endTime - startTime).TotalSeconds );
+			GenericRemove( itemtodo, count, aTime);
 		}
 
-		private static void Save( Mobile from, int x1, int y1, int x2, int y2 )
+		private static void GenericRemove( List<Item> colecao, int count, DateTime aTime )
 		{
-			World.Broadcast( 0x35, true, "Spawns are being saved, please wait." );
-			DateTime startTime = DateTime.Now;
+			foreach ( Item item in colecao )
+			{
+				item.Delete();
+			}
+			
+			DateTime bTime = DateTime.Now;
+
+			World.Broadcast( 0x35, true, "{0} spawns have been removed in {1:F1} seconds.", count, (bTime - aTime) );
+		}
+
+		//[spawngen save and [spawngen save region
+		private static void Save( Mobile from, string region )
+		{
+			Talk("saved");
+			DateTime aTime = DateTime.Now;
 			int count = 0;
-			ArrayList itemssave = new ArrayList();
-			string mapanome = "spawns";
+			List<Item> itemtodo = new List<Item>();
+			string mapanome = region;
+
+			if( region == "" )
+				mapanome = "Spawns";
+
+			foreach ( Item itemsave in World.Items.Values )
+			{
+				if ( itemsave is PremiumSpawner && ( region == null || region == "" ) )
+				{
+					itemtodo.Add( itemsave );
+					count +=1;
+				}
+
+				else if ( itemsave is PremiumSpawner && itemsave.Map == from.Map )
+				{
+					if ( GetRegion(itemsave) == region )
+					{
+						itemtodo.Add( itemsave );
+						count += 1;
+					}
+				}
+			}
+
+			GenericSave( itemtodo, mapanome, count, aTime );
+		}
+
+		//[spawngen SaveByHand
+		private static void SaveByHand()
+		{
+			Talk("saved");
+			DateTime aTime = DateTime.Now;
+			int count = 0;
+			List<Item> itemtodo = new List<Item>();
+			string mapanome = "SpawnsByHand";
+
+			foreach ( Item itemsave in World.Items.Values )
+			{ 
+				if ( itemsave is PremiumSpawner && ((PremiumSpawner)itemsave).SpawnID == 1 )
+				{
+					itemtodo.Add( itemsave );
+					count +=1;
+				}
+			}
+
+			GenericSave( itemtodo, mapanome, count, aTime );
+		}
+
+		//[spawngen save x1 y1 x2 y2
+		private static void SaveByCoord( Mobile from, int x1, int y1, int x2, int y2 )
+		{
+			Talk("saved");
+			DateTime aTime = DateTime.Now;
+			int count = 0;
+			List<Item> itemtodo = new List<Item>();
+			string mapanome = "SpawnsByCoords";
 
 			foreach ( Item itemsave in World.Items.Values )
 			{ 
 				if ( itemsave is PremiumSpawner && ( ( itemsave.X >= x1 && itemsave.X <= x2 ) && ( itemsave.Y >= y1 && itemsave.Y <= y2 ) && itemsave.Map == from.Map ) )
 				{
-					itemssave.Add( itemsave );
+					itemtodo.Add( itemsave );
 					count +=1;
 				}
 			}
 
-			GenericSave( itemssave, mapanome, count, startTime );
+			GenericSave( itemtodo, mapanome, count, aTime );
 		}
 
-		private static void GenericSave( ArrayList colecao, string mapa, int count, DateTime startTime )
+		private static void GenericSave( List<Item> colecao, string mapa, int count, DateTime startTime )
 		{
-			ArrayList itemssave = new ArrayList( colecao );
+			List<Item> itemssave = new List<Item>( colecao );
 			string mapanome = mapa;
 
 			if ( !Directory.Exists( "Data/Monsters" ) )
@@ -387,7 +405,7 @@ namespace Server
 			}
 
 			DateTime endTime = DateTime.Now;
-			World.Broadcast( 0x35, true, "{0} spawns had been saved. The entire process took {1:F1} seconds.", count, (endTime - startTime).TotalSeconds );
+			World.Broadcast( 0x35, true, "{0} spawns have been saved. The entire process took {1:F1} seconds.", count, (endTime - startTime).TotalSeconds );
 		}
 
 		public static void Parse( Mobile from, string filename )
@@ -431,22 +449,17 @@ namespace Server
 						switch( split[0].ToLower() ) 
 						{
 							//Comment Line
-
 							case "##":
 								break;
-
 							//Place By class
-
 							case "*":
 								PlaceNPC( split[2].Split(':'), split[3].Split(':'), split[4].Split(':'), split[5].Split(':'), split[6].Split(':'), split[7], split[8], split[9], split[10], split[11], split[12], split[14], split[13], split[15], split[16], split[17], split[18], split[19], split[20], split[21], split[1].Split(':') );
 								break;
-
 							//Place By Type
-
 							case "r":
 								PlaceNPC( split[2].Split(':'), split[3].Split(':'), split[4].Split(':'), split[5].Split(':'), split[6].Split(':'), split[7], split[8], split[9], split[10], split[11], split[12], split[14], split[13], split[15], split[16], split[17], split[18], split[19], split[20], split[1], "bloodmoss", "sulfurousash", "spiderssilk", "mandrakeroot", "gravedust", "nightshade", "ginseng", "garlic", "batwing", "pigiron", "noxcrystal", "daemonblood", "blackpearl");
 								break;
-							}
+						}
 					}
 				}
 
@@ -492,7 +505,7 @@ namespace Server
 
 			TimeSpan maxtime = TimeSpan.FromMinutes( dmaxtime );
 			int homerange = Utility.ToInt32( shomerange );
-		        int walkingrange = Utility.ToInt32( swalkingrange );
+	        int walkingrange = Utility.ToInt32( swalkingrange );
 			int spawnid = Utility.ToInt32( sspawnid );
 			int npccount = Utility.ToInt32( snpccount );
 			int fakecountA = Utility.ToInt32( sfakecountA );
