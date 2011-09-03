@@ -116,7 +116,7 @@ SAVE OPTIONS:
 	Save spawns by coordinates --------- [spawngen save x1 y1 x2 y2
 REMOVE OPTIONS:
 	Remove All spawners (all facets) --- [spawngen remove
-	Remove All spawners (current map) -- [spawnrem
+	Remove All spawners (current map) -- [spawnen cleanfacet
 	Remove spawners by ID -------------- [spawngen unload SpawnID
 	Remove spawners by Coordinates ----- [spawngen remove x1 y1 x2 y2
 	Remove spawners inside Region ------ [spawngen remove RegionName

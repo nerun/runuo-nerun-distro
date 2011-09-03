@@ -1,6 +1,6 @@
 /////////////////////////
 //       By Nerun      //
-//      Engine r25     //
+//      Engine r26     //
 /////////////////////////
 using System;
 using System.Collections;
@@ -32,8 +32,8 @@ namespace Server
 			CommandSystem.Register( "SpawnGen", AccessLevel.Administrator, new CommandEventHandler( SpawnGen_OnCommand ) );
 		}
 
-		[Usage( "SpawnGen [<filename>]|[unload <id>]|[remove <region>|<rect>]|[save <region>|<rect>]" )]
-		[Description( "Generates spawners from Data/Monsters/*.map" )]
+		[Usage( "SpawnGen [<filename>]|[unload <id>]|[remove <region>|<rect>]|[save <region>|<rect>][savebyhand][cleanfacet]" )]
+		[Description( "Complex command, it generate and remove spawners." )]
 		private static void SpawnGen_OnCommand( CommandEventArgs e )
 		{
 			//wrog use
@@ -41,7 +41,7 @@ namespace Server
 			{
 				e.Mobile.SendMessage( "Usage: SpawnGen [<filename>]|[remove <region>|<rect>|<ID>]|[save <region>|<rect>|<ID>]" );
 			}
-			//[spawngen remove region
+			//[spawngen remove and [spawngen remove region
 			else if ( e.Arguments[0].ToLower() == "remove" && e.Arguments.Length == 2 )
 			{
 				Remove( e.Mobile, e.Arguments[1].ToLower() );
@@ -60,7 +60,7 @@ namespace Server
 			{
 				Remove( e.Mobile, ""  );
 			}
-			//[spawngen save region
+			//[spawngen save and [spawngen save region
 			else if ( e.Arguments[0].ToLower() == "save" && e.Arguments.Length == 2 )
 			{
 				Save( e.Mobile, e.Arguments[1].ToLower() );
@@ -75,6 +75,11 @@ namespace Server
 			else if ( e.Arguments[0].ToLower() == "savebyhand" )
 			{
 				SaveByHand();
+			}
+			//[spawngen cleanfacet
+			else if ( e.Arguments[0].ToLower() == "cleanfacet" )
+			{
+				CleanFacet( e.Mobile );
 			}
 			////[spawngen save x1 y1 x2 y2
 			else if ( e.Arguments[0].ToLower() == "save" && e.Arguments.Length == 5 )
@@ -180,6 +185,27 @@ namespace Server
 			GenericRemove( itemtodo, count, aTime);
 		}
 
+		//[spawngen cleanfacet
+		//this is the old [SpawnRem
+		public static void CleanFacet( Mobile from )
+		{
+			Talk("removed");
+			DateTime aTime = DateTime.Now;
+			int count = 0;
+			List<Item> itemtodo = new List<Item>();
+
+			foreach ( Item itemremove in World.Items.Values )
+			{ 
+				if ( itemremove is PremiumSpawner && itemremove.Map == from.Map && itemremove.Parent == null )
+				{
+					itemtodo.Add( itemremove );
+					count +=1;
+				}
+			}
+
+			GenericRemove( itemtodo, count, aTime);
+		}
+
 		private static void GenericRemove( List<Item> colecao, int count, DateTime aTime )
 		{
 			foreach ( Item item in colecao )
@@ -189,7 +215,7 @@ namespace Server
 			
 			DateTime bTime = DateTime.Now;
 
-			World.Broadcast( 0x35, true, "{0} spawns have been removed in {1:F1} seconds.", count, (bTime - aTime) );
+			World.Broadcast( 0x35, true, "{0} PremiumSpawners have been removed in {1:F1} seconds.", count, (bTime - aTime).TotalSeconds );
 		}
 
 		//[spawngen save and [spawngen save region

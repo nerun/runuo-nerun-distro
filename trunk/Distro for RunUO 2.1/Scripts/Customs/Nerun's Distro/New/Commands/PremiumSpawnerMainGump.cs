@@ -53,7 +53,7 @@ namespace Server.Gumps
 
 			AddBackground( 0, 0, 267, 450, 5054 );
 
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.25", true, false );
+			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.26", true, false );
 
 			AddBlackAlpha( 8, 58, 250, 50 );
 
@@ -115,7 +115,7 @@ namespace Server.Gumps
 
 			AddBackground( 0, 0, 267, 450, 5054 );
 
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.25", true, false );
+			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.26", true, false );
 
 			AddBlackAlpha( 8, 58, 250, 110 );
 
@@ -173,7 +173,7 @@ namespace Server.Gumps
 
 			AddBackground( 0, 0, 267, 450, 5054 );
 
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.25", true, false );
+			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.26", true, false );
 
 			AddBlackAlpha( 8, 58, 250, 50 );
 
@@ -289,7 +289,7 @@ namespace Server.Gumps
 				}
 				case 10013:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawnrem", prefix ) );
+					CommandSystem.Handle( from, String.Format( "{0}spawngen cleanfacet", prefix ) );
 					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
 					break;
 				}
