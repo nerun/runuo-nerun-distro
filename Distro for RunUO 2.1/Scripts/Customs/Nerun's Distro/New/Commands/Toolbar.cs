@@ -32,8 +32,25 @@ namespace Joeku
 
 			CommandHandlers.Register("Toolbar", AccessLevel.Counselor, new CommandEventHandler(Toolbar_OnCommand));
 			EventSink.Login += new LoginEventHandler(OnLogin);
+			// Talow and AlphaDragon fix 1/3
+			// http://www.runuo.com/community/threads/joeku-toolbar-after-gm-death.477771/#post-3722174
+			EventSink.PlayerDeath += new PlayerDeathEventHandler(OnPlayerDeath);
 		}
 
+		/// <summary>
+        /// Sends a toolbar to staff members upon death.
+        /// </summary>
+		// Talow and AlphaDragon fix 2/3
+        public static void OnPlayerDeath(PlayerDeathEventArgs e)
+        {
+            if (e.Mobile.AccessLevel >= AccessLevel.Counselor)
+            {
+                e.Mobile.CloseGump(typeof(Toolbar));
+                object[] arg = new object[] {e.Mobile};
+                Timer.DelayCall( TimeSpan.FromSeconds( 2.0 ), new TimerStateCallback( SendToolbar ), arg);
+            }
+        }
+		
 		/// <summary>
 		/// Sends a toolbar to staff members upon login.
 		/// </summary>
@@ -45,7 +62,7 @@ namespace Joeku
 				SendToolbar(e.Mobile);
 			}
 		}
-
+		
 		[Usage("Toolbar")]
 		public static void Toolbar_OnCommand(CommandEventArgs e)
 		{
@@ -63,6 +80,15 @@ namespace Joeku
 
 			mob.SendGump(new Toolbar(info));
 		}
+
+		// Talow and AlphaDragon fix 3/3
+        public static void SendToolbar(object state)
+        {
+            object[] states = (object[])state;
+
+            Mobile m = (Mobile)states[0];
+            SendToolbar(m);
+        }
 
 		/// <summary>
 		/// Reads the information in the persistance item and exports it into a new ToolbarInfo class.
