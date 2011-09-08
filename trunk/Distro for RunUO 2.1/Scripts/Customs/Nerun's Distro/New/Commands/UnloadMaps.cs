@@ -1,1434 +1,379 @@
+// Engine r28
+#define RunUo2_0
 using System;
-using System.Collections;
-using System.IO;
+using System.Collections.Generic;
 using Server;
-using Server.Mobiles; 
-using Server.Items;
-using Server.Commands;
-using Server.Network;
 using Server.Gumps;
-
-namespace Server.Commands
-{
-	public class Unload
-	{
-		public Unload()
-		{
-		}
-
-		public static void Initialize() 
-		{
-			CommandSystem.Register( "UnloadTrammel", AccessLevel.Administrator, new CommandEventHandler( UnloadTrammel_OnCommand ) );
-			CommandSystem.Register( "UnloadMalas", AccessLevel.Administrator, new CommandEventHandler( UnloadMalas_OnCommand ) );
-			CommandSystem.Register( "UnloadIlshenar", AccessLevel.Administrator, new CommandEventHandler( UnloadIlshenar_OnCommand ) );
-			CommandSystem.Register( "UnloadTokuno", AccessLevel.Administrator, new CommandEventHandler( UnloadTokuno_OnCommand ) );
-			CommandSystem.Register( "UnloadFelucca", AccessLevel.Administrator, new CommandEventHandler( UnloadFelucca_OnCommand ) );
-			CommandSystem.Register( "UnloadTerMur", AccessLevel.Administrator, new CommandEventHandler( UnloadTerMur_OnCommand ) );
-		}
-
-		[Usage( "[Unloadtrammel" )]
-		[Description( "Unload Trammel maps with a menu." )] 
-		private static void UnloadTrammel_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new UnloadTrammelGump( e ) );
-		}
-
-		[Usage( "[Unloadfelucca" )]
-		[Description( "Unload Felucca maps with a menu." )] 
-		private static void UnloadFelucca_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new UnloadFeluccaGump( e ) );
-		}
-
-		[Usage( "[Unloadmalas" )]
-		[Description( "Unload Malas maps with a menu." )] 
-		private static void UnloadMalas_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new UnloadMalasGump( e ) );
-		}
-
-		[Usage( "[Unloadilshenar" )]
-		[Description( "Unload Ilshenar maps with a menu." )] 
-		private static void UnloadIlshenar_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new UnloadIlshenarGump( e ) );
-		}
-
-		[Usage( "[Unloadtokuno" )]
-		[Description( "Unload Tokuno maps with a menu." )] 
-		private static void UnloadTokuno_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new UnloadTokunoGump( e ) );
-		}
-
-		[Usage( "[Unloadtermur" )]
-		[Description( "Unload Ter Mur maps with a menu." )] 
-		private static void UnloadTerMur_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new UnloadTerMurGump( e ) );
-		}
-	}
-}
+using Server.Network;
+using Server.Commands;
 
 namespace Server.Gumps
 {
+    public class UnloadCurrentGump : Gump
+    {
+        Mobile caller;
 
-	public class UnloadTrammelGump : Gump
-	{
-		private CommandEventArgs m_CommandEventArgs;
-		public UnloadTrammelGump( CommandEventArgs e ) : base( 50,50 )
+        public static void Initialize()
+        {
+#if(RunUo2_0)
+            CommandSystem.Register("UnloadCurrent", AccessLevel.Administrator, new CommandEventHandler(UnloadCurrent_OnCommand));
+#else
+            Register("UnloadCurrent", AccessLevel.Administrator, new CommandEventHandler(UnloadCurrent_OnCommand));
+#endif
+        }
+
+        [Usage("UnloadCurrent")]
+        [Description("Unload PremiumSpawners around the world with a gump.")]
+        public static void UnloadCurrent_OnCommand(CommandEventArgs e)
+        {
+            Mobile from = e.Mobile;
+
+            if (from.HasGump(typeof(UnloadCurrentGump)))
+                from.CloseGump(typeof(UnloadCurrentGump));
+            from.SendGump(new UnloadCurrentGump(from));
+        }
+
+        public UnloadCurrentGump(Mobile from) : this()
+        {
+            caller = from;
+        }
+
+		public void AddBlackAlpha( int x, int y, int width, int height )
 		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
+			AddImageTiled( x, y, width, height, 2624 );
+			AddAlphaRegion( x, y, width, height );
+		}
 
+        public UnloadCurrentGump() : base( 30, 30 )
+        {
+            this.Closable=true;
+			this.Disposable=true;
+			this.Dragable=true;
 			AddPage(1);
+			AddBackground(58, 22, 474, 540, 9200);
+			AddImage(305, 306, 1418); // Castle
+			AddBlackAlpha(66, 30, 458, 33);
+			AddLabel(213, 37, 52, @"SELECT MAPS TO UNLOAD");
+			AddBlackAlpha(66, 87, 239, 447);
+			AddLabel(69, 67, 200, @"DUNGEONS");
+			AddLabel(69, 90, 52, @"Blighted Grove");
+			AddLabel(69, 112, 52, @"Britain Sewer");
+			AddLabel(69, 133, 52, @"Covetous");
+			AddLabel(69, 154, 52, @"Deceit");
+			AddLabel(69, 174, 52, @"Despise");
+			AddLabel(69, 196, 52, @"Destard");
+			AddLabel(69, 217, 52, @"Fire");
+			AddLabel(69, 237, 52, @"Graveyards");
+			AddLabel(69, 258, 52, @"Hythloth");
+			AddLabel(69, 280, 52, @"Ice");
+			AddLabel(69, 301, 52, @"Khaldun");
+			AddLabel(69, 322, 52, @"Orc Caves");
+			AddLabel(69, 343, 52, @"Painted Caves");
+			AddLabel(69, 363, 52, @"Palace of Paroxysmus");
+			AddLabel(69, 384, 52, @"Prism of Light");
+			AddLabel(69, 405, 52, @"Sanctuary");
+			AddLabel(69, 427, 52, @"Shame");
+			AddLabel(69, 448, 52, @"Solen Hive");
+			AddLabel(69, 469, 52, @"Terathan Keep");
+			AddLabel(69, 489, 52, @"Trinsic Passage");
+			AddLabel(69, 510, 52, @"Wrong");
+			AddLabel(194, 66, 200, @"Felucca");
+			AddCheck(210, 91, 210, 211, true, 201);
+			AddCheck(210, 112, 210, 211, true, 202);
+			AddCheck(210, 133, 210, 211, true, 203);
+			AddCheck(210, 154, 210, 211, true, 204);
+			AddCheck(210, 175, 210, 211, true, 205);
+			AddCheck(210, 196, 210, 211, true, 206);
+			AddCheck(210, 217, 210, 211, true, 207);
+			AddCheck(210, 238, 210, 211, true, 208);
+			AddCheck(210, 259, 210, 211, true, 209);
+			AddCheck(210, 280, 210, 211, true, 210);
+			AddCheck(210, 301, 210, 211, true, 228);
+			AddCheck(210, 322, 210, 211, true, 212);
+			AddCheck(210, 343, 210, 211, true, 214);
+			AddCheck(210, 364, 210, 211, true, 215);
+			AddCheck(210, 385, 210, 211, true, 216);
+			AddCheck(210, 406, 210, 211, true, 217);
+			AddCheck(210, 427, 210, 211, true, 219);
+			AddCheck(210, 448, 210, 211, true, 220);
+			AddCheck(210, 469, 210, 211, true, 221);
+			AddCheck(210, 490, 210, 211, true, 224);
+			AddCheck(210, 511, 210, 211, true, 227);
+			AddLabel(250, 66, 200, @"Trammel");
+			AddCheck(268, 91, 210, 211, true, 101);
+			AddCheck(268, 112, 210, 211, true, 102);
+			AddCheck(268, 133, 210, 211, true, 103);
+			AddCheck(268, 154, 210, 211, true, 104);
+			AddCheck(268, 175, 210, 211, true, 105);
+			AddCheck(268, 196, 210, 211, true, 106);
+			AddCheck(268, 217, 210, 211, true, 107);
+			AddCheck(268, 238, 210, 211, true, 108);
+			AddCheck(268, 259, 210, 211, true, 109);
+			AddCheck(268, 280, 210, 211, true, 110);
+			//There is no Khaldun in Trammel (ID 128 reserved)
+			AddCheck(268, 322, 210, 211, true, 112);
+			AddCheck(268, 343, 210, 211, true, 114);
+			AddCheck(268, 364, 210, 211, true, 115);
+			AddCheck(268, 385, 210, 211, true, 116);
+			AddCheck(268, 406, 210, 211, true, 117);
+			AddCheck(268, 427, 210, 211, true, 119);
+			AddCheck(268, 448, 210, 211, true, 120);
+			AddCheck(268, 469, 210, 211, true, 121);
+			AddCheck(268, 490, 210, 211, true, 124);
+			AddCheck(268, 511, 210, 211, true, 127);
+			AddBlackAlpha(311, 87, 213, 70);
+			AddLabel(315, 67, 200, @"TOWNS");
+			AddLabel(315, 91, 52, @"Animals");
+			AddLabel(315, 112, 52, @"People (*)");
+			AddLabel(315, 133, 52, @"Vendors");
+			AddLabel(413, 66, 200, @"Felucca");
+			AddCheck(429, 91, 210, 211, true, 222);
+			AddCheck(429, 112, 210, 211, true, 223);
+			AddCheck(429, 133, 210, 211, true, 225);
+			AddLabel(469, 66, 200, @"Trammel");
+			AddCheck(487, 91, 210, 211, true, 122);
+			AddCheck(487, 112, 210, 211, true, 123);
+			AddCheck(487, 133, 210, 211, true, 125);
+			AddBlackAlpha(311, 183, 213, 114);
+			AddLabel(315, 162, 200, @"OUTDOORS");
+			AddLabel(316, 187, 52, @"Animals");
+			AddLabel(316, 207, 52, @"Lost Lands");
+			AddLabel(316, 229, 52, @"Monsters");
+			AddLabel(316, 249, 52, @"Reagents");
+			AddLabel(316, 270, 52, @"Sea Life");
+			AddLabel(413, 162, 200, @"Felucca");
+			AddCheck(429, 187, 210, 211, true, 226);
+			AddCheck(429, 208, 210, 211, true, 211);
+			AddCheck(429, 229, 210, 211, true, 213);
+			AddCheck(429, 250, 210, 211, true, 229);
+			AddCheck(429, 271, 210, 211, true, 218);
+			AddLabel(469, 162, 200, @"Trammel");
+			AddCheck(487, 187, 210, 211, true, 126);
+			AddCheck(487, 208, 210, 211, true, 111);
+			AddCheck(487, 229, 210, 211, true, 113);
+			AddCheck(487, 250, 210, 211, true, 129);
+			AddCheck(487, 271, 210, 211, true, 118);
+			AddLabel(316, 305, 200, @"(*) Escortables, Hireables,");
+			AddLabel(316, 324, 200, @"Town Criers, Order and Chaos");
+			AddLabel(316, 344, 200, @"guards etc.");
+			// END
+			AddLabel(361, 453, 52, @"Page: 1/2"); //Page
+			AddButton(423, 455, 5601, 5605, 0, GumpButtonType.Page, 2); // Change Page
 
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
-
-			//----------
-			AddLabel( 95, 2, 200, "TRAMMEL" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Blighted Grove" );
-			AddLabel( 35, 76, 200, "Britain Sewer" );
-			AddLabel( 35, 101, 200, "Covetous" );
-			AddLabel( 35, 126, 200, "Deceit" );
-			AddLabel( 35, 151, 200, "Despise" );
-			AddLabel( 35, 176, 200, "Destard" );
-			AddLabel( 35, 201, 200, "Fire" );
-			AddLabel( 35, 226, 200, "Graveyards" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 101 );
-			AddCheck( 182, 73, 210, 211, false, 102 );
-			AddCheck( 182, 98, 210, 211, false, 103 );
-			AddCheck( 182, 123, 210, 211, false, 104 );
-			AddCheck( 182, 148, 210, 211, false, 105 );
-			AddCheck( 182, 173, 210, 211, false, 106 );
-			AddCheck( 182, 198, 210, 211, false, 107 );
-			AddCheck( 182, 223, 210, 211, false, 108 );
-
-			AddLabel( 110, 255, 200, "1/4" );
-			AddButton( 200, 255, 0xFA5, 0xFA7, 0, GumpButtonType.Page, 2 );
-
+			//PAGE 2
 			AddPage(2);
+			AddBackground(58, 22, 474, 540, 9200);
+			AddImage(305, 306, 1418); // Castle
+			AddBlackAlpha(66, 30, 458, 33);
+			AddLabel(213, 37, 52, @"SELECT MAPS TO SPAWN");
+			AddBlackAlpha(66, 87, 174, 300);
+			AddLabel(74, 67, 200, @"ILSHENAR");
+			AddLabel(74, 90, 52, @"Ancient Lair");
+			AddLabel(74, 112, 52, @"Ankh");
+			AddLabel(74, 133, 52, @"Blood");
+			AddLabel(74, 154, 52, @"Exodus");
+			AddLabel(74, 174, 52, @"Mushroom");
+			AddLabel(74, 196, 52, @"Outdoors");
+			AddLabel(74, 217, 52, @"Ratman Cave");
+			AddLabel(74, 237, 52, @"Rock");
+			AddLabel(74, 258, 52, @"Sorcerers");
+			AddLabel(74, 280, 52, @"Spectre");
+			AddLabel(74, 301, 52, @"Towns");
+			AddLabel(74, 322, 52, @"Twisted Weald");
+			AddLabel(74, 343, 52, @"Vendors");
+			AddLabel(74, 363, 52, @"Wisp");
+			AddCheck(215, 91, 210, 211, true, 301);
+			AddCheck(215, 112, 210, 211, true, 302);
+			AddCheck(215, 133, 210, 211, true, 303);
+			AddCheck(215, 154, 210, 211, true, 304);
+			AddCheck(215, 175, 210, 211, true, 305);
+			AddCheck(215, 196, 210, 211, true, 306);
+			AddCheck(215, 217, 210, 211, true, 307);
+			AddCheck(215, 238, 210, 211, true, 308);
+			AddCheck(215, 259, 210, 211, true, 309);
+			AddCheck(215, 280, 210, 211, true, 310);
+			AddCheck(215, 301, 210, 211, true, 311);
+			AddCheck(215, 322, 210, 211, true, 314);
+			AddCheck(215, 343, 210, 211, true, 312);
+			AddCheck(215, 364, 210, 211, true, 313);
+			AddBlackAlpha(66, 414, 174, 133);
+			AddLabel(74, 393, 200, @"TOKUNO");
+			AddLabel(74, 416, 52, @"Fan Dancers Dojo");
+			AddLabel(74, 438, 52, @"Outdoors");
+			AddLabel(74, 459, 52, @"Towns Life");
+			AddLabel(74, 480, 52, @"Vendors");
+			AddLabel(74, 500, 52, @"Wild Life");
+			AddLabel(74, 522, 52, @"Yomutso Mines");
+			AddCheck(215, 417, 210, 211, true, 501);
+			AddCheck(215, 438, 210, 211, true, 502);
+			AddCheck(215, 459, 210, 211, true, 503);
+			AddCheck(215, 480, 210, 211, true, 504);
+			AddCheck(215, 501, 210, 211, true, 505);
+			AddCheck(215, 522, 210, 211, true, 506);
+			AddBlackAlpha(246, 87, 174, 156);
+			AddLabel(253, 67, 200, @"MALAS");
+			AddLabel(253, 90, 52, @"Citadel");
+			AddLabel(253, 112, 52, @"Doom");
+			AddLabel(253, 133, 52, @"Labyrinth");
+			AddLabel(253, 154, 52, @"North (*)");
+			AddLabel(253, 174, 52, @"Orc Forts");
+			AddLabel(253, 196, 52, @"South (*)");
+			AddLabel(253, 217, 52, @"Vendors");
+			AddCheck(394, 91, 210, 211, true, 406);
+			AddCheck(394, 112, 210, 211, true, 401);
+			AddCheck(394, 133, 210, 211, true, 407);
+			AddCheck(394, 154, 210, 211, true, 402);
+			AddCheck(394, 175, 210, 211, true, 403);
+			AddCheck(394, 196, 210, 211, true, 404);
+			AddCheck(394, 217, 210, 211, true, 405);
+			AddLabel(428, 91, 200, @"(*) Wild");
+			AddLabel(428, 109, 200, @"Animals and");
+			AddLabel(428, 129, 200, @"monsters.");
+			AddBlackAlpha(246, 270, 174, 117);
+			AddLabel(253, 250, 200, @"TER MUR");
+			AddLabel(253, 273, 52, @"Vendors");
+			AddCheck(394, 274, 210, 211, true, 601);
+			//END
+			AddLabel(381, 453, 52, @"Page: 2/2"); //Page
+			AddButton(361, 455, 5603, 5607, 0, GumpButtonType.Page, 1); //Change Page
+			AddButton(282, 452, 240, 239, 1, GumpButtonType.Reply, 0); // Apply
+        }
 
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
+		public static void UnloadThis( Mobile from, List<int> ListSwitches, int switche )
+		{
+			string prefix = Server.Commands.CommandSystem.Prefix;
 
-			//----------
-			AddLabel( 95, 2, 200, "TRAMMEL" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Hythloth" );
-			AddLabel( 35, 76, 200, "Ice" );
-			AddLabel( 35, 101, 200, "Lost Lands" );
-			AddLabel( 35, 126, 200, "Orc Caves" );
-			AddLabel( 35, 151, 200, "Outdoors" );
-			AddLabel( 35, 176, 200, "Painted Caves" );
-			AddLabel( 35, 201, 200, "Palace of Paroxysmus" );
-			AddLabel( 35, 226, 200, "Prism of Light" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 109 );
-			AddCheck( 182, 73, 210, 211, false, 110 );
-			AddCheck( 182, 98, 210, 211, false, 111 );
-			AddCheck( 182, 123, 210, 211, false, 112 );
-			AddCheck( 182, 148, 210, 211, false, 113 );
-			AddCheck( 182, 173, 210, 211, false, 114 );
-			AddCheck( 182, 198, 210, 211, false, 115 );
-			AddCheck( 182, 223, 210, 211, false, 116 );
-
-			AddLabel( 110, 255, 200, "2/4" );
-			AddButton( 200, 255, 0xFA5, 0xFA7, 0, GumpButtonType.Page, 3 );
-			AddButton( 10, 255, 0xFAE, 0xFB0, 0, GumpButtonType.Page, 1 );
-
-			AddPage(3);
-
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
-
-			//----------
-			AddLabel( 95, 2, 200, "TRAMMEL" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Sanctuary" );
-			AddLabel( 35, 76, 200, "Sea Life" );
-			AddLabel( 35, 101, 200, "Shame" );
-			AddLabel( 35, 126, 200, "Solen Hive" );
-			AddLabel( 35, 151, 200, "Terathan Keep" );
-			AddLabel( 35, 176, 200, "Towns Life" );
-			AddLabel( 35, 201, 200, "Towns People" );
-			AddLabel( 35, 226, 200, "Trinsic Passage" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 117 );
-			AddCheck( 182, 73, 210, 211, false, 118 );
-			AddCheck( 182, 98, 210, 211, false, 119 );
-			AddCheck( 182, 123, 210, 211, false, 120 );
-			AddCheck( 182, 148, 210, 211, false, 121 );
-			AddCheck( 182, 173, 210, 211, false, 122 );
-			AddCheck( 182, 198, 210, 211, false, 123 );
-			AddCheck( 182, 223, 210, 211, false, 124 );
-
-			AddLabel( 110, 255, 200, "3/4" );
-			AddButton( 200, 255, 0xFA5, 0xFA7, 0, GumpButtonType.Page, 4 );
-			AddButton( 10, 255, 0xFAE, 0xFB0, 0, GumpButtonType.Page, 2 );
-
-			AddPage(4);
-
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
-
-			//----------
-			AddLabel( 95, 2, 200, "TRAMMEL" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Vendors" );
-			AddLabel( 35, 76, 200, "Wild Life" );
-			AddLabel( 35, 101, 200, "Wrong" );
-			AddLabel( 35, 126, 200, "Reagents" );
-			//AddLabel( 35, 151, 200, "29" );
-			//AddLabel( 35, 176, 200, "30" );
-			//AddLabel( 35, 201, 200, "31" );
-			//AddLabel( 35, 226, 200, "32" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 125 );
-			AddCheck( 182, 73, 210, 211, false, 126 );
-			AddCheck( 182, 98, 210, 211, false, 127 );
-			AddCheck( 182, 123, 210, 211, false, 128 );
-			//AddCheck( 182, 148, 210, 211, false, 129 );
-			//AddCheck( 182, 173, 210, 211, false, 130 );
-			//AddCheck( 182, 198, 210, 211, false, 131 );
-			//AddCheck( 182, 223, 210, 211, false, 132 );
-
-			AddLabel( 110, 255, 200, "4/4" );
-			AddButton( 10, 255, 0xFAE, 0xFB0, 0, GumpButtonType.Page, 3 );
-
-			//Ok, Cancel
-			AddButton( 55, 280, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 125, 280, 241, 243, 0, GumpButtonType.Reply, 0 );
+			if( ListSwitches.Contains( switche ) == true )
+				CommandSystem.Handle( from, String.Format( "{0}Spawngen unload {1}", prefix, switche ) );
 		}
 
-		public override void OnResponse( NetState state, RelayInfo info )
-		{
-			Mobile from = state.Mobile;
+        public override void OnResponse(NetState sender, RelayInfo info)
+        {
+            Mobile from = sender.Mobile;
 
-			switch( info.ButtonID )
-			{
-				case 0: // Closed or Cancel
+            switch(info.ButtonID)
+            {
+                case 0: //Closed or Cancel
 				{
-					return;
+					break;
 				}
 				default:
 				{
-					// Make sure that the OK, button was pressed
+					// Make sure that the APPLY button was pressed
 					if( info.ButtonID == 1 )
 					{
 						// Get the array of switches selected
-						ArrayList Selections = new ArrayList( info.Switches );
-						string prefix = Server.Commands.CommandSystem.Prefix;
+						List<int> Selections = new List<int>( info.Switches );
 
-						// Now unloading any selected maps
+						//TRAMMEL
+						// DUNGEONS
+						UnloadThis(from, Selections, 101);
+						UnloadThis(from, Selections, 102);
+						UnloadThis(from, Selections, 103);
+						UnloadThis(from, Selections, 104);
+						UnloadThis(from, Selections, 105);
+						UnloadThis(from, Selections, 106);
+						UnloadThis(from, Selections, 107);
+						UnloadThis(from, Selections, 108);
+						UnloadThis(from, Selections, 109);
+						UnloadThis(from, Selections, 110);
+						//There is no Khaldun (118)
+						UnloadThis(from, Selections, 112);
+						UnloadThis(from, Selections, 114);
+						UnloadThis(from, Selections, 115);
+						UnloadThis(from, Selections, 116);
+						UnloadThis(from, Selections, 117);
+						UnloadThis(from, Selections, 119);
+						UnloadThis(from, Selections, 120);
+						UnloadThis(from, Selections, 121);
+						UnloadThis(from, Selections, 124);
+						UnloadThis(from, Selections, 127);
+						//TOWNS
+						UnloadThis(from, Selections, 122);
+						UnloadThis(from, Selections, 123);
+						UnloadThis(from, Selections, 125);
+						//OUTDOORS
+						UnloadThis(from, Selections, 126);
+						UnloadThis(from, Selections, 111);
+						UnloadThis(from, Selections, 113);
+						UnloadThis(from, Selections, 129);
+						UnloadThis(from, Selections, 118);
 
-						if( Selections.Contains( 101 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 101", prefix ) );
-						}
-						if( Selections.Contains( 102 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 102", prefix ) );
-						}
-						if( Selections.Contains( 103 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 103", prefix ) );
-						}
-						if( Selections.Contains( 104 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 104", prefix ) );
-						}
-						if( Selections.Contains( 105 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 105", prefix ) );
-						}
-						if( Selections.Contains( 106 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 106", prefix ) );
-						}
-						if( Selections.Contains( 107 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 107", prefix ) );
-						}
-						if( Selections.Contains( 108 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 108", prefix ) );
-						}
-						if( Selections.Contains( 109 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 109", prefix ) );
-						}
-						if( Selections.Contains( 110 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 110", prefix ) );
-						}
-						if( Selections.Contains( 111 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 111", prefix ) );
-						}
-						if( Selections.Contains( 112 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 112", prefix ) );
-						}
-						if( Selections.Contains( 113 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 113", prefix ) );
-						}
-						if( Selections.Contains( 114 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 114", prefix ) );
-						}
-						if( Selections.Contains( 115 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 115", prefix ) );
-						}
-						if( Selections.Contains( 116 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 116", prefix ) );
-						}
-						if( Selections.Contains( 117 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 117", prefix ) );
-						}
-						if( Selections.Contains( 118 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 118", prefix ) );
-						}
-						if( Selections.Contains( 119 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 119", prefix ) );
-						}
-						if( Selections.Contains( 120 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 120", prefix ) );
-						}
-						if( Selections.Contains( 121 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 121", prefix ) );
-						}
-						if( Selections.Contains( 122 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 122", prefix ) );
-						}
-						if( Selections.Contains( 123 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 123", prefix ) );
-						}
-						if( Selections.Contains( 124 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 124", prefix ) );
-						}
-						if( Selections.Contains( 125 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 125", prefix ) );
-						}
-						if( Selections.Contains( 126 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 126", prefix ) );
-						}
-						if( Selections.Contains( 127 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 127", prefix ) );
-						}
-						if( Selections.Contains( 128 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 128", prefix ) );
-						}
+						//FELUCCA
+						// DUNGEONS
+						UnloadThis(from, Selections, 201);
+						UnloadThis(from, Selections, 202);
+						UnloadThis(from, Selections, 203);
+						UnloadThis(from, Selections, 204);
+						UnloadThis(from, Selections, 205);
+						UnloadThis(from, Selections, 206);
+						UnloadThis(from, Selections, 207);
+						UnloadThis(from, Selections, 208);
+						UnloadThis(from, Selections, 209);
+						UnloadThis(from, Selections, 210);
+						UnloadThis(from, Selections, 228);
+						UnloadThis(from, Selections, 212);
+						UnloadThis(from, Selections, 214);
+						UnloadThis(from, Selections, 215);
+						UnloadThis(from, Selections, 216);
+						UnloadThis(from, Selections, 217);
+						UnloadThis(from, Selections, 219);
+						UnloadThis(from, Selections, 220);
+						UnloadThis(from, Selections, 221);
+						UnloadThis(from, Selections, 224);
+						UnloadThis(from, Selections, 227);
+						//TOWNS
+						UnloadThis(from, Selections, 222);
+						UnloadThis(from, Selections, 223);
+						UnloadThis(from, Selections, 225);
+						//OUTDOORS
+						UnloadThis(from, Selections, 226);
+						UnloadThis(from, Selections, 211);
+						UnloadThis(from, Selections, 213);
+						UnloadThis(from, Selections, 229);
+						UnloadThis(from, Selections, 218);
+						
+						//ILSHENAR
+						UnloadThis(from, Selections, 301);
+						UnloadThis(from, Selections, 302);
+						UnloadThis(from, Selections, 303);
+						UnloadThis(from, Selections, 304);
+						UnloadThis(from, Selections, 305);
+						UnloadThis(from, Selections, 306);
+						UnloadThis(from, Selections, 307);
+						UnloadThis(from, Selections, 308);
+						UnloadThis(from, Selections, 309);
+						UnloadThis(from, Selections, 310);
+						UnloadThis(from, Selections, 311);
+						UnloadThis(from, Selections, 314);
+						UnloadThis(from, Selections, 312);
+						UnloadThis(from, Selections, 313);
+						
+						//MALAS
+						UnloadThis(from, Selections, 406);
+						UnloadThis(from, Selections, 401);
+						UnloadThis(from, Selections, 407);
+						UnloadThis(from, Selections, 402);
+						UnloadThis(from, Selections, 403);
+						UnloadThis(from, Selections, 404);
+						UnloadThis(from, Selections, 405);
+						
+						//TOKUNO
+						UnloadThis(from, Selections, 501);
+						UnloadThis(from, Selections, 502);
+						UnloadThis(from, Selections, 503);
+						UnloadThis(from, Selections, 504);
+						UnloadThis(from, Selections, 505);
+						UnloadThis(from, Selections, 506);
+						
+						//TER MUR
+						UnloadThis(from, Selections, 601);
+						
+						from.Say( "SPAWN UNLOAD COMPLETED" );
 					}
-
 					break;
 				}
-			}
-		}
-	}
-
-	public class UnloadFeluccaGump : Gump
-	{
-		private CommandEventArgs m_CommandEventArgs;
-		public UnloadFeluccaGump( CommandEventArgs e ) : base( 50,50 )
-		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
-
-			AddPage(1);
-
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
-
-			//----------
-			AddLabel( 95, 2, 200, "FELUCCA" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Blighted Grove" );
-			AddLabel( 35, 76, 200, "Britain Sewer" );
-			AddLabel( 35, 101, 200, "Covetous" );
-			AddLabel( 35, 126, 200, "Deceit" );
-			AddLabel( 35, 151, 200, "Despise" );
-			AddLabel( 35, 176, 200, "Destard" );
-			AddLabel( 35, 201, 200, "Fire" );
-			AddLabel( 35, 226, 200, "Graveyards" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 101 );
-			AddCheck( 182, 73, 210, 211, false, 102 );
-			AddCheck( 182, 98, 210, 211, false, 103 );
-			AddCheck( 182, 123, 210, 211, false, 104 );
-			AddCheck( 182, 148, 210, 211, false, 105 );
-			AddCheck( 182, 173, 210, 211, false, 106 );
-			AddCheck( 182, 198, 210, 211, false, 107 );
-			AddCheck( 182, 223, 210, 211, false, 108 );
-
-			AddLabel( 110, 255, 200, "1/4" );
-			AddButton( 200, 255, 0xFA5, 0xFA7, 0, GumpButtonType.Page, 2 );
-
-			AddPage(2);
-
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
-
-			//----------
-			AddLabel( 95, 2, 200, "FELUCCA" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Hythloth" );
-			AddLabel( 35, 76, 200, "Ice" );
-			AddLabel( 35, 101, 200, "Khaldun" );
-			AddLabel( 35, 126, 200, "Lost Lands" );
-			AddLabel( 35, 151, 200, "Orc Caves" );
-			AddLabel( 35, 176, 200, "Outdoors" );
-			AddLabel( 35, 201, 200, "Painted Caves" );
-			AddLabel( 35, 226, 200, "Palace of Paroxysmus" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 109 );
-			AddCheck( 182, 73, 210, 211, false, 110 );
-			AddCheck( 182, 98, 210, 211, false, 111 );
-			AddCheck( 182, 123, 210, 211, false, 112 );
-			AddCheck( 182, 148, 210, 211, false, 113 );
-			AddCheck( 182, 173, 210, 211, false, 114 );
-			AddCheck( 182, 198, 210, 211, false, 115 );
-			AddCheck( 182, 223, 210, 211, false, 116 );
-
-			AddLabel( 110, 255, 200, "2/4" );
-			AddButton( 200, 255, 0xFA5, 0xFA7, 0, GumpButtonType.Page, 3 );
-			AddButton( 10, 255, 0xFAE, 0xFB0, 0, GumpButtonType.Page, 1 );
-
-			AddPage(3);
-
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
-
-			//----------
-			AddLabel( 95, 2, 200, "FELUCCA" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Prism of Light" );
-			AddLabel( 35, 76, 200, "Sanctuary" );
-			AddLabel( 35, 101, 200, "Sea Life" );
-			AddLabel( 35, 126, 200, "Shame" );
-			AddLabel( 35, 151, 200, "Solen Hive" );
-			AddLabel( 35, 176, 200, "Terathan Keep" );
-			AddLabel( 35, 201, 200, "Towns Life" );
-			AddLabel( 35, 226, 200, "Towns People" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 117 );
-			AddCheck( 182, 73, 210, 211, false, 118 );
-			AddCheck( 182, 98, 210, 211, false, 119 );
-			AddCheck( 182, 123, 210, 211, false, 120 );
-			AddCheck( 182, 148, 210, 211, false, 121 );
-			AddCheck( 182, 173, 210, 211, false, 122 );
-			AddCheck( 182, 198, 210, 211, false, 123 );
-			AddCheck( 182, 223, 210, 211, false, 124 );
-
-			AddLabel( 110, 255, 200, "3/4" );
-			AddButton( 200, 255, 0xFA5, 0xFA7, 0, GumpButtonType.Page, 4 );
-			AddButton( 10, 255, 0xFAE, 0xFB0, 0, GumpButtonType.Page, 2 );
-
-			AddPage(4);
-
-			//grey background
-			AddBackground( 0, 0, 240, 310, 5054 );
-
-			//----------
-			AddLabel( 95, 2, 200, "FELUCCA" );
-
-			//white background
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Trinsic Passage" );
-			AddLabel( 35, 76, 200, "Vendors" );
-			AddLabel( 35, 101, 200, "Wild Life" );
-			AddLabel( 35, 126, 200, "Wrong" );
-			AddLabel( 35, 151, 200, "Reagents" );
-			//AddLabel( 35, 176, 200, "30" );
-			//AddLabel( 35, 201, 200, "31" );
-			//AddLabel( 35, 226, 200, "32" );
-
-			//Check boxes
-			AddCheck( 182, 48, 210, 211, false, 125 );
-			AddCheck( 182, 73, 210, 211, false, 126 );
-			AddCheck( 182, 98, 210, 211, false, 127 );
-			AddCheck( 182, 123, 210, 211, false, 128 );
-			AddCheck( 182, 148, 210, 211, false, 129 );
-			//AddCheck( 182, 173, 210, 211, false, 130 );
-			//AddCheck( 182, 198, 210, 211, false, 131 );
-			//AddCheck( 182, 223, 210, 211, false, 132 );
-
-			AddLabel( 110, 255, 200, "4/4" );
-			AddButton( 10, 255, 0xFAE, 0xFB0, 0, GumpButtonType.Page, 3 );
-
-			//Ok, Cancel
-			AddButton( 55, 280, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 125, 280, 241, 243, 0, GumpButtonType.Reply, 0 );
-		}
-
-		public override void OnResponse( NetState state, RelayInfo info )
-		{
-			Mobile from = state.Mobile;
-
-			switch( info.ButtonID )
-			{
-				case 0: // Closed or Cancel
-				{
-					return;
-				}
-				default:
-				{
-					// Make sure that the OK, button was pressed
-					if( info.ButtonID == 1 )
-					{
-						// Get the array of switches selected
-						ArrayList Selections = new ArrayList( info.Switches );
-						string prefix = Server.Commands.CommandSystem.Prefix;
-
-						// Now unloading any selected maps
-
-						if( Selections.Contains( 101 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 201", prefix ) );
-						}
-						if( Selections.Contains( 102 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 202", prefix ) );
-						}
-						if( Selections.Contains( 103 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 203", prefix ) );
-						}
-						if( Selections.Contains( 104 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 204", prefix ) );
-						}
-						if( Selections.Contains( 105 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 205", prefix ) );
-						}
-						if( Selections.Contains( 106 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 206", prefix ) );
-						}
-						if( Selections.Contains( 107 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 207", prefix ) );
-						}
-						if( Selections.Contains( 108 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 208", prefix ) );
-						}
-						if( Selections.Contains( 109 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 209", prefix ) );
-						}
-						if( Selections.Contains( 110 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 210", prefix ) );
-						}
-						if( Selections.Contains( 111 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 228", prefix ) );
-						}
-						if( Selections.Contains( 112 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 211", prefix ) );
-						}
-						if( Selections.Contains( 113 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 212", prefix ) );
-						}
-						if( Selections.Contains( 114 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 213", prefix ) );
-						}
-						if( Selections.Contains( 115 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 214", prefix ) );
-						}
-						if( Selections.Contains( 116 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 215", prefix ) );
-						}
-						if( Selections.Contains( 117 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 216", prefix ) );
-						}
-						if( Selections.Contains( 118 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 217", prefix ) );
-						}
-						if( Selections.Contains( 119 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 218", prefix ) );
-						}
-						if( Selections.Contains( 120 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 219", prefix ) );
-						}
-						if( Selections.Contains( 121 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 220", prefix ) );
-						}
-						if( Selections.Contains( 122 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 221", prefix ) );
-						}
-						if( Selections.Contains( 123 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 222", prefix ) );
-						}
-						if( Selections.Contains( 124 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 223", prefix ) );
-						}
-						if( Selections.Contains( 125 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 224", prefix ) );
-						}
-						if( Selections.Contains( 126 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 225", prefix ) );
-						}
-						if( Selections.Contains( 127 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 226", prefix ) );
-						}
-						if( Selections.Contains( 128 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 227", prefix ) );
-						}
-						if( Selections.Contains( 129 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 228", prefix ) );
-						}
-					}
-
-					break;
-				}
-			}
-		}
-	}
-
-	public class UnloadIlshenarGump : Gump
-	{
-		private CommandEventArgs m_CommandEventArgs;
-		public UnloadIlshenarGump( CommandEventArgs e ) : base( 50,50 )
-		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
-
-			AddPage(1);
-
-			//fundo cinza
-			AddBackground( 0, 0, 243, 310, 5054 );
-			//----------
-			AddLabel( 93, 2, 200, "ILSHENAR" );
-			//fundo branco
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Ancient Lair" );
-			AddLabel( 35, 76, 200, "Ankh" );
-			AddLabel( 35, 101, 200, "Blood" );
-			AddLabel( 35, 126, 200, "Exodus" );
-			AddLabel( 35, 151, 200, "Mushroom" );
-			AddLabel( 35, 176, 200, "Outdoors" );
-			AddLabel( 35, 201, 200, "Ratman cave" );
-			AddLabel( 35, 226, 200, "Rock" );
-
-			//Options
-			AddCheck( 182, 48, 210, 211, false, 101 );
-			AddCheck( 182, 73, 210, 211, false, 102 );
-			AddCheck( 182, 98, 210, 211, false, 103 );
-			AddCheck( 182, 123, 210, 211, false, 104 );
-			AddCheck( 182, 148, 210, 211, false, 105 );
-			AddCheck( 182, 173, 210, 211, false, 106 );
-			AddCheck( 182, 198, 210, 211, false, 107 );
-			AddCheck( 182, 223, 210, 211, false, 108 );
-
-			AddLabel( 110, 255, 200, "1/2" );
-			AddButton( 200, 255, 0xFA5, 0xFA7, 0, GumpButtonType.Page, 2 );
-
-			AddPage(2);
-
-			//fundo cinza
-			AddBackground( 0, 0, 243, 310, 5054 );
-			//----------
-			AddLabel( 93, 2, 200, "ILSHENAR" );
-			//fundo branco
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 232, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//----------
-			AddLabel( 35, 51, 200, "Sorcerers" );
-			AddLabel( 35, 76, 200, "Spectre" );
-			AddLabel( 35, 101, 200, "Towns" );
-			AddLabel( 35, 126, 200, "Vendors" );
-			AddLabel( 35, 151, 200, "Wisp" );
-			AddLabel( 35, 176, 200, "Twisted Weald" );
-			//AddLabel( 35, 201, 200, "15" );
-			//AddLabel( 35, 226, 200, "16" );
-
-			//Options
-			AddCheck( 182, 48, 210, 211, false, 109 );
-			AddCheck( 182, 73, 210, 211, false, 110 );
-			AddCheck( 182, 98, 210, 211, false, 111 );
-			AddCheck( 182, 123, 210, 211, false, 112 );
-			AddCheck( 182, 148, 210, 211, false, 113 );
-			AddCheck( 182, 173, 210, 211, false, 114 );
-			//AddCheck( 182, 198, 210, 211, false, 115 );
-			//AddCheck( 182, 223, 210, 211, false, 116 );
-
-			AddLabel( 110, 255, 200, "2/2" );
-			AddButton( 10, 255, 0xFAE, 0xFB0, 0, GumpButtonType.Page, 1 );
-
-			//Ok, Cancel
-			AddButton( 55, 280, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 125, 280, 241, 243, 0, GumpButtonType.Reply, 0 );
-
-		}
-
-		public override void OnResponse( NetState state, RelayInfo info )
-		{
-			Mobile from = state.Mobile;
-
-			switch( info.ButtonID )
-			{
-				case 0: // Closed or Cancel
-				{
-					return;
-				}
-
-				default:
-				{
-					// Make sure that the OK, button was pressed
-					if( info.ButtonID == 1 )
-					{
-						// Get the array of switches selected
-						ArrayList Selections = new ArrayList( info.Switches );
-						string prefix = Server.Commands.CommandSystem.Prefix;
-
-						// Now unloading any selected maps
-
-						if( Selections.Contains( 101 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 301", prefix ) );
-						}
-						if( Selections.Contains( 102 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 302", prefix ) );
-						}
-						if( Selections.Contains( 103 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 303", prefix ) );
-						}
-						if( Selections.Contains( 104 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 304", prefix ) );
-						}
-						if( Selections.Contains( 105 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 305", prefix ) );
-						}
-						if( Selections.Contains( 106 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 306", prefix ) );
-						}
-						if( Selections.Contains( 107 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 307", prefix ) );
-						}
-						if( Selections.Contains( 108 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 308", prefix ) );
-						}
-						if( Selections.Contains( 109 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 309", prefix ) );
-						}
-						if( Selections.Contains( 110 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 310", prefix ) );
-						}
-						if( Selections.Contains( 111 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 311", prefix ) );
-						}
-						if( Selections.Contains( 112 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 312", prefix ) );
-						}
-						if( Selections.Contains( 113 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 313", prefix ) );
-						}
-						if( Selections.Contains( 114 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 314", prefix ) );
-						}
-					}
-
-					break;
-				}
-			}
-		}
-	}
-
-	public class UnloadMalasGump : Gump
-	{
-		private CommandEventArgs m_CommandEventArgs;
-		public UnloadMalasGump( CommandEventArgs e ) : base( 50,50 )
-		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
-
-			AddPage(1);
-
-			//fundo cinza
-			//alt era 310
-			AddBackground( 0, 0, 243, 270, 5054 );
-			//----------
-			AddLabel( 100, 2, 200, "MALAS" );
-			//fundo branco
-			//x, y, largura, altura, item
-			//alt era 232
-			AddImageTiled( 10, 20, 220, 215, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Doom" );
-			AddLabel( 35, 76, 200, "North" );
-			AddLabel( 35, 101, 200, "OrcForts" );
-			AddLabel( 35, 126, 200, "South" );
-			AddLabel( 35, 151, 200, "Vendors" );
-			AddLabel( 35, 176, 200, "Citadel" );
-			AddLabel( 35, 201, 200, "Labyrinth" );
-
-			//Options
-			AddCheck( 182, 48, 210, 211, false, 101 );
-			AddCheck( 182, 73, 210, 211, false, 102 );
-			AddCheck( 182, 98, 210, 211, false, 103 );
-			AddCheck( 182, 123, 210, 211, false, 104 );
-			AddCheck( 182, 148, 210, 211, false, 105 );
-			AddCheck( 182, 173, 210, 211, false, 106 );
-			AddCheck( 182, 198, 210, 211, false, 107 );
-
-			//Ok, Cancel
-			// alt era 280
-			AddButton( 55, 240, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 125, 240, 241, 243, 0, GumpButtonType.Reply, 0 );
-		}
-
-		public override void OnResponse( NetState state, RelayInfo info )
-		{
-			Mobile from = state.Mobile;
-
-			switch( info.ButtonID )
-			{
-				case 0: // Closed or Cancel
-				{
-					return;
-				}
-
-				default:
-				{
-					// Make sure that the OK, button was pressed
-					if( info.ButtonID == 1 )
-					{
-						// Get the array of switches selected
-						ArrayList Selections = new ArrayList( info.Switches );
-						string prefix = Server.Commands.CommandSystem.Prefix;
-
-						// Now unloading any selected maps
-
-						if( Selections.Contains( 101 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 401", prefix ) );
-						}
-						if( Selections.Contains( 102 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 402", prefix ) );
-						}
-						if( Selections.Contains( 103 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 403", prefix ) );
-						}
-						if( Selections.Contains( 104 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 404", prefix ) );
-						}
-						if( Selections.Contains( 105 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 405", prefix ) );
-						}
-						if( Selections.Contains( 106 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 406", prefix ) );
-						}
-						if( Selections.Contains( 107 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 407", prefix ) );
-						}
-					}
-
-					break;
-				}
-			}
-		}
-	}
-
-	public class UnloadTokunoGump : Gump
-	{
-		private CommandEventArgs m_CommandEventArgs;
-		public UnloadTokunoGump( CommandEventArgs e ) : base( 50,50 )
-		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
-
-			AddPage(1);
-
-			//fundo cinza
-			//alt era 310
-			AddBackground( 0, 0, 243, 250, 5054 );
-			//----------
-			AddLabel( 95, 2, 200, "TOKUNO" );
-			//fundo branco
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 183, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Fan Dancers Dojo" );
-			AddLabel( 35, 76, 200, "Outdoors" );
-			AddLabel( 35, 101, 200, "Towns Life" );
-			AddLabel( 35, 126, 200, "Vendors" );
-			AddLabel( 35, 151, 200, "Wild Life" );
-			AddLabel( 35, 176, 200, "Yomutso Mines" );
-
-			//Options
-			AddCheck( 182, 48, 210, 211, false, 101 );
-			AddCheck( 182, 73, 210, 211, false, 102 );
-			AddCheck( 182, 98, 210, 211, false, 103 );
-			AddCheck( 182, 123, 210, 211, false, 104 );
-			AddCheck( 182, 148, 210, 211, false, 105 );
-			AddCheck( 182, 173, 210, 211, false, 106 );
-
-			//Ok, Cancel
-			// alt era 280
-			AddButton( 55, 220, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 125, 220, 241, 243, 0, GumpButtonType.Reply, 0 );
-		}
-
-		public override void OnResponse( NetState state, RelayInfo info )
-		{
-			Mobile from = state.Mobile;
-
-			switch( info.ButtonID )
-			{
-				case 0: // Closed or Cancel
-				{
-					return;
-				}
-
-				default:
-				{
-					// Make sure that the OK, button was pressed
-					if( info.ButtonID == 1 )
-					{
-						// Get the array of switches selected
-						ArrayList Selections = new ArrayList( info.Switches );
-						string prefix = Server.Commands.CommandSystem.Prefix;
-
-						// Now unloading any selected maps
-
-						if( Selections.Contains( 101 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 501", prefix ) );
-						}
-						if( Selections.Contains( 102 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 502", prefix ) );
-						}
-						if( Selections.Contains( 103 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 503", prefix ) );
-						}
-						if( Selections.Contains( 104 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 504", prefix ) );
-						}
-						if( Selections.Contains( 105 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 505", prefix ) );
-						}
-						if( Selections.Contains( 106 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 506", prefix ) );
-						}
-					}
-
-					break;
-				}
-			}
-		}
-	}
-
-	public class UnloadTerMurGump : Gump
-	{
-		private CommandEventArgs m_CommandEventArgs;
-		public UnloadTerMurGump( CommandEventArgs e ) : base( 50,50 )
-		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
-
-			AddPage(1);
-
-			//fundo cinza
-			//alt era 310
-			AddBackground( 0, 0, 243, 250, 5054 );
-			//----------
-			AddLabel( 95, 2, 200, "TER MUR" );
-			//fundo branco
-			//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 220, 183, 3004 );
-
-			//----------
-			AddLabel( 30, 27, 200, "MAP NAME" );
-			AddLabel( 172, 27, 200, "UNLOAD" );
-
-			//colunas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 2, 222, 10003 );
-			//AddImageTiled( 163, 25, 2, 222, 10003 );
-			//AddImageTiled( 218, 25, 2, 222, 10003 );
-
-			//Linhas
-			//x, y, comprimento, ?, item
-			//AddImageTiled( 20, 25, 200, 2, 10001 );
-			//AddImageTiled( 20, 45, 200, 2, 10001 );
-			//AddImageTiled( 20, 70, 200, 2, 10001 );
-			//AddImageTiled( 20, 95, 200, 2, 10001 );
-			//AddImageTiled( 20, 120, 200, 2, 10001 );
-			//AddImageTiled( 20, 145, 200, 2, 10001 );
-			//AddImageTiled( 20, 170, 200, 2, 10001 );
-			//AddImageTiled( 20, 195, 200, 2, 10001 );
-			//AddImageTiled( 20, 220, 200, 2, 10001 );
-			//AddImageTiled( 20, 245, 200, 2, 10001 );
-
-			//Map names
-			AddLabel( 35, 51, 200, "Vendors" );
-			//AddLabel( 35, 76, 200, "none" );
-			//AddLabel( 35, 101, 200, "none" );
-			//AddLabel( 35, 126, 200, "none" );
-			//AddLabel( 35, 151, 200, "none" );
-			//AddLabel( 35, 176, 200, "none" );
-
-			//Options
-			AddCheck( 182, 48, 210, 211, false, 101 );
-			//AddCheck( 182, 73, 210, 211, false, 102 );
-			//AddCheck( 182, 98, 210, 211, false, 103 );
-			//AddCheck( 182, 123, 210, 211, false, 104 );
-			//AddCheck( 182, 148, 210, 211, false, 105 );
-			//AddCheck( 182, 173, 210, 211, false, 106 );
-
-			//Ok, Cancel
-			// alt era 280
-			AddButton( 55, 220, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 125, 220, 241, 243, 0, GumpButtonType.Reply, 0 );
-		}
-
-		public override void OnResponse( NetState state, RelayInfo info )
-		{
-			Mobile from = state.Mobile;
-
-			switch( info.ButtonID )
-			{
-				case 0: // Closed or Cancel
-				{
-					return;
-				}
-
-				default:
-				{
-					// Make sure that the OK, button was pressed
-					if( info.ButtonID == 1 )
-					{
-						// Get the array of switches selected
-						ArrayList Selections = new ArrayList( info.Switches );
-						string prefix = Server.Commands.CommandSystem.Prefix;
-
-						// Now unloading any selected maps
-
-						if( Selections.Contains( 101 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 601", prefix ) );
-						}
-						if( Selections.Contains( 102 ) == true )
-						{
-							//CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 602", prefix ) );
-						}
-						if( Selections.Contains( 103 ) == true )
-						{
-							//CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 603", prefix ) );
-						}
-						if( Selections.Contains( 104 ) == true )
-						{
-							//CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 604", prefix ) );
-						}
-						if( Selections.Contains( 105 ) == true )
-						{
-							//CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 605", prefix ) );
-						}
-						if( Selections.Contains( 106 ) == true )
-						{
-							//CommandSystem.Handle( from, String.Format( "{0}Spawngen unload 606", prefix ) );
-						}
-					}
-
-					break;
-				}
-			}
-		}
-	}
+            }
+        }
+    }
 }
