@@ -1,7 +1,4 @@
-/////////////////////////
-//       By Nerun      //
-//      Engine r26     //
-/////////////////////////
+//Engine r28
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -116,7 +113,6 @@ namespace Server
 		//[spawngen remove and [spawngen remove region
 		private static void Remove( Mobile from, string region )
 		{
-			Talk("removed");
 			DateTime aTime = DateTime.Now;
 			int count = 0;
 			List<Item> itemtodo = new List<Item>();
@@ -148,7 +144,6 @@ namespace Server
 		//[spawngen unload SpawnID
 		private static void Unload( int ID )
 		{
-			Talk("removed");
 			DateTime aTime = DateTime.Now;
 			int count = 0;
 			List<Item> itemtodo = new List<Item>();
@@ -168,7 +163,6 @@ namespace Server
 		//[spawngen remove x1 y1 x2 y2
 		private static void RemoveByCoord( Mobile from, int x1, int y1, int x2, int y2 )
 		{
-			Talk("removed");
 			DateTime aTime = DateTime.Now;
 			int count = 0;
 			List<Item> itemtodo = new List<Item>();
@@ -189,7 +183,6 @@ namespace Server
 		//this is the old [SpawnRem
 		public static void CleanFacet( Mobile from )
 		{
-			Talk("removed");
 			DateTime aTime = DateTime.Now;
 			int count = 0;
 			List<Item> itemtodo = new List<Item>();
@@ -208,20 +201,27 @@ namespace Server
 
 		private static void GenericRemove( List<Item> colecao, int count, DateTime aTime )
 		{
-			foreach ( Item item in colecao )
+			if( colecao.Count == 0 )
 			{
-				item.Delete();
+				World.Broadcast( 0x35, true, "There are no PremiumSpawners to be removed." );
 			}
-			
-			DateTime bTime = DateTime.Now;
-
-			World.Broadcast( 0x35, true, "{0} PremiumSpawners have been removed in {1:F1} seconds.", count, (bTime - aTime).TotalSeconds );
+			else
+			{
+				Talk("removed");
+				
+				foreach ( Item item in colecao )
+				{
+					item.Delete();
+				}
+				
+				DateTime bTime = DateTime.Now;
+				World.Broadcast( 0x35, true, "{0} PremiumSpawners have been removed in {1:F1} seconds.", count, (bTime - aTime).TotalSeconds );
+			}
 		}
 
 		//[spawngen save and [spawngen save region
 		private static void Save( Mobile from, string region )
 		{
-			Talk("saved");
 			DateTime aTime = DateTime.Now;
 			int count = 0;
 			List<Item> itemtodo = new List<Item>();
@@ -254,7 +254,6 @@ namespace Server
 		//[spawngen SaveByHand
 		private static void SaveByHand()
 		{
-			Talk("saved");
 			DateTime aTime = DateTime.Now;
 			int count = 0;
 			List<Item> itemtodo = new List<Item>();
@@ -275,7 +274,6 @@ namespace Server
 		//[spawngen save x1 y1 x2 y2
 		private static void SaveByCoord( Mobile from, int x1, int y1, int x2, int y2 )
 		{
-			Talk("saved");
 			DateTime aTime = DateTime.Now;
 			int count = 0;
 			List<Item> itemtodo = new List<Item>();
@@ -297,141 +295,150 @@ namespace Server
 		{
 			List<Item> itemssave = new List<Item>( colecao );
 			string mapanome = mapa;
-
-			if ( !Directory.Exists( "Data/Monsters" ) )
-				Directory.CreateDirectory( "Data/Monsters" );
-
-			string escreva = "Data/Monsters/" + mapanome + ".map";
-
-			using ( StreamWriter op = new StreamWriter( escreva ) )
+			
+			if( itemssave.Count == 0 )
 			{
-				foreach ( PremiumSpawner itemsave2 in itemssave )
+				World.Broadcast( 0x35, true, "There are no PremiumSpawners to be saved." );
+			}
+			else
+			{
+				Talk("saved");
+				
+				if ( !Directory.Exists( "Data/Monsters" ) )
+					Directory.CreateDirectory( "Data/Monsters" );
+
+				string escreva = "Data/Monsters/" + mapanome + ".map";
+
+				using ( StreamWriter op = new StreamWriter( escreva ) )
 				{
-					int mapnumber = 0;
-					switch ( itemsave2.Map.ToString() )
+					foreach ( PremiumSpawner itemsave2 in itemssave )
 					{
-						case "Felucca":
-							mapnumber = 1;
-							break;
-						case "Trammel":
-							mapnumber = 2;
-							break;
-						case "Ilshenar":
-							mapnumber = 3;
-							break;
-						case "Malas":
-							mapnumber = 4;
-							break;
-						case "Tokuno":
-							mapnumber = 5;
-							break;
-						case "TerMur":
-							mapnumber = 6;
-							break;
-						default:
-							mapnumber = 7;
-							Console.WriteLine( "Monster Parser: Warning, unknown map {0}", itemsave2.Map );
-							break;
-					}
+						int mapnumber = 0;
+						switch ( itemsave2.Map.ToString() )
+						{
+							case "Felucca":
+								mapnumber = 1;
+								break;
+							case "Trammel":
+								mapnumber = 2;
+								break;
+							case "Ilshenar":
+								mapnumber = 3;
+								break;
+							case "Malas":
+								mapnumber = 4;
+								break;
+							case "Tokuno":
+								mapnumber = 5;
+								break;
+							case "TerMur":
+								mapnumber = 6;
+								break;
+							default:
+								mapnumber = 7;
+								Console.WriteLine( "Monster Parser: Warning, unknown map {0}", itemsave2.Map );
+								break;
+						}
 
-					string timer1a = itemsave2.MinDelay.ToString();
-					string[] timer1b = timer1a.Split( ':' );
-					int timer1c = ( Utility.ToInt32( timer1b[0] ) * 60 ) + Utility.ToInt32( timer1b[1] );
+						string timer1a = itemsave2.MinDelay.ToString();
+						string[] timer1b = timer1a.Split( ':' );
+						int timer1c = ( Utility.ToInt32( timer1b[0] ) * 60 ) + Utility.ToInt32( timer1b[1] );
 
-					string timer2a = itemsave2.MaxDelay.ToString();
-					string[] timer2b = timer2a.Split( ':' );
-					int timer2c = ( Utility.ToInt32( timer2b[0] ) * 60 ) + Utility.ToInt32( timer2b[1] );
-					string towrite = "";
-					string towriteA = "";
-					string towriteB = "";
-					string towriteC = "";
-					string towriteD = "";
-					string towriteE = "";
+						string timer2a = itemsave2.MaxDelay.ToString();
+						string[] timer2b = timer2a.Split( ':' );
+						int timer2c = ( Utility.ToInt32( timer2b[0] ) * 60 ) + Utility.ToInt32( timer2b[1] );
+						string towrite = "";
+						string towriteA = "";
+						string towriteB = "";
+						string towriteC = "";
+						string towriteD = "";
+						string towriteE = "";
 
-					if ( itemsave2.CreaturesName.Count > 0 )
-					{
-						towrite = itemsave2.CreaturesName[0].ToString();
-					}
-
-					if ( itemsave2.SubSpawnerA.Count > 0 )
-					{
-						towriteA = itemsave2.SubSpawnerA[0].ToString();
-					}
-
-					if ( itemsave2.SubSpawnerB.Count > 0 )
-					{
-						towriteB = itemsave2.SubSpawnerB[0].ToString();
-					}
-
-					if ( itemsave2.SubSpawnerC.Count > 0 )
-					{
-						towriteC = itemsave2.SubSpawnerC[0].ToString();
-					}
-
-					if ( itemsave2.SubSpawnerD.Count > 0 )
-					{
-						towriteD = itemsave2.SubSpawnerD[0].ToString();
-					}
-
-					if ( itemsave2.SubSpawnerE.Count > 0 )
-					{
-						towriteE = itemsave2.SubSpawnerE[0].ToString();
-					}
-
-					for ( int i = 1; i < itemsave2.CreaturesName.Count; ++i )
-					{
 						if ( itemsave2.CreaturesName.Count > 0 )
 						{
-							towrite = towrite + ":" + itemsave2.CreaturesName[i].ToString();
+							towrite = itemsave2.CreaturesName[0].ToString();
 						}
-					}
 
-					for ( int i = 1; i < itemsave2.SubSpawnerA.Count; ++i )
-					{
 						if ( itemsave2.SubSpawnerA.Count > 0 )
 						{
-							towriteA = towriteA + ":" + itemsave2.SubSpawnerA[i].ToString();
+							towriteA = itemsave2.SubSpawnerA[0].ToString();
 						}
-					}
 
-					for ( int i = 1; i < itemsave2.SubSpawnerB.Count; ++i )
-					{
 						if ( itemsave2.SubSpawnerB.Count > 0 )
 						{
-							towriteB = towriteB + ":" + itemsave2.SubSpawnerB[i].ToString();
+							towriteB = itemsave2.SubSpawnerB[0].ToString();
 						}
-					}
 
-					for ( int i = 1; i < itemsave2.SubSpawnerC.Count; ++i )
-					{
 						if ( itemsave2.SubSpawnerC.Count > 0 )
 						{
-							towriteC = towriteC + ":" + itemsave2.SubSpawnerC[i].ToString();
+							towriteC = itemsave2.SubSpawnerC[0].ToString();
 						}
-					}
 
-					for ( int i = 1; i < itemsave2.SubSpawnerD.Count; ++i )
-					{
 						if ( itemsave2.SubSpawnerD.Count > 0 )
 						{
-							towriteD = towriteD + ":" + itemsave2.SubSpawnerD[i].ToString();
+							towriteD = itemsave2.SubSpawnerD[0].ToString();
 						}
-					}
 
-					for ( int i = 1; i < itemsave2.SubSpawnerE.Count; ++i )
-					{
 						if ( itemsave2.SubSpawnerE.Count > 0 )
 						{
-							towriteE = towriteE + ":" + itemsave2.SubSpawnerE[i].ToString();
+							towriteE = itemsave2.SubSpawnerE[0].ToString();
 						}
+
+						for ( int i = 1; i < itemsave2.CreaturesName.Count; ++i )
+						{
+							if ( itemsave2.CreaturesName.Count > 0 )
+							{
+								towrite = towrite + ":" + itemsave2.CreaturesName[i].ToString();
+							}
+						}
+
+						for ( int i = 1; i < itemsave2.SubSpawnerA.Count; ++i )
+						{
+							if ( itemsave2.SubSpawnerA.Count > 0 )
+							{
+								towriteA = towriteA + ":" + itemsave2.SubSpawnerA[i].ToString();
+							}
+						}
+
+						for ( int i = 1; i < itemsave2.SubSpawnerB.Count; ++i )
+						{
+							if ( itemsave2.SubSpawnerB.Count > 0 )
+							{
+								towriteB = towriteB + ":" + itemsave2.SubSpawnerB[i].ToString();
+							}
+						}
+
+						for ( int i = 1; i < itemsave2.SubSpawnerC.Count; ++i )
+						{
+							if ( itemsave2.SubSpawnerC.Count > 0 )
+							{
+								towriteC = towriteC + ":" + itemsave2.SubSpawnerC[i].ToString();
+							}
+						}
+
+						for ( int i = 1; i < itemsave2.SubSpawnerD.Count; ++i )
+						{
+							if ( itemsave2.SubSpawnerD.Count > 0 )
+							{
+								towriteD = towriteD + ":" + itemsave2.SubSpawnerD[i].ToString();
+							}
+						}
+
+						for ( int i = 1; i < itemsave2.SubSpawnerE.Count; ++i )
+						{
+							if ( itemsave2.SubSpawnerE.Count > 0 )
+							{
+								towriteE = towriteE + ":" + itemsave2.SubSpawnerE[i].ToString();
+							}
+						}
+
+						op.WriteLine( "*|{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}|{17}|{18}|{19}|{20}", towrite, towriteA, towriteB, towriteC, towriteD, towriteE, itemsave2.X, itemsave2.Y, itemsave2.Z, mapnumber, timer1c, timer2c, itemsave2.WalkingRange, itemsave2.HomeRange, itemsave2.SpawnID, itemsave2.Count, itemsave2.CountA, itemsave2.CountB, itemsave2.CountC, itemsave2.CountD, itemsave2.CountE );
 					}
-
-					op.WriteLine( "*|{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}|{17}|{18}|{19}|{20}", towrite, towriteA, towriteB, towriteC, towriteD, towriteE, itemsave2.X, itemsave2.Y, itemsave2.Z, mapnumber, timer1c, timer2c, itemsave2.WalkingRange, itemsave2.HomeRange, itemsave2.SpawnID, itemsave2.Count, itemsave2.CountA, itemsave2.CountB, itemsave2.CountC, itemsave2.CountD, itemsave2.CountE );
 				}
-			}
 
-			DateTime endTime = DateTime.Now;
-			World.Broadcast( 0x35, true, "{0} spawns have been saved. The entire process took {1:F1} seconds.", count, (endTime - startTime).TotalSeconds );
+				DateTime endTime = DateTime.Now;
+				World.Broadcast( 0x35, true, "{0} spawns have been saved. The entire process took {1:F1} seconds.", count, (endTime - startTime).TotalSeconds );
+			}
 		}
 
 		public static void Parse( Mobile from, string filename )

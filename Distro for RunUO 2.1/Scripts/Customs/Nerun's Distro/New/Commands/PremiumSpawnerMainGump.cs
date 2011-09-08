@@ -1,395 +1,289 @@
+// Engine r28
+#define RunUo2_0
 using System;
-using System.Collections;
-using System.IO;
 using Server;
-using Server.Mobiles;
-using Server.Items;
-using Server.Commands;
-using Server.Network;
 using Server.Gumps;
-
-namespace Server.Commands 
-{
-	public class PremiumSpawnerCommand
-	{
-		public PremiumSpawnerCommand()
-		{
-		}
-
-		public static void Initialize() 
-		{ 
-			CommandSystem.Register( "PremiumSpawner", AccessLevel.Administrator, new CommandEventHandler( PremiumSpawner_OnCommand ) );
-			CommandSystem.Register( "Spawner", AccessLevel.Administrator, new CommandEventHandler( PremiumSpawner_OnCommand ) ); 
-		}
- 
-		[Usage( "just use [PremiumSpawner" )]
-		[Aliases( "Spawner" )]
-		[Description( "Main Gump to access Premium Spawner functions." )]
-		private static void PremiumSpawner_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.SendGump( new PremiumSpawnerMainGump( e ) );
-		}
-	}
-}
+using Server.Network;
+using Server.Commands;
 
 namespace Server.Gumps
 {
-	public class PremiumSpawnerMainGump : Gump
-	{
+    public class PremiumSpawnerMainGump : Gump
+    {
+        Mobile caller;
+
+        public static void Initialize()
+        {
+#if(RunUo2_0)
+            CommandSystem.Register("PremiumSpawner", AccessLevel.Administrator, new CommandEventHandler(PremiumSpawner_OnCommand));
+			CommandSystem.Register("Spawner", AccessLevel.Administrator, new CommandEventHandler(PremiumSpawner_OnCommand));
+#else
+            Register("PremiumSpawner", AccessLevel.Administrator, new CommandEventHandler(PremiumSpawner_OnCommand));
+            Register("Spawner", AccessLevel.Administrator, new CommandEventHandler(PremiumSpawner_OnCommand));
+#endif
+        }
+
+        [Usage("PremiumSpawner")]
+		[Aliases( "Spawner" )]
+        [Description("PremiumSpawner main gump.")]
+        public static void PremiumSpawner_OnCommand(CommandEventArgs e)
+        {
+            Mobile from = e.Mobile;
+
+            if (from.HasGump(typeof(PremiumSpawnerMainGump)))
+                from.CloseGump(typeof(PremiumSpawnerMainGump));
+            from.SendGump(new PremiumSpawnerMainGump(from));
+        }
+
+        public PremiumSpawnerMainGump(Mobile from) : this()
+        {
+            caller = from;
+        }
+		
 		public void AddBlackAlpha( int x, int y, int width, int height )
 		{
 			AddImageTiled( x, y, width, height, 2624 );
 			AddAlphaRegion( x, y, width, height );
 		}
 
-		private CommandEventArgs m_CommandEventArgs;
-		public PremiumSpawnerMainGump( CommandEventArgs e ) : base( 50,50 )
-		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
-
+        public PremiumSpawnerMainGump() : base( 0, 0 )
+        {
+            this.Closable=true;
+			this.Disposable=true;
+			this.Dragable=true;
+			//PAGE 1
 			AddPage(1);
-
-			AddBackground( 0, 0, 267, 450, 5054 );
-
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.27", true, false );
-
-			AddBlackAlpha( 8, 58, 250, 50 );
-
-			AddBlackAlpha( 8, 116, 250, 130 );
-
-			AddBlackAlpha( 8, 254, 250, 130 );
-
-			AddButton( 220, 405, 0x158A, 0x158B, 10000, GumpButtonType.Reply, 1 ); //Quit Button
-//Options---------------------
-			AddLabel( 10, 60, 52, "WORLD CREATION OPTIONS" );
-
-			AddLabel( 45, 80, 52, "Create World gump" );
-			AddButton( 25, 80, 0x845, 0x846, 10001, GumpButtonType.Reply, 0 );
-
-			AddLabel( 10, 118, 52, "SPAWN OPTIONS" );
-
-			AddLabel( 45, 138, 52, "Trammel" );
-			AddButton( 25, 138, 0x845, 0x846, 10002, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 158, 52, "Felucca" );
-			AddButton( 25, 158, 0x845, 0x846, 10003, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 178, 52, "Ilshenar" );
-			AddButton( 25, 178, 0x845, 0x846, 10004, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 198, 52, "Malas" );
-			AddButton( 25, 198, 0x845, 0x846, 10104, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 218, 52, "Tokuno" );
-			AddButton( 25, 218, 0x845, 0x846, 10105, GumpButtonType.Reply, 0 );
-
-			AddLabel( 165, 138, 52, "Ter Mur" );
-			AddButton( 145, 138, 0x845, 0x846, 10106, GumpButtonType.Reply, 0 );
-
-			AddLabel( 10, 256, 52, "UNLOAD SPAWNS" );
-
-			AddLabel( 45, 278, 52, "Trammel" );
-			AddButton( 25, 278, 0x845, 0x846, 10005, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 298, 52, "Felucca" );
-			AddButton( 25, 298, 0x845, 0x846, 10006, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 318, 52, "Ilshenar" );
-			AddButton( 25, 318, 0x845, 0x846, 10007, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 338, 52, "Malas" );
-			AddButton( 25, 338, 0x845, 0x846, 10107, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 358, 52, "Tokuno" );
-			AddButton( 25, 358, 0x845, 0x846, 10108, GumpButtonType.Reply, 0 );
-
-			AddLabel( 165, 278, 52, "Ter Mur" );
-			AddButton( 145, 278, 0x845, 0x846, 10109, GumpButtonType.Reply, 0 );
-
-			AddLabel( 120, 410, 200, "1/3" );
-			AddButton( 145, 410, 0x15E1, 0x15E5, 0, GumpButtonType.Page, 2 );
-// -----------------------------------------
+			AddBackground(93, 68, 256, 423, 9200);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.28", (bool)true, (bool)false);
+			AddBlackAlpha(100, 124, 241, 71);
+			AddLabel(109, 126, 52, @"WORLD CREATION");
+			AddLabel(126, 148, 52, @"Let there be light (Create World)");
+			AddLabel(126, 170, 52, @"Apocalypse now (Clear All Facets)");
+			AddButton(109, 151, 1210, 1209, 101, GumpButtonType.Reply, 0);
+			AddButton(109, 173, 1210, 1209, 102, GumpButtonType.Reply, 0);
+			AddBlackAlpha(100, 200, 241, 89);
+			AddLabel(109, 202, 52, @"SELECT SPAWNS BY EXPANSION");
+			AddLabel(126, 224, 52, @"UO Classic spawns (pre-T2A)");
+			AddLabel(126, 244, 1000, @"UO Mondain's Legacy spawns");
+			AddLabel(126, 264, 52, @"UO KR, SA and HS spawns");
+			//AddLabel(238, 224, 52, @"UO:ML spawns");
+			//AddLabel(238, 244, 52, @"UO:KR, SA and HS spawns");
+			//AddLabel(238, 264, 52, @"teste");
+			AddButton(109, 227, 1210, 1209, 103, GumpButtonType.Reply, 0);
+			//AddButton(109, 247, 1210, 1209, 104, GumpButtonType.Reply, 0);
+			AddButton(109, 267, 1210, 1209, 105, GumpButtonType.Reply, 0);
+			//AddButton(221, 227, 1210, 1209, 106, GumpButtonType.Reply, 0);
+			//AddButton(221, 247, 1210, 1209, 107, GumpButtonType.Reply, 0);
+			//AddButton(221, 267, 1210, 1209, 108, GumpButtonType.Reply, 0);
+			AddBlackAlpha(100, 294, 241, 89);
+			AddLabel(109, 296, 52, @"REMOVE SPAWNS BY EXPANSION");
+			AddLabel(126, 318, 52, @"UO Classic spawns (pre-T2A)");
+			AddLabel(126, 338, 1000, @"UO Mondain's Legacy spawns");
+			AddLabel(126, 358, 52, @"UO KR, SA and HS spawns");
+			//AddLabel(238, 318, 52, @"Ter Mur");
+			//AddLabel(238, 338, 52, @"Tokuno");
+			//AddLabel(238, 358, 52, @"Trammel");
+			AddButton(109, 321, 1210, 1209, 109, GumpButtonType.Reply, 0);
+			//AddButton(109, 341, 1210, 1209, 110, GumpButtonType.Reply, 0);
+			AddButton(109, 361, 1210, 1209, 111, GumpButtonType.Reply, 0);
+			//AddButton(221, 321, 1210, 1209, 112, GumpButtonType.Reply, 0);
+			//AddButton(221, 341, 1210, 1209, 113, GumpButtonType.Reply, 0);
+			//AddButton(221, 361, 1210, 1209, 114, GumpButtonType.Reply, 0);
+			AddBlackAlpha(100, 388, 241, 68);
+			AddLabel(109, 391, 52, @"SMART PLAYER RANGE SENSITIVE");
+			AddLabel(126, 413, 52, @"Generate Spawns' Overseer");
+			AddLabel(126, 432, 52, @"Remove Spawns' Overseer");
+			AddButton(109, 416, 1210, 1209, 115, GumpButtonType.Reply, 0);
+			AddButton(109, 435, 1210, 1209, 116, GumpButtonType.Reply, 0);
+			//Page change
+			AddLabel(207, 463, 200, @"1/3");
+			AddButton(235, 465, 5601, 5605, 0, GumpButtonType.Page, 2); //advance
+			
+			// PAGE 2
 			AddPage(2);
-
-			AddBackground( 0, 0, 267, 450, 5054 );
-
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.27", true, false );
-
-			AddBlackAlpha( 8, 58, 250, 110 );
-
-			AddBlackAlpha( 8, 176, 250, 130 );
-
-			AddBlackAlpha( 8, 314, 250, 88 );
-
-			AddButton( 220, 405, 0x158A, 0x158B, 10000, GumpButtonType.Reply, 1 ); //Quit Button
-//Options---------------------
-			AddLabel( 10, 60, 52, "SAVE OPTIONS" );
-			AddLabel( 10, 178, 52, "REMOVE OPTIONS" );
-			AddLabel( 10, 316, 52, "EDITION OPTIONS" );
-
-			AddLabel( 45, 80, 52, "Save All spawns (spawns.map)" );
-			AddButton( 25, 80, 0x845, 0x846, 10008, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 100, 52, "Save 'By Hand' spawns (byhand.map)" );
-			AddButton( 25, 100, 0x845, 0x846, 10009, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 120, 52, "Save spawns inside Region" );
-			AddButton( 25, 120, 0x845, 0x846, 10010, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 140, 52, "Save spawns by Coordinates" );
-			AddButton( 25, 140, 0x845, 0x846, 10011, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 198, 52, "Remove All spawners (all facets)" );
-			AddButton( 25, 198, 0x845, 0x846, 10012, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 218, 52, "Remove All spawners (current map)" );
-			AddButton( 25, 218, 0x845, 0x846, 10013, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 238, 52, "Remove spawners by ID" );
-			AddButton( 25, 238, 0x845, 0x846, 10014, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 258, 52, "Remove spawners by Coordinates" );
-			AddButton( 25, 258, 0x845, 0x846, 10015, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 278, 52, "Remove spawners inside Region" );
-			AddButton( 25, 278, 0x845, 0x846, 10016, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 336, 52, "Spawn Editor" );
-			AddButton( 25, 336, 0x845, 0x846, 10017, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 356, 52, "Clear All Facets" );
-			AddButton( 25, 356, 0x845, 0x846, 10018, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 376, 52, "Set my own body to GM Style" );
-			AddButton( 25, 376, 0x845, 0x846, 10019, GumpButtonType.Reply, 0 );
-
-			AddLabel( 120, 410, 200, "2/3" );
-			AddButton( 100, 410, 0x15E3, 0x15E7, 0, GumpButtonType.Page, 1 );
-			AddButton( 145, 410, 0x15E1, 0x15E5, 0, GumpButtonType.Page, 3 );
-// -----------------------------------------
+			AddBackground(93, 68, 256, 423, 9200);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.28", (bool)true, (bool)false);
+			AddBlackAlpha(100, 124, 241, 114);
+			AddLabel(109, 126, 52, @"SAVE SPAWNERS");
+			AddLabel(126, 148, 52, @"All spawns (spawns.map)");
+			AddLabel(126, 170, 52, @"'By hand' spawns (byhand.map)");
+			AddLabel(126, 192, 52, @"Spawns inside region (region.map)");
+			AddLabel(126, 214, 52, @"Spawns inside coordinates");
+			AddButton(109, 151, 1210, 1209, 117, GumpButtonType.Reply, 0);
+			AddButton(109, 173, 1210, 1209, 118, GumpButtonType.Reply, 0);
+			AddButton(109, 195, 1210, 1209, 119, GumpButtonType.Reply, 0);
+			AddButton(109, 217, 1210, 1209, 120, GumpButtonType.Reply, 0);
+			AddBlackAlpha(100, 244, 241, 134);
+			AddLabel(109, 246, 52, @"REMOVE SPAWNERS");
+			AddLabel(126, 268, 52, @"All spawners in ALL facets");
+			AddLabel(126, 290, 52, @"All spawners in THIS facet");
+			AddLabel(126, 312, 52, @"Remove spawners by SpawnID");
+			AddLabel(126, 334, 52, @"Remove inside coordinates");
+			AddLabel(126, 355, 52, @"Remove spawners inside region");
+			AddButton(109, 271, 1210, 1209, 121, GumpButtonType.Reply, 0);
+			AddButton(109, 293, 1210, 1209, 122, GumpButtonType.Reply, 0);
+			AddButton(109, 315, 1210, 1209, 123, GumpButtonType.Reply, 0);
+			AddButton(109, 337, 1210, 1209, 124, GumpButtonType.Reply, 0);
+			AddButton(109, 358, 1210, 1209, 125, GumpButtonType.Reply, 0);
+			AddBlackAlpha(100, 385, 241, 71);
+			AddLabel(109, 387, 52, @"EDITOR");
+			AddLabel(126, 408, 52, @"Spawn Editor (edit, find and list");
+			AddLabel(126, 427, 52, @"all PremiumSpawners in the world)");
+			AddButton(109, 411, 1210, 1209, 126, GumpButtonType.Reply, 0);
+			//Page change
+			AddLabel(207, 463, 200, @"2/3");
+			AddButton(189, 465, 5603, 5607, 0, GumpButtonType.Page, 1); //back
+			AddButton(235, 465, 5601, 5605, 0, GumpButtonType.Page, 3); //advance
+			
+			//PAGE 3
 			AddPage(3);
-
-			AddBackground( 0, 0, 267, 450, 5054 );
-
-			AddHtml( 8, 8, 250, 42, "        PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.27", true, false );
-
-			AddBlackAlpha( 8, 58, 250, 50 );
-
-			AddBlackAlpha( 8, 116, 250, 70 );
-
-			AddBlackAlpha( 8, 194, 250, 50 );
-
-			AddButton( 220, 405, 0x158A, 0x158B, 10000, GumpButtonType.Reply, 1 ); //Quit Button
-//Options---------------------
-			AddLabel( 10, 60, 52, "CONVERSION UTILITY" );
-			AddLabel( 10, 118, 52, "SMART PLAYER RANGE SENSITIVE" );
-			AddLabel( 10, 196, 52, "CUSTOM REGIONS IN A BOX" );
-
-			AddLabel( 45, 80, 52, "RunUO Spawns to PremiumSpawner" );
-			AddButton( 25, 80, 0x845, 0x846, 10200, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 138, 52, "Generate Spawn's Overseers" );
-			AddButton( 25, 138, 0x845, 0x846, 10301, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 158, 52, "Remove Overseers" );
-			AddButton( 25, 158, 0x845, 0x846, 10302, GumpButtonType.Reply, 0 );
-
-			AddLabel( 45, 216, 52, "Add a Region Controller" );
-			AddButton( 25, 216, 0x845, 0x846, 10303, GumpButtonType.Reply, 0 );
-
-			AddLabel( 120, 410, 200, "3/3" );
-			AddButton( 100, 410, 0x15E3, 0x15E7, 0, GumpButtonType.Page, 2 );
+			AddBackground(93, 68, 256, 423, 9200);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.28", (bool)true, (bool)false);
+			AddBlackAlpha(101, 124, 241, 47);
+			AddLabel(109, 126, 52, @"CONVERSION UTILITY");
+			AddLabel(127, 148, 52, @"RunUO Spawners to Premium");
+			AddButton(110, 151, 1210, 1209, 127, GumpButtonType.Reply, 0);
+			AddBlackAlpha(101, 177, 241, 134);
+			AddLabel(109, 179, 52, @"CUSTOM REGIONS IN A BOX");
+			AddLabel(127, 201, 52, @"Add a Region Controler");
+			AddLabel(127, 222, 52, @"(double-click the Region");
+			AddLabel(127, 243, 52, @"Controller to configure it region.");
+			AddLabel(127, 264, 52, @"Every Controller control one");
+			AddLabel(127, 286, 52, @"region. Don't forget to prop)");
+			AddButton(110, 204, 1210, 1209, 128, GumpButtonType.Reply, 0);
+			//Page change
+			AddLabel(207, 463, 200, @"3/3");
+			AddButton(189, 465, 5603, 5607, 0, GumpButtonType.Page, 2); //back
+        }
+		
+		public static void DoThis( Mobile from, string command)
+		{
+			string prefix = Server.Commands.CommandSystem.Prefix;
+			CommandSystem.Handle( from, String.Format( "{0}{1}", prefix, command ) );
+			CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
 		}
 
-		public override void OnResponse( NetState state, RelayInfo info )
-		{
-			Mobile from = state.Mobile;
-			string prefix = Server.Commands.CommandSystem.Prefix;
+        public override void OnResponse(NetState sender, RelayInfo info)
+        {
+            Mobile from = sender.Mobile;
 
-			switch( info.ButtonID )
-			{
-				case 10000:
+            switch(info.ButtonID)
+            {
+                case 0:
 				{
 					//Quit
 					break;
 				}
-				case 10001:
+				case 101:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}createworld", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "createworld" );
 					break;
 				}
-				case 10002:
+				case 102:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawntrammel", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "clearall" );
 					break;
 				}
-				case 10003:
+				case 103:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawnfelucca", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					from.Say( "SPAWNING UO Classic..." );
+					DoThis( from, "spawngen uoclassic/UOClassic.map" );
 					break;
 				}
-				case 10004:
+					//DoThis( from104, "" );
+				case 105:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawnilshenar", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "SpawnCurrent" );
 					break;
 				}
-				case 10005:
+					//DoThis( from106, "" );
+					//DoThis( from107, "" );
+					//DoThis( from108, "" );
+				case 109:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}unloadtrammel", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "spawngen unload 1000" );
 					break;
 				}
-				case 10006:
+					//DoThis( from110, "" );
+				case 111:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}unloadfelucca", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "UnloadCurrent" );
 					break;
 				}
-				case 10007:
+					//DoThis( from112, "" );
+					//DoThis( from113, "" );
+					//DoThis( from114, "" );
+				case 115:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}unloadilshenar", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "GenSeers" );
 					break;
 				}
-				case 10008:
+				case 116:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawngen save", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "RemSeers" );
 					break;
 				}
-				case 10009:
+				case 117:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawngen savebyhand", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "spawngen save" );
 					break;
 				}
-				case 10010:
+				case 118:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}GumpSaveRegion", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "spawngen savebyhand" );
 					break;
 				}
-				case 10011:
+				case 119:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}GumpSaveCoordinate", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "GumpSaveRegion" );
 					break;
 				}
-				case 10012:
+				case 120:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawngen remove", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "GumpSaveCoordinate" );
 					break;
 				}
-				case 10013:
+				case 121:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawngen cleanfacet", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "spawngen remove" );
 					break;
 				}
-				case 10014:
+				case 122:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}GumpRemoveID", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "spawngen cleanfacet" );
 					break;
 				}
-				case 10015:
+				case 123:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}GumpRemoveCoordinate", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "GumpRemoveID" );
 					break;
 				}
-				case 10016:
+				case 124:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}GumpRemoveRegion", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "GumpRemoveCoordinate" );
 					break;
 				}
-				case 10017:
+				case 125:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}editor", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "GumpRemoveRegion" );
 					break;
 				}
-				case 10018:
+				case 126:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}clearall", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "SpawnEditor" );
 					break;
 				}
-				case 10019:
+				case 127:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}gmbody", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "RunUOSpawnerExporter" );
 					break;
 				}
-				case 10104:
+				case 128:
 				{
-					CommandSystem.Handle( from, String.Format( "{0}spawnmalas", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
+					DoThis( from, "Add RegionControl" );
 					break;
 				}
-				case 10105:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}spawntokuno", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10106:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}spawntermur", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10107:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}unloadmalas", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10108:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}unloadtokuno", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10109:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}unloadtermur", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10200:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}rse", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10301:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}GenSeers", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10302:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}RemSeers", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-				case 10303:
-				{
-					CommandSystem.Handle( from, String.Format( "{0}Add RegionControl", prefix ) );
-					CommandSystem.Handle( from, String.Format( "{0}spawner", prefix ) );
-					break;
-				}
-			}
-		}
-	}
+            }
+        }
+    }
 }
