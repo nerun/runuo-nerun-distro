@@ -10,6 +10,7 @@ rn/Data/signs.cfg.bak
 rm/Data/treasure.cfg
 rn/Data/treasure.cfg.bak
 rm/Data/Decoration/Britannia/NERUN-BritainSewers.cfg
+rm/Data/Decoration/Britannia/NERUN-SeaMarket.cfg
 rm/Data/Decoration/Malas/NERUN-Malas.cfg
 sh/Data/Decoration/Mondain's Legacy
 rm/Data/Decoration/Trammel/_haven additions.cfg
