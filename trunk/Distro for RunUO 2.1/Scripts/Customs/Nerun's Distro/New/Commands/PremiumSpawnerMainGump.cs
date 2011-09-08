@@ -1,4 +1,4 @@
-// Engine r28
+// Engine r29
 #define RunUo2_0
 using System;
 using Server;
@@ -54,7 +54,7 @@ namespace Server.Gumps
 			//PAGE 1
 			AddPage(1);
 			AddBackground(93, 68, 256, 423, 9200);
-			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.28", (bool)true, (bool)false);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.29", (bool)true, (bool)false);
 			AddBlackAlpha(100, 124, 241, 71);
 			AddLabel(109, 126, 52, @"WORLD CREATION");
 			AddLabel(126, 148, 52, @"Let there be light (Create World)");
@@ -64,13 +64,13 @@ namespace Server.Gumps
 			AddBlackAlpha(100, 200, 241, 89);
 			AddLabel(109, 202, 52, @"SELECT SPAWNS BY EXPANSION");
 			AddLabel(126, 224, 52, @"UO Classic spawns (pre-T2A)");
-			AddLabel(126, 244, 1000, @"UO Mondain's Legacy spawns");
+			AddLabel(126, 244, 52, @"UO Mondain's Legacy spawns");
 			AddLabel(126, 264, 52, @"UO KR, SA and HS spawns");
 			//AddLabel(238, 224, 52, @"UO:ML spawns");
 			//AddLabel(238, 244, 52, @"UO:KR, SA and HS spawns");
 			//AddLabel(238, 264, 52, @"teste");
 			AddButton(109, 227, 1210, 1209, 103, GumpButtonType.Reply, 0);
-			//AddButton(109, 247, 1210, 1209, 104, GumpButtonType.Reply, 0);
+			AddButton(109, 247, 1210, 1209, 104, GumpButtonType.Reply, 0);
 			AddButton(109, 267, 1210, 1209, 105, GumpButtonType.Reply, 0);
 			//AddButton(221, 227, 1210, 1209, 106, GumpButtonType.Reply, 0);
 			//AddButton(221, 247, 1210, 1209, 107, GumpButtonType.Reply, 0);
@@ -78,13 +78,13 @@ namespace Server.Gumps
 			AddBlackAlpha(100, 294, 241, 89);
 			AddLabel(109, 296, 52, @"REMOVE SPAWNS BY EXPANSION");
 			AddLabel(126, 318, 52, @"UO Classic spawns (pre-T2A)");
-			AddLabel(126, 338, 1000, @"UO Mondain's Legacy spawns");
+			AddLabel(126, 338, 52, @"UO Mondain's Legacy spawns");
 			AddLabel(126, 358, 52, @"UO KR, SA and HS spawns");
 			//AddLabel(238, 318, 52, @"Ter Mur");
 			//AddLabel(238, 338, 52, @"Tokuno");
 			//AddLabel(238, 358, 52, @"Trammel");
 			AddButton(109, 321, 1210, 1209, 109, GumpButtonType.Reply, 0);
-			//AddButton(109, 341, 1210, 1209, 110, GumpButtonType.Reply, 0);
+			AddButton(109, 341, 1210, 1209, 110, GumpButtonType.Reply, 0);
 			AddButton(109, 361, 1210, 1209, 111, GumpButtonType.Reply, 0);
 			//AddButton(221, 321, 1210, 1209, 112, GumpButtonType.Reply, 0);
 			//AddButton(221, 341, 1210, 1209, 113, GumpButtonType.Reply, 0);
@@ -102,7 +102,7 @@ namespace Server.Gumps
 			// PAGE 2
 			AddPage(2);
 			AddBackground(93, 68, 256, 423, 9200);
-			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.28", (bool)true, (bool)false);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.29", (bool)true, (bool)false);
 			AddBlackAlpha(100, 124, 241, 114);
 			AddLabel(109, 126, 52, @"SAVE SPAWNERS");
 			AddLabel(126, 148, 52, @"All spawns (spawns.map)");
@@ -138,7 +138,7 @@ namespace Server.Gumps
 			//PAGE 3
 			AddPage(3);
 			AddBackground(93, 68, 256, 423, 9200);
-			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.28", (bool)true, (bool)false);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.29", (bool)true, (bool)false);
 			AddBlackAlpha(101, 124, 241, 47);
 			AddLabel(109, 126, 52, @"CONVERSION UTILITY");
 			AddLabel(127, 148, 52, @"RunUO Spawners to Premium");
@@ -190,7 +190,11 @@ namespace Server.Gumps
 					DoThis( from, "spawngen uoclassic/UOClassic.map" );
 					break;
 				}
-					//DoThis( from104, "" );
+				case 104:
+				{
+					DoThis( from, "SpawnUOML" );
+					break;
+				}
 				case 105:
 				{
 					DoThis( from, "SpawnCurrent" );
@@ -204,7 +208,11 @@ namespace Server.Gumps
 					DoThis( from, "spawngen unload 1000" );
 					break;
 				}
-					//DoThis( from110, "" );
+				case 110:
+				{
+					DoThis( from, "UnloadUOML" );
+					break;
+				}
 				case 111:
 				{
 					DoThis( from, "UnloadCurrent" );
