@@ -1,7 +1,8 @@
+//Engine r32
 using System;
 using System.IO;
 using System.Text;
-using System.Collections;
+using System.Collections.Generic;
 using Server;
 using Server.Mobiles;
 using Server.Items;
@@ -29,8 +30,7 @@ namespace Server.Commands
 		public static void RunUOSpawnerExporter_OnCommand( CommandEventArgs e )
 		{
 			Map map = e.Mobile.Map;
-			ArrayList list = new ArrayList();
-			ArrayList entries = new ArrayList();
+			List<Item> list = new List<Item>();
 
 			if ( !Directory.Exists( @".\Data\Monsters\" ) )
 				Directory.CreateDirectory( @".\Data\Monsters\" );
@@ -96,39 +96,48 @@ namespace Server.Commands
 					{
 						walkrange = spawner.WalkingRange.ToString();
 					}
+					
+					int MinDelay = ConvertToInt(spawner.MinDelay);
 
-					if ( spawner.SpawnNames.Count > 0 )
+					if (MinDelay < 1)
 					{
-						int MinDelay = ConvertToInt(spawner.MinDelay);
+						MinDelay = 1;
+					}
 
-						if (MinDelay < 1)
-						{
-							MinDelay = 1;
-						}
+					int MaxDelay = ConvertToInt(spawner.MaxDelay);
 
-						int MaxDelay = ConvertToInt(spawner.MaxDelay);
+					if (MaxDelay < MinDelay)
+					{
+						MaxDelay = MinDelay;
+					}
+					
+					string towrite = "*|";
 
-						if (MaxDelay < MinDelay)
-						{
-							MaxDelay = MinDelay;
-						}
-
-						string towrite = "*|" + spawner.SpawnNames[0];
+					if( spawner.SpawnNames.Count > 0 )
+					{
+						towrite = "*|" + spawner.SpawnNames[0];
 
 						for ( int i = 1; i < spawner.SpawnNames.Count; ++i )
 						{
 							towrite = towrite + ":" + spawner.SpawnNames[i].ToString();
 						}
-
+					}
+					
+					if ( spawner.SpawnNames.Count > 0 && spawner.Running == true )
+					{
 						op.WriteLine( "{0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, walkrange, spawner.HomeRange, spawner.Count);
 					}
-
-					else
+					
+					if( spawner.SpawnNames.Count == 0 )
 					{
-						op.WriteLine( "## No creatures in spawner at: {0} {1} {2}, map: {3}", spawner.X, spawner.Y, spawner.Z, mapfinal);
+						op.WriteLine( "## Void: {0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, walkrange, spawner.HomeRange, spawner.Count);
+					}
+					
+					if( spawner.SpawnNames.Count > 0 && spawner.Running == false )
+					{
+						op.WriteLine( "## Inactive: {0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, walkrange, spawner.HomeRange, spawner.Count);
 					}
 				}
-
 				e.Mobile.SendMessage( String.Format( "You exported {0} RunUO Spawner{1} from this facet.", list.Count, list.Count == 1 ? "" : "s" ) );
 			}
 		}
