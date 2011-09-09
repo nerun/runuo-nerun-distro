@@ -1,3 +1,4 @@
+//Engine r32
 using System;
 using System.IO;
 using System.Text;
@@ -95,39 +96,48 @@ namespace Server.Commands
 					{
 						walkrange = spawner.WalkingRange.ToString();
 					}
+					
+					int MinDelay = ConvertToInt(spawner.MinDelay);
 
-					if ( spawner.CreaturesName.Count > 0 )
+					if (MinDelay < 1)
 					{
-						int MinDelay = ConvertToInt(spawner.MinDelay);
+						MinDelay = 1;
+					}
 
-						if (MinDelay < 1)
-						{
-							MinDelay = 1;
-						}
+					int MaxDelay = ConvertToInt(spawner.MaxDelay);
 
-						int MaxDelay = ConvertToInt(spawner.MaxDelay);
+					if (MaxDelay < MinDelay)
+					{
+						MaxDelay = MinDelay;
+					}
+					
+					string towrite = "*|";
 
-						if (MaxDelay < MinDelay)
-						{
-							MaxDelay = MinDelay;
-						}
-
-						string towrite = "*|" + spawner.CreaturesName[0];
+					if( spawner.CreaturesName.Count > 0 )
+					{
+						towrite = "*|" + spawner.CreaturesName[0];
 
 						for ( int i = 1; i < spawner.CreaturesName.Count; ++i )
 						{
 							towrite = towrite + ":" + spawner.CreaturesName[i].ToString();
 						}
-
+					}
+					
+					if ( spawner.CreaturesName.Count > 0 && spawner.Running == true )
+					{
 						op.WriteLine( "{0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, walkrange, spawner.HomeRange, spawner.Count);
 					}
-
-					else
+					
+					if( spawner.CreaturesName.Count == 0 )
 					{
-						op.WriteLine( "## No creatures in spawner at: {0} {1} {2}, map: {3}", spawner.X, spawner.Y, spawner.Z, mapfinal);
+						op.WriteLine( "## Void: {0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, walkrange, spawner.HomeRange, spawner.Count);
+					}
+					
+					if( spawner.CreaturesName.Count > 0 && spawner.Running == false )
+					{
+						op.WriteLine( "## Inactive: {0}||||||{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|1|{9}|0|0|0|0|0", towrite, spawner.X, spawner.Y, spawner.Z, mapfinal, MinDelay, MaxDelay, walkrange, spawner.HomeRange, spawner.Count);
 					}
 				}
-
 				e.Mobile.SendMessage( String.Format( "You exported {0} RunUO Spawner{1} from this facet.", list.Count, list.Count == 1 ? "" : "s" ) );
 			}
 		}

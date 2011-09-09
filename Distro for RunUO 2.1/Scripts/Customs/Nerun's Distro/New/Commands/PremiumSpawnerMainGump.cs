@@ -54,7 +54,7 @@ namespace Server.Gumps
 			//PAGE 1
 			AddPage(1);
 			AddBackground(93, 68, 256, 423, 9200);
-			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.31", (bool)true, (bool)false);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.32", (bool)true, (bool)false);
 			AddBlackAlpha(100, 124, 241, 71);
 			AddLabel(109, 126, 52, @"WORLD CREATION");
 			AddLabel(126, 148, 52, @"Let there be light (Create World)");
@@ -102,7 +102,7 @@ namespace Server.Gumps
 			// PAGE 2
 			AddPage(2);
 			AddBackground(93, 68, 256, 423, 9200);
-			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.31", (bool)true, (bool)false);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.32", (bool)true, (bool)false);
 			AddBlackAlpha(100, 124, 241, 114);
 			AddLabel(109, 126, 52, @"SAVE SPAWNERS");
 			AddLabel(126, 148, 52, @"All spawns (spawns.map)");
@@ -138,7 +138,7 @@ namespace Server.Gumps
 			//PAGE 3
 			AddPage(3);
 			AddBackground(93, 68, 256, 423, 9200);
-			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.31", (bool)true, (bool)false);
+			AddHtml( 98, 75, 244, 44, "       PREMIUM SPAWNER<BR>" + "by Nerun                  Rev.32", (bool)true, (bool)false);
 			AddBlackAlpha(101, 124, 241, 47);
 			AddLabel(109, 126, 52, @"CONVERSION UTILITY");
 			AddLabel(127, 148, 52, @"RunUO Spawners to Premium");
