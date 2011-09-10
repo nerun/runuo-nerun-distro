@@ -343,18 +343,18 @@ namespace Joeku
 				case 0: // Player
 					break;
 				case 1: // Counselor
-					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[SpeedBoost"); entries.Add("[M Tele"); for( int j = 0; j < 5; j++ ){entries.Add("-*UNUSED*-");}
+					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Stuck"); entries.Add("[M Tele"); for( int j = 0; j < 5; j++ ){entries.Add("-*UNUSED*-");}
 					entries.Add("[Where"); entries.Add("[who"); entries.Add("[Self Hide"); entries.Add("[Self Unhide");
 					break;
 				case 2: // GameMaster
-					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[SpeedBoost"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 2; j++ ){entries.Add("-*UNUSED*-");}
+					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Props"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 2; j++ ){entries.Add("-*UNUSED*-");}
 					entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Kill"); entries.Add("[Recover"); entries.Add("[Self Unhide");
 					break;
 				case 3: // Seer
 					goto case 2;
 				case 4: // Administrator
-					entries.Add("[Admin"); entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[SpeedBoost"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 1; j++ ){entries.Add("-*UNUSED*-");}
-					entries.Add("[PremiumSpawner"); entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Kill"); entries.Add("[Recover"); entries.Add("[Self Unhide");
+					entries.Add("[Admin"); entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[StaEx MyDeco"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 1; j++ ){entries.Add("-*UNUSED*-");}
+					entries.Add("[PremiumSpawner"); entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Props"); entries.Add("[Recover"); entries.Add("[Self Unhide");
 					break;
 				case 5: // Developer
 					goto case 4;
