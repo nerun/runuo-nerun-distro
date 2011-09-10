@@ -28,7 +28,7 @@ namespace Server.Regions
         // public override bool OnDeath( Mobile m )
         public override void OnDeath(Mobile m)
         {
-            bool toreturn = true;
+			//bool toreturn = true;
 
             if ( m != null && !m.Deleted)
             {
@@ -48,7 +48,7 @@ namespace Server.Regions
                         m.Hidden = true;
                     }
                     m.Hidden = false;
-                    toreturn = false;
+                    //toreturn = false;
                 }
                 else if ( !(m is PlayerMobile) && m_Controller.NoNPCItemDrop)
                 {
@@ -65,10 +65,10 @@ namespace Server.Regions
                         m.Hidden = true;
                     }
                     m.Hidden = false;
-                    toreturn = false;
+                    //toreturn = false;
                 }
-                else
-                    toreturn = true;
+                //else
+					//toreturn = true;
 
                 // Start a 1 second timer
                 // The Timer will check if they need moving, corpse deleting etc.

@@ -80,7 +80,7 @@ namespace Server.Commands
 				else
 					item.Delete();
 			}
-
+			
 			protected override void OnTarget( Mobile from, object targeted )
 			{
 				if ( targeted is Mobile )
@@ -94,6 +94,9 @@ namespace Server.Commands
 						m_Mobile = from;
 
 						CommandLogging.WriteLine( from, "{0} {1} is assuming a GM body", from.AccessLevel, CommandLogging.Format( from ) );
+						
+						string prefix = Server.Commands.CommandSystem.Prefix;
+						CommandSystem.Handle( from, String.Format( "{0}AutoSpeedBooster true", prefix ) );
 
 						Container pack = from.Backpack;
 
@@ -188,28 +191,18 @@ namespace Server.Commands
 						if(from.AccessLevel >= AccessLevel.Administrator)
 						{
 							PackItem( new StaffCloak() );
+							EquipItem( new ThighBoots( 1001 ) );
+							EquipItem( new AdminRobe() );
 						}
 						
 						if(from.AccessLevel == AccessLevel.Administrator)
-						{
-							EquipItem( new AdminRobe() );
-							EquipItem( new ThighBoots( 1001 ) );
 							from.Title = "[Admin]";
-						}
 
 						if(from.AccessLevel == AccessLevel.Developer)
-						{
-							EquipItem( new AdminRobe() );
-							EquipItem( new ThighBoots( 1001 ) );
 							from.Title = "[Developer]";
-						}
 
 						if(from.AccessLevel == AccessLevel.Owner)
-						{
-							EquipItem( new AdminRobe() );
-							EquipItem( new ThighBoots( 1001 ) );
 							from.Title = "[Owner]";
-						}
 					}
 				}
 			}
