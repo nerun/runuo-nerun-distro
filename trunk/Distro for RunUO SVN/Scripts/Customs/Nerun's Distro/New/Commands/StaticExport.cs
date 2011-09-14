@@ -1,6 +1,6 @@
 /*************************
  * StaticExport by Nerun *
- *      Version 2.2      *
+ *      Version 2.3      *
  *************************
 */
 using System;
@@ -98,7 +98,7 @@ namespace Server.Commands
 
 				op.WriteLine( "# Saved By Static Exporter" );
 				op.WriteLine( "#  StaticExport by Nerun" );
-				op.WriteLine( "#       Version 2.2" );
+				op.WriteLine( "#       Version 2.3" );
 				op.WriteLine( "" );
 
 				foreach ( Item item in World.Items.Values )
@@ -121,7 +121,7 @@ namespace Server.Commands
 					}
 					else if (item is Moongate)
 					{
-						op.WriteLine( "Moongate 3948 (Target={0}; TargetMap={1})", ((Moongate)item).Target, ((Moongate)item).TargetMap );
+						op.WriteLine( "Moongate 3948 (Target={0}; TargetMap={1}; Hue={2})", ((Moongate)item).Target, ((Moongate)item).TargetMap, ((Moongate)item).Hue );
 						op.WriteLine( "{0} {1} {2}", item.X, item.Y, item.Z );
 						op.WriteLine( "" );
 					}
@@ -254,6 +254,10 @@ namespace Server.Commands
 						{
 							NamePlusID = "LocalizedSign " + HexConstruct + itemidhex + " (LabelNumber=" + ((LocalizedSign)item).LabelNumber + ")";
 						}
+						else if ( itemname == "Cannon" )
+						{
+							NamePlusID = "Cannon 0";
+						}
 
 						/*
 						 * 5.- Now, the main job. Above, we created a Dictionary, that holds collections of
@@ -274,8 +278,8 @@ namespace Server.Commands
 						}
 						else
 						{
-							if ( itemname != "AddonComponent" && itemname != "InternalItem" ) // ignore AddonComponent and InternalItem
-							{
+							if ( !itemname.Contains("Component") && itemname != "InternalItem" && itemname != "PremiumSpawner" )
+							{ // ignore AddonComponent, CannonComponent, InternalItem and PremiumSpawner
 								List<string> CoordXYZ = new List<string>();
 								CoordXYZ.Add(Coord);
 								DicOfItemIDs.Add(NamePlusID, CoordXYZ);
