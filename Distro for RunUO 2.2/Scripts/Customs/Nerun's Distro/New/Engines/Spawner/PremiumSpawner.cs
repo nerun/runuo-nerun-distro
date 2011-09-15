@@ -1,8 +1,4 @@
-///////////////////////////
-//       By Nerun        //
-//    Engine v5.2.4      //
-///////////////////////////
-
+//Engine r53
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1154,6 +1150,11 @@ namespace Server.Mobiles
 				
 
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
+				
+				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
+				{
+					loc = GetSpawnPosition();
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
@@ -1220,6 +1221,11 @@ namespace Server.Mobiles
 				
 
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
+				
+				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
+				{
+					loc = GetSpawnPosition();
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
@@ -1286,6 +1292,11 @@ namespace Server.Mobiles
 				
 
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
+				
+				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
+				{
+					loc = GetSpawnPosition();
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
@@ -1352,6 +1363,11 @@ namespace Server.Mobiles
 				
 
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
+				
+				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
+				{
+					loc = GetSpawnPosition();
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
@@ -1418,6 +1434,11 @@ namespace Server.Mobiles
 				
 
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
+				
+				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
+				{
+					loc = GetSpawnPosition();
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
@@ -1484,6 +1505,11 @@ namespace Server.Mobiles
 				
 
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
+				
+				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
+				{
+					loc = GetSpawnPosition();
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
