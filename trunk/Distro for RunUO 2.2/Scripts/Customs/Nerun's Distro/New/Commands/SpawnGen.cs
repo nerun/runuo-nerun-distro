@@ -1,4 +1,4 @@
-//Engine r28
+//Engine r53
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -518,11 +518,47 @@ namespace Server
 			int y = Utility.ToInt32( sy );
 			int z = Utility.ToInt32( sz );
 			int map = Utility.ToInt32( sm );
-			double dmintime = Utility.ToDouble( smintime );
+			
+			//MinTime
+			string samintime = smintime;
+			
+			if ( smintime.Contains("s") || smintime.Contains("m") || smintime.Contains("h") )
+			{
+				samintime = smintime.Remove(smintime.Length - 1);
+			}
+			
+			double dmintime = Utility.ToDouble( samintime );
+			
 			if ( m_MinTimeOverride != -1 )
+			{
 				dmintime = m_MinTimeOverride;
+			}
+
 			TimeSpan mintime = TimeSpan.FromMinutes( dmintime );
-			double dmaxtime = Utility.ToDouble( smaxtime );
+			
+			if ( smintime.Contains("s") )
+			{
+				mintime = TimeSpan.FromSeconds( dmintime );
+			}
+			else if ( smintime.Contains("m") )
+			{
+				mintime = TimeSpan.FromMinutes( dmintime );
+			}
+			else if ( smintime.Contains("h") )
+			{
+				mintime = TimeSpan.FromHours( dmintime );
+			}
+			
+			//MaxTime
+			
+			string samaxtime = smaxtime;
+			
+			if ( smaxtime.Contains("s") || smaxtime.Contains("m") || smaxtime.Contains("h") )
+			{
+				samaxtime = smaxtime.Remove(smaxtime.Length - 1);
+			}
+			
+			double dmaxtime = Utility.ToDouble( samaxtime );
 
 			if ( m_MaxTimeOverride != -1 )
 			{
@@ -537,6 +573,21 @@ namespace Server
 			}
 
 			TimeSpan maxtime = TimeSpan.FromMinutes( dmaxtime );
+			
+			if ( smaxtime.Contains("s") )
+			{
+				maxtime = TimeSpan.FromSeconds( dmaxtime );
+			}
+			else if ( smaxtime.Contains("m") )
+			{
+				maxtime = TimeSpan.FromMinutes( dmaxtime );
+			}
+			else if ( smaxtime.Contains("h") )
+			{
+				maxtime = TimeSpan.FromHours( dmaxtime );
+			}
+			
+			//
 			int homerange = Utility.ToInt32( shomerange );
 	        int walkingrange = Utility.ToInt32( swalkingrange );
 			int spawnid = Utility.ToInt32( sspawnid );

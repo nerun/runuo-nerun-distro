@@ -347,18 +347,18 @@ namespace Joeku
 				case 0: // Player
 					break;
 				case 1: // Counselor
-					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Stuck"); entries.Add("[M Tele"); for( int j = 0; j < 5; j++ ){entries.Add("-");}
+					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Stuck"); entries.Add("[M Tele"); for( int j = 0; j < 5; j++ ){entries.Add("-*UNUSED*-");}
 					entries.Add("[Where"); entries.Add("[who"); entries.Add("[Self Hide"); entries.Add("[Self Unhide");
 					break;
 				case 2: // GameMaster
-					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Props"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 2; j++ ){entries.Add("-");}
+					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Props"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 2; j++ ){entries.Add("-*UNUSED*-");}
 					entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Kill"); entries.Add("[Recover"); entries.Add("[Self Unhide");
 					break;
 				case 3: // Seer
 					goto case 2;
 				case 4: // Administrator
-					entries.Add("[Admin"); entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[StaEx MyDeco"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
-					entries.Add("[PremiumSpawner"); entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Props"); entries.Add("[Recover"); entries.Add("[Self Unhide"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
+					entries.Add("[Admin"); entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[StaEx MyDeco"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 1; j++ ){entries.Add("-*UNUSED*-");}
+					entries.Add("[PremiumSpawner"); entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Props"); entries.Add("[Recover"); entries.Add("[Self Unhide"); for( int j = 0; j < 1; j++ ){entries.Add("-*UNUSED*-");}
 					entries.Add("[AddonGen");
 					break;
 				case 5: // Developer
@@ -445,8 +445,16 @@ namespace Joeku
 			p_Columns = info.Dimensions[0];
 			p_Rows = info.Dimensions[1];
 
-			if( Lock )
-				Closable = false;
+//original
+//            if( Lock )
+//                Closable = false;
+//AlphaDragon's mod:
+            if( Lock )
+            {
+                Closable = false;
+                Disposable = false;
+            }
+//I moded end so that will remain even when editing house
 
 			int offset = GumpIDs.Misc[(int)GumpIDs.MiscIDs.ButtonOffset].Content[p_Skin,0];
 			int bx = ((offset * 2) + (Columns * 110)), by = ((offset * 2) + (Rows * 24)), byx = by, cy = 0;
