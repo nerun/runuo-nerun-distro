@@ -1,6 +1,6 @@
 /*************************
  *       By Nerun        *
- *      Engine r22       *
+ *      Engine r55       *
  *************************
  */
 
@@ -8,7 +8,7 @@ using System;
 using System.IO;
 using Server;
 using Server.Mobiles;
-using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 
 namespace Server.Items
@@ -150,6 +150,21 @@ namespace Server.Items
 			InRangeDelay = 30; //minutes
 			OutRangeDelay = 5; //seconds
 		}
+		
+		[Constructable]
+		public SpawnsOverseer( int startrange ) : base( 7966 )
+		{
+			Name = "Spawns' Overseer";
+			Movable = false;
+			Light = LightType.Circle150;
+			Weight = 1;
+			Visible = false;
+			Enable = true;
+			Range = startrange;
+			CurrentDelay = TimeSpan.FromSeconds( 5 );
+			InRangeDelay = 30; //minutes
+			OutRangeDelay = 5; //seconds
+		}
 
 		public override void GetProperties( ObjectPropertyList list )
 		{
@@ -196,20 +211,18 @@ namespace Server.Items
 
 		public void OnTickDoThis()
 		{
-			ArrayList ClosePremiumSpawners = new ArrayList();
+			List<Item> ClosePremiumSpawners = new List<Item>();
 
-			ArrayList ClosePlayers = new ArrayList();
+			List<Mobile> ClosePlayers = new List<Mobile>();
 
-			ArrayList MobsCleaning = new ArrayList();
+			List<Mobile> MobsCleaning = new List<Mobile>();
 
-			ArrayList ItemsCleaning = new ArrayList();
+			List<Item> ItemsCleaning = new List<Item>();
 
 			foreach ( Item item in this.GetItemsInRange( Range ) ) // para cada item dentro do raio de alcance
 			{
 				if( item is PremiumSpawner ) // se for um PremiumSpawner
-				{
 					ClosePremiumSpawners.Add( item );
-				}
 			}
 
 			if ( ClosePremiumSpawners.Count > 0 )
@@ -217,9 +230,7 @@ namespace Server.Items
 				foreach ( Mobile m in this.GetMobilesInRange( Range ) ) // para cada mobile dentro do raio de alcance
 				{
 					if( m is PlayerMobile && m.AccessLevel == AccessLevel.Player || m is PlayerMobile && m.AccessLevel > AccessLevel.Player && m.Hidden == false ) //se fôr player ou GM não oculto (hidden)
-					{
 						ClosePlayers.Add( m );
-					}
 				}
 
 				if ( ClosePlayers.Count > 0 ) // há pelo menos um player próximo
@@ -251,33 +262,25 @@ namespace Server.Items
 							foreach ( Mobile mobdel in this.GetMobilesInRange( Range ) )
 							{
 								if( mobdel is BaseCreature || mobdel is TownCrier )
-								{
 									MobsCleaning.Add( mobdel );
-								}
 							}
 
 							if ( MobsCleaning.Count > 0 )
 							{
 								foreach ( Mobile mDel in MobsCleaning )
-								{
 									mDel.Delete();
-								}
 							}
 
 							foreach ( Item itemdel in this.GetItemsInRange( Range ) )
 							{
 								if( itemdel.Movable == true ) //se fôr um item móvel (não decoração)
-								{
 									ItemsCleaning.Add( itemdel );
-								}
 							}
 
 							if ( ItemsCleaning.Count > 0 )
 							{
 								foreach ( Item iDel in ItemsCleaning )
-								{
 									iDel.Delete();
-								}
 							}
 						}
 					}
