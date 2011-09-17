@@ -1,4 +1,4 @@
-//Engine r53
+//Engine r55
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -341,12 +341,19 @@ namespace Server
 						}
 
 						string timer1a = itemsave2.MinDelay.ToString();
-						string[] timer1b = timer1a.Split( ':' );
-						int timer1c = ( Utility.ToInt32( timer1b[0] ) * 60 ) + Utility.ToInt32( timer1b[1] );
-
+						string[] timer1b = timer1a.Split( ':' ); //Broke the string hh:mm:ss in an array (hh, mm, ss)
+						int timer1c = ( Utility.ToInt32( timer1b[0] ) * 60 ) + Utility.ToInt32( timer1b[1] ); //multiply hh * 60 to find mm, then add mm
+						string timer1d = timer1c.ToString();
+						if ( Utility.ToInt32( timer1b[0] ) == 0 && Utility.ToInt32( timer1b[1] ) == 0 ) //If hh and mm are 0, use seconds, else drop ss
+							timer1d = Utility.ToInt32( timer1b[2] ) + "s";
+						
 						string timer2a = itemsave2.MaxDelay.ToString();
 						string[] timer2b = timer2a.Split( ':' );
 						int timer2c = ( Utility.ToInt32( timer2b[0] ) * 60 ) + Utility.ToInt32( timer2b[1] );
+						string timer2d = timer2c.ToString();
+						if ( Utility.ToInt32( timer2b[0] ) == 0 && Utility.ToInt32( timer2b[1] ) == 0 )
+							timer2d = Utility.ToInt32( timer2b[2] ) + "s";
+						
 						string towrite = "";
 						string towriteA = "";
 						string towriteB = "";
@@ -355,84 +362,60 @@ namespace Server
 						string towriteE = "";
 
 						if ( itemsave2.CreaturesName.Count > 0 )
-						{
 							towrite = itemsave2.CreaturesName[0].ToString();
-						}
 
 						if ( itemsave2.SubSpawnerA.Count > 0 )
-						{
 							towriteA = itemsave2.SubSpawnerA[0].ToString();
-						}
 
 						if ( itemsave2.SubSpawnerB.Count > 0 )
-						{
 							towriteB = itemsave2.SubSpawnerB[0].ToString();
-						}
 
 						if ( itemsave2.SubSpawnerC.Count > 0 )
-						{
 							towriteC = itemsave2.SubSpawnerC[0].ToString();
-						}
 
 						if ( itemsave2.SubSpawnerD.Count > 0 )
-						{
 							towriteD = itemsave2.SubSpawnerD[0].ToString();
-						}
 
 						if ( itemsave2.SubSpawnerE.Count > 0 )
-						{
 							towriteE = itemsave2.SubSpawnerE[0].ToString();
-						}
 
 						for ( int i = 1; i < itemsave2.CreaturesName.Count; ++i )
 						{
 							if ( itemsave2.CreaturesName.Count > 0 )
-							{
 								towrite = towrite + ":" + itemsave2.CreaturesName[i].ToString();
-							}
 						}
 
 						for ( int i = 1; i < itemsave2.SubSpawnerA.Count; ++i )
 						{
 							if ( itemsave2.SubSpawnerA.Count > 0 )
-							{
 								towriteA = towriteA + ":" + itemsave2.SubSpawnerA[i].ToString();
-							}
 						}
 
 						for ( int i = 1; i < itemsave2.SubSpawnerB.Count; ++i )
 						{
 							if ( itemsave2.SubSpawnerB.Count > 0 )
-							{
 								towriteB = towriteB + ":" + itemsave2.SubSpawnerB[i].ToString();
-							}
 						}
 
 						for ( int i = 1; i < itemsave2.SubSpawnerC.Count; ++i )
 						{
 							if ( itemsave2.SubSpawnerC.Count > 0 )
-							{
 								towriteC = towriteC + ":" + itemsave2.SubSpawnerC[i].ToString();
-							}
 						}
 
 						for ( int i = 1; i < itemsave2.SubSpawnerD.Count; ++i )
 						{
 							if ( itemsave2.SubSpawnerD.Count > 0 )
-							{
 								towriteD = towriteD + ":" + itemsave2.SubSpawnerD[i].ToString();
-							}
 						}
 
 						for ( int i = 1; i < itemsave2.SubSpawnerE.Count; ++i )
 						{
 							if ( itemsave2.SubSpawnerE.Count > 0 )
-							{
 								towriteE = towriteE + ":" + itemsave2.SubSpawnerE[i].ToString();
-							}
 						}
 
-						op.WriteLine( "*|{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}|{17}|{18}|{19}|{20}", towrite, towriteA, towriteB, towriteC, towriteD, towriteE, itemsave2.X, itemsave2.Y, itemsave2.Z, mapnumber, timer1c, timer2c, itemsave2.WalkingRange, itemsave2.HomeRange, itemsave2.SpawnID, itemsave2.Count, itemsave2.CountA, itemsave2.CountB, itemsave2.CountC, itemsave2.CountD, itemsave2.CountE );
+						op.WriteLine( "*|{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}|{11}|{12}|{13}|{14}|{15}|{16}|{17}|{18}|{19}|{20}", towrite, towriteA, towriteB, towriteC, towriteD, towriteE, itemsave2.X, itemsave2.Y, itemsave2.Z, mapnumber, timer1d, timer2d, itemsave2.WalkingRange, itemsave2.HomeRange, itemsave2.SpawnID, itemsave2.Count, itemsave2.CountA, itemsave2.CountB, itemsave2.CountC, itemsave2.CountD, itemsave2.CountE );
 					}
 				}
 
@@ -523,69 +506,47 @@ namespace Server
 			string samintime = smintime;
 			
 			if ( smintime.Contains("s") || smintime.Contains("m") || smintime.Contains("h") )
-			{
 				samintime = smintime.Remove(smintime.Length - 1);
-			}
 			
 			double dmintime = Utility.ToDouble( samintime );
 			
 			if ( m_MinTimeOverride != -1 )
-			{
 				dmintime = m_MinTimeOverride;
-			}
 
 			TimeSpan mintime = TimeSpan.FromMinutes( dmintime );
 			
 			if ( smintime.Contains("s") )
-			{
 				mintime = TimeSpan.FromSeconds( dmintime );
-			}
 			else if ( smintime.Contains("m") )
-			{
 				mintime = TimeSpan.FromMinutes( dmintime );
-			}
 			else if ( smintime.Contains("h") )
-			{
 				mintime = TimeSpan.FromHours( dmintime );
-			}
 			
 			//MaxTime
 			
 			string samaxtime = smaxtime;
 			
 			if ( smaxtime.Contains("s") || smaxtime.Contains("m") || smaxtime.Contains("h") )
-			{
 				samaxtime = smaxtime.Remove(smaxtime.Length - 1);
-			}
 			
 			double dmaxtime = Utility.ToDouble( samaxtime );
 
 			if ( m_MaxTimeOverride != -1 )
 			{
 				if ( m_MaxTimeOverride < dmintime )
-				{
 					dmaxtime = dmintime;
-				}
 				else
-				{
 					dmaxtime = m_MaxTimeOverride;
-				}
 			}
 
 			TimeSpan maxtime = TimeSpan.FromMinutes( dmaxtime );
 			
 			if ( smaxtime.Contains("s") )
-			{
 				maxtime = TimeSpan.FromSeconds( dmaxtime );
-			}
 			else if ( smaxtime.Contains("m") )
-			{
 				maxtime = TimeSpan.FromMinutes( dmaxtime );
-			}
 			else if ( smaxtime.Contains("h") )
-			{
 				maxtime = TimeSpan.FromHours( dmaxtime );
-			}
 			
 			//
 			int homerange = Utility.ToInt32( shomerange );
