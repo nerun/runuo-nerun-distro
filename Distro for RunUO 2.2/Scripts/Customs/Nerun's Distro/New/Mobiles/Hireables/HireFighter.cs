@@ -31,9 +31,9 @@ namespace Server.Mobiles
 			HairHue = Race.RandomHairHue();
 			Race.RandomFacialHair( this );
 
-			SetStr( 91, 91 );
-			SetDex( 91, 91 );
-			SetInt( 50, 50 );
+			SetStr( 40, 100 );
+			SetDex( 30, 99 );
+			SetInt( 40, 49 );
 
 			SetDamage( 7, 14 );
 

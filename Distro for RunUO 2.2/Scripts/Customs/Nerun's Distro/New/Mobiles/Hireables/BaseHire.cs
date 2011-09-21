@@ -17,7 +17,7 @@ namespace Server.Mobiles
 		private int m_HoldGold = 8;
 		private Timer m_PayTimer;
 
-		public BaseHire( AIType   AI ): base( AI, FightMode.Aggressor, 10, 1, 0.1, 4.0 )
+		public BaseHire( AIType AI ): base( AI, FightMode.Aggressor, 10, 1, 0.1, 4.0 )
 		{
 		}
 
@@ -60,8 +60,10 @@ namespace Server.Mobiles
 		}
 
 		public override bool KeepsItemsOnDeath{ get{ return true;}}
+		
 		private int m_GoldOnDeath = 0;
-		public override bool OnBeforeDeath() 
+		
+		public override bool OnBeforeDeath()
 		{ 
 			// Stop the pay timer if its running 
 			if( m_PayTimer != null ) 
@@ -272,6 +274,8 @@ namespace Server.Mobiles
 		#region [ GetContextMenuEntries ] 
 		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
 		{
+			BaseAI m_AI = new MeleeAI(this);
+		
 			if ( this.Deleted )
 				return;
 
@@ -283,7 +287,11 @@ namespace Server.Mobiles
 
 			if( Controlled == false )
 				list.Add( new HireEntry( from, this )  );
+
+			if( Controlled == true ) // OSI has a custom MenuEntries for Hireling, with Dismiss instead of Release (see BaseAI changes)
+				m_AI.GetContextMenuEntries( from, list );
 		}
+		
 		#endregion 
 	
 		#region [ Class PayTimer ] 
