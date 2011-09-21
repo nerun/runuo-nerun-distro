@@ -1,4 +1,4 @@
-// Nerun's Distro changes at line 2214
+// Nerun's Distro changes at lines 51-53; 2217-2229.
 using System;
 using System.Collections.Generic;
 using Server.Regions;
@@ -48,6 +48,9 @@ namespace Server.Mobiles
 						//"(All/Name) attack"  All or the specified pet(s) currently under your control attack the target.
 		Patrol,			//"(Name) patrol"  Roves between two or more guarded targets.
 		Release,		//"(Name) release"  Releases pet back into the wild (removes "tame" status).
+// >>> [1st change of 2]
+		Dismiss,		//"(Name) dismiss"  Dismiss hireling (removes "tame" status).
+// end 1st
 		Stay,			//"(All/Name) stay" All or the specified pet(s) will stop and stay in current spot.
 		Stop,			//"(All/Name) stop Cancels any current orders to attack, guard or follow.
 		Transfer		//"(Name) transfer" Transfers complete ownership to targeted player.
@@ -2211,16 +2214,19 @@ namespace Server.Mobiles
 				case AIType.AI_Thief:
 					m_AI = new ThiefAI(this);
 					break;
-// >>>>>>>>>> ERICA'S ORC SCOUT and NINJA // PAPPA SMURF's Spellbinder (1st change of 1) >>>>>>>>>>
+// >>> [2nd change of 2]
+// ERICA'S ORC SCOUT and NINJA
 				case AIType.AI_OrcScout:
 					m_AI = new OrcScoutAI(this);			         
 				        break;
 				case AIType.AI_Ninja:
 					m_AI = new NinjaAI(this);
 					break;
+// PAPPA SMURF's Spellbinder
 				case AIType.AI_Spellbinder:
 					m_AI = new SpellbinderAI(this);
 					break;
+// end 2nd
 			}
 		}
 
