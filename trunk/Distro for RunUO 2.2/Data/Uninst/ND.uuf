@@ -37,6 +37,8 @@ rm/Scripts/Engines/Plants/MainPlantGump.cs
 rn/Scripts/Engines/Plants/MainPlantGump.cs.bak
 rm/Scripts/Engines/Quests/Core/QuestSystem.cs
 rn/Scripts/Engines/Quests/Core/QuestSystem.cs.bak
+rm/Scripts/Gumps/ConfirmReleaseGump.cs
+rn/Scripts/Gumps/ConfirmReleaseGump.cs.bak
 rm/Scripts/Gumps/Go/GoGump.cs
 rn/Scripts/Gumps/Go/GoGump.cs.bak
 rm/Scripts/Mobiles/BaseCreature.cs

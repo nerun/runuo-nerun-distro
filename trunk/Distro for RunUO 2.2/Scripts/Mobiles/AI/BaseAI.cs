@@ -1,3 +1,4 @@
+// TO DO: Need to add OnSpeech to Hires at lines 516-771
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,11 +28,12 @@ namespace Server.Mobiles
 		AI_Mage,
 		AI_Berserk,
 		AI_Predator,
-// >>>>>>>>>> ERICA'S ORC Scout and Ninja // PAPPA SMURF's Spellbinder
+// >>> [1st change of 7]
 		AI_Thief,
-		AI_OrcScout,
-		AI_Ninja,
-		AI_Spellbinder
+		AI_OrcScout, // ERICA'S
+		AI_Ninja, // ERICA'S
+		AI_Spellbinder // PAPPA SMURF's
+// end 1st
 	}
 
 	public enum ActionType
@@ -155,6 +157,17 @@ namespace Server.Mobiles
 
 							break;
 						}
+// >>> [2nd change of 7]
+						case OrderType.Dismiss:
+						{
+							if( m_Mobile.Summoned )
+								goto default;
+							else
+								m_From.SendGump( new Gumps.ConfirmReleaseGump( m_From, m_Mobile ) );
+
+							break;
+						}
+// end 2nd
 						default:
 						{
 							if( m_Mobile.CheckControlChance( m_From ) )
@@ -173,14 +186,19 @@ namespace Server.Mobiles
 			{
 				if( from == m_Mobile.ControlMaster )
 				{
+// >>> [3rd change of 7]
+// In OSI, the right order is Kill-Follow-Guard and not Guard-Follow-Kill
+					list.Add( new InternalEntry( from, 6111, 14, m_Mobile, this, OrderType.Attack ) ); // Command: Kill
 					list.Add( new InternalEntry( from, 6107, 14, m_Mobile, this, OrderType.Guard ) );  // Command: Guard
 					list.Add( new InternalEntry( from, 6108, 14, m_Mobile, this, OrderType.Follow ) ); // Command: Follow
+//					list.Add( new InternalEntry( from, 6107, 14, m_Mobile, this, OrderType.Guard ) );  // Command: Guard
+//					list.Add( new InternalEntry( from, 6108, 14, m_Mobile, this, OrderType.Follow ) ); // Command: Follow
 
 					if( m_Mobile.CanDrop )
 						list.Add( new InternalEntry( from, 6109, 14, m_Mobile, this, OrderType.Drop ) );   // Command: Drop
 
-					list.Add( new InternalEntry( from, 6111, 14, m_Mobile, this, OrderType.Attack ) ); // Command: Kill
-
+//					list.Add( new InternalEntry( from, 6111, 14, m_Mobile, this, OrderType.Attack ) ); // Command: Kill
+// end 3rd
 					list.Add( new InternalEntry( from, 6112, 14, m_Mobile, this, OrderType.Stop ) );   // Command: Stop
 					list.Add( new InternalEntry( from, 6114, 14, m_Mobile, this, OrderType.Stay ) );   // Command: Stay
 
@@ -190,8 +208,18 @@ namespace Server.Mobiles
 						list.Add( new InternalEntry( from, 6099, 14, m_Mobile, this, OrderType.Unfriend ) ); // Remove Friend
 						list.Add( new InternalEntry( from, 6113, 14, m_Mobile, this, OrderType.Transfer ) ); // Transfer
 					}
-
-					list.Add( new InternalEntry( from, 6118, 14, m_Mobile, this, OrderType.Release ) ); // Release
+// >>> [4th change of 7]
+					if ( m_Mobile is BaseHire )
+					{//Mobile from, int number, int range, BaseCreature mobile, BaseAI ai, OrderType order
+						list.Add( new InternalEntry( from, 6129, 14, m_Mobile, this, OrderType.Dismiss ) ); // Dismiss
+					}
+					else
+					{
+						list.Add( new InternalEntry( from, 6118, 14, m_Mobile, this, OrderType.Release ) ); // Release
+					}
+					
+//					list.Add( new InternalEntry( from, 6118, 14, m_Mobile, this, OrderType.Release ) );
+// end 4th
 				}
 				else if( m_Mobile.IsPetFriend( from ) )
 				{
@@ -1013,7 +1041,10 @@ namespace Server.Mobiles
 
 				case OrderType.Release:
 				return DoOrderRelease();
-
+// >>> [5th change of 7]
+				case OrderType.Dismiss:
+				return DoOrderDismiss();
+// end 5th
 				case OrderType.Stay:
 				return DoOrderStay();
 
@@ -1102,7 +1133,15 @@ namespace Server.Mobiles
 				m_Mobile.Warmode = false;
 				m_Mobile.Combatant = null;
 				break;
-
+// >>> [6th change of 7]
+				case OrderType.Dismiss:
+				m_Mobile.ControlMaster.RevealingAction();
+				m_Mobile.CurrentSpeed = m_Mobile.PassiveSpeed;
+				m_Mobile.PlaySound( m_Mobile.GetIdleSound() );
+				m_Mobile.Warmode = false;
+				m_Mobile.Combatant = null;
+				break;
+// end 6th
 				case OrderType.Stay:
 				m_Mobile.ControlMaster.RevealingAction();
 				m_Mobile.CurrentSpeed = m_Mobile.PassiveSpeed;
@@ -1566,7 +1605,38 @@ namespace Server.Mobiles
 
 			return true;
 		}
+// >>> [7th change of 7]
+		public virtual bool DoOrderDismiss()
+		{
+			m_Mobile.DebugSay( "I have been dismissed" );
 
+			m_Mobile.PlaySound( m_Mobile.GetAngerSound() );
+			
+			m_Mobile.Say( 502034 ); // I thank thee for thy kindness!
+			m_Mobile.Say( "I quit." ); // I quit.
+
+			m_Mobile.SetControlMaster( null );
+			m_Mobile.SummonMaster = null;
+
+			m_Mobile.BondingBegin = DateTime.MinValue;
+			m_Mobile.OwnerAbandonTime = DateTime.MinValue;
+			m_Mobile.IsBonded = false;
+
+			SpawnEntry se = m_Mobile.Spawner as SpawnEntry;
+			if( se != null && se.HomeLocation != Point3D.Zero )
+			{
+				m_Mobile.Home = se.HomeLocation;
+				m_Mobile.RangeHome = se.HomeRange;
+			}
+
+			if( m_Mobile.DeleteOnRelease || m_Mobile.IsDeadPet )
+				m_Mobile.Delete();
+			
+			m_Mobile.BeginDeleteTimer();
+			
+			return true;
+		}
+// end 7th
 		public virtual bool DoOrderStay()
 		{
 			if( CheckHerding() )
