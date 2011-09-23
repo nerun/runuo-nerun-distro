@@ -9,6 +9,8 @@ rm/Data/signs.cfg
 rn/Data/signs.cfg.bak
 rm/Data/treasure.cfg
 rn/Data/treasure.cfg.bak
+rm/Data/Decoration/Britannia/britain.cfg
+rn/Data/Decoration/Britannia/britain.cfg.bak
 rm/Data/Decoration/Britannia/NERUN-BritainSewers.cfg
 rm/Data/Decoration/Britannia/NERUN-SeaMarket.cfg
 rm/Data/Decoration/Malas/NERUN-Malas.cfg
