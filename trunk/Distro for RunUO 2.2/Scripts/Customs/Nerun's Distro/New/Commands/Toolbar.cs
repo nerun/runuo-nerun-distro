@@ -359,7 +359,7 @@ namespace Joeku
 				case 4: // Administrator
 					entries.Add("[Admin"); entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[StaEx MyDeco"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
 					entries.Add("[PremiumSpawner"); entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Props"); entries.Add("[Recover"); entries.Add("[Self Unhide"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
-					entries.Add("[AddonGen"); entries.Add("[Get Location"); entries.Add("[Get ItemID");
+					entries.Add("[AddonGen"); entries.Add("[Get Location"); entries.Add("[Get ItemID"); entries.Add("[AddDoor");
 					break;
 				case 5: // Developer
 					goto case 4;

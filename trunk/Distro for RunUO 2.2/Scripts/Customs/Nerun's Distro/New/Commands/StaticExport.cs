@@ -1,312 +1,329 @@
-/*************************
- * StaticExport by Nerun *
- *      Version 2.3      *
- *************************
-*/
+/**************************************
+*Script Name: Static Exporter
+*Author: Nerun
+*Rewritten by: Joeku
+*For use with RunUO 2.0 RC2
+*Client Tested with: 6.0.9.1
+*Version: 2.00
+*Initial Release: 04/13/05
+*Revision Date: 08/09/08
+**************************************/
+
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Collections.Generic;
 using Server;
 using Server.Mobiles;
 using Server.Items;
 using Server.Commands;
 using Server.Targeting;
+using Server.Engines.Quests.Haven;
+using Server.Engines.Quests.Necro;
 
-namespace Server.Commands
+namespace Joeku.SE
 {
-	public class StaticExport
+	public class SE_Main
 	{
+		public const int Version = 200; // Script version (do not change)
+		public static string FilePath = @".\Export\";
+
 		public static void Initialize()
 		{
-			CommandSystem.Register( "StaticExport" , AccessLevel.Administrator, new CommandEventHandler( StaticExport_OnCommand ) );
-			CommandSystem.Register( "StaEx" , AccessLevel.Administrator, new CommandEventHandler( StaticExport_OnCommand ) );
+			CommandSystem.Register("StaticExport" , AccessLevel.Administrator, new CommandEventHandler(StaticExport_OnCommand));
+			CommandSystem.Register("StaEx" , AccessLevel.Administrator, new CommandEventHandler(StaticExport_OnCommand));
 		}
 
-		[Usage( "staticexport [string filename]" )]
-		[Aliases( "staex" )]
-		[Description( "Convert Statics in a cfg decoration file." )]
-		public static void StaticExport_OnCommand( CommandEventArgs e )
+		[Usage( "StaticExport [string filename]" )]
+		[Aliases( "StaEx" )]
+		[Description( "Exports statics to a cfg decoration file." )]
+		public static void StaticExport_OnCommand(CommandEventArgs e )
 		{
-			if ( e.Arguments.Length == 5 )
-			{
-				string file = e.Arguments[0];
-				int x1 = Utility.ToInt32( e.Arguments[1] );
-				int y1 = Utility.ToInt32( e.Arguments[2] );
-				int x2 = Utility.ToInt32( e.Arguments[3] );
-				int y2 = Utility.ToInt32( e.Arguments[4] );
-				Export( e.Mobile, file, x1, y1, x2, y2 );
-			}
-			else 
-			{
-				if ( e.Arguments.Length == 1 )
-				{
-					string file = e.Arguments[0];
-					BeginStaEx( e.Mobile, file );
-				}
-				else				
-				{
-					e.Mobile.SendMessage( "Usage: StaEx filename" );
-				}
-			}
+			if( e.Arguments.Length > 0 )
+				BeginStaEx(e.Mobile, e.ArgString );
+			else
+				e.Mobile.SendMessage("Format: StaticExport [string filename]" );
 		}
 
-		public static void BeginStaEx( Mobile from, string file )
+		public static void BeginStaEx(Mobile mob, string file )
 		{
-	    		BoundingBoxPicker.Begin( from, new BoundingBoxCallback( StaExBox_Callback ), new object[]{ file } );
+	    	BoundingBoxPicker.Begin(mob, new BoundingBoxCallback(StaExBox_Callback), new object[]{ file });
 		}
 
-		private static void StaExBox_Callback( Mobile from, Map map, Point3D start, Point3D end, object state )
+		private static void StaExBox_Callback(Mobile mob, Map map, Point3D start, Point3D end, object state)
 		{
 			object[] states = (object[])state;
 			string file = (string)states[0];
 
-			Export( from, file, start.X, start.Y, end.X, end.Y );
+			Export(mob, file, new Rectangle2D(new Point2D(start.X, start.Y), new Point2D(end.X+1, end.Y+1)));
 		}
 
-		private static void Export( Mobile from, string file, int X1, int Y1, int X2, int Y2 )
+		private static void Export(Mobile mob, string file, Rectangle2D rect)
 		{
-				int x1 = X1;
-				int y1 = Y1;
-				int x2 = X2;
-				int y2 = Y2;
+			Map map = mob.Map;
 
-				if(X1 > X2)
-				{
-					x1 = X2;
-					x2 = X1;
-				}
+			if( !Directory.Exists(FilePath) )
+				Directory.CreateDirectory(FilePath);
 
-				if(Y1 < Y2)
-				{
-					y1 = Y2;
-					y2 = Y1;
-				}
-
-			Map map = from.Map;
-			List<Item> list = new List<Item>();
-			Dictionary<string, List<string>> DicOfItemIDs = new Dictionary<string, List<string>>();
-			List<Item> Signs = new List<Item>();
-
-			if ( !Directory.Exists( @".\Export\" ) )
-				Directory.CreateDirectory( @".\Export\" );
-
-			using ( StreamWriter op = new StreamWriter( String.Format( @".\Export\{0}.cfg", file ) ) )
+			using(StreamWriter op = new StreamWriter(String.Format(@".\Export\{0}.cfg", file)))
 			{
 
-				from.SendMessage( "Saving Statics..." );
+				mob.SendMessage("Exporting statics...");
 
-				op.WriteLine( "# Saved By Static Exporter" );
-				op.WriteLine( "#  StaticExport by Nerun" );
-				op.WriteLine( "#       Version 2.3" );
-				op.WriteLine( "" );
+				op.WriteLine("# Saved By Static Exporter");
+				op.WriteLine("# StaticExport by Nerun");
+				op.WriteLine("# Rewritten by Joeku");
+				op.WriteLine();
 
-				foreach ( Item item in World.Items.Values )
+				IPooledEnumerable eable = mob.Map.GetItemsInBounds(rect);
+				int i = 0;
+
+				try
 				{
-					if ( item.Decays == false && item.Movable == false && item.Parent == null && ( ( item.X >= x1 && item.X <= x2 ) && ( item.Y <= y1 && item.Y >= y2 ) && item.Map == map ) )
+					foreach(Item item in eable)
 					{
-						list.Add( item );
-					}
-				}
+						if( item == null || item.Deleted )
+							continue;
+						if( item is AddonComponent )
+							continue;
 
-				foreach ( Item item in list )
-				{
-					Map MapDestFinal = item.Map;
+						string s = Construct(item);
+						if( !s.Substring(0, s.IndexOf(' ')+1).Contains("+") ) // Make sure this isn't an InternalItem of a class...
+						{
+							op.WriteLine(s);
+							op.WriteLine("{0} {1} {2}", item.X, item.Y, item.Z);
+							op.WriteLine();
+							i++;
+						}
+					}
 				
-					if (item is PublicMoongate)
-					{
-						op.WriteLine( "PublicMoongate 3948" );
-						op.WriteLine( "{0} {1} {2}", item.X, item.Y, item.Z );
-						op.WriteLine( "" );
-					}
-					else if (item is Moongate)
-					{
-						op.WriteLine( "Moongate 3948 (Target={0}; TargetMap={1}; Hue={2})", ((Moongate)item).Target, ((Moongate)item).TargetMap, ((Moongate)item).Hue );
-						op.WriteLine( "{0} {1} {2}", item.X, item.Y, item.Z );
-						op.WriteLine( "" );
-					}
-					else if (item is Teleporter)
-					{
-						if ( ((Teleporter)item).MapDest != null )
-						{
-							MapDestFinal = ((Teleporter)item).MapDest;
-						}
-						else
-						{
-							MapDestFinal = ((Teleporter)item).Map;
-						}
-						op.WriteLine( "Teleporter 7107 (PointDest={0}; MapDestination={1})", ((Teleporter)item).PointDest, MapDestFinal );
-						op.WriteLine( "{0} {1} {2}", item.X, item.Y, item.Z );
-						op.WriteLine( "" );
-					}
-					else if (item is KeywordTeleporter)
-					{
-						if ( ((KeywordTeleporter)item).MapDest != null )
-						{
-							MapDestFinal = ((KeywordTeleporter)item).MapDest;
-						}
-						else
-						{
-							MapDestFinal = ((KeywordTeleporter)item).Map;
-						}
-						op.WriteLine( "KeywordTeleporter 7107 (PointDest={0}; MapDestination={1}; Range={2}; Substring={3})", ((KeywordTeleporter)item).PointDest, MapDestFinal, ((KeywordTeleporter)item).Range, ((KeywordTeleporter)item).Substring );
-						op.WriteLine( "{0} {1} {2}", item.X, item.Y, item.Z );
-						op.WriteLine( "" );
-					}
-					else if (item is Spawner)
-					{
-						op.WriteLine( "Spawner 0x1F13 (Spawn={0}; Count={1}; HomeRange={2}; WalkingRange={3})", ((Spawner)item).SpawnNames[0], ((Spawner)item).Count, ((Spawner)item).HomeRange, ((Spawner)item).WalkingRange );
-						op.WriteLine( "{0} {1} {2}", item.X, item.Y, item.Z );
-						op.WriteLine( "" );
-					}
-					else
-					{
-						/* How would Jack the Ripper said: divided into parts!
-						 *
-						 * 1.- Some items are statics other are not. So lets get the "real" item name, that is
-						 *     something like: 0x40098345 "LampPost1". The real hame has hex number plus a
-						 *     name inside quotes. So lets remove the 12 first caracters fromk the beginning
-						 *     (the hex number plus the space and the first quote before the name). Now we just
-						 *     need to remove the last caracter (the last quote) to get our "real name".
-						 *     The end is just: LampPost1, without quotes.
-						 */
-
-						string itemname = item.ToString();
-						itemname = itemname.Remove(0, 12); //remove 12 caracters from the beginning of the string
-						itemname = itemname.Remove(itemname.Length - 1); // remove the last caracter (the ")
-
-						/*
-						 * 2.- Some items are Addons. Addons are collections of static items, called
-						 *     AddonComponent. We don't need the AddonComponent, but just the Addon item.
-						 *     The "real name" of the Addon will have an ItemID equal to 1. But this is not good
-						 *     for us, because if the configuration file has, example:
-						 *
-						 *		StoneFountainAddon 1
-						 *		1437 1678 10
-						 *     
-						 *     The [decorate command will place the Addon in the right place, but will forget
-						 *     one static item of that collection: the one at coordinates 1437 1678 10.
-						 *
-						 *     So lets change the ItemID from 1 to 0, that will generate the Addon correctly.
-						 */
-
-						int itemid = item.ItemID;
-
-						if ( itemid == 1 )
-						{
-							itemid = 0; // if it is Addon "main", change the ID to 0, because 1 forget one static
-						}
-
-						string itemidhex = itemid.ToString("X");
-
-						/*
-						 * 3.- Now lets begin the work. Decoration files starts with an item name plus a number
-						 *     (ItemID) in the same line. In the line bellow, there are all events of that
-						 *     exactly item translated in coordinates. We will simplify, creating a string that
-						 *     sums item "real name" and ItemID. Plus a string that sums all the coordinates
-						 *     X, Y and Z in one line string.
-						 */
-
-						string HexConstruct = " 0x";
-
-						if ( itemidhex.Length == 1 )
-						{
-							HexConstruct = " 0x000";
-						}
-						else if ( itemidhex.Length == 2 )
-						{
-							HexConstruct = " 0x00";
-						}
-						else if ( itemidhex.Length == 3 )
-						{
-							HexConstruct = " 0x0";
-						}
-
-						string NamePlusID = itemname + HexConstruct + itemidhex;
-						string Coord = (item.X).ToString() + " " + (item.Y).ToString() + " " + (item.Z).ToString();
-
-						/*
-						 * 4.- Lets customize the NamePlusID and Coord strings, because some decorations has
-						 *     custom Names and Hues (custom properties).
-						 */
-
-						if ( item.Name == null && item.Hue != 0 )
-						{
-							NamePlusID = NamePlusID + " (Hue=" + item.Hue + ")";
-						}
-
-						else if ( item.Hue == 0 && item.Name != null )
-						{
-							NamePlusID = NamePlusID + " (Name=" + item.Name + ")";
-						}
-
-						else if ( item.Name != null && item.Hue != 0 )
-						{
-							NamePlusID = NamePlusID + " (Name=" + item.Name + "; Hue=" + item.Hue + ")";
-						}
-
-						else if ( item is BaseBeverage && item.Hue == 0 && item.Name == null)
-						{
-							string sContent = " (Content=" + ((BaseBeverage)item).Content + ")";
-							NamePlusID = NamePlusID + sContent;
-						}
-						else if ( item is LocalizedSign )
-						{
-							NamePlusID = "LocalizedSign " + HexConstruct + itemidhex + " (LabelNumber=" + ((LocalizedSign)item).LabelNumber + ")";
-						}
-						else if ( itemname == "Cannon" )
-						{
-							NamePlusID = "Cannon 0";
-						}
-
-						/*
-						 * 5.- Now, the main job. Above, we created a Dictionary, that holds collections of
-						 *     Keys and values. Each item in a decoration file has a Key (NamePlusID string)
-						 *     plus a lot of Values (all the coordinates where that item appear). Because of
-						 *     it we create a Dictionary of String plus ArrayList as value!
-						 *     The code bellow will add the NamePlusID (the key) to the Dictionary if that
-						 *     key was not added yet. If was, it will add the new coordinates to the
-						 *     ArrayList of values, and update the key with more one coordinate!
-						 */
-
-						if (DicOfItemIDs.ContainsKey(NamePlusID))
-						{
-							List<string> CoordXYZupdated = DicOfItemIDs[NamePlusID];
-							CoordXYZupdated.Add(Coord);
-							DicOfItemIDs.Remove(NamePlusID);
-							DicOfItemIDs.Add(NamePlusID, CoordXYZupdated);
-						}
-						else
-						{
-							if ( !itemname.Contains("Component") && itemname != "InternalItem" && itemname != "PremiumSpawner" )
-							{ // ignore AddonComponent, CannonComponent, InternalItem and PremiumSpawner
-								List<string> CoordXYZ = new List<string>();
-								CoordXYZ.Add(Coord);
-								DicOfItemIDs.Add(NamePlusID, CoordXYZ);
-							}
-						}
-					}
+					mob.SendMessage("You exported {0} statics from this facet.", i);
 				}
+				catch(Exception e){ mob.SendMessage(e.Message); }
 
-				/*
-				 * 6.- Final job. Lets analyze the Dictionary and write id up in
-				 *     the configuration file.
-				 */
-
-				foreach ( KeyValuePair<string, List<string>> pair in DicOfItemIDs )
-				{
-					op.WriteLine("{0}", pair.Key);
-
-					foreach (string ElementInArray in DicOfItemIDs[pair.Key])
-					{
-						op.WriteLine(ElementInArray);
-					}
-
-					op.WriteLine( "" );
-				}
-				
-				from.SendMessage( String.Format( "You exported {0} Statics from this facet.", list.Count ) );
+				eable.Free();
 			}
 		}
+
+		public static List<string[]> List = new List<string[]>();
+
+		public static void Add(string s){ Add(s, ""); }
+		public static void Add(string s1, string s2)
+		{
+			List.Add(new string[]{s1, s2});
+		}
+
+		public static string Construct(Item item)
+		{
+			string s;
+
+			int itemID = item.ItemID;
+
+			if( item is BaseAddon )
+				for( int i = 0; i < ((BaseAddon)item).Components.Count; i++ )
+					if( ((BaseAddon)item).Components[i].Offset == Point3D.Zero )
+					{
+						itemID = ((BaseAddon)item).Components[i].ItemID;
+						break;
+					}
+
+			if( item is LocalizedStatic )
+				Add("LabelNumber", ((LocalizedStatic)item).Number.ToString());
+			else if( item is LocalizedSign )
+				Add("LabelNumber", ((LocalizedSign)item).Number.ToString());
+			else if( item is AnkhWest )
+				Add("Bloodied", (item.ItemID == 0x1D98).ToString());
+			else if( item is AnkhNorth )
+				Add("Bloodied", (item.ItemID == 0x1E5D).ToString());
+			else if( item is MarkContainer )
+			{
+				Add("Bone", ((MarkContainer)item).Bone.ToString());
+				Add("Locked", ((MarkContainer)item).AutoLock.ToString());
+				if( ((MarkContainer)item).TargetMap != null )
+					Add("TargetMap", ((MarkContainer)item).TargetMap.ToString());
+			}
+			else if( item is WarningItem )
+			{
+				Add("Range", ((WarningItem)item).Range.ToString());
+				if( VS(((WarningItem)item).WarningString) )
+					Add("WarningString", ((WarningItem)item).WarningString);
+				Add("WarningNumber", ((WarningItem)item).WarningNumber.ToString());
+				if( item is HintItem )
+				{
+					if( VS(((HintItem)item).HintString) )
+						Add("HintString", ((HintItem)item).HintString);
+					Add("HintNumber", ((HintItem)item).HintNumber.ToString());
+				}
+				Add("Range", ((WarningItem)item).ResetDelay.ToString());
+			}
+			else if( item is Cannon )
+				Add("CannonDirection", ((Cannon)item).CannonDirection.ToString());
+			else if( item is SerpentPillar )
+			{
+				if( VS(((SerpentPillar)item).Word) )
+					Add("Word", ((SerpentPillar)item).Word);
+				Add("DestStart", ((SerpentPillar)item).Destination.Start.ToString());
+				Add("DestEnd", ((SerpentPillar)item).Destination.End.ToString());
+			}
+			else if( item.GetType().IsSubclassOf(typeof(BaseBeverage)) ) 
+				Add("Content", ((BaseBeverage)item).Content.ToString());
+			else if( item.GetType().IsSubclassOf(typeof(BaseDoor)) )
+				Add("Facing", GetFacing(((BaseDoor)item).Offset).ToString());
+
+			if( item is MaabusCoffin )
+				Add("SpawnLocation", ((MaabusCoffin)item).SpawnLocation.ToString());
+			else if( item is BaseLight )
+			{
+				if( !((BaseLight)item).Burning )
+					Add("Unlit", String.Empty);
+				if( !((BaseLight)item).Protected )
+					Add("Unprotected", String.Empty);
+			}
+			else if( item is Spawner )
+			{
+				Spawner sp = (Spawner)item;
+
+				for(int i = 0; i < sp.SpawnNames.Count; i++)
+					if( VS(sp.SpawnNames[i]) )
+						Add("Spawn", sp.SpawnNames[i]);
+				// if( sp.MinDelay > TimeSpan.Zero )
+					Add("MinDelay", sp.MinDelay.ToString());
+				// if( sp.MaxDelay > TimeSpan.Zero )
+					Add("MaxDelay", sp.MaxDelay.ToString());
+				// if( sp.NextSpawn > TimeSpan.Zero )
+					Add("NextSpawn", sp.NextSpawn.ToString());
+				// if( sp.Count > 0 )
+					Add("Count", sp.Count.ToString());
+				// if( sp.Team > 0 )
+					Add("Team", sp.Team.ToString());
+				// if( sp.HomeRange > 0 )
+					Add("HomeRange", sp.HomeRange.ToString());
+				// if( sp.Running )
+					Add("Running", sp.Running.ToString());
+				// if( sp.Group )
+					Add("Group", sp.Group.ToString());
+			}
+			else if( item is RecallRune )
+			{
+				RecallRune rune = (RecallRune)item;
+
+				if( VS(rune.Description) )
+					Add("Description", rune.Description);
+				Add("Marked", rune.Marked.ToString());
+				if( rune.TargetMap != null )
+					Add("TargetMap", rune.TargetMap.ToString());
+				Add("Target", rune.Target.ToString());
+			}
+			else if( item is Teleporter )
+			{
+				Teleporter tp = (Teleporter)item;
+
+				if( item is SkillTeleporter )
+				{
+					SkillTeleporter st = (SkillTeleporter)item;
+
+					Add("Skill", st.Skill.ToString());
+					// "RequiredFixedPoint" == Required * 0.1 ?
+					Add("Required", st.Required.ToString());
+					if( VS(st.MessageString) )
+						Add("MessageString", st.MessageString);
+					Add("MessageNumber", st.MessageNumber.ToString());
+				}
+				else if( item is KeywordTeleporter )
+				{
+					KeywordTeleporter kt = (KeywordTeleporter)item;
+
+					if( VS(kt.Substring) )
+						Add("Substring", kt.Substring);
+					Add("Keyword", kt.Keyword.ToString());
+					Add("Range", kt.Range.ToString());
+				}
+				Add("PointDest", tp.PointDest.ToString());
+				if( tp.MapDest != null )
+					Add("MapDest", tp.MapDest.ToString());
+				Add("Creatures", tp.Creatures.ToString());
+				Add("SourceEffect", tp.SourceEffect.ToString());
+				Add("DestEffect", tp.DestEffect.ToString());
+				Add("SoundID", tp.SoundID.ToString());
+				Add("Delay", tp.Delay.ToString());
+			}
+			else if( item is FillableContainer )
+				Add("ContentType", ((FillableContainer)item).ContentType.ToString());
+
+			if( item.Light != LightType.ArchedWindowEast )
+				Add("Light", item.Light.ToString());
+			if( item.Hue > 0 )
+				Add("Hue", item.Hue.ToString());
+			if( VS(item.Name) )
+				Add("Name", item.Name);
+			if( item.Amount > 1 )
+				Add("Amount", item.Amount.ToString());
+
+			s = String.Format("{0} {1}", ConstructType(item), itemID);
+
+			if( List.Count > 0 )
+			{
+				s += " (";
+				for( int i = 0; i < List.Count; i++ )
+				{
+					if( List[i][1] == String.Empty )
+						s += String.Format("{0}{1}", List[i][0], (i < List.Count-1 ? "; " : String.Empty));
+					else
+						s += String.Format("{0}={1}{2}", List[i][0], List[i][1], (i < List.Count-1 ? "; " : String.Empty));
+				}
+				s += ")";
+			}
+
+			List.Clear();
+			return s;
+		}
+
+		public static bool VS(string s)
+		{
+			if( s == null || s == String.Empty )
+				return false;
+			return true;
+		}
+
+		public static string ConstructType(Item item)
+		{
+			string s = item.GetType().ToString();
+
+			if( s.LastIndexOf('.') > -1 )
+				s = s.Remove(0, s.LastIndexOf('.')+1);
+
+			return s;
+		}
+
+		public static DoorFacing GetFacing(Point3D p)
+		{
+			DoorFacing facing = DoorFacing.WestCW;
+			for(int i = 0; i < m_Offsets.Length; i++)
+			{
+				if( p == m_Offsets[i] )
+				{
+					facing = (DoorFacing)i;
+					break;
+				}
+			}
+			
+			return facing;
+		}
+		private static Point3D[] m_Offsets = new Point3D[]
+		{
+			new Point3D(-1, 1, 0 ),
+			new Point3D( 1, 1, 0 ),
+			new Point3D(-1, 0, 0 ),
+			new Point3D( 1,-1, 0 ),
+			new Point3D( 1, 1, 0 ),
+			new Point3D( 1,-1, 0 ),
+			new Point3D( 0, 0, 0 ),
+			new Point3D( 0,-1, 0 ),
+
+			new Point3D( 0, 0, 0 ),
+			new Point3D( 0, 0, 0 ),
+			new Point3D( 0, 0, 0 ),
+			new Point3D( 0, 0, 0 )
+		};
 	}
 }
