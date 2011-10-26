@@ -1,4 +1,4 @@
-// Engine r28
+// Engine r63
 #define RunUo2_0
 using System;
 using System.Collections.Generic;
@@ -231,10 +231,14 @@ namespace Server.Gumps
 			AddLabel(428, 129, 200, @"monsters.");
 			AddBlackAlpha(246, 270, 174, 117);
 			AddLabel(253, 250, 200, @"TER MUR");
-			AddLabel(253, 273, 52, @"Underworld");
-			AddLabel(253, 294, 52, @"Vendors");
-			AddCheck(394, 274, 210, 211, true, 602);
-			AddCheck(394, 295, 210, 211, true, 601);
+			AddLabel(253, 273, 52, @"Abyss");
+			AddLabel(253, 294, 52, @"TerMur");
+			AddLabel(253, 315, 52, @"Underworld");
+			AddLabel(253, 336, 52, @"Vendors");
+			AddCheck(394, 274, 210, 211, true, 601);
+			AddCheck(394, 295, 210, 211, true, 602);
+			AddCheck(394, 316, 210, 211, true, 603);
+			AddCheck(394, 337, 210, 211, true, 604);
 			//END
 			AddLabel(381, 453, 52, @"Page: 2/2"); //Page
 			AddButton(361, 455, 5603, 5607, 0, GumpButtonType.Page, 1); //Change Page
@@ -371,6 +375,8 @@ namespace Server.Gumps
 						//TER MUR
 						UnloadThis(from, Selections, 601);
 						UnloadThis(from, Selections, 602);
+						UnloadThis(from, Selections, 603);
+						UnloadThis(from, Selections, 604);
 						
 						from.Say( "SPAWN UNLOAD COMPLETED" );
 					}
