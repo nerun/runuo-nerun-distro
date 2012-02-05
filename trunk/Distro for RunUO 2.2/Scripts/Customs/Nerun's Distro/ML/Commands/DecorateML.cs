@@ -8,7 +8,7 @@ using Server.Network;
 
 namespace Server
 {
-	public static class MondainsLegacy
+	public static class DecorateML
 	{	
 		public static void Initialize()
 		{
