@@ -167,7 +167,7 @@ namespace Server.Mobiles
 		}
 	}
 
-	public class BaseCreature : Mobile, IHonorTarget
+	public partial class BaseCreature : Mobile, IHonorTarget
 	{
 		public const int MaxLoyalty = 100;
 
@@ -3125,7 +3125,7 @@ namespace Server.Mobiles
 
 			if ( m_AI != null )
 			{
-				if( !Core.ML || ( ct != OrderType.Follow && ct != OrderType.Stop ) )
+				if( !Core.ML || ( ct != OrderType.Follow && ct != OrderType.Stop && ct != OrderType.Stay ) )
 				{
 					m_AI.OnAggressiveAction( aggressor );
 				}
@@ -3164,7 +3164,7 @@ namespace Server.Mobiles
 		public override bool OnMoveOver( Mobile m )
 		{
 			if ( m is BaseCreature && !((BaseCreature)m).Controlled )
-				return ( !Alive || !m.Alive || IsDeadBondedPet || m.IsDeadBondedPet ) || ( Hidden && m.AccessLevel > AccessLevel.Player );
+				return ( !Alive || !m.Alive || IsDeadBondedPet || m.IsDeadBondedPet ) || ( Hidden && AccessLevel > AccessLevel.Player );
 
 			return base.OnMoveOver( m );
 		}
@@ -5363,7 +5363,7 @@ namespace Server.Mobiles
 					}
 
 					// added lines to check if a wild creature in a house region has to be removed or not
-					if ( (!c.Controlled && ( c.Region.IsPartOf( typeof( HouseRegion ) ) && c.CanBeDamaged()) || ( c.RemoveIfUntamed && c.Spawner == null )) )
+					if ( !c.Controlled && !c.IsStabled && ( ( c.Region.IsPartOf( typeof( HouseRegion ) ) && c.CanBeDamaged() ) || ( c.RemoveIfUntamed && c.Spawner == null ) ) )
 					{
 						c.RemoveStep++;
 
