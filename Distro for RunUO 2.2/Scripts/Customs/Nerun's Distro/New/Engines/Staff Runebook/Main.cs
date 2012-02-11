@@ -20,7 +20,8 @@ namespace Joeku.SR
 	{
 		public static int Version = 110;
 		public static string ReleaseDate = "February 4, 2009";
-		public static string SavePath = "Saves\\Staff Runebook"; // "ROOT\..."
+		public static string SavePath = "Saves/Staff Runebook"; // "ROOT\..."
+		//public static string SavePath = "Saves\\Staff Runebook"; // "ROOT\..."
 		public static string FileName = "Rune Accounts.xml";
 		public static List<SR_RuneAccount> Info = new List<SR_RuneAccount>();
 		public static int Count{ get{ return Info.Count; } }
