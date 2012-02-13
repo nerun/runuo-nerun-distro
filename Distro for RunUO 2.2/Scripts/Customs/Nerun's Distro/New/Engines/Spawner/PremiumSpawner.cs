@@ -1,4 +1,4 @@
-//Engine r70
+//Engine r71
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -753,82 +753,54 @@ namespace Server.Mobiles
 			}
 			else
 			{
-				Spawn();
-				SpawnA();
-				SpawnB();
-				SpawnC();
-				SpawnD();
-				SpawnE();
+				Spawn(CreaturesNameCount, m_Creatures, m_Count, m_CreaturesName);
+				Spawn(CreaturesNameCountA, m_CreaturesA, m_CountA, m_CreaturesNameA);
+				Spawn(CreaturesNameCountB, m_CreaturesB, m_CountB, m_CreaturesNameB);
+				Spawn(CreaturesNameCountC, m_CreaturesC, m_CountC, m_CreaturesNameC);
+				Spawn(CreaturesNameCountD, m_CreaturesD, m_CountD, m_CreaturesNameD);
+				Spawn(CreaturesNameCountE, m_CreaturesE, m_CountE, m_CreaturesNameE);
 			}
 		}
 		
 		public void Respawn() // remove all creatures and spawn all again
 		{
-			RemoveCreatures();
-			RemoveCreaturesA();
-			RemoveCreaturesB();
-			RemoveCreaturesC();
-			RemoveCreaturesD();
-			RemoveCreaturesE();
+			RemoveCreatures(m_Creatures);
+			RemoveCreatures(m_CreaturesA);
+			RemoveCreatures(m_CreaturesB);
+			RemoveCreatures(m_CreaturesC);
+			RemoveCreatures(m_CreaturesD);
+			RemoveCreatures(m_CreaturesE);
 
 			for ( int i = 0; i < m_Count; i++ )
-				Spawn();
+				Spawn(CreaturesNameCount, m_Creatures, m_Count, m_CreaturesName);
 			for ( int i = 0; i < m_CountA; i++ )
-				SpawnA();
+				Spawn(CreaturesNameCountA, m_CreaturesA, m_CountA, m_CreaturesNameA);
 			for ( int i = 0; i < m_CountB; i++ )
-				SpawnB();
+				Spawn(CreaturesNameCountB, m_CreaturesB, m_CountB, m_CreaturesNameB);
 			for ( int i = 0; i < m_CountC; i++ )
-				SpawnC();
+				Spawn(CreaturesNameCountC, m_CreaturesC, m_CountC, m_CreaturesNameC);
 			for ( int i = 0; i < m_CountD; i++ )
-				SpawnD();
+				Spawn(CreaturesNameCountD, m_CreaturesD, m_CountD, m_CreaturesNameD);
 			for ( int i = 0; i < m_CountE; i++ )
-				SpawnE();
+				Spawn(CreaturesNameCountE, m_CreaturesE, m_CountE, m_CreaturesNameE);
 		}
 		
-		public void Spawn()
+		public void Spawn( int CreatNameCount, List<IEntity> m_Creat, int m_Countt, List<string> m_CreatName )
 		{
-			if ( CreaturesNameCount > 0 )
-				Spawn( Utility.Random( CreaturesNameCount ) );
+			if ( CreatNameCount > 0 )
+				SpawnTwo( Utility.Random( CreatNameCount ), CreatNameCount, m_Creat, m_Countt, m_CreatName );
 
 		}
 
-		public void SpawnA()
-		{
-			if ( CreaturesNameCountA > 0 )
-				SpawnA( Utility.Random( CreaturesNameCountA ) );
-		}
-
-		public void SpawnB()
-		{
-			if ( CreaturesNameCountB > 0 )
-				SpawnB( Utility.Random( CreaturesNameCountB ) );
-		}
-
-		public void SpawnC()
-		{
-			if ( CreaturesNameCountC > 0 )
-				SpawnC( Utility.Random( CreaturesNameCountC ) );
-		}
-
-		public void SpawnD()
-		{
-			if ( CreaturesNameCountD > 0 )
-				SpawnD( Utility.Random( CreaturesNameCountD ) );
-		}
-
-		public void SpawnE()
-		{
-			if ( CreaturesNameCountE > 0 )
-				SpawnE( Utility.Random( CreaturesNameCountE ) );
-		}
-
+		// Spawn(string anystring) - all this works for PremiumSpawnerGump(line 579) and SpawnEditor(line 957)
+		// But this funcionality is broken in these scripts.
 		public void Spawn( string creatureName )
 		{
 			for ( int i = 0; i < m_CreaturesName.Count; i++ )
 			{
 				if ( m_CreaturesName[i] == creatureName )
 				{
-					Spawn( i );
+					SpawnTwo( i, CreaturesNameCount, m_Creatures, m_Count, m_CreaturesName );
 					break;
 				}
 			}
@@ -840,7 +812,7 @@ namespace Server.Mobiles
 			{
 				if ( (string)m_CreaturesNameA[i] == creatureNameA )
 				{
-					SpawnA( i );
+					SpawnTwo( i, CreaturesNameCountA, m_CreaturesA, m_CountA, m_CreaturesNameA );
 					break;
 				}
 			}
@@ -852,7 +824,7 @@ namespace Server.Mobiles
 			{
 				if ( (string)m_CreaturesNameB[i] == creatureNameB )
 				{
-					SpawnB( i );
+					SpawnTwo( i, CreaturesNameCountB, m_CreaturesB, m_CountB, m_CreaturesNameB );
 					break;
 				}
 			}
@@ -864,7 +836,7 @@ namespace Server.Mobiles
 			{
 				if ( (string)m_CreaturesNameC[i] == creatureNameC )
 				{
-					SpawnC( i );
+					SpawnTwo( i, CreaturesNameCountC, m_CreaturesC, m_CountC, m_CreaturesNameC );
 					break;
 				}
 			}
@@ -876,7 +848,7 @@ namespace Server.Mobiles
 			{
 				if ( (string)m_CreaturesNameD[i] == creatureNameD )
 				{
-					SpawnD( i );
+					SpawnTwo( i, CreaturesNameCountD, m_CreaturesD, m_CountD, m_CreaturesNameD );
 					break;
 				}
 			}
@@ -888,129 +860,24 @@ namespace Server.Mobiles
 			{
 				if ( (string)m_CreaturesNameE[i] == creatureNameE )
 				{
-					SpawnE( i );
+					SpawnTwo( i, CreaturesNameCountE, m_CreaturesE, m_CountE, m_CreaturesNameE );
 					break;
 				}
 			}
 		}
 
-		protected virtual IEntity CreateSpawnedObject( int index )
+		protected virtual IEntity CreateSpawnedObject( int index, List<string> m_CreatName )
 		{
-			if ( index >= m_CreaturesName.Count )
+			if ( index >= m_CreatName.Count )
 				return null;
 
-			Type type = ScriptCompiler.FindTypeByName( ParseType( m_CreaturesName[index] ) );
+			Type type = ScriptCompiler.FindTypeByName( ParseType( m_CreatName[index] ) );
 
 			if ( type != null )
 			{
 				try
 				{
-					return Build( CommandSystem.Split( m_CreaturesName[index] ) );
-				}
-				catch
-				{
-				}
-			}
-
-			return null;
-		}
-
-		protected virtual IEntity CreateSpawnedObjectA( int index )
-		{
-			if ( index >= m_CreaturesNameA.Count )
-				return null;
-
-			Type type = ScriptCompiler.FindTypeByName( ParseType( m_CreaturesNameA[index] ) );
-
-			if ( type != null )
-			{
-				try
-				{
-					return Build( CommandSystem.Split( m_CreaturesNameA[index] ) );
-				}
-				catch
-				{
-				}
-			}
-
-			return null;
-		}
-
-		protected virtual IEntity CreateSpawnedObjectB( int index )
-		{
-			if ( index >= m_CreaturesNameB.Count )
-				return null;
-
-			Type type = ScriptCompiler.FindTypeByName( ParseType( m_CreaturesNameB[index] ) );
-
-			if ( type != null )
-			{
-				try
-				{
-					return Build( CommandSystem.Split( m_CreaturesNameB[index] ) );
-				}
-				catch
-				{
-				}
-			}
-
-			return null;
-		}
-
-		protected virtual IEntity CreateSpawnedObjectC( int index )
-		{
-			if ( index >= m_CreaturesNameC.Count )
-				return null;
-
-			Type type = ScriptCompiler.FindTypeByName( ParseType( m_CreaturesNameC[index] ) );
-
-			if ( type != null )
-			{
-				try
-				{
-					return Build( CommandSystem.Split( m_CreaturesNameC[index] ) );
-				}
-				catch
-				{
-				}
-			}
-
-			return null;
-		}
-
-		protected virtual IEntity CreateSpawnedObjectD( int index )
-		{
-			if ( index >= m_CreaturesNameD.Count )
-				return null;
-
-			Type type = ScriptCompiler.FindTypeByName( ParseType( m_CreaturesNameD[index] ) );
-
-			if ( type != null )
-			{
-				try
-				{
-					return Build( CommandSystem.Split( m_CreaturesNameD[index] ) );
-				}
-				catch
-				{
-				}
-			}
-
-			return null;
-		}
-
-		protected virtual IEntity CreateSpawnedObjectE( int index )
-		{
-			if ( index >= m_CreaturesNameE.Count )
-				return null;
-
-			Type type = ScriptCompiler.FindTypeByName( ParseType( m_CreaturesNameE[index] ) );
-
-			if ( type != null )
-			{
-				try
-				{
-					return Build( CommandSystem.Split( m_CreaturesNameE[index] ) );
+					return Build( CommandSystem.Split( m_CreatName[index] ) );
 				}
 				catch
 				{
@@ -1127,26 +994,26 @@ namespace Server.Mobiles
 			return null;
 		}
 
-		public void Spawn( int index )
+		public void SpawnTwo( int index, int CreatNameCount, List<IEntity> m_Creat, int m_Countt, List<string> m_CreatName )
 		{
 			Map map = Map;
 
-			if ( map == null || map == Map.Internal || CreaturesNameCount == 0 || index >= CreaturesNameCount || Parent != null )
+			if ( map == null || map == Map.Internal || CreatNameCount == 0 || index >= CreatNameCount || Parent != null )
 				return;
 
 			Defrag();
 
-			if ( m_Creatures.Count >= m_Count )
+			if ( m_Creat.Count >= m_Countt )
 				return;
 
 
-			IEntity ent = CreateSpawnedObject( index );
+			IEntity ent = CreateSpawnedObject( index, m_CreatName );
 
 			if ( ent is Mobile )
 			{
 				Mobile m = (Mobile)ent;
 
-				m_Creatures.Add( m );
+				m_Creat.Add( m );
 				
 
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
@@ -1190,374 +1057,7 @@ namespace Server.Mobiles
 			{
 				Item item = (Item)ent;
 
-				m_Creatures.Add( item );
-
-				Point3D loc = GetSpawnPosition();
-
-				item.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				item.MoveToWorld( loc, map );
-
-				item.OnAfterSpawn();
-			}
-		}
-
-		public void SpawnA( int index )
-		{
-			Map map = Map;
-
-			if ( map == null || map == Map.Internal || CreaturesNameCountA == 0 || index >= CreaturesNameCountA || Parent != null )
-				return;
-
-			Defrag();
-
-			if ( m_CreaturesA.Count >= m_CountA )
-				return;
-
-
-			IEntity ent = CreateSpawnedObjectA( index );
-
-			if ( ent is Mobile )
-			{
-				Mobile m = (Mobile)ent;
-
-				m_CreaturesA.Add( m );
-				
-				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
-				
-				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
-				{
-					loc = GetSpawnPosition();
-				}
-				
-				if ( m.CanSwim == true )
-				{
-					loc = GetSpawnPosition(m);
-				}
-
-				m.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				m.MoveToWorld( loc, map );
-
-				if ( m is BaseCreature )
-				{
-					BaseCreature c = (BaseCreature)m;
-					
-					if( m_WalkingRange >= 0 )
-						c.RangeHome = m_WalkingRange;
-					else
-						c.RangeHome = m_HomeRange;
-
-					c.CurrentWayPoint = m_WayPoint;
-
-					if ( m_Team > 0 )
-						c.Team = m_Team;
-
-					c.Home = this.Location;
-				}
-
-				m.OnAfterSpawn();
-			}
-			else if ( ent is Item )
-			{
-				Item item = (Item)ent;
-
-				m_CreaturesA.Add( item );
-
-				Point3D loc = GetSpawnPosition();
-
-				item.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				item.MoveToWorld( loc, map );
-
-				item.OnAfterSpawn();
-			}
-		}
-
-		public void SpawnB( int index )
-		{
-			Map map = Map;
-
-			if ( map == null || map == Map.Internal || CreaturesNameCountB == 0 || index >= CreaturesNameCountB || Parent != null )
-				return;
-
-			Defrag();
-
-			if ( m_CreaturesB.Count >= m_CountB )
-				return;
-
-			IEntity ent = CreateSpawnedObjectB( index );
-
-			if ( ent is Mobile )
-			{
-				Mobile m = (Mobile)ent;
-
-				m_CreaturesB.Add( m );
-				
-				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
-				
-				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
-				{
-					loc = GetSpawnPosition();
-				}
-				
-				if ( m.CanSwim == true )
-				{
-					loc = GetSpawnPosition(m);
-				}
-
-				m.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				m.MoveToWorld( loc, map );
-
-				if ( m is BaseCreature )
-				{
-					BaseCreature c = (BaseCreature)m;
-					
-					if( m_WalkingRange >= 0 )
-						c.RangeHome = m_WalkingRange;
-					else
-						c.RangeHome = m_HomeRange;
-
-					c.CurrentWayPoint = m_WayPoint;
-
-					if ( m_Team > 0 )
-						c.Team = m_Team;
-
-					c.Home = this.Location;
-				}
-
-				m.OnAfterSpawn();
-			}
-			else if ( ent is Item )
-			{
-				Item item = (Item)ent;
-
-				m_CreaturesB.Add( item );
-
-				Point3D loc = GetSpawnPosition();
-
-				item.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				item.MoveToWorld( loc, map );
-
-				item.OnAfterSpawn();
-			}
-		}
-
-		public void SpawnC( int index )
-		{
-			Map map = Map;
-
-			if ( map == null || map == Map.Internal || CreaturesNameCountC == 0 || index >= CreaturesNameCountC || Parent != null )
-				return;
-
-			Defrag();
-
-			if ( m_CreaturesC.Count >= m_CountC )
-				return;
-
-			IEntity ent = CreateSpawnedObjectC( index );
-
-			if ( ent is Mobile )
-			{
-				Mobile m = (Mobile)ent;
-
-				m_CreaturesC.Add( m );
-				
-				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
-				
-				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
-				{
-					loc = GetSpawnPosition();
-				}
-				
-				if ( m.CanSwim == true )
-				{
-					loc = GetSpawnPosition(m);
-				}
-
-				m.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				m.MoveToWorld( loc, map );
-
-				if ( m is BaseCreature )
-				{
-					BaseCreature c = (BaseCreature)m;
-					
-					if( m_WalkingRange >= 0 )
-						c.RangeHome = m_WalkingRange;
-					else
-						c.RangeHome = m_HomeRange;
-
-					c.CurrentWayPoint = m_WayPoint;
-
-					if ( m_Team > 0 )
-						c.Team = m_Team;
-
-					c.Home = this.Location;
-				}
-
-				m.OnAfterSpawn();
-			}
-			else if ( ent is Item )
-			{
-				Item item = (Item)ent;
-
-				m_CreaturesC.Add( item );
-
-				Point3D loc = GetSpawnPosition();
-
-				item.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				item.MoveToWorld( loc, map );
-
-				item.OnAfterSpawn();
-			}
-		}
-
-		public void SpawnD( int index )
-		{
-			Map map = Map;
-
-			if ( map == null || map == Map.Internal || CreaturesNameCountD == 0 || index >= CreaturesNameCountD || Parent != null )
-				return;
-
-			Defrag();
-
-			if ( m_CreaturesD.Count >= m_CountD )
-				return;
-
-			IEntity ent = CreateSpawnedObjectD( index );
-
-			if ( ent is Mobile )
-			{
-				Mobile m = (Mobile)ent;
-
-				m_CreaturesD.Add( m );
-				
-				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
-				
-				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
-				{
-					loc = GetSpawnPosition();
-				}
-				
-				if ( m.CanSwim == true )
-				{
-					loc = GetSpawnPosition(m);
-				}
-
-				m.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				m.MoveToWorld( loc, map );
-
-				if ( m is BaseCreature )
-				{
-					BaseCreature c = (BaseCreature)m;
-					
-					if( m_WalkingRange >= 0 )
-						c.RangeHome = m_WalkingRange;
-					else
-						c.RangeHome = m_HomeRange;
-
-					c.CurrentWayPoint = m_WayPoint;
-
-					if ( m_Team > 0 )
-						c.Team = m_Team;
-
-					c.Home = this.Location;
-				}
-
-				m.OnAfterSpawn();
-			}
-			else if ( ent is Item )
-			{
-				Item item = (Item)ent;
-
-				m_CreaturesD.Add( item );
-
-				Point3D loc = GetSpawnPosition();
-
-				item.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				item.MoveToWorld( loc, map );
-
-				item.OnAfterSpawn();
-			}
-		}
-
-		public void SpawnE( int index )
-		{
-			Map map = Map;
-
-			if ( map == null || map == Map.Internal || CreaturesNameCountE == 0 || index >= CreaturesNameCountE || Parent != null )
-				return;
-
-			Defrag();
-
-			if ( m_CreaturesE.Count >= m_CountE )
-				return;
-
-
-			IEntity ent = CreateSpawnedObjectE( index );
-
-			if ( ent is Mobile )
-			{
-				Mobile m = (Mobile)ent;
-
-				m_CreaturesE.Add( m );
-				
-				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
-				
-				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
-				{
-					loc = GetSpawnPosition();
-				}
-				
-				if ( m.CanSwim == true )
-				{
-					loc = GetSpawnPosition(m);
-				}
-
-				m.OnBeforeSpawn( loc, map );
-				InvalidateProperties();
-
-				m.MoveToWorld( loc, map );
-
-				if ( m is BaseCreature )
-				{
-					BaseCreature c = (BaseCreature)m;
-					
-					if( m_WalkingRange >= 0 )
-						c.RangeHome = m_WalkingRange;
-					else
-						c.RangeHome = m_HomeRange;
-
-					c.CurrentWayPoint = m_WayPoint;
-
-					if ( m_Team > 0 )
-						c.Team = m_Team;
-
-					c.Home = this.Location;
-				}
-
-				m.OnAfterSpawn();
-			}
-			else if ( ent is Item )
-			{
-				Item item = (Item)ent;
-
-				m_CreaturesE.Add( item );
+				m_Creat.Add( item );
 
 				Point3D loc = GetSpawnPosition();
 
@@ -1761,6 +1261,8 @@ namespace Server.Mobiles
 			return count;
 		}
 
+		// RemoveCreatures(string anystring) - all this works for PremiumSpawnerGump(line 579) and SpawnEditor(line 957)
+		// But this funcionality is broken in these scripts.
 		public void RemoveCreatures( string creatureName )
 		{
 			Defrag();
@@ -1851,62 +1353,12 @@ namespace Server.Mobiles
 			InvalidateProperties();
 		}
 		
-		public void RemoveCreatures()
+		public void RemoveCreatures( List<IEntity> m_Creatur )
 		{
 			Defrag();
 
-			for ( int i = 0; i < m_Creatures.Count; ++i )
-				m_Creatures[i].Delete();
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesA()
-		{
-			Defrag();
-
-			for ( int i = 0; i < m_CreaturesA.Count; ++i )
-				m_CreaturesA[i].Delete();
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesB()
-		{
-			Defrag();
-
-			for ( int i = 0; i < m_CreaturesB.Count; ++i )
-				m_CreaturesB[i].Delete();
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesC()
-		{
-			Defrag();
-
-			for ( int i = 0; i < m_CreaturesC.Count; ++i )
-				m_CreaturesC[i].Delete();
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesD()
-		{
-			Defrag();
-
-			for ( int i = 0; i < m_CreaturesD.Count; ++i )
-				m_CreaturesD[i].Delete();
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesE()
-		{
-			Defrag();
-
-			for ( int i = 0; i < m_CreaturesE.Count; ++i )
-				m_CreaturesE[i].Delete();
+			for ( int i = 0; i < m_Creatur.Count; ++i )
+				m_Creatur[i].Delete();
 
 			InvalidateProperties();
 		}
@@ -2022,19 +1474,18 @@ namespace Server.Mobiles
 					item.MoveToWorld( Location, Map );
 				}
 			}
-
 		}
 
 		public override void OnDelete()
 		{
 			base.OnDelete();
 
-			RemoveCreatures();
-			RemoveCreaturesA();
-			RemoveCreaturesB();
-			RemoveCreaturesC();
-			RemoveCreaturesD();
-			RemoveCreaturesE();
+			RemoveCreatures(m_Creatures);
+			RemoveCreatures(m_CreaturesA);
+			RemoveCreatures(m_CreaturesB);
+			RemoveCreatures(m_CreaturesC);
+			RemoveCreatures(m_CreaturesD);
+			RemoveCreatures(m_CreaturesE);
 			if ( m_Timer != null )
 				m_Timer.Stop();
 		}
