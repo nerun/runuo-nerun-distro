@@ -1,4 +1,4 @@
-//Engine r53
+//Engine r70
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1155,6 +1155,11 @@ namespace Server.Mobiles
 				{
 					loc = GetSpawnPosition();
 				}
+				
+				if ( m.CanSwim == true )
+				{
+					loc = GetSpawnPosition(m);
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
@@ -1219,17 +1224,20 @@ namespace Server.Mobiles
 
 				m_CreaturesA.Add( m );
 				
-
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
 				
 				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
 				{
 					loc = GetSpawnPosition();
 				}
+				
+				if ( m.CanSwim == true )
+				{
+					loc = GetSpawnPosition(m);
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
-
 
 				m.MoveToWorld( loc, map );
 
@@ -1281,7 +1289,6 @@ namespace Server.Mobiles
 			if ( m_CreaturesB.Count >= m_CountB )
 				return;
 
-
 			IEntity ent = CreateSpawnedObjectB( index );
 
 			if ( ent is Mobile )
@@ -1290,17 +1297,20 @@ namespace Server.Mobiles
 
 				m_CreaturesB.Add( m );
 				
-
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
 				
 				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
 				{
 					loc = GetSpawnPosition();
 				}
+				
+				if ( m.CanSwim == true )
+				{
+					loc = GetSpawnPosition(m);
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
-
 
 				m.MoveToWorld( loc, map );
 
@@ -1352,7 +1362,6 @@ namespace Server.Mobiles
 			if ( m_CreaturesC.Count >= m_CountC )
 				return;
 
-
 			IEntity ent = CreateSpawnedObjectC( index );
 
 			if ( ent is Mobile )
@@ -1361,17 +1370,20 @@ namespace Server.Mobiles
 
 				m_CreaturesC.Add( m );
 				
-
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
 				
 				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
 				{
 					loc = GetSpawnPosition();
 				}
+				
+				if ( m.CanSwim == true )
+				{
+					loc = GetSpawnPosition(m);
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
-
 
 				m.MoveToWorld( loc, map );
 
@@ -1423,7 +1435,6 @@ namespace Server.Mobiles
 			if ( m_CreaturesD.Count >= m_CountD )
 				return;
 
-
 			IEntity ent = CreateSpawnedObjectD( index );
 
 			if ( ent is Mobile )
@@ -1432,17 +1443,20 @@ namespace Server.Mobiles
 
 				m_CreaturesD.Add( m );
 				
-
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
 				
 				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
 				{
 					loc = GetSpawnPosition();
 				}
+				
+				if ( m.CanSwim == true )
+				{
+					loc = GetSpawnPosition(m);
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
-
 
 				m.MoveToWorld( loc, map );
 
@@ -1503,17 +1517,20 @@ namespace Server.Mobiles
 
 				m_CreaturesE.Add( m );
 				
-
 				Point3D loc = ( m is BaseVendor ? this.Location : GetSpawnPosition() );
 				
 				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
 				{
 					loc = GetSpawnPosition();
 				}
+				
+				if ( m.CanSwim == true )
+				{
+					loc = GetSpawnPosition(m);
+				}
 
 				m.OnBeforeSpawn( loc, map );
 				InvalidateProperties();
-
 
 				m.MoveToWorld( loc, map );
 
@@ -1553,6 +1570,40 @@ namespace Server.Mobiles
 			}
 		}
 
+		//SeaCreatures
+		// FIX: Sea Creatures spawning all at same spot.
+		public Point3D GetSpawnPosition( Mobile m )
+		{
+			Map map = Map;
+
+			if ( map == null )
+				return Location;
+
+			// Try 10 times to find a Spawnable location.
+			for ( int i = 0; i < 10; i++ )
+			{
+				int x, y;
+
+				if ( m_HomeRange > 0 ) {
+					x = Location.X + (Utility.Random( (m_HomeRange * 2) + 1 ) - m_HomeRange);
+					y = Location.Y + (Utility.Random( (m_HomeRange * 2) + 1 ) - m_HomeRange);
+				} else {
+					x = Location.X;
+					y = Location.Y;
+				}
+
+				int z = Map.GetAverageZ( x, y );
+
+				if ( Map.CanFit( x, y, this.Z, 16, true, true, false ) )
+					return new Point3D( x, y, this.Z );
+				else if ( Map.CanFit( x, y, z, 16, true, true, false ) )
+					return new Point3D( x, y, z );
+			}
+			
+			return this.Location;
+		}
+
+		//Non-SeaCreatures
 		public Point3D GetSpawnPosition()
 		{
 			Map map = Map;
@@ -1580,10 +1631,10 @@ namespace Server.Mobiles
 				else if ( Map.CanSpawnMobile( new Point2D( x, y ), z ) )
 					return new Point3D( x, y, z );
 			}
-
+			
 			return this.Location;
 		}
-
+		
 		public void DoTimer()
 		{
 			if ( !m_Running )
