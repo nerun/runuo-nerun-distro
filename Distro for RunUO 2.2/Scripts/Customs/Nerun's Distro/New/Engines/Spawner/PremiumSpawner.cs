@@ -1,4 +1,4 @@
-//Engine r71
+//Engine r72
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -462,13 +462,13 @@ namespace Server.Mobiles
 			return s.Split( null, 2 )[0];
 		}
 
-		public void Defrag()
+		public void Defrag( List<IEntity> m_Beings )
 		{
 			bool removed = false;
 
-			for ( int i = 0; i < m_Creatures.Count; ++i )
+			for ( int i = 0; i < m_Beings.Count; ++i )
 			{
-				IEntity e = m_Creatures[i];
+				IEntity e = m_Beings[i];
 
 				if ( e is Item )
 				{
@@ -476,7 +476,7 @@ namespace Server.Mobiles
 
 					if ( item.Deleted || item.Parent != null )
 					{
-						m_Creatures.RemoveAt( i );
+						m_Beings.RemoveAt( i );
 						--i;
 						removed = true;
 					}
@@ -487,7 +487,7 @@ namespace Server.Mobiles
 
 					if ( m.Deleted )
 					{
-						m_Creatures.RemoveAt( i );
+						m_Beings.RemoveAt( i );
 						--i;
 						removed = true;
 					}
@@ -496,7 +496,7 @@ namespace Server.Mobiles
 						BaseCreature bc = (BaseCreature)m;
 						if ( bc.Controlled || bc.IsStabled )
 						{
-							m_Creatures.RemoveAt( i );
+							m_Beings.RemoveAt( i );
 							--i;
 							removed = true;
 						}
@@ -504,227 +504,7 @@ namespace Server.Mobiles
 				}
 				else
 				{
-					m_Creatures.RemoveAt( i );
-					--i;
-					removed = true;
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesA.Count; ++i )
-			{
-				IEntity e = m_CreaturesA[i];
-
-				if ( e is Item )
-				{
-					Item item = (Item)e;
-
-					if ( item.Deleted || item.Parent != null )
-					{
-						m_CreaturesA.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-				}
-				else if ( e is Mobile )
-				{
-					Mobile m = (Mobile)e;
-
-					if ( m.Deleted )
-					{
-						m_CreaturesA.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-					else if ( m is BaseCreature )
-					{
-						BaseCreature bc = (BaseCreature)m;
-						if ( bc.Controlled || bc.IsStabled )
-						{
-							m_CreaturesA.RemoveAt( i );
-							--i;
-							removed = true;
-						}
-					}
-				}
-				else
-				{
-					m_CreaturesA.RemoveAt( i );
-					--i;
-					removed = true;
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesB.Count; ++i )
-			{
-				IEntity e = m_CreaturesB[i];
-
-				if ( e is Item )
-				{
-					Item item = (Item)e;
-
-					if ( item.Deleted || item.Parent != null )
-					{
-						m_CreaturesB.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-				}
-				else if ( e is Mobile )
-				{
-					Mobile m = (Mobile)e;
-
-					if ( m.Deleted )
-					{
-						m_CreaturesB.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-					else if ( m is BaseCreature )
-					{
-						BaseCreature bc = (BaseCreature)m;
-						if ( bc.Controlled || bc.IsStabled )
-						{
-							m_CreaturesB.RemoveAt( i );
-							--i;
-							removed = true;
-						}
-					}
-				}
-				else
-				{
-					m_CreaturesB.RemoveAt( i );
-					--i;
-					removed = true;
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesC.Count; ++i )
-			{
-				IEntity e = m_CreaturesC[i];
-
-				if ( e is Item )
-				{
-					Item item = (Item)e;
-
-					if ( item.Deleted || item.Parent != null )
-					{
-						m_CreaturesC.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-				}
-				else if ( e is Mobile )
-				{
-					Mobile m = (Mobile)e;
-
-					if ( m.Deleted )
-					{
-						m_CreaturesC.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-					else if ( m is BaseCreature )
-					{
-						BaseCreature bc = (BaseCreature)m;
-						if ( bc.Controlled || bc.IsStabled )
-						{
-							m_CreaturesC.RemoveAt( i );
-							--i;
-							removed = true;
-						}
-					}
-				}
-				else
-				{
-					m_CreaturesC.RemoveAt( i );
-					--i;
-					removed = true;
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesD.Count; ++i )
-			{
-				IEntity e = m_CreaturesD[i];
-
-				if ( e is Item )
-				{
-					Item item = (Item)e;
-
-					if ( item.Deleted || item.Parent != null )
-					{
-						m_CreaturesD.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-				}
-				else if ( e is Mobile )
-				{
-					Mobile m = (Mobile)e;
-
-					if ( m.Deleted )
-					{
-						m_CreaturesD.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-					else if ( m is BaseCreature )
-					{
-						BaseCreature bc = (BaseCreature)m;
-						if ( bc.Controlled || bc.IsStabled )
-						{
-							m_CreaturesD.RemoveAt( i );
-							--i;
-							removed = true;
-						}
-					}
-				}
-				else
-				{
-					m_CreaturesD.RemoveAt( i );
-					--i;
-					removed = true;
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesE.Count; ++i )
-			{
-				IEntity e = m_CreaturesE[i];
-
-				if ( e is Item )
-				{
-					Item item = (Item)e;
-
-					if ( item.Deleted || item.Parent != null )
-					{
-						m_CreaturesE.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-				}
-				else if ( e is Mobile )
-				{
-					Mobile m = (Mobile)e;
-
-					if ( m.Deleted )
-					{
-						m_CreaturesE.RemoveAt( i );
-						--i;
-						removed = true;
-					}
-					else if ( m is BaseCreature )
-					{
-						BaseCreature bc = (BaseCreature)m;
-						if ( bc.Controlled || bc.IsStabled )
-						{
-							m_CreaturesE.RemoveAt( i );
-							--i;
-							removed = true;
-						}
-					}
-				}
-				else
-				{
-					m_CreaturesE.RemoveAt( i );
+					m_Beings.RemoveAt( i );
 					--i;
 					removed = true;
 				}
@@ -740,7 +520,12 @@ namespace Server.Mobiles
 
 			if ( m_Group )
 			{
-				Defrag();
+				Defrag(m_Creatures);
+				Defrag(m_CreaturesA);
+				Defrag(m_CreaturesB);
+				Defrag(m_CreaturesC);
+				Defrag(m_CreaturesD);
+				Defrag(m_CreaturesE);
 
 				if  ( m_Creatures.Count == 0 || m_CreaturesA.Count == 0 || m_CreaturesB.Count == 0 || m_CreaturesC.Count == 0 || m_CreaturesD.Count == 0 || m_CreaturesE.Count == 0 )
 				{
@@ -792,7 +577,7 @@ namespace Server.Mobiles
 
 		}
 
-		// Spawn(string anystring) - all this works for PremiumSpawnerGump(line 579) and SpawnEditor(line 957)
+		// Spawn(string anystring) - all this works for PremiumSpawnerGump(line 422) and SpawnEditor(line 957)
 		// But this funcionality is broken in these scripts.
 		public void Spawn( string creatureName )
 		{
@@ -1001,7 +786,12 @@ namespace Server.Mobiles
 			if ( map == null || map == Map.Internal || CreatNameCount == 0 || index >= CreatNameCount || Parent != null )
 				return;
 
-			Defrag();
+			Defrag(m_Creatures);
+			Defrag(m_CreaturesA);
+			Defrag(m_CreaturesB);
+			Defrag(m_CreaturesC);
+			Defrag(m_CreaturesD);
+			Defrag(m_CreaturesE);
 
 			if ( m_Creat.Count >= m_Countt )
 				return;
@@ -1185,7 +975,7 @@ namespace Server.Mobiles
 
 		public int CountCreatures( string creatureName )
 		{
-			Defrag();
+			Defrag(m_Creatures);
 
 			int count = 0;
 
@@ -1198,7 +988,7 @@ namespace Server.Mobiles
 
 		public int CountCreaturesA( string creatureNameA )
 		{
-			Defrag();
+			Defrag(m_CreaturesA);
 
 			int count = 0;
 
@@ -1211,7 +1001,7 @@ namespace Server.Mobiles
 
 		public int CountCreaturesB( string creatureNameB )
 		{
-			Defrag();
+			Defrag(m_CreaturesB);
 
 			int count = 0;
 
@@ -1224,7 +1014,7 @@ namespace Server.Mobiles
 
 		public int CountCreaturesC( string creatureNameC )
 		{
-			Defrag();
+			Defrag(m_CreaturesC);
 
 			int count = 0;
 
@@ -1237,7 +1027,7 @@ namespace Server.Mobiles
 
 		public int CountCreaturesD( string creatureNameD )
 		{
-			Defrag();
+			Defrag(m_CreaturesD);
 
 			int count = 0;
 
@@ -1250,7 +1040,7 @@ namespace Server.Mobiles
 
 		public int CountCreaturesE( string creatureNameE )
 		{
-			Defrag();
+			Defrag(m_CreaturesE);
 
 			int count = 0;
 
@@ -1265,7 +1055,7 @@ namespace Server.Mobiles
 		// But this funcionality is broken in these scripts.
 		public void RemoveCreatures( string creatureName )
 		{
-			Defrag();
+			Defrag(m_Creatures);
 
 			for ( int i = 0; i < m_Creatures.Count; ++i )
 			{
@@ -1280,7 +1070,7 @@ namespace Server.Mobiles
 
 		public void RemoveCreaturesA( string creatureNameA )
 		{
-			Defrag();
+			Defrag(m_CreaturesA);
 
 			for ( int i = 0; i < m_CreaturesA.Count; ++i )
 			{
@@ -1295,7 +1085,7 @@ namespace Server.Mobiles
 
 		public void RemoveCreaturesB( string creatureNameB )
 		{
-			Defrag();
+			Defrag(m_CreaturesB);
 
 			for ( int i = 0; i < m_CreaturesB.Count; ++i )
 			{
@@ -1310,7 +1100,7 @@ namespace Server.Mobiles
 
 		public void RemoveCreaturesC( string creatureNameC )
 		{
-			Defrag();
+			Defrag(m_CreaturesC);
 
 			for ( int i = 0; i < m_CreaturesC.Count; ++i )
 			{
@@ -1325,7 +1115,7 @@ namespace Server.Mobiles
 
 		public void RemoveCreaturesD( string creatureNameD )
 		{
-			Defrag();
+			Defrag(m_CreaturesD);
 
 			for ( int i = 0; i < m_CreaturesD.Count; ++i )
 			{
@@ -1340,7 +1130,7 @@ namespace Server.Mobiles
 
 		public void RemoveCreaturesE( string creatureNameE )
 		{
-			Defrag();
+			Defrag(m_CreaturesE);
 
 			for ( int i = 0; i < m_CreaturesE.Count; ++i )
 			{
@@ -1355,7 +1145,7 @@ namespace Server.Mobiles
 		
 		public void RemoveCreatures( List<IEntity> m_Creatur )
 		{
-			Defrag();
+			Defrag(m_Creatur);
 
 			for ( int i = 0; i < m_Creatur.Count; ++i )
 				m_Creatur[i].Delete();
@@ -1363,13 +1153,12 @@ namespace Server.Mobiles
 			InvalidateProperties();
 		}
 
-		public void BringToHome()
+		//Used by PremiumSpawnerGump
+		public void BringToHome( List<IEntity> m_Beings )
 		{
-			Defrag();
-
-			for ( int i = 0; i < m_Creatures.Count; ++i )
+			for ( int i = 0; i < m_Beings.Count; ++i )
 			{
-				IEntity e = m_Creatures[i];
+				IEntity e = m_Beings[i];
 
 				if ( e is Mobile )
 				{
@@ -1384,96 +1173,24 @@ namespace Server.Mobiles
 					item.MoveToWorld( Location, Map );
 				}
 			}
+		}
 
-			for ( int i = 0; i < m_CreaturesA.Count; ++i )
-			{
-				object o = m_CreaturesA[i];
+		//Used by PremiumSpawnerGump
+		public void BringToHome()
+		{
+			Defrag(m_Creatures);
+			Defrag(m_CreaturesA);
+			Defrag(m_CreaturesB);
+			Defrag(m_CreaturesC);
+			Defrag(m_CreaturesD);
+			Defrag(m_CreaturesE);
 
-				if ( o is Mobile )
-				{
-					Mobile m = (Mobile)o;
-
-					m.MoveToWorld( Location, Map );
-				}
-				else if ( o is Item )
-				{
-					Item item = (Item)o;
-
-					item.MoveToWorld( Location, Map );
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesB.Count; ++i )
-			{
-				object o = m_CreaturesB[i];
-
-				if ( o is Mobile )
-				{
-					Mobile m = (Mobile)o;
-
-					m.MoveToWorld( Location, Map );
-				}
-				else if ( o is Item )
-				{
-					Item item = (Item)o;
-
-					item.MoveToWorld( Location, Map );
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesC.Count; ++i )
-			{
-				object o = m_CreaturesC[i];
-
-				if ( o is Mobile )
-				{
-					Mobile m = (Mobile)o;
-
-					m.MoveToWorld( Location, Map );
-				}
-				else if ( o is Item )
-				{
-					Item item = (Item)o;
-
-					item.MoveToWorld( Location, Map );
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesD.Count; ++i )
-			{
-				object o = m_CreaturesD[i];
-
-				if ( o is Mobile )
-				{
-					Mobile m = (Mobile)o;
-
-					m.MoveToWorld( Location, Map );
-				}
-				else if ( o is Item )
-				{
-					Item item = (Item)o;
-
-					item.MoveToWorld( Location, Map );
-				}
-			}
-
-			for ( int i = 0; i < m_CreaturesE.Count; ++i )
-			{
-				object o = m_CreaturesE[i];
-
-				if ( o is Mobile )
-				{
-					Mobile m = (Mobile)o;
-
-					m.MoveToWorld( Location, Map );
-				}
-				else if ( o is Item )
-				{
-					Item item = (Item)o;
-
-					item.MoveToWorld( Location, Map );
-				}
-			}
+			BringToHome(m_Creatures);
+			BringToHome(m_CreaturesA);
+			BringToHome(m_CreaturesB);
+			BringToHome(m_CreaturesC);
+			BringToHome(m_CreaturesD);
+			BringToHome(m_CreaturesE);
 		}
 
 		public override void OnDelete()

@@ -1,6 +1,4 @@
-//////////////////
-// Engine 5.2.5 //
-//////////////////
+//Engine r1
 using System;
 using System.Collections;
 using Server.Network;
@@ -32,7 +30,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 100, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1001, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -44,7 +42,7 @@ namespace Server.Mobiles
 			AddButton( 260, 190, 0xFAB, 0xFAD, 400, GumpButtonType.Reply, 0 );
 			AddLabel( 245, 210, 52, "Properties" );
 
-			AddButton( 260, 240, 0xFB1, 0xFB3, 0, GumpButtonType.Reply, 0 );
+			AddButton( 260, 240, 0xFB1, 0xFB3, 500, GumpButtonType.Reply, 0 );
 			AddLabel( 256, 260, 52, "Cancel" );
 
 			AddButton( 230, 320, 5603, 5607, 0, GumpButtonType.Page, 6 );
@@ -53,8 +51,9 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, 4 + (i * 2), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, 5 + (i * 2), GumpButtonType.Reply, 0 );
+				// AddButton ( x, y, image, imageOnClick, ButtonID )
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (0 + i), GumpButtonType.Reply, 0 ); // > (spawn this creature)
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (90 + i), GumpButtonType.Reply, 0 ); // X (remove this creature)
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -81,7 +80,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 101, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1002, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -93,7 +92,7 @@ namespace Server.Mobiles
 			AddButton( 260, 190, 0xFAB, 0xFAD, 400, GumpButtonType.Reply, 0 );
 			AddLabel( 245, 210, 52, "Properties" );
 
-			AddButton( 260, 240, 0xFB1, 0xFB3, 0, GumpButtonType.Reply, 0 );
+			AddButton( 260, 240, 0xFB1, 0xFB3, 500, GumpButtonType.Reply, 0 );
 			AddLabel( 256, 260, 52, "Cancel" );
 
 			AddButton( 230, 320, 5603, 5607, 0, GumpButtonType.Page, 1 );
@@ -102,8 +101,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, 4 + (i * 2), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, 5 + (i * 2), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (15 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (105 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -130,7 +129,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 102, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1003, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -142,7 +141,7 @@ namespace Server.Mobiles
 			AddButton( 260, 190, 0xFAB, 0xFAD, 400, GumpButtonType.Reply, 0 );
 			AddLabel( 245, 210, 52, "Properties" );
 
-			AddButton( 260, 240, 0xFB1, 0xFB3, 0, GumpButtonType.Reply, 0 );
+			AddButton( 260, 240, 0xFB1, 0xFB3, 500, GumpButtonType.Reply, 0 );
 			AddLabel( 256, 260, 52, "Cancel" );
 
 			AddButton( 230, 320, 5603, 5607, 0, GumpButtonType.Page, 2 );
@@ -151,8 +150,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, 4 + (i * 2), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, 5 + (i * 2), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (30 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (120 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -179,7 +178,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 103, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1004, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -191,7 +190,7 @@ namespace Server.Mobiles
 			AddButton( 260, 190, 0xFAB, 0xFAD, 400, GumpButtonType.Reply, 0 );
 			AddLabel( 245, 210, 52, "Properties" );
 
-			AddButton( 260, 240, 0xFB1, 0xFB3, 0, GumpButtonType.Reply, 0 );
+			AddButton( 260, 240, 0xFB1, 0xFB3, 500, GumpButtonType.Reply, 0 );
 			AddLabel( 256, 260, 52, "Cancel" );
 
 			AddButton( 230, 320, 5603, 5607, 0, GumpButtonType.Page, 3 );
@@ -200,8 +199,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, 4 + (i * 2), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, 5 + (i * 2), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (45 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (135 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -228,7 +227,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 104, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1005, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -240,7 +239,7 @@ namespace Server.Mobiles
 			AddButton( 260, 190, 0xFAB, 0xFAD, 400, GumpButtonType.Reply, 0 );
 			AddLabel( 245, 210, 52, "Properties" );
 
-			AddButton( 260, 240, 0xFB1, 0xFB3, 0, GumpButtonType.Reply, 0 );
+			AddButton( 260, 240, 0xFB1, 0xFB3, 500, GumpButtonType.Reply, 0 );
 			AddLabel( 256, 260, 52, "Cancel" );
 
 			AddButton( 230, 320, 5603, 5607, 0, GumpButtonType.Page, 4 );
@@ -249,8 +248,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, 4 + (i * 2), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, 5 + (i * 2), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (60 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (150 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -277,7 +276,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 105, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1006, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -289,7 +288,7 @@ namespace Server.Mobiles
 			AddButton( 260, 190, 0xFAB, 0xFAD, 400, GumpButtonType.Reply, 0 );
 			AddLabel( 245, 210, 52, "Properties" );
 
-			AddButton( 260, 240, 0xFB1, 0xFB3, 0, GumpButtonType.Reply, 0 );
+			AddButton( 260, 240, 0xFB1, 0xFB3, 500, GumpButtonType.Reply, 0 );
 			AddLabel( 256, 260, 52, "Cancel" );
 
 			AddButton( 230, 320, 5603, 5607, 0, GumpButtonType.Page, 5 );
@@ -298,8 +297,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, 4 + (i * 2), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, 5 + (i * 2), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (75 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (165 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -319,13 +318,13 @@ namespace Server.Mobiles
 
 		}
 
-		public List<string> CreateArray( RelayInfo info, Mobile from )
+		public List<string> CreateArray( RelayInfo info, Mobile from, int TextIndex )
 		{
 			List<string> creaturesName = new List<string>();
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				TextRelay te = info.GetTextEntry( 100 + i );
+				TextRelay te = info.GetTextEntry( TextIndex + i );
 
 				if ( te != null )
 				{
@@ -350,161 +349,6 @@ namespace Server.Mobiles
 			return creaturesName;
 		}
 
-		public List<string> CreateArrayA( RelayInfo info, Mobile from )
-		{
-			List<string> creatureNameAA = new List<string>();
-
-			for ( int i = 0;  i < 15; i++ )
-			{
-				TextRelay te = info.GetTextEntry( 200 + i );
-
-				if ( te != null )
-				{
-					string str = te.Text;
-
-					if ( str.Length > 0 )
-					{
-						str = str.Trim();
-
-						string t = Spawner.ParseType( str );
-
-						Type type = ScriptCompiler.FindTypeByName( t );
-
-						if ( type != null )
-							creatureNameAA.Add( str );
-						else
-							from.SendMessage( "{0} is not a valid type name.", t );
-					}
-				}
-			}
-
-			return creatureNameAA;
-		}
-
-		public List<string> CreateArrayB( RelayInfo info, Mobile from )
-		{
-			List<string> creatureNameBB = new List<string>();
-
-			for ( int i = 0;  i < 15; i++ )
-			{
-				TextRelay te = info.GetTextEntry( 300 + i );
-
-				if ( te != null )
-				{
-					string str = te.Text;
-
-					if ( str.Length > 0 )
-					{
-						str = str.Trim();
-
-						string t = Spawner.ParseType( str );
-
-						Type type = ScriptCompiler.FindTypeByName( t );
-
-						if ( type != null )
-							creatureNameBB.Add( str );
-						else
-							from.SendMessage( "{0} is not a valid type name.", t );
-					}
-				}
-			}
-
-			return creatureNameBB;
-		}
-
-		public List<string> CreateArrayC( RelayInfo info, Mobile from )
-		{
-			List<string> creatureNameCC = new List<string>();
-
-			for ( int i = 0;  i < 15; i++ )
-			{
-				TextRelay te = info.GetTextEntry( 400 + i );
-
-				if ( te != null )
-				{
-					string str = te.Text;
-
-					if ( str.Length > 0 )
-					{
-						str = str.Trim();
-
-						string t = Spawner.ParseType( str );
-
-						Type type = ScriptCompiler.FindTypeByName( t );
-
-						if ( type != null )
-							creatureNameCC.Add( str );
-						else
-							from.SendMessage( "{0} is not a valid type name.", t );
-					}
-				}
-			}
-
-			return creatureNameCC;
-		}
-
-		public List<string> CreateArrayD( RelayInfo info, Mobile from )
-		{
-			List<string> creatureNameDD = new List<string>();
-
-			for ( int i = 0;  i < 15; i++ )
-			{
-				TextRelay te = info.GetTextEntry( 500 + i );
-
-				if ( te != null )
-				{
-					string str = te.Text;
-
-					if ( str.Length > 0 )
-					{
-						str = str.Trim();
-
-						string t = Spawner.ParseType( str );
-
-						Type type = ScriptCompiler.FindTypeByName( t );
-
-						if ( type != null )
-							creatureNameDD.Add( str );
-						else
-							from.SendMessage( "{0} is not a valid type name.", t );
-					}
-				}
-			}
-
-			return creatureNameDD;
-		}
-
-		public List<string> CreateArrayE( RelayInfo info, Mobile from )
-		{
-			List<string> creatureNameEE = new List<string>();
-
-			for ( int i = 0;  i < 15; i++ )
-			{
-				TextRelay te = info.GetTextEntry( 600 + i );
-
-				if ( te != null )
-				{
-					string str = te.Text;
-
-					if ( str.Length > 0 )
-					{
-						str = str.Trim();
-
-						string t = Spawner.ParseType( str );
-
-						Type type = ScriptCompiler.FindTypeByName( t );
-
-						if ( type != null )
-							creatureNameEE.Add( str );
-						else
-							from.SendMessage( "{0} is not a valid type name.", t );
-					}
-				}
-			}
-
-			return creatureNameEE;
-		}
-
 		public override void OnResponse( NetState state, RelayInfo info )
 		{
 			if ( m_Spawner.Deleted )
@@ -512,80 +356,126 @@ namespace Server.Mobiles
 
 			switch ( info.ButtonID )
 			{
-				case 0: // Closed
-				{
-					break;
-				}
-				case 100: // Okay
-				{
-					m_Spawner.CreaturesName = CreateArray( info, state.Mobile );
-					break;
-				}
-				case 101: // Okay
-				{
-					m_Spawner.SubSpawnerA = CreateArrayA( info, state.Mobile );
-					break;
-				}
-				case 102: // Okay
-				{
-					m_Spawner.SubSpawnerB = CreateArrayB( info, state.Mobile );
-					break;
-				}
-				case 103: // Okay
-				{
-					m_Spawner.SubSpawnerC = CreateArrayC( info, state.Mobile );
-					break;
-				}
-				case 104: // Okay
-				{
-					m_Spawner.SubSpawnerD = CreateArrayD( info, state.Mobile );
-					break;
-				}
-				case 105: // Okay
-				{
-					m_Spawner.SubSpawnerE = CreateArrayE( info, state.Mobile );
-					break;
-				}
 				case 200: // Bring everything home
 				{
 					m_Spawner.BringToHome();
-
 					break;
 				}
 				case 300: // Complete respawn
 				{
 					m_Spawner.Respawn();
-
 					break;
 				}
 				case 400: // Props
 				{
 					state.Mobile.SendGump( new PropertiesGump( state.Mobile, m_Spawner ) );
 					state.Mobile.SendGump( new PremiumSpawnerGump( m_Spawner ) );
-
+					break;
+				}
+				case 500: // Cancel
+				{
+					break;
+				}
+				case 1001: // Okay
+				{
+					m_Spawner.CreaturesName = CreateArray( info, state.Mobile, 100 );
+					break;
+				}
+				case 1002: // Okay
+				{
+					m_Spawner.SubSpawnerA = CreateArray( info, state.Mobile, 200 );
+					break;
+				}
+				case 1003: // Okay
+				{
+					m_Spawner.SubSpawnerB = CreateArray( info, state.Mobile, 300 );
+					break;
+				}
+				case 1004: // Okay
+				{
+					m_Spawner.SubSpawnerC = CreateArray( info, state.Mobile, 400 );
+					break;
+				}
+				case 1005: // Okay
+				{
+					m_Spawner.SubSpawnerD = CreateArray( info, state.Mobile, 500 );
+					break;
+				}
+				case 1006: // Okay
+				{
+					m_Spawner.SubSpawnerE = CreateArray( info, state.Mobile, 600 );
 					break;
 				}
 				default:
-				{
-					int buttonID = info.ButtonID - 4;
-					int index = buttonID / 2;
-					int type = buttonID % 2;
+				{ //ButtonID: 1-90 spawn; 91-180 remove
+					int buttonID = info.ButtonID;
+					
+					int Type = 0;
+					
+					// Choose the right TextEntry number
+					if ( (buttonID >= 1) && (buttonID <= 15) )
+						Type += 100 + buttonID;
+					else if ( (buttonID >= 16) && (buttonID <= 30) )
+						Type += 200 + buttonID - 15;
+					else if ( (buttonID >= 31) && (buttonID <= 45) )
+						Type += 300 + buttonID - 30;
+					else if ( (buttonID >= 46) && (buttonID <= 60) )
+						Type += 400 + buttonID - 45;
+					else if ( (buttonID >= 61) && (buttonID <= 75) )
+						Type += 500 + buttonID - 60;
+					else if ( (buttonID >= 76) && (buttonID <= 90) )
+						Type += 600 + buttonID - 75;
+					// Remove creature
+					else if ( (buttonID >= 91) && (buttonID <= 105) )
+						Type += 100 + buttonID - 90;
+					else if ( (buttonID >= 106) && (buttonID <= 120) )
+						Type += 200 + buttonID - 105;
+					else if ( (buttonID >= 121) && (buttonID <= 135) )
+						Type += 300 + buttonID - 120;
+					else if ( (buttonID >= 136) && (buttonID <= 150) )
+						Type += 400 + buttonID - 135;
+					else if ( (buttonID >= 151) && (buttonID <= 165) )
+						Type += 500 + buttonID - 150;
+					else if ( (buttonID >= 166) && (buttonID <= 180) )
+						Type += 600 + buttonID - 165;
 
-					TextRelay entry = info.GetTextEntry( index );
-
+					TextRelay entry = info.GetTextEntry( Type );
+					
 					if ( entry != null && entry.Text.Length > 0 )
 					{
-						if ( type == 0 ) // Spawn creature
+						// Spawn creature
+						if ( (buttonID >= 1) && (buttonID <= 15) )
 							m_Spawner.Spawn( entry.Text );
-						else // Remove creatures
+						else if ( (buttonID >= 16) && (buttonID <= 30) )
+							m_Spawner.SpawnA( entry.Text );
+						else if ( (buttonID >= 31) && (buttonID <= 45) )
+							m_Spawner.SpawnB( entry.Text );
+						else if ( (buttonID >= 46) && (buttonID <= 60) )
+							m_Spawner.SpawnC( entry.Text );
+						else if ( (buttonID >= 61) && (buttonID <= 75) )
+							m_Spawner.SpawnD( entry.Text );
+						else if ( (buttonID >= 76) && (buttonID <= 90) )
+							m_Spawner.SpawnE( entry.Text );
+						// Remove creature
+						else if ( (buttonID >= 91) && (buttonID <= 105) )
 							m_Spawner.RemoveCreatures( entry.Text );
+						else if ( (buttonID >= 106) && (buttonID <= 120) )
+							m_Spawner.RemoveCreaturesA( entry.Text );
+						else if ( (buttonID >= 121) && (buttonID <= 135) )
+							m_Spawner.RemoveCreaturesB( entry.Text );
+						else if ( (buttonID >= 136) && (buttonID <= 150) )
+							m_Spawner.RemoveCreaturesC( entry.Text );
+						else if ( (buttonID >= 151) && (buttonID <= 165) )
+							m_Spawner.RemoveCreaturesD( entry.Text );
+						else if ( (buttonID >= 166) && (buttonID <= 180) )
+							m_Spawner.RemoveCreaturesE( entry.Text );
 
-						m_Spawner.CreaturesName = CreateArray( info, state.Mobile );
-						m_Spawner.SubSpawnerA = CreateArrayA( info, state.Mobile );
-						m_Spawner.SubSpawnerB = CreateArrayB( info, state.Mobile );
-						m_Spawner.SubSpawnerC = CreateArrayC( info, state.Mobile );
-						m_Spawner.SubSpawnerD = CreateArrayD( info, state.Mobile );
-						m_Spawner.SubSpawnerE = CreateArrayE( info, state.Mobile );
+						m_Spawner.CreaturesName = CreateArray( info, state.Mobile, 100 );
+						m_Spawner.SubSpawnerA = CreateArray( info, state.Mobile, 200 );
+						m_Spawner.SubSpawnerB = CreateArray( info, state.Mobile, 300 );
+						m_Spawner.SubSpawnerC = CreateArray( info, state.Mobile, 400 );
+						m_Spawner.SubSpawnerD = CreateArray( info, state.Mobile, 500 );
+						m_Spawner.SubSpawnerE = CreateArray( info, state.Mobile, 600 );
 					}
 
 					break;
