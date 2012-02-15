@@ -1,4 +1,4 @@
-//Engine r1
+//Engine r73
 using System;
 using System.Collections;
 using Server.Network;
@@ -52,8 +52,8 @@ namespace Server.Mobiles
 			for ( int i = 0;  i < 15; i++ )
 			{
 				// AddButton ( x, y, image, imageOnClick, ButtonID )
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (0 + i), GumpButtonType.Reply, 0 ); // > (spawn this creature)
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (90 + i), GumpButtonType.Reply, 0 ); // X (remove this creature)
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (1 + i), GumpButtonType.Reply, 0 ); // > (spawn this creature)
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (91 + i), GumpButtonType.Reply, 0 ); // X (remove this creature)
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -68,7 +68,7 @@ namespace Server.Mobiles
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
 
-				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 100 + i, str );
+				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 101 + i, str );
 			}
 
 			AddPage( 2 );
@@ -101,8 +101,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (15 + i), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (105 + i), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (16 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (106 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -117,7 +117,7 @@ namespace Server.Mobiles
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
 
-				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 200 + i, str );
+				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 201 + i, str );
 			}
 
 			AddPage( 3 );
@@ -150,8 +150,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (30 + i), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (120 + i), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (31 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (121 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -166,7 +166,7 @@ namespace Server.Mobiles
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
 
-				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 300 + i, str );
+				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 301 + i, str );
 			}
 
 			AddPage( 4 );
@@ -199,8 +199,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (45 + i), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (135 + i), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (46 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (136 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -215,7 +215,7 @@ namespace Server.Mobiles
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
 
-				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 400 + i, str );
+				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 401 + i, str );
 			}
 
 			AddPage( 5 );
@@ -248,8 +248,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (60 + i), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (150 + i), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (61 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (151 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -264,7 +264,7 @@ namespace Server.Mobiles
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
 
-				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 500 + i, str );
+				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 501 + i, str );
 			}
 
 			AddPage( 6 );
@@ -297,8 +297,8 @@ namespace Server.Mobiles
 
 			for ( int i = 0;  i < 15; i++ )
 			{
-				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (75 + i), GumpButtonType.Reply, 0 );
-				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (165 + i), GumpButtonType.Reply, 0 );
+				AddButton( 5, ( 22 * i ) + 20, 0xFA5, 0xFA7, (76 + i), GumpButtonType.Reply, 0 );
+				AddButton( 38, ( 22 * i ) + 20, 0xFA2, 0xFA4, (166 + i), GumpButtonType.Reply, 0 );
 
 				AddImageTiled( 71, ( 22 * i ) + 20, 119, 23, 0xA40 );
 				AddImageTiled( 72, ( 22 * i ) + 21, 117, 21, 0xBBC );
@@ -313,7 +313,7 @@ namespace Server.Mobiles
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
 
-				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 600 + i, str );
+				AddTextEntry( 75, ( 22 * i ) + 21, 114, 21, 0, 601 + i, str );
 			}
 
 		}
@@ -348,6 +348,12 @@ namespace Server.Mobiles
 
 			return creaturesName;
 		}
+		
+		public string GetEntry( int Type, RelayInfo info )
+		{
+			TextRelay entry = info.GetTextEntry( Type );
+			return entry.Text;
+		}
 
 		public override void OnResponse( NetState state, RelayInfo info )
 		{
@@ -356,6 +362,10 @@ namespace Server.Mobiles
 
 			switch ( info.ButtonID )
 			{
+				case 0: // Cancel (mouse's right button click anywhere on the gump)
+				{
+					break;
+				}
 				case 200: // Bring everything home
 				{
 					m_Spawner.BringToHome();
@@ -372,7 +382,7 @@ namespace Server.Mobiles
 					state.Mobile.SendGump( new PremiumSpawnerGump( m_Spawner ) );
 					break;
 				}
-				case 500: // Cancel
+				case 500: // Cancel (button "Cancel")
 				{
 					break;
 				}
@@ -408,68 +418,77 @@ namespace Server.Mobiles
 				}
 				default:
 				{ //ButtonID: 1-90 spawn; 91-180 remove
-					int buttonID = info.ButtonID;
+					int ID = info.ButtonID;
 					
 					int Type = 0;
 					
-					// Choose the right TextEntry number
-					if ( (buttonID >= 1) && (buttonID <= 15) )
-						Type += 100 + buttonID;
-					else if ( (buttonID >= 16) && (buttonID <= 30) )
-						Type += 200 + buttonID - 15;
-					else if ( (buttonID >= 31) && (buttonID <= 45) )
-						Type += 300 + buttonID - 30;
-					else if ( (buttonID >= 46) && (buttonID <= 60) )
-						Type += 400 + buttonID - 45;
-					else if ( (buttonID >= 61) && (buttonID <= 75) )
-						Type += 500 + buttonID - 60;
-					else if ( (buttonID >= 76) && (buttonID <= 90) )
-						Type += 600 + buttonID - 75;
-					// Remove creature
-					else if ( (buttonID >= 91) && (buttonID <= 105) )
-						Type += 100 + buttonID - 90;
-					else if ( (buttonID >= 106) && (buttonID <= 120) )
-						Type += 200 + buttonID - 105;
-					else if ( (buttonID >= 121) && (buttonID <= 135) )
-						Type += 300 + buttonID - 120;
-					else if ( (buttonID >= 136) && (buttonID <= 150) )
-						Type += 400 + buttonID - 135;
-					else if ( (buttonID >= 151) && (buttonID <= 165) )
-						Type += 500 + buttonID - 150;
-					else if ( (buttonID >= 166) && (buttonID <= 180) )
-						Type += 600 + buttonID - 165;
-
-					TextRelay entry = info.GetTextEntry( Type );
-					
-					if ( entry != null && entry.Text.Length > 0 )
+					// Spawn creature
+					if ( (ID >= 1) && (ID <= 15) )
 					{
-						// Spawn creature
-						if ( (buttonID >= 1) && (buttonID <= 15) )
-							m_Spawner.Spawn( entry.Text );
-						else if ( (buttonID >= 16) && (buttonID <= 30) )
-							m_Spawner.SpawnA( entry.Text );
-						else if ( (buttonID >= 31) && (buttonID <= 45) )
-							m_Spawner.SpawnB( entry.Text );
-						else if ( (buttonID >= 46) && (buttonID <= 60) )
-							m_Spawner.SpawnC( entry.Text );
-						else if ( (buttonID >= 61) && (buttonID <= 75) )
-							m_Spawner.SpawnD( entry.Text );
-						else if ( (buttonID >= 76) && (buttonID <= 90) )
-							m_Spawner.SpawnE( entry.Text );
-						// Remove creature
-						else if ( (buttonID >= 91) && (buttonID <= 105) )
-							m_Spawner.RemoveCreatures( entry.Text );
-						else if ( (buttonID >= 106) && (buttonID <= 120) )
-							m_Spawner.RemoveCreaturesA( entry.Text );
-						else if ( (buttonID >= 121) && (buttonID <= 135) )
-							m_Spawner.RemoveCreaturesB( entry.Text );
-						else if ( (buttonID >= 136) && (buttonID <= 150) )
-							m_Spawner.RemoveCreaturesC( entry.Text );
-						else if ( (buttonID >= 151) && (buttonID <= 165) )
-							m_Spawner.RemoveCreaturesD( entry.Text );
-						else if ( (buttonID >= 166) && (buttonID <= 180) )
-							m_Spawner.RemoveCreaturesE( entry.Text );
+						Type += 100 + ID;
+						m_Spawner.Spawn( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 16) && (ID <= 30) )
+					{
+						Type += 200 + ID - 15;
+						m_Spawner.SpawnA( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 31) && (ID <= 45) )
+					{
+						Type += 300 + ID - 30;
+						m_Spawner.SpawnB( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 46) && (ID <= 60) )
+					{
+						Type += 400 + ID - 45;
+						m_Spawner.SpawnC( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 61) && (ID <= 75) )
+					{
+						Type += 500 + ID - 60;
+						m_Spawner.SpawnD( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 76) && (ID <= 90) )
+					{
+						Type += 600 + ID - 75;
+						m_Spawner.SpawnE( GetEntry(Type, info) );
+					}
+					// Remove creature
+					else if ( (ID >= 91) && (ID <= 105) )
+					{
+						Type += 100 + ID - 90;
+						m_Spawner.RemoveCreatures( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 106) && (ID <= 120) )
+					{
+						Type += 200 + ID - 105;
+						m_Spawner.RemoveCreaturesA( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 121) && (ID <= 135) )
+					{
+						Type += 300 + ID - 120;
+						m_Spawner.RemoveCreaturesB( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 136) && (ID <= 150) )
+					{
+						Type += 400 + ID - 135;
+						m_Spawner.RemoveCreaturesC( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 151) && (ID <= 165) )
+					{
+						Type += 500 + ID - 150;
+						m_Spawner.RemoveCreaturesD( GetEntry(Type, info) );
+					}
+					else if ( (ID >= 166) && (ID <= 180) )
+					{
+						Type += 600 + ID - 165;
+						m_Spawner.RemoveCreaturesE( GetEntry(Type, info) );
+					}
 
+					string entry = GetEntry(Type, info);
+					
+					if ( entry != null && entry.Length > 0 )
+					{
 						m_Spawner.CreaturesName = CreateArray( info, state.Mobile, 100 );
 						m_Spawner.SubSpawnerA = CreateArray( info, state.Mobile, 200 );
 						m_Spawner.SubSpawnerB = CreateArray( info, state.Mobile, 300 );
