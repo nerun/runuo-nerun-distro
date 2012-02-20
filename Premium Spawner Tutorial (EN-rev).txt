@@ -594,6 +594,19 @@ SpawnsOverseer 7966
 SpawnsOverseer 7966 (Range=50)
 5433 1102 0
 
+You can change other parameters:
+
+ SpawnsOverseer 7966 (InRangeDelay=30; OutRangeDelay=5)
+ 5433 1102 0
+
+And use all the together:
+
+ SpawnsOverseer 7966 (Range=50; InRangeDelay=30; OutRangeDelay=5)
+ 5433 1102 0
+
+InRangeDelay = time in minutes to next check if players are in range
+
+OutRangeDelay = time in seconds to next check if there is no players in range
 
 >>>>>> ITEMID >>>>>>
 
