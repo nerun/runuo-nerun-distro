@@ -3,7 +3,7 @@
                +-----------------------------------+
 
                                                ------------------------
-					       Última revisão: Set/2011
+					       Última revisão: Fev/2012
                                                ------------------------
 
 	Premium Spawner nasceu como um "mod" do script Ultimate Spawner,
@@ -509,18 +509,112 @@ o tempo de save do jogo, e o tamanho dos arquivos salvos.
 Como funciona:
 Ele tem um "range" (alcance), que pode ser editado por um GM ou superior.
 Ele procura por players dentro deste range a cada vez que o timer zera.
-Se houver um jogador neste raiod e alcance (ou um membro da Staff que não
+Se houver um jogador neste raio de alcance (ou um membro da Staff que não
 esteja oculto) ele verificará por players novamente apenas depois 30 min
 (este tempo pode ser alterado). Se não houver jogadores ao alcance (ou se
 os membros da staff estiverem ao alcance, mas ocultos) ele desabilitará
-todos os PremiumSpawners ao alcance, apagando mobiles e itens, e
-voltará a checar por players a cada 5 segundos.
+todos os PremiumSpawners na área, apagando mobiles e itens, e voltará a
+checar por players a cada 5 segundos.
 
 [GenSeers – gera Overseers lendo arquivos de configuração em
             Data\Monsters\Overseers.
 
+Não há arquivos de configuração para Overseers ainda. Então nada é gerado
+com esse comando ainda. A engine está feita e está funcionando, mas ainda
+precisa de arquivos de configuração para dizer à engine onde colocar os
+overseers.
+
 [RemSeers – remove todos os Overseers.
 
-[add SpawnsOverseer – adiciona um Overseer no mapa, onde você clicar.
 
-PS.: atualmente o arquivo de configuração está vazio.
+>>>>>> ADICIONADO >>>>>>
+	
+Se não há arquivos de configuração, você terá que adicionar OverSeers
+você mesmo, na mão:
+
+[add SpawnsOverseer
+- adicionará um OverSeer com range 20 (área de 40 x 40 quadrados).
+
+[add SpawnsOverseer 50
+- adicionará um OverSeer com range 50 (área de 100 x 100 quadrados).
+
+
+>>>>>> ARQUIVOS DE CONFIGURAÇÃO >>>>>>
+
+Olhe em:
+
+ ...\Data\Monsters\overseers\Trammel\Overseers.cfg
+
+É um arquivo de exemplo:
+
+ SpawnsOverseer 7966
+ 5433 1102 0
+
+É simples: abaixo de "SpawnsOverseer 7966" entre as coordenadas (x,y,z)
+onde você quer que seja colcoado um overseer.
+
+
+>>>>>> RANGES >>>>>>
+
+Você pode colocar ranges diferentes:
+
+ SpawnsOverseer 7966 (Range=50)
+ 5433 1102 0
+
+Lembre-se que s enão especiicado o range padrão é 20.
+
+Range é o alcance da visão do seer (o feitor, o vigia). PremiumSpawners
+dentro deste alcance serão vigiados pelo feitor. você pode colcoar o
+range que quiser, não há limite.
+
+Você pode colocar muitos seers com alcances diferentes:
+
+ SpawnsOverseer 7966
+ 5433 1102 0
+ 1234 970 0
+ 3456 456 0
+
+ SpawnsOverseer 7966 (Range=50)
+ 5433 1102 0
+
+
+>>>>>> ITEMID >>>>>>
+
+Sempre use "SpawnsOverseer 7966", o número é o ItemID dos
+SpawnsOverseers, obrigatório.
+
+
+>>>>>> COMMENTÁRIOS >>>>>>
+
+Use # para adicionar comentários ao arquivo, que não serão lidos pelo
+comando [GenSeers:
+
+ # Esta linha é um comentário.
+ # Use para organizar seus arquivos e anotar
+ # lembretes para si mesmo
+ SpawnsOverseer 7966 (Range=50)
+ 5433 1102 0
+
+
+>>>>>> PASTAS >>>>>>
+
+Coloque os arquivos de coniguração na apsta certa.
+
+Trammel em:
+ ...\Data\Monsters\overseers\Trammel\Overseers.cfg
+
+Felucca em:
+ ...\Data\Monsters\overseers\Felucca\Overseers.cfg
+
+Etc.
+
+
+>>>>>> NOMES DOS ARQUIVOS DE .CFG >>>>>>
+
+Você pode colcoar mais de um arquivo cfg na mesma pasta, não precisam
+ter o nome "Overseers.cfg", eles podemt er qualquer nome, desde que
+termine em .cfg.
+
+Você pode optar por um arquivo "Graveyards.cfg" para todos os
+cemitérios de um dado mapa, e outro "Florests.cfg" para as florestas
+e áreas abertas etc.

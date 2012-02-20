@@ -1,6 +1,6 @@
 /*************************
  *       By Nerun        *
- *      Engine r55       *
+ *      Engine r74       *
  *************************
  */
 
@@ -20,7 +20,7 @@ namespace Server.Items
 		private int m_OutRangeDelay;
 		private CheckTimer m_Timer;
 		private bool m_Enable;
-		private TimeSpan m_CurrentDelay; // players fora da dungeon
+		private TimeSpan m_CurrentDelay; // players out dungeon
 		private DateTime m_End;
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -137,22 +137,22 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public SpawnsOverseer() : base( 7966 )
+		public SpawnsOverseer() : this( 20, 30, 5 )
 		{
-			Name = "Spawns' Overseer";
-			Movable = false;
-			Light = LightType.Circle150;
-			Weight = 1;
-			Visible = false;
-			Enable = true;
-			Range = 20;
-			CurrentDelay = TimeSpan.FromSeconds( 5 );
-			InRangeDelay = 30; //minutes
-			OutRangeDelay = 5; //seconds
+		}
+
+		[Constructable]
+		public SpawnsOverseer( int startrange ) : this( startrange, 30, 5 )
+		{
 		}
 		
 		[Constructable]
-		public SpawnsOverseer( int startrange ) : base( 7966 )
+		public SpawnsOverseer( int startrange, int startIRD, int startORD ) : base( 0x1F1E )
+		{
+			InitSeer( startrange, startIRD, startORD );
+		}
+		
+		private void InitSeer( int startrange, int startIRD, int startORD )
 		{
 			Name = "Spawns' Overseer";
 			Movable = false;
@@ -162,8 +162,8 @@ namespace Server.Items
 			Enable = true;
 			Range = startrange;
 			CurrentDelay = TimeSpan.FromSeconds( 5 );
-			InRangeDelay = 30; //minutes
-			OutRangeDelay = 5; //seconds
+			InRangeDelay = startIRD; //minutes
+			OutRangeDelay = startORD; //seconds
 		}
 
 		public override void GetProperties( ObjectPropertyList list )
