@@ -577,6 +577,22 @@ Você pode colocar muitos seers com alcances diferentes:
  SpawnsOverseer 7966 (Range=50)
  5433 1102 0
 
+Você pode mudar outros parâmetros usando:
+
+ SpawnsOverseer 7966 (InRangeDelay=30; OutRangeDelay=5)
+ 5433 1102 0
+
+E pode combinar todos eles juntos:
+
+ SpawnsOverseer 7966 (Range=50; InRangeDelay=30; OutRangeDelay=5)
+ 5433 1102 0
+
+InRangeDelay = tempo em minutos para a próxima verificação se houver players
+               dentro do range (alcance).
+
+OutRangeDelay = tempo em segundos para a próxima verificação se NÃO
+                houver players dentro do range.
+
 
 >>>>>> ITEMID >>>>>>
 
