@@ -3,7 +3,7 @@
                +----------------------------------+
 
                                         -------------------------------
-					English last revision: Sep/2011
+					English last revision: Fev/2012
                                         -------------------------------
 
 	Premium Spawner project was born as a "mod" of "Ultimate Spawner"
@@ -539,8 +539,90 @@ players every 5 seconds.
 [GenSeers – generates Overseers crystal by reading configuration files
             at Data\Monsters\Overseers.
 
+There is no OverSeers configuration files yet. So it generates no
+OverSeers. The engine is done, it is working, but you need a config file
+to tells the engine where to place OverSeers.
+
 [RemSeers – removes all Overseers.
 
-[add SpawnsOverseer – adds an Overseer crystal.
 
-PS.: there is no Overseers in the configuration files yet.
+>>>>>> ADDING >>>>>>
+
+One option it to add OverSeers yourself, by hand.
+
+[add SpawnsOverseer
+- this will add an OverSeer with range 20 (square of 40 x 40).
+
+[add SpawnsOverseer 50
+- this will add an OverSeer with range 50 (square of 100 x 100).
+
+
+>>>>>> CONFIG FILES >>>>>>
+
+And look at:
+
+...\Data\Monsters\overseers\Trammel\Overseers.cfg
+
+It is an example of OverSeer config file:
+
+SpawnsOverseer 7966
+5433 1102 0
+
+It is simple: bellow "SpawnsOverseer 7966" write coordinates (x,y,z) where
+you want to put them.
+
+
+>>>>>> RANGES >>>>>>
+
+I thin you can write different ranges too, something like this:
+
+SpawnsOverseer 7966 (Range=50)
+5433 1102 0
+
+Remember that default range is 20 if none specified.
+
+Range is the seer's "watching range". PremiumSpawners inside it range will
+be watched by that seer. There is no limit to the range.
+
+You can place many seers with different ranges:
+
+SpawnsOverseer 7966
+5433 1102 0
+1234 970 0
+3456 456 0
+
+SpawnsOverseer 7966 (Range=50)
+5433 1102 0
+
+
+>>>>>> ITEMID >>>>>>
+
+Always use "SpawnsOverseer 7966", the number is the ItemID of
+SpawnsOverseer item.
+
+>>>>>> COMMENTS >>>>>>
+
+Use # to add comments that will not be read by [GenSeers:
+
+# This is a comment line
+SpawnsOverseer 7966 (Range=50)
+5433 1102 0
+
+>>>>>> FOLDERS >>>>>>
+
+Place the CFG file in the right folder.
+
+Trammel:
+...\Data\Monsters\overseers\Trammel\Overseers.cfg
+
+Felucca:
+...\Data\Monsters\overseers\Felucca\Overseers.cfg
+
+etc
+
+>>>>>> .CFG FILE NAME >>>>>>
+
+You can place more then one cfg inside the same folder, and don't
+need to have the name Overseers.cfg. Files can have any name. You
+can do a file "Graveyards.cfg" for all graveyards in a facet. Plus
+another called "Florests.cfg" for florests and open areas etc.
