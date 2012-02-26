@@ -71,7 +71,7 @@ namespace Server.Mobiles
 		}
 		*/
 
-		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		//public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 5; } }
 
 		public MasterJonath( Serial serial )
