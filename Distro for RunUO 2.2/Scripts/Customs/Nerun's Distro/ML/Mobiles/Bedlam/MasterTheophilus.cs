@@ -4,16 +4,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "a master theophilus corpse" )]
-	public class MasterTheophilus : BaseCreature
+	[CorpseName( "a Master Theophilus corpse" )]
+	public class MasterTheophilus : EvilMageLord
 	{
 		[Constructable]
-		public MasterTheophilus() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )//AI_Necromage
+		public MasterTheophilus()
 		{
-			Name = "a master theophilus";
+			Name = "Master Theophilus";
 			Title = "the necromancer";
-			BaseSoundID = 0x1C3;
-			Body = Utility.Random( 0x7D, 1 );
 
 			SetStr( 137, 187 );
 			SetDex( 253, 301 );
@@ -39,54 +37,68 @@ namespace Server.Mobiles
 			SetSkill( SkillName.Necromancy, 125.6, 133.8 );
 			SetSkill( SkillName.SpiritSpeak, 125.6, 133.8 );
 			SetSkill( SkillName.Meditation, 128.8, 132.9 );
-			
+
+			Fame = 18000;
+			Karma = -18000;
+
 			AddItem( new Shoes( 0x537 ) );
 			AddItem( new Robe( 0x452 ) );
-			
-			for ( int i = 0; i < 2; i ++ )
+
+			for ( int i = 0; i < 2; ++i )
+			{
 				if ( Utility.RandomBool() )
 					PackNecroScroll( Utility.RandomMinMax( 5, 9 ) );
 				else
 					PackScroll( 4, 7 );
-				
+			}
+
 			PackReg( 7 );
 			PackReg( 7 );
 			PackReg( 8 );
 		}
-		
+
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.AosUltraRich, 4 );
 		}
-		
+
+		public override WeaponAbility GetWeaponAbility()
+		{
+			return WeaponAbility.ParalyzingBlow;
+		}
+
+		/*
+		// TODO: Needs verification
 		public override void OnDeath( Container c )
 		{
-			base.OnDeath( c );		
-			
+			base.OnDeath( c );
+
 			if ( Paragon.ChestChance > Utility.RandomDouble() )
 				c.DropItem( new ParagonChest( Name, TreasureMapLevel ) );
 		}
-		
-//OFF		public override bool GivesMinorArtifact{ get{ return true; } }
+		*/
+
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool AlwaysMurderer{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 5; } }
-	
-		public MasterTheophilus( Serial serial ) : base( serial )
+
+		public MasterTheophilus( Serial serial )
+			: base( serial )
 		{
 		}
 
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			
+
 			writer.Write( (int) 0 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
-			
+
 			int version = reader.ReadInt();
 		}
 	}
 }
-

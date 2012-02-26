@@ -4,17 +4,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "a master jonath corpse" )]
-	public class MasterJonath : BaseCreature
+	[CorpseName( "a Master Jonath corpse" )]
+	public class MasterJonath : BoneMagi
 	{
 		[Constructable]
-		public MasterJonath() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 ) // AI_Necromage
+		public MasterJonath()
 		{
-			Name = "a master jonath";
-			Title = "the necromancer";
-			BaseSoundID = 0x1C3;
-			Hue = 0x497;
-			Body = Utility.Random( 0x7D, 1 );
+			Name = "Master Jonath";
+			Hue = 0x455;
 
 			SetStr( 109, 131 );
 			SetDex( 98, 110 );
@@ -39,54 +36,61 @@ namespace Server.Mobiles
 			SetSkill( SkillName.EvalInt, 99.6, 106.9 );
 			SetSkill( SkillName.Necromancy, 100.0, 106.6 );
 			SetSkill( SkillName.SpiritSpeak, 99.6, 106.9 );
-			
+
+			Fame = 18000;
+			Karma = -18000;
+
 			if ( Utility.RandomBool() )
 				PackNecroScroll( Utility.RandomMinMax( 5, 9 ) );
 			else
 				PackScroll( 4, 7 );
-				
+
 			PackReg( 7 );
 			PackReg( 7 );
 			PackReg( 8 );
 		}
-		
+
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.AosUltraRich, 4 );
 		}
-		
+
+		// TODO: Special move?
+
+		/*
+		// TODO: uncomment once added
 		public override void OnDeath( Container c )
 		{
-			base.OnDeath( c );		
-/*
-			if ( Utility.RandomDouble() < 0.05 )				
+			base.OnDeath( c );
+
+			if ( Utility.RandomDouble() < 0.05 )
 				c.DropItem( new ParrotItem() );
 
 			if ( Utility.RandomDouble() < 0.15 )
 				c.DropItem( new DisintegratingThesisNotes() );
-*/
 		}
-		
-//OFF		public override bool GivesMinorArtifact{ get{ return true; } }
+		*/
+
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 5; } }
-	
-		public MasterJonath( Serial serial ) : base( serial )
+
+		public MasterJonath( Serial serial )
+			: base( serial )
 		{
 		}
 
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			
+
 			writer.Write( (int) 0 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
-			
+
 			int version = reader.ReadInt();
 		}
 	}
 }
-
