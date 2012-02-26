@@ -4,16 +4,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "a master mikael corpse" )]
-	public class MasterMikael : BaseCreature
+	[CorpseName( "a Master Mikael corpse" )]
+	public class MasterMikael : BoneMagi
 	{
 		[Constructable]
-		public MasterMikael() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.015, 0.075 ) //AI_Necromage
+		public MasterMikael()
 		{
-			Name = "a master mikael";
+			Name = "Master Mikael";
 			Hue = 0x8FD;
-			Body = 0x94;
-			BaseSoundID = 0x1C3;
 
 			SetStr( 93, 122 );
 			SetDex( 91, 100 );
@@ -38,52 +36,59 @@ namespace Server.Mobiles
 			SetSkill( SkillName.EvalInt, 96.1, 105.3 );
 			SetSkill( SkillName.Necromancy, 103.8, 108.0 );
 			SetSkill( SkillName.SpiritSpeak, 96.1, 105.3 );
-			
+
+			Fame = 18000;
+			Karma = -18000;
+
 			if ( Utility.RandomBool() )
 				PackNecroScroll( Utility.RandomMinMax( 5, 9 ) );
 			else
 				PackScroll( 4, 7 );
-				
+
 			PackReg( 3 );
 			PackNecroReg( 1, 10 );
 		}
-		
+
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.AosUltraRich, 3 );
 		}
-		
+
+		// TODO: Special move?
+
+		/*
+		// TODO: uncomment once added
 		public override void OnDeath( Container c )
 		{
-			base.OnDeath( c );		
-/*
+			base.OnDeath( c );
+
 			if ( Utility.RandomDouble() < 0.15 )
 				c.DropItem( new DisintegratingThesisNotes() );
 
 			if ( Utility.RandomDouble() < 0.1 )
 				c.DropItem( new ParrotItem() );
-*/
 		}
-		
-//OFF		public override bool GivesMinorArtifact{ get{ return true; } }
-	
-		public MasterMikael( Serial serial ) : base( serial )
+		*/
+
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
+
+		public MasterMikael( Serial serial )
+			: base( serial )
 		{
 		}
 
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			
+
 			writer.Write( (int) 0 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
-			
+
 			int version = reader.ReadInt();
 		}
 	}
 }
-

@@ -1,20 +1,18 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using Server;
 using Server.Items;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "a lady jennifyr corpse" )]
-	public class LadyJennifyr : BaseCreature
+	[CorpseName( "a Lady Jennifyr corpse" )]
+	public class LadyJennifyr : SkeletalKnight
 	{
 		[Constructable]
-		public LadyJennifyr() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.015, 0.075 )
+		public LadyJennifyr()
 		{
-			Name = "a lady jennifyr";
+			Name = "Lady Jennifyr";
 			Hue = 0x76D;
-			Body = 0x93;
-			BaseSoundID = 0x1C3;
 
 			SetStr( 208, 309 );
 			SetDex( 91, 118 );
@@ -37,82 +35,102 @@ namespace Server.Mobiles
 			SetSkill( SkillName.Tactics, 128.4, 141.9 );
 			SetSkill( SkillName.MagicResist, 102.1, 119.5 );
 			SetSkill( SkillName.Anatomy, 129.0, 137.5 );
-			
-			AddItem( new PlateLegs() );
+
+			Fame = 18000;
+			Karma = -18000;
 		}
-		
+
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.AosUltraRich, 4 );
 		}
-		
+
 		public override void OnGaveMeleeAttack( Mobile defender )
 		{
 			base.OnGaveMeleeAttack( defender );
-			
-			if ( m_Table == null )
-				m_Table = new Hashtable();
-		
-			if ( Combatant != null && m_Table[ Combatant ] == null )
+
+			if ( Utility.RandomDouble() < 0.1 )
 			{
+				ExpireTimer timer;
+
+				if ( m_Table.TryGetValue( defender, out timer ) )
+					timer.DoExpire();
+
+				defender.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot );
+				defender.PlaySound( 0x208 );
+				defender.SendLocalizedMessage( 1070833 ); // The creature fans you with fire, reducing your resistance to fire attacks.
+
 				ResistanceMod mod = new ResistanceMod( ResistanceType.Fire, -10 );
-				Combatant.AddResistanceMod( mod );
-				m_Table[ Combatant ] = mod;
-				Timer.DelayCall( TimeSpan.FromSeconds( 30 ), new TimerStateCallback( EndMod_Callback ), Combatant );
+				defender.AddResistanceMod( mod );
+
+				m_Table[defender] = timer = new ExpireTimer( defender, mod );
+				timer.Start();
 			}
 		}
-		
+
+		private static Dictionary<Mobile, ExpireTimer> m_Table = new Dictionary<Mobile, ExpireTimer>();
+
+		private class ExpireTimer : Timer
+		{
+			private Mobile m_Mobile;
+			private ResistanceMod m_Mod;
+
+			public ExpireTimer( Mobile m, ResistanceMod mod )
+				: base( TimeSpan.FromSeconds( 10 ) )
+			{
+				m_Mobile = m;
+				m_Mod = mod;
+				Priority = TimerPriority.TwoFiftyMS;
+			}
+
+			public void DoExpire()
+			{
+				m_Mobile.RemoveResistanceMod( m_Mod );
+
+				Stop();
+				m_Table.Remove( m_Mobile );
+			}
+
+			protected override void OnTick()
+			{
+				m_Mobile.SendLocalizedMessage( 1070834 ); // Your resistance to fire attacks has returned.
+				DoExpire();
+			}
+		}
+
+		/*
+		// TODO: Uncomment once added
 		public override void OnDeath( Container c )
 		{
-			base.OnDeath( c );		
-/*
+			base.OnDeath( c );
+
 			if ( Utility.RandomDouble() < 0.15 )
 				c.DropItem( new DisintegratingThesisNotes() );
 
 			if ( Utility.RandomDouble() < 0.1 )
 				c.DropItem( new ParrotItem() );
-*/
 		}
-		
-//OFF		public override bool GivesMinorArtifact{ get{ return true; } }
-	
-		public LadyJennifyr( Serial serial ) : base( serial )
+		*/
+
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
+
+		public LadyJennifyr( Serial serial )
+			: base( serial )
 		{
-		}
-		
-		private static Hashtable m_Table;
-		
-		private void EndMod_Callback( object state )
-		{
-			if ( state is Mobile )
-				RemoveResistanceMod( (Mobile) state );
-		}
-		
-		public virtual void RemoveResistanceMod( Mobile from )
-		{			
-			if ( m_Table == null )
-				m_Table = new Hashtable();
-				
-			if ( m_Table[ from ] != null )
-			{
-				from.RemoveResistanceMod( (ResistanceMod) m_Table[ from ] );
-				m_Table[ from ] = null;
-			}
 		}
 
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
-			
+
 			writer.Write( (int) 0 ); // version
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
-			
+
 			int version = reader.ReadInt();
 		}
 	}
 }
-
