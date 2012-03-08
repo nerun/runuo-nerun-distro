@@ -62,6 +62,9 @@ namespace Server.Mobiles
 			//PackArcaneScroll( 0, 1 );
 		}
 
+		public override bool ShowFameTitle{ get{ return false; } }
+		public override bool InitialInnocent{ get{ return ( m_MorphedInto != null ); } }
+
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.AosRich, 3 );
@@ -77,12 +80,12 @@ namespace Server.Mobiles
 			get { return m_MorphedInto; }
 			set
 			{
+				if ( value == this )
+					value = null;
+
 				if ( m_MorphedInto != value )
 				{
 					Revert();
-
-					if ( value == this )
-						value = null;
 
 					if ( value != null )
 					{
@@ -91,6 +94,7 @@ namespace Server.Mobiles
 					}
 
 					m_MorphedInto = value;
+					Delta( MobileDelta.Noto );
 				}
 			}
 		}
