@@ -10,6 +10,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public Lurg()
 		{
+			IsParagon = true;
+
 			Name = "Lurg";
 			Hue = 0x455;
 
@@ -39,16 +41,11 @@ namespace Server.Mobiles
 
 			Fame = 10000;
 			Karma = -10000;
-
-			/*
-			if ( Paragon.ChestChance > Utility.RandomDouble() ) // TODO: Needs verification
-				PackItem( new ParagonChest( Name, TreasureMapLevel ) );
-			*/
 		}
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 3 );
+			AddLoot( LootPack.UltraRich, 2 );
 		}
 
 		public override WeaponAbility GetWeaponAbility()
@@ -56,7 +53,7 @@ namespace Server.Mobiles
 			return WeaponAbility.CrushingBlow;
 		}
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 4; } }
 
 		public Lurg( Serial serial )

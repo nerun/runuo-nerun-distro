@@ -13,6 +13,10 @@ namespace Server.Mobiles
 		[Constructable]
 		public Spite()
 		{
+			IsParagon = true;
+
+			Hue = DefaultHue;
+
 			SetStr( 53, 214 );
 			SetDex( 243, 367 );
 			SetInt( 369, 586 );
@@ -44,10 +48,10 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 3 );
+			AddLoot( LootPack.UltraRich, 2 );
 		}
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public Spite( Serial serial )
 			: base( serial )

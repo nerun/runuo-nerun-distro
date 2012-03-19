@@ -10,6 +10,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public MasterMikael()
 		{
+			IsParagon = true;
+
 			Name = "Master Mikael";
 			Hue = 0x8FD;
 
@@ -51,7 +53,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 3 );
+			AddLoot( LootPack.UltraRich, 2 );
 		}
 
 		// TODO: Special move?
@@ -70,7 +72,7 @@ namespace Server.Mobiles
 		}
 		*/
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public MasterMikael( Serial serial )
 			: base( serial )

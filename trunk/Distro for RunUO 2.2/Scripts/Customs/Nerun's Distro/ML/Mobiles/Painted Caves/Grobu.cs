@@ -10,6 +10,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public Grobu()
 		{
+			IsParagon = true;
+
 			Name = "Grobu";
 			Hue = 0x455;
 
@@ -40,13 +42,11 @@ namespace Server.Mobiles
 
 			Fame = 1000;
 			Karma = 1000;
-
-			Tamable = false;
 		}
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosFilthyRich, 3 );
+			AddLoot( LootPack.FilthyRich, 2 );
 		}
 
 		/*
@@ -59,7 +59,7 @@ namespace Server.Mobiles
 		}
 		*/
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public Grobu( Serial serial )
 			: base( serial )

@@ -10,6 +10,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public Gnaw()
 		{
+			IsParagon = true;
+
 			Name = "Gnaw";
 			Hue = 0x130;
 
@@ -37,16 +39,14 @@ namespace Server.Mobiles
 
 			Fame = 17500;
 			Karma = -17500;
-
-			Tamable = false;
 		}
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosFilthyRich, 3 );
+			AddLoot( LootPack.FilthyRich, 2 );
 		}
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int Hides{ get{ return 28; } }
 		public override int Meat{ get{ return 4; } }
 
