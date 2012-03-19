@@ -53,7 +53,7 @@ namespace Server.Mobiles
 			return WeaponAbility.ParalyzingBlow;
 		}
 
-		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		//public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public Silk( Serial serial )
 			: base( serial )

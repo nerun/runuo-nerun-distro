@@ -46,7 +46,7 @@ namespace Server.Mobiles
 
 		// TODO: Angry fire
 
-		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		//public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public override void GenerateLoot()
 		{

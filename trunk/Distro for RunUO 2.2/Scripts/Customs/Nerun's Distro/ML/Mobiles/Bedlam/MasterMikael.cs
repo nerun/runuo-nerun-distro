@@ -72,7 +72,7 @@ namespace Server.Mobiles
 		}
 		*/
 
-		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		//public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public MasterMikael( Serial serial )
 			: base( serial )

@@ -42,7 +42,7 @@ namespace Server.Mobiles
 			Karma = 0;
 
 			PackReg( 4 );
-			PackArcaneScroll( 0, 1 );
+			//PackArcaneScroll( 0, 1 );
 		}
 
 		public override void GenerateLoot()
@@ -109,7 +109,7 @@ namespace Server.Mobiles
 			}
 		}
 
-		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		//public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int Feathers{ get{ return 72; } }
 
 		/*
