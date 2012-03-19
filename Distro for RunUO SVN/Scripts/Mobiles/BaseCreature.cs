@@ -1,4 +1,4 @@
-// Nerun's Distro changes at lines 51-3; 2265-77.
+// Nerun's Distro changes at lines 51-3; 2268-80.
 using System;
 using System.Collections.Generic;
 using Server.Regions;
@@ -719,7 +719,7 @@ namespace Server.Mobiles
 		#endregion
 
 		#region Flee!!!
-		public virtual bool CanFlee{ get{ return ( !m_Paragon && !GivesMLMinorArtifact ); } }
+		public virtual bool CanFlee{ get{ return !m_Paragon; } }
 
 		private DateTime m_EndFlee;
 
@@ -884,7 +884,7 @@ namespace Server.Mobiles
 
 		public override string ApplyNameSuffix( string suffix )
 		{
-			if ( IsParagon )
+			if ( IsParagon && !GivesMLMinorArtifact )
 			{
 				if ( suffix.Length == 0 )
 					suffix = "(Paragon)";
@@ -1092,7 +1092,10 @@ namespace Server.Mobiles
 			if ( base.CheckPoisonImmunity( from, poison ) )
 				return true;
 
-			Poison p = this.PoisonImmune;
+			Poison p = PoisonImmune;
+
+			if ( m_Paragon )
+				p = PoisonImpl.IncreaseLevel( p );
 
 			return ( p != null && p.Level >= poison.Level );
 		}
@@ -2797,13 +2800,15 @@ namespace Server.Mobiles
 			if ( m_Paragon )
 				p = PoisonImpl.IncreaseLevel( p );
 
-			if ( p != null && HitPoisonChance >= Utility.RandomDouble() ) {
+			if ( p != null && HitPoisonChance >= Utility.RandomDouble() )
+			{
 				defender.ApplyPoison( this, p );
-				if ( this.Controlled )
-					this.CheckSkill(SkillName.Poisoning, 0, this.Skills[SkillName.Poisoning].Cap);
+
+				if ( Controlled )
+					CheckSkill( SkillName.Poisoning, 0, Skills[SkillName.Poisoning].Cap );
 			}
 
-			if( AutoDispel && defender is BaseCreature && ((BaseCreature)defender).IsDispellable && AutoDispelChance > Utility.RandomDouble() )
+			if ( AutoDispel && defender is BaseCreature && ((BaseCreature)defender).IsDispellable && AutoDispelChance > Utility.RandomDouble() )
 				Dispel( defender );
 		}
 
@@ -4510,13 +4515,18 @@ namespace Server.Mobiles
 
 		public virtual void OnKilledBy( Mobile mob )
 		{
-			if ( m_Paragon && Paragon.CheckArtifactChance( mob, this ) )
-				Paragon.GiveArtifactTo( mob );
-
 			#region Mondain's Legacy
-			if ( GivesMLMinorArtifact && MondainsLegacy.CheckArtifactChance( mob, this ) )
-				MondainsLegacy.GiveArtifactTo( mob );
+			if ( GivesMLMinorArtifact )
+			{
+				if ( MondainsLegacy.CheckArtifactChance( mob, this ) )
+					MondainsLegacy.GiveArtifactTo( mob );
+			}
 			#endregion
+			else if ( m_Paragon )
+			{
+				if ( Paragon.CheckArtifactChance( mob, this ) )
+					Paragon.GiveArtifactTo( mob );
+			}
 		}
 
 		public override void OnDeath( Container c )

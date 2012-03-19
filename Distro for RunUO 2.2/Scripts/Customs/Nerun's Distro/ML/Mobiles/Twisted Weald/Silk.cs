@@ -10,6 +10,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public Silk()
 		{
+			IsParagon = true;
+
 			Name = "Silk";
 			Hue = 0x47E;
 
@@ -43,7 +45,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 3 );
+			AddLoot( LootPack.UltraRich, 2 );
 		}
 
 		public override WeaponAbility GetWeaponAbility()
@@ -51,9 +53,7 @@ namespace Server.Mobiles
 			return WeaponAbility.ParalyzingBlow;
 		}
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
-		public override Poison PoisonImmune{ get{ return Poison.Lethal; } }
-		public override Poison HitPoison{ get{ return Poison.Lethal; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public Silk( Serial serial )
 			: base( serial )

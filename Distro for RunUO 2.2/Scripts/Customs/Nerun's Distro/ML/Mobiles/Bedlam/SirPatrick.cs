@@ -12,6 +12,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public SirPatrick()
 		{
+			IsParagon = true;
+
 			Name = "Sir Patrick";
 			Hue = 0x47E;
 
@@ -43,12 +45,20 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 3 );
+			AddLoot( LootPack.UltraRich, 2 );
 		}
 
 		public override void OnGaveMeleeAttack( Mobile defender )
 		{
 			base.OnGaveMeleeAttack( defender );
+
+			if ( Utility.RandomDouble() < 0.1 )
+				DrainLife();
+		}
+
+		public override void OnGotMeleeAttack( Mobile attacker )
+		{
+			base.OnGotMeleeAttack( attacker );
 
 			if ( Utility.RandomDouble() < 0.1 )
 				DrainLife();
@@ -60,7 +70,7 @@ namespace Server.Mobiles
 
 			foreach ( Mobile m in GetMobilesInRange( 2 ) )
 			{
-				if ( m == this || !CanBeHarmful( m ) )
+				if ( m == this || !CanBeHarmful( m, false ) || ( Core.AOS && !InLOS( m ) ) )
 					continue;
 
 				if ( m is BaseCreature )
@@ -104,7 +114,7 @@ namespace Server.Mobiles
 		}
 		*/
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public SirPatrick( Serial serial )
 			: base( serial )

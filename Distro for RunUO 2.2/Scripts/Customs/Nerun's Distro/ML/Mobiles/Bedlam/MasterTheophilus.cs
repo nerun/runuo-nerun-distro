@@ -10,8 +10,11 @@ namespace Server.Mobiles
 		[Constructable]
 		public MasterTheophilus()
 		{
+			IsParagon = true;
+
 			Name = "Master Theophilus";
 			Title = "the necromancer";
+			Hue = 0;
 
 			SetStr( 137, 187 );
 			SetDex( 253, 301 );
@@ -59,7 +62,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 4 );
+			AddLoot( LootPack.UltraRich, 3 );
 		}
 
 		public override WeaponAbility GetWeaponAbility()
@@ -67,19 +70,7 @@ namespace Server.Mobiles
 			return WeaponAbility.ParalyzingBlow;
 		}
 
-		/*
-		// TODO: Needs verification
-		public override void OnDeath( Container c )
-		{
-			base.OnDeath( c );
-
-			if ( Paragon.ChestChance > Utility.RandomDouble() )
-				c.DropItem( new ParagonChest( Name, TreasureMapLevel ) );
-		}
-		*/
-
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
-		public override bool AlwaysMurderer{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 5; } }
 
 		public MasterTheophilus( Serial serial )

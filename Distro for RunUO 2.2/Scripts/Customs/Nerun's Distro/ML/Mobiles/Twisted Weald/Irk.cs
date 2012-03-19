@@ -13,6 +13,10 @@ namespace Server.Mobiles
 		[Constructable]
 		public Irk()
 		{
+			IsParagon = true;
+
+			Hue = DefaultHue;
+
 			SetStr( 23, 183 );
 			SetDex( 259, 360 );
 			SetInt( 374, 600 );
@@ -42,11 +46,11 @@ namespace Server.Mobiles
 
 		// TODO: Angry fire
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 3 );
+			AddLoot( LootPack.UltraRich, 2 );
 		}
 
 		/*

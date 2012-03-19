@@ -11,6 +11,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public LadyMarai()
 		{
+			IsParagon = true;
+
 			Name = "Lady Marai";
 			Hue = 0x21;
 
@@ -42,7 +44,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 4 );
+			AddLoot( LootPack.UltraRich, 3 );
 		}
 
 		public override WeaponAbility GetWeaponAbility()
@@ -64,7 +66,7 @@ namespace Server.Mobiles
 		}
 		*/
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public LadyMarai( Serial serial )
 			: base( serial )

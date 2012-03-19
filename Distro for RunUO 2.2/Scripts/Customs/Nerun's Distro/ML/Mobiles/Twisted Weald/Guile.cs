@@ -13,6 +13,10 @@ namespace Server.Mobiles
 		[Constructable]
 		public Guile()
 		{
+			IsParagon = true;
+
+			Hue = DefaultHue;
+
 			SetStr( 53, 214 );
 			SetDex( 243, 367 );
 			SetInt( 369, 586 );
@@ -57,11 +61,11 @@ namespace Server.Mobiles
 			}
 		}
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 3 );
+			AddLoot( LootPack.UltraRich, 2 );
 		}
 
 		public Guile( Serial serial )

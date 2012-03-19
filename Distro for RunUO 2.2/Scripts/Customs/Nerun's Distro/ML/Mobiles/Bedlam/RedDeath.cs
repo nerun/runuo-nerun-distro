@@ -11,6 +11,8 @@ namespace Server.Mobiles
 		public RedDeath()
 			: base( "Red Death" )
 		{
+			IsParagon = true;
+
 			Hue = 0x21;
 			BaseSoundID = 0x1C3;
 
@@ -51,7 +53,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 4 );
+			AddLoot( LootPack.UltraRich, 3 );
 		}
 
 		public override WeaponAbility GetWeaponAbility()
@@ -66,10 +68,10 @@ namespace Server.Mobiles
 			c.DropItem( new ResolvesBridle() );
 		}
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override bool AlwaysMurderer{ get{ return true; } }
 		public override bool HasBreath{ get{ return true; } }
-		//public override int BreathChaosDamage{ get { return 100; } }
+		public override int BreathChaosDamage{ get { return 100; } }
 		public override int BreathFireDamage{ get{ return 0; } }
 
 		public RedDeath( Serial serial )

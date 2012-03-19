@@ -13,6 +13,8 @@ namespace Server.Mobiles
 		[Constructable]
 		public Pyre()
 		{
+			IsParagon = true;
+
 			Name = "Pyre";
 			Hue = 0x489;
 
@@ -48,7 +50,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.AosUltraRich, 4 );
+			AddLoot( LootPack.UltraRich, 3 );
 		}
 
 		public override WeaponAbility GetWeaponAbility()
@@ -59,9 +61,9 @@ namespace Server.Mobiles
 				return WeaponAbility.BleedAttack;
 		}
 
-		//public override bool GivesMLMinorArtifact{ get{ return true; } }
+		public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 5; } }
-		//public override bool HasAura{ get{ return true; } }
+		public override bool HasAura{ get{ return true; } }
 
 		public Pyre( Serial serial )
 			: base( serial )
