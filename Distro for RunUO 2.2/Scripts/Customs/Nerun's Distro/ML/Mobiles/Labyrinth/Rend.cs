@@ -55,7 +55,7 @@ namespace Server.Mobiles
 				return WeaponAbility.BleedAttack;
 		}
 
-		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		//public override bool GivesMLMinorArtifact{ get{ return true; } }
 
 		public Rend( Serial serial )
 			: base( serial )

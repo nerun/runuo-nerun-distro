@@ -53,7 +53,7 @@ namespace Server.Mobiles
 			return WeaponAbility.CrushingBlow;
 		}
 
-		public override bool GivesMLMinorArtifact{ get{ return true; } }
+		//public override bool GivesMLMinorArtifact{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 4; } }
 
 		public Lurg( Serial serial )
