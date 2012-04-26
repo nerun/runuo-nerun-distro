@@ -1,4 +1,4 @@
-//Engine r72
+//Engine r91
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,6 +42,7 @@ namespace Server.Mobiles
 		private DateTime m_End;
 		private InternalTimer m_Timer;
 		private bool m_Running;
+		private bool m_Water;
 		private bool m_Group;
 		private WayPoint m_WayPoint;
 
@@ -359,6 +360,7 @@ namespace Server.Mobiles
 			Visible = false;
 			Movable = false;
 			m_Running = true;
+			m_Water = false;
 			m_Group = false;
 			m_MinDelay = minDelay;
 			m_MaxDelay = maxDelay;
@@ -434,6 +436,10 @@ namespace Server.Mobiles
 				LabelTo( from, "[Running]" );
 			else
 				LabelTo( from, "[Off]" );
+		}
+		
+		public void SpawnWater()
+		{
 		}
 
 		public void Start()
@@ -803,6 +809,15 @@ namespace Server.Mobiles
 			{
 				Mobile m = (Mobile)ent;
 
+				if ( m.CanSwim )
+				{
+					m_Water = true;
+				}
+				else 
+				{
+					m_Water = false;
+				}
+
 				m_Creat.Add( m );
 				
 
@@ -811,11 +826,6 @@ namespace Server.Mobiles
 				if ( m is WanderingHealer || m is EvilWanderingHealer || m is EvilHealer )
 				{
 					loc = GetSpawnPosition();
-				}
-				
-				if ( m.CanSwim == true )
-				{
-					loc = GetSpawnPosition(m);
 				}
 
 				m.OnBeforeSpawn( loc, map );
@@ -860,40 +870,6 @@ namespace Server.Mobiles
 			}
 		}
 
-		//SeaCreatures
-		// FIX: Sea Creatures spawning all at same spot.
-		public Point3D GetSpawnPosition( Mobile m )
-		{
-			Map map = Map;
-
-			if ( map == null )
-				return Location;
-
-			// Try 10 times to find a Spawnable location.
-			for ( int i = 0; i < 10; i++ )
-			{
-				int x, y;
-
-				if ( m_HomeRange > 0 ) {
-					x = Location.X + (Utility.Random( (m_HomeRange * 2) + 1 ) - m_HomeRange);
-					y = Location.Y + (Utility.Random( (m_HomeRange * 2) + 1 ) - m_HomeRange);
-				} else {
-					x = Location.X;
-					y = Location.Y;
-				}
-
-				int z = Map.GetAverageZ( x, y );
-
-				if ( Map.CanFit( x, y, this.Z, 16, true, true, false ) )
-					return new Point3D( x, y, this.Z );
-				else if ( Map.CanFit( x, y, z, 16, true, true, false ) )
-					return new Point3D( x, y, z );
-			}
-			
-			return this.Location;
-		}
-
-		//Non-SeaCreatures
 		public Point3D GetSpawnPosition()
 		{
 			Map map = Map;
@@ -915,6 +891,17 @@ namespace Server.Mobiles
 				}
 
 				int z = Map.GetAverageZ( x, y );
+
+				if ( m_Water )
+				{	
+					TileMatrix tiles = Map.Tiles;
+						LandTile _tile = tiles.GetLandTile(x,y);
+						int id = _tile.ID;
+					if((id >= 168 && id <= 171) || id == 100)
+						{
+							return new Point3D(x,y,this.Z);
+						}
+				}
 
 				if ( Map.CanSpawnMobile( new Point2D( x, y ), this.Z ) )
 					return new Point3D( x, y, this.Z );
