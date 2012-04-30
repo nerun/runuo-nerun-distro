@@ -176,6 +176,9 @@
 				<child name="Center" x="5228" y="3978" z="37" />
 				<child name="Orc Fort" x="5210" y="3636" z="3" />
 			</parent>
+			<parent name="Dock Town">
+				<child name="Docks" x="4551" y="2312" z="-2" />
+			</parent>
 			<parent name="Haven">
 				<child name="Old Haven" x="3650" y="2592" z="0" />
 				<child name="Old Haven North" x="3650" y="2516" z="0" />

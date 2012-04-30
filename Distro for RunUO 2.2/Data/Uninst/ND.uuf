@@ -31,6 +31,8 @@ rn/Data/Locations/felucca.xml.bak
 rm/Data/Locations/termur.xml
 rm/Data/Locations/trammel.xml
 rn/Data/Locations/trammel.xml.bak
+rm/Data/Locations/malas.xml
+rn/Data/Locations/malas.xml.bak
 sh/Data/Monsters
 rm/Scripts/Commands/GenTeleporter.cs
 rn/Scripts/Commands/GenTeleporter.cs.bak
