@@ -1108,7 +1108,6 @@ namespace Server.Commands
 			{
 			// Others Mondain's Legacy places
 				//Bedlam
-				CreateTeleporter( 2068, 1371, -75, 120, 1680, 0, map, false );
 				CreateTeleporter( 117, 1684, 0, 2068, 1372, -75, map, false );
 				CreateTeleporter( 118, 1684, 0, 2068, 1372, -75, map, false );
 				CreateTeleporter( 119, 1684, 0, 2068, 1372, -75, map, false );
