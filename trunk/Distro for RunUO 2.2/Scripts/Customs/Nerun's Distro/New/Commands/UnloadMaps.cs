@@ -1,4 +1,4 @@
-// Engine r63
+// Engine r93
 #define RunUo2_0
 using System;
 using System.Collections.Generic;
@@ -210,35 +210,37 @@ namespace Server.Gumps
 			AddCheck(215, 480, 210, 211, true, 504);
 			AddCheck(215, 501, 210, 211, true, 505);
 			AddCheck(215, 522, 210, 211, true, 506);
-			AddBlackAlpha(246, 87, 174, 156);
+			AddBlackAlpha(246, 87, 174, 178);
 			AddLabel(253, 67, 200, @"MALAS");
-			AddLabel(253, 90, 52, @"Citadel");
-			AddLabel(253, 112, 52, @"Doom");
-			AddLabel(253, 133, 52, @"Labyrinth");
-			AddLabel(253, 154, 52, @"North (*)");
-			AddLabel(253, 174, 52, @"Orc Forts");
-			AddLabel(253, 196, 52, @"South (*)");
-			AddLabel(253, 217, 52, @"Vendors");
-			AddCheck(394, 91, 210, 211, true, 406);
-			AddCheck(394, 112, 210, 211, true, 401);
-			AddCheck(394, 133, 210, 211, true, 407);
-			AddCheck(394, 154, 210, 211, true, 402);
-			AddCheck(394, 175, 210, 211, true, 403);
-			AddCheck(394, 196, 210, 211, true, 404);
-			AddCheck(394, 217, 210, 211, true, 405);
+			AddLabel(253, 90, 52, @"Bedlam");
+			AddLabel(253, 112, 52, @"Citadel");
+			AddLabel(253, 133, 52, @"Doom");
+			AddLabel(253, 154, 52, @"Labyrinth");
+			AddLabel(253, 174, 52, @"North (*)");
+			AddLabel(253, 196, 52, @"Orc Forts");
+			AddLabel(253, 217, 52, @"South (*)");
+			AddLabel(253, 238, 52, @"Vendors");
+			AddCheck(394, 91, 210, 211, true, 408);
+			AddCheck(394, 112, 210, 211, true, 406);
+			AddCheck(394, 133, 210, 211, true, 401);
+			AddCheck(394, 154, 210, 211, true, 407);
+			AddCheck(394, 175, 210, 211, true, 402);
+			AddCheck(394, 196, 210, 211, true, 403);
+			AddCheck(394, 217, 210, 211, true, 404);
+			AddCheck(394, 238, 210, 211, true, 405);
 			AddLabel(428, 91, 200, @"(*) Wild");
 			AddLabel(428, 109, 200, @"Animals and");
 			AddLabel(428, 129, 200, @"monsters.");
-			AddBlackAlpha(246, 270, 174, 117);
-			AddLabel(253, 250, 200, @"TER MUR");
-			AddLabel(253, 273, 52, @"Abyss");
-			AddLabel(253, 294, 52, @"TerMur");
-			AddLabel(253, 315, 52, @"Underworld");
-			AddLabel(253, 336, 52, @"Vendors");
-			AddCheck(394, 274, 210, 211, true, 601);
-			AddCheck(394, 295, 210, 211, true, 602);
-			AddCheck(394, 316, 210, 211, true, 603);
-			AddCheck(394, 337, 210, 211, true, 604);
+			AddBlackAlpha(246, 292, 174, 117);
+			AddLabel(253, 272, 200, @"TER MUR");
+			AddLabel(253, 295, 52, @"Abyss");
+			AddLabel(253, 314, 52, @"TerMur");
+			AddLabel(253, 337, 52, @"Underworld");
+			AddLabel(253, 358, 52, @"Vendors");
+			AddCheck(394, 296, 210, 211, true, 601);
+			AddCheck(394, 315, 210, 211, true, 602);
+			AddCheck(394, 338, 210, 211, true, 603);
+			AddCheck(394, 359, 210, 211, true, 604);
 			//END
 			AddLabel(381, 453, 52, @"Page: 2/2"); //Page
 			AddButton(361, 455, 5603, 5607, 0, GumpButtonType.Page, 1); //Change Page
@@ -356,6 +358,7 @@ namespace Server.Gumps
 						UnloadThis(from, Selections, 313);
 						
 						//MALAS
+						UnloadThis(from, Selections, 408);
 						UnloadThis(from, Selections, 406);
 						UnloadThis(from, Selections, 401);
 						UnloadThis(from, Selections, 407);
