@@ -46,6 +46,10 @@
 				<child name="Guardian's Room" x="365" y="15" z="-1"/>
 				<child name="Lamp Room" x="470" y="95" z="-1"/>
 			</parent>
+			<parent name="Labyrinth">
+				<child name="Entrance" x="1730" y="978" z="-80" />
+				<child name="Center" x="378" y="1914" z="0" />
+			</parent>
 		</parent>
 		<parent name="Sites">
 			<parent name="Points of Interest">
