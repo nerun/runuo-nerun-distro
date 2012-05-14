@@ -892,16 +892,20 @@ namespace Server.Mobiles
 
 				int z = Map.GetAverageZ( x, y );
 
-				if ( m_Water )
-				{	
-					TileMatrix tiles = Map.Tiles;
-						LandTile _tile = tiles.GetLandTile(x,y);
-						int id = _tile.ID;
-					if((id >= 168 && id <= 171) || id == 100)
-						{
-							return new Point3D(x,y,this.Z);
-						}
-				}
+			   if ( m_Water )
+			   {
+					   TileMatrix tiles = Map.Tiles;
+					   LandTile _tile = tiles.GetLandTile(x,y);
+					   int id = _tile.ID;
+					   if((id >= 168 && id <= 171) || id == 100)
+					   {
+						   return new Point3D( x, y, this.Z );
+					   }
+					   else
+					   {
+						   continue;
+					   }
+			   }
 
 				if ( Map.CanSpawnMobile( new Point2D( x, y ), this.Z ) )
 					return new Point3D( x, y, this.Z );
