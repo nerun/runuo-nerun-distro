@@ -8,49 +8,45 @@ namespace Server.Mobiles
 	public class MantraEffervescence : BaseCreature
 	{
 		[Constructable]
-		public MantraEffervescence()
-			: base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
+		public MantraEffervescence() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 		{
 			Name = "a mantra effervescence";
 			Body = 0x111;
 			BaseSoundID = 0x56E;
 
-			SetStr( 130, 150 );
-			SetDex( 120, 130 );
-			SetInt( 150, 230 );
+			SetStr( 137, 146 );
+			SetDex( 124, 130 );
+			SetInt( 191, 229 );
 
-			SetHits( 150, 250 );
+			SetHits( 152, 236 );
 
-			SetDamage( 21, 25 );
+			SetDamage( 14, 17 );
 
 			SetDamageType( ResistanceType.Physical, 30 );
 			SetDamageType( ResistanceType.Energy, 70 );
 
-			SetResistance( ResistanceType.Physical, 60, 65 );
-			SetResistance( ResistanceType.Fire, 40, 50 );
-			SetResistance( ResistanceType.Cold, 40, 50 );
-			SetResistance( ResistanceType.Poison, 50, 60 );
+			SetResistance( ResistanceType.Physical, 61, 65 );
+			SetResistance( ResistanceType.Fire, 45, 46 );
+			SetResistance( ResistanceType.Cold, 44, 46 );
+			SetResistance( ResistanceType.Poison, 53, 59 );
 			SetResistance( ResistanceType.Energy, 100 );
 
-			SetSkill( SkillName.Wrestling, 80.0, 85.0 );
-			SetSkill( SkillName.Tactics, 80.0, 85.0 );
-			SetSkill( SkillName.MagicResist, 105.0, 115.0 );
-			SetSkill( SkillName.Magery, 90.0, 110.0 );
-			SetSkill( SkillName.EvalInt, 80.0, 90.0 );
-			SetSkill( SkillName.Meditation, 90.0, 100.0 );
-
-			Fame = 6500;
-			Karma = -6500;
+			SetSkill( SkillName.Wrestling, 84.2, 85.0 );
+			SetSkill( SkillName.Tactics, 81.7, 83.5 );
+			SetSkill( SkillName.MagicResist, 106.0, 111.6 );
+			SetSkill( SkillName.Magery, 95.6, 108.0 );
+			SetSkill( SkillName.EvalInt, 84.6, 90.0 );
+			SetSkill( SkillName.Meditation, 91.8, 95.7 );
 		}
-
+		
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.FilthyRich );
-			AddLoot( LootPack.Rich );
-		}
+			AddLoot( LootPack.AosFilthyRich, 3 );
+		}		
+		
+		public override bool Unprovokable{ get{ return true; } }
 
-		public MantraEffervescence( Serial serial )
-			: base( serial )
+		public MantraEffervescence( Serial serial ) : base( serial )
 		{
 		}
 
