@@ -1,4 +1,4 @@
-// Nerun's Distro changes at lines 52-4; 2269-81.
+// Nerun's Distro changes at lines 52-4; 2289-301.
 using System;
 using System.Collections.Generic;
 using Server.Regions;
@@ -667,6 +667,8 @@ namespace Server.Mobiles
 
 		#endregion
 
+		public virtual bool CanFly { get { return false; } }
+
 		#region Spill Acid
 
 		public void SpillAcid( int Amount )
@@ -880,7 +882,7 @@ namespace Server.Mobiles
 			if ( ( FightMode == FightMode.Evil && m.Karma < 0 ) || ( c.FightMode == FightMode.Evil && Karma < 0 ) )
 				return true;
 
-			return ( m_iTeam != c.m_iTeam || ( (m_bSummoned || m_bControlled) != (c.m_bSummoned || c.m_bControlled) )/* || c.Combatant == this*/ );
+			return ( m_iTeam != c.m_iTeam || ( (m_bSummoned || m_bControlled) != (c.m_bSummoned || c.m_bControlled ) )/* || c.Combatant == this*/ );
 		}
 
 		public override string ApplyNameSuffix( string suffix )
@@ -1296,6 +1298,17 @@ namespace Server.Mobiles
 
 		public HonorContext ReceivedHonorContext{ get{ return m_ReceivedHonorContext; } set{ m_ReceivedHonorContext = value; } }
 
+		public virtual void CheckStopFollow( Mobile from )
+		{
+			if( ControlOrder == OrderType.Follow && Utility.RandomDouble() < .10 )
+			{
+				ControlTarget = from;
+				ControlOrder = OrderType.Attack;
+				Combatant = from;
+				Warmode = true;
+			}
+		}
+
 		public override void OnDamage( int amount, Mobile from, bool willKill )
 		{
 			if ( BardPacified && (HitsMax - Hits) * 0.001 > Utility.RandomDouble() )
@@ -1331,14 +1344,21 @@ namespace Server.Mobiles
 			if ( m_ReceivedHonorContext != null )
 				m_ReceivedHonorContext.OnTargetDamaged( from, amount );
 
-			if ( willKill && from is PlayerMobile )
-				Timer.DelayCall( TimeSpan.FromSeconds( 10 ), new TimerCallback( ((PlayerMobile) from).RecoverAmmo ) );
+			if( !willKill )
+			{
+				CheckStopFollow( from );
+			}
+			else if( from is PlayerMobile )
+			{
+				Timer.DelayCall( TimeSpan.FromSeconds( 10 ), new TimerCallback( ( ( PlayerMobile )from ).RecoverAmmo ) );
+			}
 
 			base.OnDamage( amount, from, willKill );
 		}
 
 		public virtual void OnDamagedBySpell( Mobile from )
 		{
+			CheckStopFollow( from );
 		}
 
 		public virtual void OnHarmfulSpell( Mobile from )
@@ -3408,6 +3428,18 @@ namespace Server.Mobiles
 				m_AI.Activate();
 		}
 
+		public override void OnCombatantChange()
+		{
+			base.OnCombatantChange();
+
+			Warmode = ( Combatant != null && !Combatant.Deleted && Combatant.Alive );
+
+			if( CanFly && Warmode )
+			{
+				Flying = false;
+			}
+		}
+
 		protected override void OnMapChange( Map oldMap )
 		{
 			CheckAIActive();
@@ -3422,12 +3454,34 @@ namespace Server.Mobiles
 			base.OnLocationChange( oldLocation );
 		}
 
+		public virtual void ForceReacquire()
+		{
+			m_NextReacquireTime = DateTime.MinValue;
+		}
+
 		public override void OnMovement( Mobile m, Point3D oldLocation )
 		{
-			base.OnMovement( m, oldLocation );
+			if( AcquireOnApproach )
+			{
+				if( InRange( m.Location, AcquireOnApproachRange ) && !InRange( oldLocation, AcquireOnApproachRange ) )
+				{
+					if( CanBeHarmful( m ) && IsEnemy( m ))
+					{
+						Combatant = FocusMob = m;
 
-			if ( ReacquireOnMovement || m_Paragon )
+						if( AIObject != null )
+						{
+							AIObject.MoveTo( m, true, 1 );
+						}
+
+						DoHarmful( m );
+					}
+				}
+			}
+			else if( ReacquireOnMovement )
+			{
 				ForceReacquire();
+			}
 
 			InhumanSpeech speechType = this.SpeechType;
 
@@ -4744,11 +4798,8 @@ namespace Server.Mobiles
 
 		public virtual TimeSpan ReacquireDelay{ get{ return TimeSpan.FromSeconds( 10.0 ); } }
 		public virtual bool ReacquireOnMovement{ get{ return false; } }
-
-		public void ForceReacquire()
-		{
-			m_NextReacquireTime = DateTime.MinValue;
-		}
+		public virtual bool AcquireOnApproach{ get { return m_Paragon; } }
+		public virtual int AcquireOnApproachRange { get { return 10; } }
 
 		public override void OnDelete()
 		{
