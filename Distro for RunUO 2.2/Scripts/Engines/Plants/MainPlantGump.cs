@@ -316,9 +316,7 @@ namespace Server.Engines.Plants
 						from.Target = new PlantPourTarget( m_Plant );
 						from.SendLocalizedMessage( 1060808, "#" + m_Plant.GetLocalizedPlantStatus().ToString() ); // Target the container you wish to use to water the ~1_val~.
 					}
-					
-					if ( from.HasGump( typeof(MainPlantGump) ) )
-						from.CloseGump( typeof( MainPlantGump ) );
+
 					from.SendGump( new MainPlantGump( m_Plant ) );
 
 					break;
