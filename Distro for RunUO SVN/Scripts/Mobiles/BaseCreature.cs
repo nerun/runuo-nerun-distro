@@ -1,4 +1,4 @@
-// Nerun's Distro changes at lines 52-4; 2289-301.
+// Nerun's Distro changes at lines 52-4; 2316-328.
 using System;
 using System.Collections.Generic;
 using Server.Regions;
@@ -241,6 +241,7 @@ namespace Server.Mobiles
 		private List<Mobile> m_Friends;
 
 		private bool		m_IsStabled;
+		private Mobile		m_StabledBy;
 
 		private bool		m_HasGeneratedLoot; // have we generated our loot yet?
 
@@ -270,6 +271,13 @@ namespace Server.Mobiles
 				if ( m_IsStabled )
 					StopDeleteTimer();
 			}
+		}
+
+		[CommandProperty( AccessLevel.GameMaster, AccessLevel.Administrator )]
+		public Mobile StabledBy
+		{
+			get { return m_StabledBy; }
+			set { m_StabledBy = value; }
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -513,8 +521,8 @@ namespace Server.Mobiles
 		public virtual double BreathDamageScalar{ get{ return (Core.AOS ? 0.16 : 0.05); } }
 
 		// Min/max seconds until next breath
-		public virtual double BreathMinDelay{ get{ return 10.0; } }
-		public virtual double BreathMaxDelay{ get{ return 15.0; } }
+		public virtual double BreathMinDelay{ get{ return 30.0; } }
+		public virtual double BreathMaxDelay{ get{ return 45.0; } }
 
 		// Creature stops moving for 1.0 seconds while breathing
 		public virtual double BreathStallTime{ get{ return 1.0; } }
@@ -1298,9 +1306,22 @@ namespace Server.Mobiles
 
 		public HonorContext ReceivedHonorContext{ get{ return m_ReceivedHonorContext; } set{ m_ReceivedHonorContext = value; } }
 
-		public virtual void CheckStopFollow( Mobile from )
+		/*
+
+		Seems this actually was removed on OSI somewhere between the original bug report and now.
+		We will call it ML, until we can get better information. I suspect it was on the OSI TC when
+		originally it taken out of RunUO, and not implmented on OSIs production shards until more 
+		recently.  Either way, this is, or was, accurate OSI behavior, and just entirely 
+		removing it was incorrect.  OSI followers were distracted by being attacked well into
+		AoS, at very least.
+
+		*/
+
+		public virtual bool CanBeDistracted { get { return !Core.ML ; } }
+
+		public virtual void CheckDistracted( Mobile from )
 		{
-			if( ControlOrder == OrderType.Follow && Utility.RandomDouble() < .10 )
+			if( Utility.RandomDouble() < .10 )
 			{
 				ControlTarget = from;
 				ControlOrder = OrderType.Attack;
@@ -1346,7 +1367,10 @@ namespace Server.Mobiles
 
 			if( !willKill )
 			{
-				CheckStopFollow( from );
+				if( CanBeDistracted && ControlOrder == OrderType.Follow )
+				{
+					CheckDistracted( from );
+				}
 			}
 			else if( from is PlayerMobile )
 			{
@@ -1358,7 +1382,10 @@ namespace Server.Mobiles
 
 		public virtual void OnDamagedBySpell( Mobile from )
 		{
-			CheckStopFollow( from );
+			if( CanBeDistracted && ControlOrder == OrderType.Follow )
+			{
+				CheckDistracted( from );
+			}
 		}
 
 		public virtual void OnHarmfulSpell( Mobile from )
@@ -3461,7 +3488,7 @@ namespace Server.Mobiles
 
 		public override void OnMovement( Mobile m, Point3D oldLocation )
 		{
-			if( AcquireOnApproach )
+			if( AcquireOnApproach && ( !Controlled && !Summoned ) && FightMode != FightMode.Aggressor )
 			{
 				if( InRange( m.Location, AcquireOnApproachRange ) && !InRange( oldLocation, AcquireOnApproachRange ) )
 				{
@@ -5198,12 +5225,12 @@ namespace Server.Mobiles
 
 				if( target != null && target.Alive && !target.IsDeadBondedPet && CanBeHarmful( target ) && target.Map == this.Map && !IsDeadBondedPet && target.InRange( this, BreathRange ) && InLOS( target ) && !BardPacified )
 				{
-					if( ( DateTime.Now - m_NextBreathTime ) < TimeSpan.FromSeconds( 30 ) )
+					if( ( DateTime.Now - m_NextBreathTime ) < TimeSpan.FromSeconds( 30 ) && Utility.RandomBool() )
 					{
 						BreathStart( target );
 					}
 
-					m_NextBreathTime = DateTime.Now + TimeSpan.FromSeconds( BreathMinDelay + ( Utility.RandomDouble() * BreathMaxDelay ) );
+					m_NextBreathTime = DateTime.Now + TimeSpan.FromSeconds( BreathMinDelay + ( ( Utility.RandomDouble( ) * ( BreathMaxDelay - BreathMinDelay ) ) ) );
 				}
 			}
 
