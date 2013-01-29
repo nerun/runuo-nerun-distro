@@ -1,6 +1,6 @@
 /*************************
  *       By Nerun        *
- *      Engine r74       *
+ *      Engine r103      *
  *************************
  */
 
@@ -18,6 +18,7 @@ namespace Server.Items
 		private int m_Range;
 		private int m_InRangeDelay;
 		private int m_OutRangeDelay;
+		private int m_Overseeing;
 		private CheckTimer m_Timer;
 		private bool m_Enable;
 		private TimeSpan m_CurrentDelay; // players out dungeon
@@ -84,6 +85,13 @@ namespace Server.Items
 			set { m_OutRangeDelay = value; InvalidateProperties(); }
 		}
 
+		[CommandProperty( AccessLevel.GameMaster )]
+		public int Overseeing
+		{
+			get { return m_Overseeing; }
+			set { m_Overseeing = value; InvalidateProperties(); }
+		}
+
 		public void Begin()
 		{
 			if ( !m_Enable )
@@ -137,22 +145,22 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public SpawnsOverseer() : this( 20, 30, 5 )
+		public SpawnsOverseer() : this( 20, 30, 5, 0 )
 		{
 		}
 
 		[Constructable]
-		public SpawnsOverseer( int startrange ) : this( startrange, 30, 5 )
+		public SpawnsOverseer( int startrange ) : this( startrange, 30, 5, 0 )
 		{
 		}
 		
 		[Constructable]
-		public SpawnsOverseer( int startrange, int startIRD, int startORD ) : base( 0x1F1E )
+		public SpawnsOverseer( int startrange, int startIRD, int startORD, int startOverseeing ) : base( 0x1F1E )
 		{
-			InitSeer( startrange, startIRD, startORD );
+			InitSeer( startrange, startIRD, startORD, startOverseeing );
 		}
 		
-		private void InitSeer( int startrange, int startIRD, int startORD )
+		private void InitSeer( int startrange, int startIRD, int startORD, int startOverseeing )
 		{
 			Name = "Spawns' Overseer";
 			Movable = false;
@@ -164,6 +172,7 @@ namespace Server.Items
 			CurrentDelay = TimeSpan.FromSeconds( 5 );
 			InRangeDelay = startIRD; //minutes
 			OutRangeDelay = startORD; //seconds
+			Overseeing = startOverseeing; //PremiumSpawners under control
 		}
 
 		public override void GetProperties( ObjectPropertyList list )
@@ -177,6 +186,7 @@ namespace Server.Items
 				list.Add( 1060662, "Range\t{0}", Range.ToString() );
 				list.Add( 1060663, "In Range Delay\t{0} min", InRangeDelay.ToString() );
 				list.Add( 1060661, "Out Range Delay\t{0} sec", OutRangeDelay.ToString() );
+				list.Add( 1060658, "Overseeing\t{0} PremiumSpawners", Overseeing.ToString() );
 			}
 			else
 			{
@@ -227,6 +237,8 @@ namespace Server.Items
 
 			if ( ClosePremiumSpawners.Count > 0 )
 			{
+				this.Overseeing = ClosePremiumSpawners.Count;
+			
 				foreach ( Mobile m in this.GetMobilesInRange( Range ) ) // para cada mobile dentro do raio de alcance
 				{
 					if( m is PlayerMobile && m.AccessLevel == AccessLevel.Player || m is PlayerMobile && m.AccessLevel > AccessLevel.Player && m.Hidden == false ) //se fôr player ou GM não oculto (hidden)
@@ -273,7 +285,7 @@ namespace Server.Items
 
 							foreach ( Item itemdel in this.GetItemsInRange( Range ) )
 							{
-								if( itemdel.Movable == true ) //se fôr um item móvel (não decoração)
+								if( itemdel.Movable == true ) //se for um item móvel (não decoração)
 									ItemsCleaning.Add( itemdel );
 							}
 
@@ -291,6 +303,7 @@ namespace Server.Items
 			{
 				this.Enable = false;
 				this.CurrentDelay = TimeSpan.FromSeconds( OutRangeDelay );
+				this.Overseeing = ClosePremiumSpawners.Count;
 			}
 		}
 
@@ -307,6 +320,7 @@ namespace Server.Items
 			writer.Write( m_Range );
 			writer.Write( m_InRangeDelay );
 			writer.Write( m_OutRangeDelay );
+			writer.Write( m_Overseeing );
 			writer.Write( m_Enable );
 			if ( m_Enable )
 				writer.WriteDeltaTime( m_End );
@@ -321,6 +335,7 @@ namespace Server.Items
 			m_Range = reader.ReadInt();
 			m_InRangeDelay = reader.ReadInt();
 			m_OutRangeDelay = reader.ReadInt();
+			m_Overseeing = reader.ReadInt();
 			m_Enable = reader.ReadBool();
 			TimeSpan ts = TimeSpan.Zero;
 			if ( m_Enable )
