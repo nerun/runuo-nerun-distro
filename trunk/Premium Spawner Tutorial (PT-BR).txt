@@ -3,7 +3,7 @@
                +-----------------------------------+
 
                                                ------------------------
-					       Última revisão: Fev/2012
+					       Última revisão: Jan/2013
                                                ------------------------
 
 	Premium Spawner nasceu como um "mod" do script Ultimate Spawner,
@@ -70,7 +70,7 @@ Para instalar a distro:
 1) Descompacte com WinRAR o arquivo "NerunsDistro-rx.rar".
 2) Depois você verá duas pastas: "Data" e "Scripts". E alguns arquivos.
 3) Corte as pastas "Data" e "Scripts".
-4) Vá para "c:\RunUO 2.1\" (diretório raiz do RunUO) e cole-as lá, o
+4) Vá para "c:\RunUO 2.2\" (diretório raiz do RunUO) e cole-as lá, o
    Windows Explorer perguntará se você deseja sobrescrever, clique "sim
    para todos".
 
@@ -87,37 +87,37 @@ explicativas e/ou conter dicas. Mas vou listá-las aqui:
 
 USO ATRAVÉS DO MENU                        LINHA DE COMANDO
 ===========================================================
-WORLD CREATION OPTIONS:
-	Create World Gump ------------------ [createworld
-SPAWN OPTIONS:
-	Spawn Trammel/Felucca -------------- [spawntrammel or [spawnfelucca
-	Spawn Ilshenar --------------------- [spawnilshenar
-	Spawn Malas ------------------------ [spawnmalas
-	Spawn Tokuno ----------------------- [spawntokuno
-	Spawn Ter Mur ---------------------- [spawntermur
-UNLOAD SPAWNS
-	Unload Trammel/Felucca spawns ------ [unloadtrammel or [unloadfelucca
-	Unload Ilshenar spawns ------------- [unloadilshenar
-	Unload Malas spawns ---------------- [unloadmalas
-	Unload Tokuno spawns --------------- [unloadtokuno
-	Unload Ter Mur Spawns -------------- [unloadtermur
-SAVE OPTIONS:
-	Save All spawns (spawns.map) ------- [spawngen save
-	Save 'By Hand' spawns (byhand.map) - [spawngen savebyhand
-	Save spawns inside region ---------- [spawngen save RegionName
-	Save spawns by coordinates --------- [spawngen save x1 y1 x2 y2
-REMOVE OPTIONS:
-	Remove All spawners (all facets) --- [spawngen remove
-	Remove All spawners (current map) -- [spawngen cleanfacet
-	Remove spawners by ID -------------- [spawngen unload SpawnID
-	Remove spawners by Coordinates ----- [spawngen remove x1 y1 x2 y2
+WORLD CREATION:
+	Let there be light (Create world) -- [createworld
+	Apocalypse now (Clear all facets) -- [clearall
+SELECT SPAWNS BY EXPANSION:
+	UO Classic Spawns (pre-T2A) -------- [spawngen uoclassic/UOClassic.map
+	UO Mondain's Legacy Spawns --------- [SpawnUOML
+	UO KR, SA and HS Spawns ------------ [SpawnCurrent
+REMOVE SPAWNS BY EXPANSION:
+	UO Classic Spawns (pre-T2A) -------- [spawngen unload 1000
+	UO Mondain's Legacy Spawns --------- [UnloadUOML
+	UO KR, SA and HS Spawns ------------ [UnloadCurrent
+SMART PLAYER RANGE SENSITIVE:
+	Generate Spawns' Overseer ---------- [GenSeers
+	Remove Spawns' Overseer ------------ [RemSeers
+SAVE SPAWNERS:
+	All spawns (spawns.map) ------------ [spawngen save
+	'By Hand' spawns (byhand.map) ------ [spawngen savebyhand
+	Spawns inside region (region.map) -- [spawngen save RegionName
+	Spawns inside coordinates ---------- [spawngen save x1 y1 x2 y2
+REMOVE SPAWNERS:
+	All spawner in ALL facets ---------- [spawngen remove
+	All spawners in THIS facet --------- [spawngen cleanfacet
+	Remove spawners by SpawnID --------- [spawngen unload SpawnID
+	Remove inside Coordinates ---------- [spawngen remove x1 y1 x2 y2
 	Remove spawners inside Region ------ [spawngen remove RegionName
-EDITION OPTIONS:
+EDITOR:
 	Spawn Editor ----------------------- [editor
-	Clear All Facets ------------------- [clearall
-	Set my own body to GM Style -------- [gmbody
 CONVERSION UTILITY:
-	RunUO Spawns to PremiumSpawner ----- [rse
+	RunUO Spawners to Premium ---------- [rse
+CUSTOM REGIONS IN A BOX:
+	Add a Region Controller ------------ [Add RegionControl
 
 	Como vocês podem ver, ele centraliza num único menu todos os
 comandos do sistema, você não precisa saber como se escreve cada comando
@@ -189,10 +189,16 @@ cemitério de Britain. Vamos analisá-lo:
 -  Os próximos dois números após o do mapa definem respectivamente o
    tempo mínimo e o tempo máximo para o respawn. Isto é, as criaturas
    daquele spawner vão "dar respawn" num intervalo de tempo escolhido
-   aleatoriamente entre o tempo mínimo e o máximo. No caso temos "5|10|"
+   aleatoriamente entre o tempo mínimo e o máximo. No caso temos "5|10"
    , com uma "|" os dois números (sempre uma "|"). O tempo está em
    minutos, logo os spawners vão dar respawn entre 5 e 10 min após
    terem sido mortos pelos players.
+
+   Mas você poderia escrever o tempo de outra forma, em segundos, minutos
+   ou horas:
+	|10s| = dez segundos;
+	|10m| (ou apenas |10|, o padrão) = dez minutos;
+	|10h| = dez horas.
 
 -  Os próximos dois números após os números do tempo, são respectiva-
    mente o WalkingRange e o HomeRange. No caso, 30 de WalkingRange e 20 de
@@ -561,10 +567,10 @@ Você pode colocar ranges diferentes:
  SpawnsOverseer 7966 (Range=50)
  5433 1102 0
 
-Lembre-se que s enão especiicado o range padrão é 20.
+Lembre-se que s enão especificado o range padrão é 20.
 
 Range é o alcance da visão do seer (o feitor, o vigia). PremiumSpawners
-dentro deste alcance serão vigiados pelo feitor. você pode colcoar o
+dentro deste alcance serão vigiados pelo feitor. você pode colocar o
 range que quiser, não há limite.
 
 Você pode colocar muitos seers com alcances diferentes:
@@ -588,10 +594,10 @@ E pode combinar todos eles juntos:
  5433 1102 0
 
 InRangeDelay = tempo em minutos para a próxima verificação se houver players
-               dentro do range (alcance).
+               dentro do raio de alcance.
 
 OutRangeDelay = tempo em segundos para a próxima verificação se NÃO
-                houver players dentro do range.
+                houver players dentro do raio de alcance.
 
 
 >>>>>> ITEMID >>>>>>
@@ -614,7 +620,7 @@ comando [GenSeers:
 
 >>>>>> PASTAS >>>>>>
 
-Coloque os arquivos de coniguração na apsta certa.
+Coloque os arquivos de coniguração na pasta certa.
 
 Trammel em:
  ...\Data\Monsters\overseers\Trammel\Overseers.cfg
@@ -627,8 +633,8 @@ Etc.
 
 >>>>>> NOMES DOS ARQUIVOS DE .CFG >>>>>>
 
-Você pode colcoar mais de um arquivo cfg na mesma pasta, não precisam
-ter o nome "Overseers.cfg", eles podemt er qualquer nome, desde que
+Você pode colocar mais de um arquivo cfg na mesma pasta, não precisam
+ter o nome "Overseers.cfg", eles podem ter qualquer nome, desde que
 termine em .cfg.
 
 Você pode optar por um arquivo "Graveyards.cfg" para todos os

@@ -3,7 +3,7 @@
                +----------------------------------+
 
                                         -------------------------------
-					English last revision: Fev/2012
+					English last revision: Jan/2013
                                         -------------------------------
 
 	Premium Spawner project was born as a "mod" of "Ultimate Spawner"
@@ -79,7 +79,7 @@ To install the distro:
 
 3) Cut the folders "Data" and "Scripts".
 
-4) Go to "c:\RunUO 2.1\" (or where you install it) and paste it there. Windows
+4) Go to "c:\RunUO 2.2\" (or where you install it) and paste it there. Windows
    Explorer will say that those folders already exists, and will ask if you
    want to overwrite, click "yes to all".
 
@@ -95,37 +95,37 @@ options are self-explained:
 
 GUMP NAME                                    COMMAND PROMPT
 ===========================================================
-WORLD CREATION OPTIONS:
-	Create World Gump ------------------ [createworld
-SPAWN OPTIONS:
-	Spawn Trammel/Felucca -------------- [spawntrammel or [spawnfelucca
-	Spawn Ilshenar --------------------- [spawnilshenar
-	Spawn Malas ------------------------ [spawnmalas
-	Spawn Tokuno ----------------------- [spawntokuno
-	Spawn Ter Mur ---------------------- [spawntermur
-UNLOAD SPAWNS
-	Unload Trammel/Felucca spawns ------ [unloadtrammel or [unloadfelucca
-	Unload Ilshenar spawns ------------- [unloadilshenar
-	Unload Malas spawns ---------------- [unloadmalas
-	Unload Tokuno spawns --------------- [unloadtokuno
-	Unload Ter Mur Spawns -------------- [unloadtermur
-SAVE OPTIONS:
-	Save All spawns (spawns.map) ------- [spawngen save
-	Save 'By Hand' spawns (byhand.map) - [spawngen savebyhand
-	Save spawns inside region ---------- [spawngen save RegionName
-	Save spawns by coordinates --------- [spawngen save x1 y1 x2 y2
-REMOVE OPTIONS:
-	Remove All spawners (all facets) --- [spawngen remove
-	Remove All spawners (current map) -- [spawnen cleanfacet
-	Remove spawners by ID -------------- [spawngen unload SpawnID
-	Remove spawners by Coordinates ----- [spawngen remove x1 y1 x2 y2
+WORLD CREATION:
+	Let there be light (Create world) -- [createworld
+	Apocalypse now (Clear all facets) -- [clearall
+SELECT SPAWNS BY EXPANSION:
+	UO Classic Spawns (pre-T2A) -------- [spawngen uoclassic/UOClassic.map
+	UO Mondain's Legacy Spawns --------- [SpawnUOML
+	UO KR, SA and HS Spawns ------------ [SpawnCurrent
+REMOVE SPAWNS BY EXPANSION:
+	UO Classic Spawns (pre-T2A) -------- [spawngen unload 1000
+	UO Mondain's Legacy Spawns --------- [UnloadUOML
+	UO KR, SA and HS Spawns ------------ [UnloadCurrent
+SMART PLAYER RANGE SENSITIVE:
+	Generate Spawns' Overseer ---------- [GenSeers
+	Remove Spawns' Overseer ------------ [RemSeers
+SAVE SPAWNERS:
+	All spawns (spawns.map) ------------ [spawngen save
+	'By Hand' spawns (byhand.map) ------ [spawngen savebyhand
+	Spawns inside region (region.map) -- [spawngen save RegionName
+	Spawns inside coordinates ---------- [spawngen save x1 y1 x2 y2
+REMOVE SPAWNERS:
+	All spawner in ALL facets ---------- [spawngen remove
+	All spawners in THIS facet --------- [spawngen cleanfacet
+	Remove spawners by SpawnID --------- [spawngen unload SpawnID
+	Remove inside Coordinates ---------- [spawngen remove x1 y1 x2 y2
 	Remove spawners inside Region ------ [spawngen remove RegionName
-EDITION OPTIONS:
+EDITOR:
 	Spawn Editor ----------------------- [editor
-	Clear All Facets ------------------- [clearall
-	Set my own body to GM Style -------- [gmbody
 CONVERSION UTILITY:
-	RunUO Spawns to PremiumSpawner ----- [rse
+	RunUO Spawners to Premium ---------- [rse
+CUSTOM REGIONS IN A BOX:
+	Add a Region Controller ------------ [Add RegionControl
 
 
 	As you can see, it centered on a single menu all the system commands,
@@ -213,6 +213,11 @@ Graveyard. Let's analyze it:
    time. In the example We have "5 | 10 |" (always a "|"). Time is in
    minutes, so creatures will respawn between 5 and 10 min after being
    killed by players.
+
+   But you could write otherwise, time in seconds, minutes or hours:
+	|10s| = ten seconds;
+	|10m| (or just |10|, the default) = ten minutes;
+	|10h| = ten hours.
 
 -  Next 2 numbers after respawn time: defines WalkingRange and HomeRange.
    In this case, 30 WalkingRange and 20 HomeRange. The creatures will walk
