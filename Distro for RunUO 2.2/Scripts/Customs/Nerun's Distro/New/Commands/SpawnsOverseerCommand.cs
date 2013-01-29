@@ -1,12 +1,11 @@
-// Engine r75
+// Engine r103
 using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using Server;
 using Server.Items;
-using Server.Engines.Quests.Haven;
-using Server.Engines.Quests.Necro;
+using Server.Mobiles;
 
 namespace Server.Commands
 {
@@ -442,6 +441,15 @@ namespace Server.Commands
 			foreach ( Item itemremove2 in itemsremove )
 			{
 				itemremove2.Delete();
+			}
+			
+			foreach ( Item premiums in World.Items.Values )
+			{ 
+				if ( premiums is PremiumSpawner && premiums.Parent == null && ((PremiumSpawner)premiums).Running == false )
+				{
+					((PremiumSpawner)premiums).Running = true;
+					((PremiumSpawner)premiums).NextSpawn = TimeSpan.FromSeconds( 1 );
+				}
 			}
 
 			DateTime endTime = DateTime.Now;
