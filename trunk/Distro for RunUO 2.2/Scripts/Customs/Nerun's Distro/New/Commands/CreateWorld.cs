@@ -46,12 +46,12 @@ namespace Server.Gumps
 
 	//fundo cinza
 	//x, y, largura, altura, item
-			AddBackground( 0, 0, 200, 415, 5054 );
+			AddBackground( 0, 0, 200, 440, 5054 );
 	//----------
 			AddLabel( 30, 2, 200, "CREATE WORLD GUMP" );
 	//fundo branco
 	//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 180, 355, 3004 );
+			AddImageTiled( 10, 20, 180, 380, 3004 );
 	//----------
 			AddLabel( 20, 26, 200, "Moongen" );
 			AddLabel( 20, 51, 200, "DoorGen" );
@@ -67,6 +67,7 @@ namespace Server.Gumps
 			AddLabel( 20, 301, 200, "SecretLocGen" );
 			AddLabel( 20, 326, 246, "DecorateML" );
 			AddLabel( 20, 351, 246, "DecorateSA" );
+			AddLabel( 20, 376, 200, "DecorateMag" );
 	//Options
 			AddCheck( 160, 23, 210, 211, true, 101 );
 			AddCheck( 160, 48, 210, 211, true, 102 );
@@ -82,9 +83,10 @@ namespace Server.Gumps
 			AddCheck( 160, 298, 210, 211, true, 112 );
 			AddCheck( 160, 323, 210, 211, true, 113 );
 			AddCheck( 160, 348, 210, 211, true, 114 );
+			AddCheck( 160, 373, 210, 211, true, 115 );
 	//Ok, Cancel (x, y, ?, ?, ?)
-			AddButton( 30, 384, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 100, 384, 241, 243, 0, GumpButtonType.Reply, 0 );
+			AddButton( 30, 409, 247, 249, 1, GumpButtonType.Reply, 0 );
+			AddButton( 100, 409, 241, 243, 0, GumpButtonType.Reply, 0 );
 		}
 
 		public override void OnResponse( NetState state, RelayInfo info ) 
@@ -186,6 +188,10 @@ namespace Server.Gumps
 						if( Selections.Contains( 114 ) == true )
 						{
 							CommandSystem.Handle( from, String.Format( "{0}decoratesa", prefix ) );
+						}
+						if( Selections.Contains( 115 ) == true )
+						{
+							CommandSystem.Handle( from, String.Format( "{0}decoratemag", prefix ) );
 						}
 					}
 
