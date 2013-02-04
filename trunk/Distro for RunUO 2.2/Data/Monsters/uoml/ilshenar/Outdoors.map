@@ -47,9 +47,9 @@ overridemaxtime 10
 *|Imp||||||1571|253|14|3|5|10|25|10|1|3|0|0|0|0|0
 ## Swamp near savage
 *|Sewerrat|Corpser|Bogling|Giantrat|Alligator|Mongbat|1070|750|-80|3|5|10|30|30|1|4|2|2|2|2|2
-*|Lizardman|Plaguebeast|Toxicelemental||||1070|750|-80|3|5|10|30|30|1|4|2|1|0|0|0
+*|Lizardman|Plaguebeast|AcidElemental||||1070|750|-80|3|5|10|30|30|1|4|2|1|0|0|0
 *|Sewerrat|Corpser|Bogling|Giantrat|Alligator|Mongbat|1135|743|-80|3|5|10|30|30|1|4|2|2|2|2|2
-*|Lizardman|Plaguebeast|Toxicelemental|Bogthing|||1135|743|-80|3|5|10|30|30|1|4|2|1|1|0|0
+*|Lizardman|Plaguebeast|AcidElemental|Bogthing|||1135|743|-80|3|5|10|30|30|1|4|2|1|1|0|0
 *|Sewerrat|Corpser|Bogling|Giantrat|Alligator|Mongbat|1160|681|-80|3|5|10|30|30|1|4|2|1|2|2|1
 *|Lizardman|Plaguebeast|||||1160|681|-80|3|5|10|30|30|1|3|1|0|0|0|0
 ## Controller Tower

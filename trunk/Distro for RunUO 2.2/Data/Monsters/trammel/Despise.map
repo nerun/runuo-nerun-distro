@@ -8,7 +8,7 @@ overridemaxtime 10
 ##
 ## Despise Dungeon
 ##
-## Note: Acidelemental do not exist then i used Toxicelemental instead.
+## Note: Acidelemental do not exist then i used AcidElemental instead.
 ##
 ## Level 1
 ##
@@ -53,7 +53,7 @@ overridemaxtime 10
 *|Cyclops||||||5471|973|15|2|2|10|25|18|1|3|0|0|0|0|0
 *|Ettin||||||5426|943|20|2|2|10|25|15|1|4|0|0|0|0|0
 *|Ettin||||||5391|905|30|2|2|10|25|15|1|4|0|0|0|0|0
-*|Toxicelemental||||||5398|996|5|2|2|10|25|15|1|3|0|0|0|0|0
+*|AcidElemental||||||5398|996|5|2|2|10|25|15|1|3|0|0|0|0|0
 *|TreasureLevel2||||||5593|794|60|2|1|2|5|5|1|1|0|0|0|0|0
 *|TreasureLevel2|TreasureLevel3|||||5546|888|30|2|1|2|8|8|1|1|2|0|0|0|0
 *|TreasureLevel3||||||5397|995|5|2|1|2|10|10|1|1|0|0|0|0|0

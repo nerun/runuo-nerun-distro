@@ -10,7 +10,7 @@ overridemaxtime 10
 ## Level 1
 ##
 *|Zombie||||||427|67|-28|3|5|10|25|25|1|2|0|0|0|0|0
-*|Toxicelemental:Fireelemental:Bloodelemental||||||455|70|-28|3|5|10|10|7|1|5|0|0|0|0|0
+*|AcidElemental:Fireelemental:Bloodelemental||||||455|70|-28|3|5|10|10|7|1|5|0|0|0|0|0
 *|Shade|Mongbat|||||394|69|-28|3|5|10|15|10|1|2|5|0|0|0|0
 *|Gargoyle|Stonegargoyle|Lich|Shade|||447|19|-28|3|5|10|25|10|1|3|1|1|1|0|0
 *|Headlessone|Mongbat|||||431|16|-28|3|5|10|15|5|1|2|2|0|0|0|0
