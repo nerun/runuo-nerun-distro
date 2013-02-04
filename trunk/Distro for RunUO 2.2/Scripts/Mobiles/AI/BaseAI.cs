@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Server;
 using Server.Items;
 using Server.Targeting;
@@ -208,6 +209,7 @@ namespace Server.Mobiles
 						list.Add( new InternalEntry( from, 6099, 14, m_Mobile, this, OrderType.Unfriend ) ); // Remove Friend
 						list.Add( new InternalEntry( from, 6113, 14, m_Mobile, this, OrderType.Transfer ) ); // Transfer
 					}
+
 // >>> [4th change of 12]
 					if ( m_Mobile is BaseHire )
 					{//Mobile from, int number, int range, BaseCreature mobile, BaseAI ai, OrderType order
@@ -219,7 +221,7 @@ namespace Server.Mobiles
 						list.Add( new InternalEntry( from, 6118, 14, m_Mobile, this, OrderType.Release ) ); // Release
 					}
 					
-//					list.Add( new InternalEntry( from, 6118, 14, m_Mobile, this, OrderType.Release ) );
+//					list.Add( new InternalEntry( from, 6118, 14, m_Mobile, this, OrderType.Release ) ); // Release
 // end 4th
 				}
 				else if( m_Mobile.IsPetFriend( from ) )
@@ -992,7 +994,7 @@ namespace Server.Mobiles
 
 		public virtual bool DoActionCombat()
 		{
-			if ( CheckHerding() )
+			if ( Core.AOS && CheckHerding() )
 			{
 				m_Mobile.DebugSay( "Praise the shepherd!" );
 			}
@@ -1011,7 +1013,7 @@ namespace Server.Mobiles
 
 		public virtual bool DoActionGuard()
 		{
-			if ( CheckHerding() )
+			if ( Core.AOS && CheckHerding() )
 			{
 				m_Mobile.DebugSay( "Praise the shepherd!" );
 			}
@@ -1407,7 +1409,8 @@ namespace Server.Mobiles
 						else
 						{
 							m_Mobile.Warmode = false;
-							m_Mobile.CurrentSpeed = 0.1;
+							if ( Core.AOS )
+								m_Mobile.CurrentSpeed = 0.1;
 						}
 					}
 				}
@@ -1576,7 +1579,8 @@ namespace Server.Mobiles
 				m_Mobile.DebugSay( "Nothing to guard from" );
 
 				m_Mobile.Warmode = false;
-				m_Mobile.CurrentSpeed = 0.1;
+				if ( Core.AOS )
+					m_Mobile.CurrentSpeed = 0.1;
 
 				WalkMobileRange( controlMaster, 1, false, 0, 1 );
 			}
@@ -1593,8 +1597,13 @@ namespace Server.Mobiles
 			{
 				m_Mobile.DebugSay( "I think he might be dead. He's not anywhere around here at least. That's cool. I'm glad he's dead." );
 
-				m_Mobile.ControlTarget = m_Mobile.ControlMaster;
-				m_Mobile.ControlOrder = OrderType.Follow;
+				if ( Core.AOS ) {
+					m_Mobile.ControlTarget = m_Mobile.ControlMaster;
+					m_Mobile.ControlOrder = OrderType.Follow;
+				} else {
+					m_Mobile.ControlTarget = null;
+					m_Mobile.ControlOrder = OrderType.None;
+				}
 
 				if( m_Mobile.FightMode == FightMode.Closest || m_Mobile.FightMode == FightMode.Aggressor )
 				{
@@ -1671,6 +1680,7 @@ namespace Server.Mobiles
 
 			return true;
 		}
+
 // >>> [12th change of 12]
 		public virtual bool DoOrderDismiss()
 		{
@@ -1703,6 +1713,7 @@ namespace Server.Mobiles
 			return true;
 		}
 // end 12th
+
 		public virtual bool DoOrderStay()
 		{
 			if( CheckHerding() )
@@ -1763,7 +1774,7 @@ namespace Server.Mobiles
 					Name = FriendlyNameAttribute.GetFriendlyNameFor( creature.GetType() ).ToString();
 
 				//(As Per OSI)No name.  Normally, set by the ItemID of the Shrink Item unless we either explicitly set it with an Attribute, or, no lookup found
-				
+
 				Hue = creature.Hue & 0x0FFF;
 			}
 
@@ -2114,6 +2125,14 @@ namespace Server.Mobiles
 
 			if( delay < 0.0 )
 				delay = 0.0;
+
+			if ( double.IsNaN( delay ) ) {
+				using( StreamWriter op = new StreamWriter( "nan_transform.txt", true ) ) {
+					op.WriteLine( String.Format( "NaN in TransformMoveDelay: {0}, {1}, {2}, {3}", DateTime.Now, this.GetType().ToString(), m_Mobile == null ? "null" : m_Mobile.GetType().ToString(), m_Mobile.HitsMax ) );
+				}
+
+				return 1.0;
+			}
 
 			return delay;
 		}
@@ -2615,7 +2634,7 @@ namespace Server.Mobiles
 						continue;
 
 					// Let's not target ourselves...
-					if ( m == m_Mobile )
+					if ( m == m_Mobile || m is BaseFamiliar )
 						continue;
 
 					// Dead targets are invalid.
@@ -2660,36 +2679,33 @@ namespace Server.Mobiles
 					// Ignore players with activated honor
 					if ( m is PlayerMobile && ( (PlayerMobile)m ).HonorActive && !( m_Mobile.Combatant == m ))
 						continue;
-					
-					if( acqType == FightMode.Aggressor || acqType == FightMode.Evil )
+
+					if( acqType == FightMode.Aggressor || acqType == FightMode.Evil || ( m is BaseCreature ) && ( ( BaseCreature )m ).Summoned )
 					{
-						// Only acquire this mobile if it attacked us, or if it's evil.
-						bool bValid = false;
+						BaseCreature bc = m as BaseCreature;
 
-						for ( int a = 0; !bValid && a < m_Mobile.Aggressors.Count; ++a )
-							bValid = ( m_Mobile.Aggressors[a].Attacker == m );
+						bool bValid = IsHostile( m );
 
-						for ( int a = 0; !bValid && a < m_Mobile.Aggressed.Count; ++a )
-							bValid = ( m_Mobile.Aggressed[a].Defender == m );
-
-						#region Ethics & Faction checks
-						if ( !bValid )
+						if( !bValid && ( !( m is BaseCreature ) || !bc.Summoned || bc.Controlled ) )
+						{ 
 							bValid = ( m_Mobile.GetFactionAllegiance( m ) == BaseCreature.Allegiance.Enemy || m_Mobile.GetEthicAllegiance( m ) == BaseCreature.Allegiance.Enemy );
-						#endregion
 
-						if ( acqType == FightMode.Evil && !bValid )
-						{
-							if( m is BaseCreature && ((BaseCreature)m).Controlled && ((BaseCreature)m).ControlMaster != null )
-							bValid = ( ((BaseCreature)m).ControlMaster.Karma < 0 );
-							else
-							bValid = ( m.Karma < 0 );
+							if( acqType == FightMode.Evil && !bValid )
+							{
+								if( m is BaseCreature && bc.Controlled && bc.ControlMaster != null )
+								{
+									bValid = (  bc.ControlMaster.Karma < 0 );
+								}
+								else
+								{
+									bValid = ( ( Core.AOS || m.Player ) && m.Karma < 0 );
+								}
+							}
 						}
 
 						if ( !bValid )
 							continue;
 					} else {
-
-
 						// Same goes for faction enemies.
 						if ( bFacFoe && !m_Mobile.IsEnemy( m ) )
 							continue;
@@ -2711,10 +2727,44 @@ namespace Server.Mobiles
 				eable.Free();
 
 				m_Mobile.FocusMob = newFocusMob;
+
+				if( m_Mobile.FocusMob is BaseFamiliar )
+				{
+					m_Mobile.FocusMob = null;
+				}
 			}
 
 			return (m_Mobile.FocusMob != null);
 		}
+
+		private bool IsHostile( Mobile from )
+		{
+			int count = Math.Max( m_Mobile.Aggressors.Count, m_Mobile.Aggressed.Count );
+
+			if( m_Mobile.Combatant == from || from.Combatant == m_Mobile )
+			{
+				return true;
+			}
+
+			if( count  > 0 )
+			{
+				for( int a = 0; a < count; ++a )
+				{
+					if( a < m_Mobile.Aggressed.Count && m_Mobile.Aggressed[ a ].Attacker == from )
+					{
+						return true;
+					}
+
+					if( a < m_Mobile.Aggressors.Count && m_Mobile.Aggressors[ a ].Defender == from )
+					{
+						return true;
+					}
+				}
+			}
+
+			return false;
+		}
+
 
 		public virtual void DetectHidden()
 		{
@@ -2844,6 +2894,7 @@ namespace Server.Mobiles
 				}
 				else if( m_Owner.m_Mobile.Map == null || m_Owner.m_Mobile.Map == Map.Internal )
 				{
+					m_Owner.Deactivate();
 					return;
 				}
 				else if( m_Owner.m_Mobile.PlayerRangeSensitive )//have to check this in the timer....
@@ -2865,6 +2916,7 @@ namespace Server.Mobiles
 				}
 				else if( m_Owner.m_Mobile.Map == null || m_Owner.m_Mobile.Map == Map.Internal )
 				{
+					m_Owner.Deactivate();
 					return;
 				}
 
