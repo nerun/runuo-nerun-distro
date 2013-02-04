@@ -190,7 +190,7 @@ namespace Server.Commands
 
 						if(from.AccessLevel >= AccessLevel.Administrator)
 						{
-							PackItem( new StaffCloak() );
+							PackItem( new StaffOrb() );
 							EquipItem( new ThighBoots( 1001 ) );
 							EquipItem( new AdminRobe() );
 						}
