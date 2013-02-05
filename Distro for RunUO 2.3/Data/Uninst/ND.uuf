@@ -9,23 +9,7 @@ rm/Data/signs.cfg
 rn/Data/signs.cfg.bak
 rm/Data/treasure.cfg
 rn/Data/treasure.cfg.bak
-rm/Data/Decoration/Britannia/britain.cfg
-rn/Data/Decoration/Britannia/britain.cfg.bak
-rm/Data/Decoration/Britannia/NERUN-BritainSewers.cfg
-rm/Data/Decoration/Britannia/NERUN-SeaMarket.cfg
-rm/Data/Decoration/Malas/NERUN-Malas.cfg
-sh/Data/Decoration/Mondain's Legacy
-rm/Data/Decoration/Trammel/_haven additions.cfg
-rn/Data/Decoration/Trammel/_haven additions.cfg.bak
-rm/Data/Decoration/Trammel/collector quest.cfg
-rn/Data/Decoration/Trammel/collector quest.cfg.bak
-rm/Data/Decoration/Trammel/haven.cfg
-rn/Data/Decoration/Trammel/haven.cfg.bak
-rm/Data/Decoration/Trammel/NERUN-HavenIsland.cfg
-rm/Data/Decoration/Trammel/NERUN-NewHaven.cfg
-rm/Data/Decoration/Trammel/NERUN-OldHaven.cfg
-rm/Data/Decoration/Trammel/uzeraan turmoil quest.cfg
-rn/Data/Decoration/Trammel/uzeraan turmoil quest.cfg.bak
+sh/Data/Decoration/Nerun
 rm/Data/Locations/felucca.xml
 rn/Data/Locations/felucca.xml.bak
 rm/Data/Locations/termur.xml

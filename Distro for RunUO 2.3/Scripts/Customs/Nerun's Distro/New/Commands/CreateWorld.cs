@@ -126,13 +126,13 @@ namespace Server.Gumps
 			CommandSystem.Handle( from, String.Format( "{0}{1}", prefix, command ) );
 		}
 		
-		public static void DoBegin()
+		public static void DoBegin( Mobile from )
 		{
 			DoThis( from, "Moongen" );
 			DoThis( from, "DoorGen" );
 		}
 
-		public static void DoEnd()
+		public static void DoEnd( Mobile from )
 		{
 			DoThis( from, "SignGen" );
 			DoThis( from, "TelGen" );
@@ -157,51 +157,51 @@ namespace Server.Gumps
 				}
 				case 10:
 				{
-					DoBegin();
+					DoBegin( from );
 					DoThis( from, "DecorateSE" );
-					DoEnd();
+					DoEnd( from );
 					break;
 				}
 				case 11:
 				{
-					DoBegin();
+					DoBegin( from );
 					DoThis( from, "DecorateML" );
-					DoEnd();
+					DoEnd( from );
 					break;
 				}
 				case 12:
 				{
-					DoBegin();
+					DoBegin( from );
 					DoThis( from, "DecorateKRfirstAge" );
-					DoEnd();
+					DoEnd( from );
 					break;
 				}
 				case 13:
 				{
-					DoBegin();
+					DoBegin( from );
 					DoThis( from, "DecorateKRsecondAge" );
-					DoEnd();
+					DoEnd( from );
 					break;
 				}
 				case 14:
 				{
-					DoBegin();
+					DoBegin( from );
 					DoThis( from, "DecorateSA" );
-					DoEnd();
+					DoEnd( from );
 					break;
 				}
 				case 15:
 				{
-					DoBegin();
+					DoBegin( from );
 					DoThis( from, "DecorateHSfirstAge" );
-					DoEnd();
+					DoEnd( from );
 					break;
 				}
 				case 16:
 				{
-					DoBegin();
+					DoBegin( from );
 					DoThis( from, "DecorateHSsecondAge" );
-					DoEnd();
+					DoEnd( from );
 					break;
 				}
 			} 
