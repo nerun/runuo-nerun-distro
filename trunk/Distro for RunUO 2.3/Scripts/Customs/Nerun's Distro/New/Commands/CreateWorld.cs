@@ -1,12 +1,13 @@
+// Engine r114
 using System;
 using System.Collections;
 using System.IO;
 using Server;
-using Server.Mobiles; 
-using Server.Items;
 using Server.Commands; 
-using Server.Network;
 using Server.Gumps;
+using Server.Items;
+using Server.Mobiles; 
+using Server.Network;
 
 namespace Server.Commands 
 {
@@ -21,8 +22,8 @@ namespace Server.Commands
 			CommandSystem.Register( "Createworld", AccessLevel.Administrator, new CommandEventHandler( Create_OnCommand ) ); 
 		} 
 
-		[Usage( "[createworld" )]
-		[Description( "Create world with a menu." )]
+		[Usage( "[CreateWorld" )]
+		[Description( "Generates world decorations, doors, signs and moongates with a menu." )]
 		private static void Create_OnCommand( CommandEventArgs e )
 		{
 			e.Mobile.SendGump( new CreateWorldGump( e ) );
@@ -32,173 +33,177 @@ namespace Server.Commands
 
 namespace Server.Gumps
 {
-
 	public class CreateWorldGump : Gump
 	{
 		private CommandEventArgs m_CommandEventArgs;
-		public CreateWorldGump( CommandEventArgs e ) : base( 50,50 )
-		{
-			m_CommandEventArgs = e;
-			Closable = true;
-			Dragable = true;
+
+        public CreateWorldGump( CommandEventArgs e ) : base( 70, 70 )
+        {
+            this.Closable=true;
+			this.Disposable=true;
+			this.Dragable=true;
+			this.Resizable=false;
+
+	//NOTE: generic button format (x, y, ItemID, ItemID pressed, ButtonID )
 
 			AddPage(1);
 
-	//fundo cinza
-	//x, y, largura, altura, item
-			AddBackground( 0, 0, 200, 440, 5054 );
-	//----------
-			AddLabel( 30, 2, 200, "CREATE WORLD GUMP" );
-	//fundo branco
-	//x, y, largura, altura, item
-			AddImageTiled( 10, 20, 180, 380, 3004 );
-	//----------
-			AddLabel( 20, 26, 200, "Moongen" );
-			AddLabel( 20, 51, 200, "DoorGen" );
-			AddLabel( 20, 76, 200, "Decorate" );
-			AddLabel( 20, 101, 200, "SignGen" );
-			AddLabel( 20, 126, 200, "TelGen" );
-			AddLabel( 20, 151, 200, "GenGauntlet" );
-			AddLabel( 20, 176, 246, "GenChampions" );
-			AddLabel( 20, 201, 200, "GenKhaldun" );
-			AddLabel( 20, 226, 200, "GenerateFactions" );
-			AddLabel( 20, 251, 200, "GenStealArties" );
-			AddLabel( 20, 276, 200, "SHTelGen" );
-			AddLabel( 20, 301, 200, "SecretLocGen" );
-			AddLabel( 20, 326, 246, "DecorateML" );
-			AddLabel( 20, 351, 246, "DecorateSA" );
-			AddLabel( 20, 376, 200, "DecorateMag" );
+	//Background (x, y, largura, altura, item)
+			AddBackground(76, 70, 606, 472, 9200);
+			AddImageTiled(26, 42, 74, 414, 10440);
+	//Page change
+			AddLabel(614, 80, 52, @"1/2");
+			AddButton(647, 82, 5601, 5605, 0, GumpButtonType.Page, 2);
+	//Titles
+			AddLabel(330, 80, 52, @"CREATE WORLD");
+			AddLabel(104, 109, 52, @"Select UO Era");
+			AddLabel(220, 109, 52, @"Short description of the Era");
 	//Options
-			AddCheck( 160, 23, 210, 211, true, 101 );
-			AddCheck( 160, 48, 210, 211, true, 102 );
-			AddCheck( 160, 73, 210, 211, true, 103 );
-			AddCheck( 160, 98, 210, 211, true, 104 );
-			AddCheck( 160, 123, 210, 211, true, 105 );
-			AddCheck( 160, 148, 210, 211, true, 106 );
-			AddCheck( 160, 173, 210, 211, true, 107 );
-			AddCheck( 160, 198, 210, 211, true, 108 );
-			AddCheck( 160, 223, 210, 211, true, 109 );
-			AddCheck( 160, 248, 210, 211, true, 110 );
-			AddCheck( 160, 273, 210, 211, true, 111 );
-			AddCheck( 160, 298, 210, 211, true, 112 );
-			AddCheck( 160, 323, 210, 211, true, 113 );
-			AddCheck( 160, 348, 210, 211, true, 114 );
-			AddCheck( 160, 373, 210, 211, true, 115 );
-	//Ok, Cancel (x, y, ?, ?, ?)
-			AddButton( 30, 409, 247, 249, 1, GumpButtonType.Reply, 0 );
-			AddButton( 100, 409, 241, 243, 0, GumpButtonType.Reply, 0 );
+			AddLabel(104, 142, 87, @"Samurai Empire");
+			AddButton(104, 168, 4005, 4006, 10, GumpButtonType.Reply, 0);
+			AddHtml( 220, 142, 444, 81, @"DATE: Nov/2004
+				CLIENTS: 4.0.5a to 4.0.11c
+				DESCRIPTION: This expansion added Tokuno facet, new monsters and two new classes: Samurai and Ninja.
+				EVENTS: Britain invasion by lizardmen (Jan-May/2005) brought a few new decorations.", (bool)true, (bool)true);
+			AddLabel(104, 242, 87, @"Mondain's Legacy");
+			AddButton(104, 268, 4005, 4006, 11, GumpButtonType.Reply, 0);
+			AddHtml( 220, 242, 444, 81, @"DATE: Aug/2005
+				CLIENTS: 4.0.11d to 5.0.9.1
+				DESCRIPTION: This expansion added new race Elves, spellweaving, Heartwood town, new dungeons and new monsters.
+				EVENTS: New town and dungeons brought new decorations. There was no special event.", (bool)true, (bool)true);
+			AddLabel(104, 342, 87, @"Kingdom's Reborn");
+			AddLabel(170, 368, 87, @"Age I");
+			AddButton(104, 368, 4005, 4006, 12, GumpButtonType.Reply, 0);
+			AddHtml( 220, 342, 444, 81, @"DATE: Apr/2007
+				CLIENTS: 6.0.0.0 to 6.0.3.1
+				DESCRIPTION: Kingdom Reborn was not considered an expansion pack, but I use the coincidence of this client release to date some important events that, in practice, occurred during Mondain's Legacy Era.
+				EVENTS: Haven was destroyed, presumably at the hands of Blackrock traders. There are now two cities: New Haven (starting city), and Old Haven (in ruins). So we have new decorations.", (bool)true, (bool)true);
+			AddLabel(104, 442, 87, @"Kingdom's Reborn");
+			AddLabel(170, 469, 87, @"Age II");
+			AddButton(104, 468, 4005, 4006, 13, GumpButtonType.Reply, 0);
+			AddHtml( 220, 442, 444, 81, @"DATE: Oct/2007
+				CLIENTS: 6.0.4.0 to 6.0.14.3
+				DESCRIPTION: As explained in Kingdom Reborn, Age I.
+				EVENTS: Warriors of Destiny event cycle. City of Magincia was invaded, and destroyed, by Demonic entities. So we have new decorations.", (bool)true, (bool)true);
+
+			AddPage(2);
+
+	//Background (x, y, largura, altura, item)
+			AddBackground(76, 70, 606, 472, 9200);
+			AddImageTiled(26, 42, 74, 414, 10440);
+	//Page change
+			AddLabel(614, 80, 52, @"2/2");
+			AddButton(590, 82, 5603, 5607, 0, GumpButtonType.Page, 1);
+	//Titles
+			AddLabel(330, 80, 52, @"CREATE WORLD");
+			AddLabel(104, 109, 52, @"Select UO Era");
+			AddLabel(220, 109, 52, @"Short description of the Era");
+	//Options
+			AddLabel(104, 142, 87, @"Stygian Abyss");
+			AddButton(104, 168, 4005, 4006, 14, GumpButtonType.Reply, 0);
+			AddHtml( 220, 142, 444, 81, @"DATE: Nov/2009
+				CLIENTS: 6.0.14.4 to 7.0.8.2
+				DESCRIPTION: This expansion added the new race Gargoyles and new places, towns and dungeons.
+				EVENTS: New town and dungeons brought new decorations. There was no special event.", (bool)true, (bool)true);
+			AddLabel(104, 242, 87, @"High Seas - Age I");
+			AddButton(104, 268, 4005, 4006, 15, GumpButtonType.Reply, 0);
+			AddHtml( 220, 242, 444, 81, @"DATE: Oct/2010
+				CLIENTS: 7.0.9.0 to 7.0.13.0
+				DESCRIPTION: This expansion added sea stuff: new ships, sea market (Dock Town), pirates etc.
+				EVENTS: New town and stuff brought new decorations. There was no special event, yet.", (bool)true, (bool)true);
+			AddLabel(104, 342, 87, @"High Seas - Age II");
+			AddButton(104, 368, 4005, 4006, 16, GumpButtonType.Reply, 0);
+			AddHtml( 220, 342, 444, 81, @"DATE: Mar/2011
+				CLIENTS: 7.0.13.1 up to the present day.
+				DESCRIPTION: As explained in High Seas, Age I.
+				EVENTS: A 'New Magincia' was built. So 'Old Magincia' rubbles was removed, and was added new decorations.", (bool)true, (bool)true);
+        }
+		
+		public static void DoThis( Mobile from, string command)
+		{
+			from.Say( "Generating world decoration..." );
+			string prefix = Server.Commands.CommandSystem.Prefix;
+			CommandSystem.Handle( from, String.Format( "{0}{1}", prefix, command ) );
+		}
+		
+		public static void DoBegin()
+		{
+			DoThis( from, "Moongen" );
+			DoThis( from, "DoorGen" );
 		}
 
-		public override void OnResponse( NetState state, RelayInfo info ) 
+		public static void DoEnd()
+		{
+			DoThis( from, "SignGen" );
+			DoThis( from, "TelGen" );
+			DoThis( from, "GenGauntlet" );
+			DoThis( from, "GenChampions" );
+			DoThis( from, "GenKhaldun" );
+			DoThis( from, "GenerateFactions" );
+			DoThis( from, "GenStealArties" );
+			DoThis( from, "SHTelGen" );
+			DoThis( from, "SecretLocGen" );
+		}
+
+		public override void OnResponse( NetState sender, RelayInfo info ) 
 		{ 
-			Mobile from = state.Mobile; 
+			Mobile from = sender.Mobile; 
 
 			switch( info.ButtonID ) 
 			{ 
-				case 0: // Closed or Cancel
+				case 0: // Closed or Canceled
 				{
-					return;
-				}
-
-				default: 
-				{ 
-					// Make sure that the OK, button was pressed
-					if( info.ButtonID == 1 )
-					{
-						// Get the array of switches selected
-						ArrayList Selections = new ArrayList( info.Switches );
-						string prefix = Server.Commands.CommandSystem.Prefix;
-
-						from.Say( "CREATING WORLD..." );
-
-						// Now use any selected command
-						if( Selections.Contains( 101 ) == true )
-						{
-							from.Say( "Generating moongates..." );
-							CommandSystem.Handle( from, String.Format( "{0}moongen", prefix ) );
-						}
-
-						if( Selections.Contains( 102 ) == true )
-						{
-							from.Say( "Generating doors..." );
-							CommandSystem.Handle( from, String.Format( "{0}doorgen", prefix ) );
-						}
-
-						if( Selections.Contains( 103 ) == true )
-						{
-							from.Say( "Decorating world..." );
-							CommandSystem.Handle( from, String.Format( "{0}decorate", prefix ) );
-						}
-
-						if( Selections.Contains( 104 ) == true )
-						{
-							from.Say( "Generating signs..." );
-							CommandSystem.Handle( from, String.Format( "{0}signgen", prefix ) );
-						}
-
-						if( Selections.Contains( 105 ) == true )
-						{
-							from.Say( "Generating teleporters..." );
-							CommandSystem.Handle( from, String.Format( "{0}telgen", prefix ) );
-						}
-
-						if( Selections.Contains( 106 ) == true )
-						{
-							from.Say( "Generating Gauntlet spawners..." );
-							CommandSystem.Handle( from, String.Format( "{0}gengauntlet", prefix ) );
-						}
-
-						if( Selections.Contains( 107 ) == true )
-						{
-							// champions message in champions script
-							CommandSystem.Handle( from, String.Format( "{0}genchampions", prefix ) );
-						}
-
-						if( Selections.Contains( 108 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}genkhaldun", prefix ) );
-						}
-
-						if( Selections.Contains( 109 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}generatefactions", prefix ) );
-							from.Say( "Factions Generated!" );
-						}
-
-						if( Selections.Contains( 110 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}genstealarties", prefix ) );
-							from.Say( "Stealable Artifacts Generated!" );
-						}
-
-						if( Selections.Contains( 111 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}shtelgen", prefix ) );
-						}
-
-						if( Selections.Contains( 112 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}secretlocgen", prefix ) );
-						}
-
-						if( Selections.Contains( 113 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}decorateml", prefix ) );
-						}
-						if( Selections.Contains( 114 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}decoratesa", prefix ) );
-						}
-						if( Selections.Contains( 115 ) == true )
-						{
-							CommandSystem.Handle( from, String.Format( "{0}decoratemag", prefix ) );
-						}
-					}
-
-					from.Say( "World generation completed!" );
-
 					break;
-				} 
+				}
+				case 10:
+				{
+					DoBegin();
+					DoThis( from, "DecorateSE" );
+					DoEnd();
+					break;
+				}
+				case 11:
+				{
+					DoBegin();
+					DoThis( from, "DecorateML" );
+					DoEnd();
+					break;
+				}
+				case 12:
+				{
+					DoBegin();
+					DoThis( from, "DecorateKRfirstAge" );
+					DoEnd();
+					break;
+				}
+				case 13:
+				{
+					DoBegin();
+					DoThis( from, "DecorateKRsecondAge" );
+					DoEnd();
+					break;
+				}
+				case 14:
+				{
+					DoBegin();
+					DoThis( from, "DecorateSA" );
+					DoEnd();
+					break;
+				}
+				case 15:
+				{
+					DoBegin();
+					DoThis( from, "DecorateHSfirstAge" );
+					DoEnd();
+					break;
+				}
+				case 16:
+				{
+					DoBegin();
+					DoThis( from, "DecorateHSsecondAge" );
+					DoEnd();
+					break;
+				}
 			} 
 		}
 	}
