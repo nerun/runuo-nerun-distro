@@ -33,7 +33,7 @@ namespace Server.Commands
 			//SE
 			Decorate.Generate( "Data/Decoration/Nerun/06-SE/Britannia", Map.Trammel, Map.Felucca );
 
-            e.Mobile.SendMessage("Samurai Empire Decoration Completed.");
+            e.Mobile.SendMessage("Samurai Empire decorated.");
         }
 
         [Usage("DecorateDeleteSE")]
@@ -73,7 +73,7 @@ namespace Server.Commands
 			Decorate.Generate( "Data/Decoration/Nerun/07-ML/Ilshenar", Map.Ilshenar );
 			Decorate.Generate( "Data/Decoration/Nerun/07-ML/Malas", Map.Malas );
 
-            e.Mobile.SendMessage("Mondain's Legacy Decoration Completed.");
+            e.Mobile.SendMessage("Mondain's Legacy decorated.");
         }
 
         [Usage("DecorateDeleteML")]
@@ -115,7 +115,7 @@ namespace Server.Commands
 			//KR
 			Decorate.Generate( "Data/Decoration/Nerun/08-KR/Trammel", Map.Trammel );
 
-            e.Mobile.SendMessage("Kingdom's Reborn First Age Decoration Completed.");
+            e.Mobile.SendMessage("Kingdom's Reborn - I decorated.");
         }
 
         [Usage("DecorateDeleteKRfirstAge")]
@@ -149,7 +149,7 @@ namespace Server.Commands
 			//Remove some default decorations
 			DecorateDelete.RemoveOne( "Data/Decoration/Britannia", "magincia.cfg", Map.Trammel, Map.Felucca );
 
-            e.Mobile.SendMessage("Kingdom's Reborn Second Age Decoration Completed.");
+            e.Mobile.SendMessage("Kingdom's Reborn - II decorated.");
         }
 
         [Usage("DecorateDeleteKRsecondAge")]
@@ -183,7 +183,7 @@ namespace Server.Commands
 			Decorate.Generate( "Data/Decoration/Nerun/09-SA/TerMur", Map.TerMur );
 			Decorate.Generate( "Data/Decoration/Nerun/09-SA/Trammel", Map.Trammel );
 
-            e.Mobile.SendMessage("Stygian Abyss Decoration Completed.");
+            e.Mobile.SendMessage("Stygian Abyss decorated.");
         }
 
         [Usage("DecorateDeleteSA")]
@@ -216,7 +216,7 @@ namespace Server.Commands
 			//Nerun's Distro custom decoration
 			Decorate.Generate( "Data/Decoration/Nerun/10-HS/Britannia", Map.Trammel, Map.Felucca );
 
-            e.Mobile.SendMessage("High Seas First Age Decoration Completed.");
+            e.Mobile.SendMessage("High Seas - I decorated.");
         }
 
         [Usage("DecorateDeleteHSfirstAge")]
@@ -248,7 +248,7 @@ namespace Server.Commands
 			DecorateDelete.Remove( "Data/Decoration/RuinedMaginciaTram", Map.Trammel );
 			DecorateDelete.Remove( "Data/Decoration/RuinedMaginciaFel", Map.Felucca );
 
-            e.Mobile.SendMessage("High Seas Second Age Decoration Completed.");
+            e.Mobile.SendMessage("High Seas - II decorated.");
         }
 
         [Usage("DecorateDeleteHSsecondAge")]

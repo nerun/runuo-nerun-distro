@@ -121,7 +121,6 @@ namespace Server.Gumps
 		
 		public static void DoThis( Mobile from, string command)
 		{
-			from.Say( "Generating world decoration..." );
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( from, String.Format( "{0}{1}", prefix, command ) );
 		}
