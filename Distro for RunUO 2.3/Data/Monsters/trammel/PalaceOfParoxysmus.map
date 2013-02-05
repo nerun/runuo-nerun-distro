@@ -9,7 +9,7 @@ overridemaxtime 10
 ##
 ## Palace of Paroxysmus
 ##
-*|daemon:succubus|InterredGrizzle:poisonelemental|plaguebeast:plaguespawn|corrosiveslime|putrifier|plaguebeastlord|6295|616|-50|1|5|10|50|50|1|6|6|6|3|3|3
+*|daemon:succubus|InterredGrizzle:poisonelemental|plaguebeast:plaguespawn|corrosiveslime|putrefier|plaguebeastlord|6295|616|-50|1|5|10|50|50|1|6|6|6|3|3|3
 *|InterredGrizzle|corrosiveslime|poisonelemental|balron:succubus:daemon|plaguebeastlord:plaguebeast:plaguespawn||6384|580|-50|1|5|10|30|30|1|4|4|3|9|11|0
 *|poisonelemental||||||6328|517|-50|1|5|10|10|10|1|4|0|0|0|0|0
 *|plaguebeast:corrosiveslime|poisonelemental:plaguespawn|||||6354|455|-40|1|5|10|20|20|1|5|5|0|0|0|0
