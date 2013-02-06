@@ -2,13 +2,8 @@
 *Script Name: Static Exporter
 *Author: Nerun
 *Rewritten by: Joeku
-*For use with RunUO 2.0 RC2
-*Client Tested with: 6.0.9.1
-*Version: 2.00
-*Initial Release: 04/13/05
-*Revision Date: 08/09/08
+*Revised by: Nerun
 **************************************/
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,15 +29,25 @@ namespace Joeku.SE
 			CommandSystem.Register("StaEx" , AccessLevel.Administrator, new CommandEventHandler(StaticExport_OnCommand));
 		}
 
-		[Usage( "StaticExport [string filename]" )]
+		[Usage( "StaticExport <filename> with or without <x1> <y1> <x2> <y2>" )]
 		[Aliases( "StaEx" )]
 		[Description( "Exports statics to a cfg decoration file." )]
 		public static void StaticExport_OnCommand(CommandEventArgs e )
 		{
-			if( e.Arguments.Length > 0 )
+			if( e.Arguments.Length == 1 )
+			{
 				BeginStaEx(e.Mobile, e.ArgString );
+			}
+			else if( e.Arguments.Length == 5 )
+			{
+				int x1 = Utility.ToInt32( e.Arguments[1] );
+				int y1 = Utility.ToInt32( e.Arguments[2] );
+				int x2 = Utility.ToInt32( e.Arguments[3] );
+				int y2 = Utility.ToInt32( e.Arguments[4] );
+				ExportXY( e.Mobile, e.Arguments[0], x1, y1, x2, y2 );
+			}
 			else
-				e.Mobile.SendMessage("Format: StaticExport [string filename]" );
+				e.Mobile.SendMessage("Format: StaticExport <filename>" );
 		}
 
 		public static void BeginStaEx(Mobile mob, string file )
@@ -57,6 +62,11 @@ namespace Joeku.SE
 
 			Export(mob, file, new Rectangle2D(new Point2D(start.X, start.Y), new Point2D(end.X+1, end.Y+1)));
 		}
+		
+		private static void ExportXY(Mobile mob, string file, int ax, int ay, int bx, int by)
+		{
+			Export( mob, file, new Rectangle2D( new Point2D(ax, ay), new Point2D(bx, by) ) );
+		}
 
 		private static void Export(Mobile mob, string file, Rectangle2D rect)
 		{
@@ -70,9 +80,10 @@ namespace Joeku.SE
 
 				mob.SendMessage("Exporting statics...");
 
-				op.WriteLine("# Saved By Static Exporter");
-				op.WriteLine("# StaticExport by Nerun");
+				op.WriteLine("# Saved by Static Exporter");
+				op.WriteLine("# Author: Nerun");
 				op.WriteLine("# Rewritten by Joeku");
+				op.WriteLine("# Revised by Nerun");
 				op.WriteLine();
 
 				IPooledEnumerable eable = mob.Map.GetItemsInBounds(rect);
@@ -258,9 +269,15 @@ namespace Joeku.SE
 				Add("Name", item.Name);
 			if( item.Amount > 1 )
 				Add("Amount", item.Amount.ToString());
-
+			
 			s = String.Format("{0} {1}", ConstructType(item), itemID);
 
+			if( item is Sign )
+				s = String.Format("Static {0}", itemID);
+
+			if( item is LocalizedSign )
+				s = String.Format("LocalizedSign {0}", itemID);
+			
 			if( List.Count > 0 )
 			{
 				s += " (";
