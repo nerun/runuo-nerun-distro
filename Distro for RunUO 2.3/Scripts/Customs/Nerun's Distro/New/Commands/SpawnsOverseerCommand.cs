@@ -1,4 +1,4 @@
-// Engine r103
+// Engine r117
 using System;
 using System.IO;
 using System.Collections;
@@ -29,12 +29,12 @@ namespace Server.Commands
 
 			m_Mobile.SendMessage( "Generating Spawns' Overseers, please wait." );
 
-			Generate( "Data/Monsters/overseers/Trammel", Map.Trammel );
-			Generate( "Data/Monsters/overseers/Felucca", Map.Felucca );
-			Generate( "Data/Monsters/overseers/Ilshenar", Map.Ilshenar );
-			Generate( "Data/Monsters/overseers/Malas", Map.Malas );
-			Generate( "Data/Monsters/overseers/Tokuno", Map.Tokuno );
-			Generate( "Data/Monsters/overseers/Termur", Map.TerMur );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/Trammel", Map.Trammel );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/Felucca", Map.Felucca );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/Ilshenar", Map.Ilshenar );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/Malas", Map.Malas );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/Tokuno", Map.Tokuno );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/Termur", Map.TerMur );
 			
 			m_Mobile.SendMessage( "Spawns' Overseers generation complete. {0} seers were generated.", m_Count );
 		}

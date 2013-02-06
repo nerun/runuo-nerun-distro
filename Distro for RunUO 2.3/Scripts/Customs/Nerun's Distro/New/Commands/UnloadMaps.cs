@@ -138,7 +138,7 @@ namespace Server.Gumps
 			AddLabel(315, 162, 200, @"OUTDOORS");
 			AddLabel(316, 187, 52, @"Animals");
 			AddLabel(316, 207, 52, @"Lost Lands");
-			AddLabel(316, 229, 52, @"Monsters");
+			AddLabel(316, 229, 52, @"Spawns");
 			AddLabel(316, 249, 52, @"Reagents");
 			AddLabel(316, 270, 52, @"Sea Life");
 			AddLabel(413, 162, 200, @"Felucca");

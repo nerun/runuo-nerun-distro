@@ -1,4 +1,4 @@
-//Engine r55
+//Engine r117
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,6 @@ using Server.Items;
 using Server.Network;
 using Server.Commands;
 using Server.Regions;
-
 
 namespace Server
 {
@@ -33,7 +32,7 @@ namespace Server
 		[Description( "Complex command, it generate and remove spawners." )]
 		private static void SpawnGen_OnCommand( CommandEventArgs e )
 		{
-			//wrog use
+			//wrong use
 			if ( e.ArgString == null || e.ArgString == "" )
 			{
 				e.Mobile.SendMessage( "Usage: SpawnGen [<filename>]|[remove <region>|<rect>|<ID>]|[save <region>|<rect>|<ID>]" );
@@ -304,10 +303,10 @@ namespace Server
 			{
 				Talk("saved");
 				
-				if ( !Directory.Exists( "Data/Monsters" ) )
-					Directory.CreateDirectory( "Data/Monsters" );
+				if ( !Directory.Exists( "Data/Nerun's Distro/Spawns" ) )
+					Directory.CreateDirectory( "Data/Nerun's Distro/Spawns" );
 
-				string escreva = "Data/Monsters/" + mapanome + ".map";
+				string escreva = "Data/Nerun's Distro/Spawns/" + mapanome + ".map";
 
 				using ( StreamWriter op = new StreamWriter( escreva ) )
 				{
@@ -426,7 +425,7 @@ namespace Server
 
 		public static void Parse( Mobile from, string filename )
 		{
-			string monster_path1 = Path.Combine( Core.BaseDirectory, "Data/Monsters" );
+			string monster_path1 = Path.Combine( Core.BaseDirectory, "Data/Nerun's Distro/Spawns" );
 			string monster_path = Path.Combine( monster_path1, filename );
 			m_Count = 0;
 

@@ -32,10 +32,10 @@ namespace Server.Commands
 			Map map = e.Mobile.Map;
 			List<Item> list = new List<Item>();
 
-			if ( !Directory.Exists( @".\Data\Monsters\" ) )
-				Directory.CreateDirectory( @".\Data\Monsters\" );
+			if ( !Directory.Exists( @".\Data\Nerun's Distro\Spawns\" ) )
+				Directory.CreateDirectory( @".\Data\Nerun's Distro\Spawns\" );
 
-			using ( StreamWriter op = new StreamWriter( String.Format( @".\Data\Monsters\{0}-exported.map", map ) ) )
+			using ( StreamWriter op = new StreamWriter( String.Format( @".\Data\Nerun's Distro\Spawns\{0}-exported.map", map ) ) )
 			{
 
 				if ( map == null || map == Map.Internal )

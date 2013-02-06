@@ -31,7 +31,7 @@ namespace Server.Commands
 			//Remove some default decorations
 			DecorateDelete.RemoveOne( "Data/Decoration/Britannia", "britain.cfg", Map.Trammel, Map.Felucca );
 			//SE
-			Decorate.Generate( "Data/Decoration/Nerun/06-SE/Britannia", Map.Trammel, Map.Felucca );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/06-SE/Britannia", Map.Trammel, Map.Felucca );
 
             e.Mobile.SendMessage("Samurai Empire decorated.");
         }
@@ -45,7 +45,7 @@ namespace Server.Commands
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateDelete", prefix ) );
 			
 			//Nerun's Distro custom decoration
-			DecorateDelete.Remove( "Data/Decoration/Nerun/06-SE/Britannia", Map.Trammel, Map.Felucca );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/06-SE/Britannia", Map.Trammel, Map.Felucca );
 
             e.Mobile.SendMessage("Decoration removal completed.");
         }
@@ -67,11 +67,11 @@ namespace Server.Commands
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateSE", prefix ) );
 			//ML
-			Decorate.Generate( "Data/Decoration/Nerun/07-ML/Britannia", Map.Trammel, Map.Felucca );
-			Decorate.Generate( "Data/Decoration/Nerun/07-ML/Felucca", Map.Felucca );
-			Decorate.Generate( "Data/Decoration/Nerun/07-ML/Trammel", Map.Trammel );
-			Decorate.Generate( "Data/Decoration/Nerun/07-ML/Ilshenar", Map.Ilshenar );
-			Decorate.Generate( "Data/Decoration/Nerun/07-ML/Malas", Map.Malas );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/07-ML/Britannia", Map.Trammel, Map.Felucca );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/07-ML/Felucca", Map.Felucca );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/07-ML/Trammel", Map.Trammel );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/07-ML/Ilshenar", Map.Ilshenar );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/07-ML/Malas", Map.Malas );
 
             e.Mobile.SendMessage("Mondain's Legacy decorated.");
         }
@@ -84,11 +84,11 @@ namespace Server.Commands
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateDeleteSE", prefix ) );
 			//Nerun's Distro custom decoration
-			DecorateDelete.Remove( "Data/Decoration/Nerun/07-ML/Britannia", Map.Trammel, Map.Felucca );
-			DecorateDelete.Remove( "Data/Decoration/Nerun/07-ML/Felucca", Map.Felucca );
-			DecorateDelete.Remove( "Data/Decoration/Nerun/07-ML/Trammel", Map.Trammel );
-			DecorateDelete.Remove( "Data/Decoration/Nerun/07-ML/Ilshenar", Map.Ilshenar );
-			DecorateDelete.Remove( "Data/Decoration/Nerun/07-ML/Malas", Map.Malas );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/07-ML/Britannia", Map.Trammel, Map.Felucca );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/07-ML/Felucca", Map.Felucca );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/07-ML/Trammel", Map.Trammel );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/07-ML/Ilshenar", Map.Ilshenar );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/07-ML/Malas", Map.Malas );
         }
     }
 
@@ -113,7 +113,7 @@ namespace Server.Commands
 			DecorateDelete.RemoveOne( "Data/Decoration/Trammel", "haven.cfg", Map.Trammel );
 			DecorateDelete.RemoveOne( "Data/Decoration/Trammel", "uzeraan turmoil quest.cfg", Map.Trammel );
 			//KR
-			Decorate.Generate( "Data/Decoration/Nerun/08-KR/Trammel", Map.Trammel );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/08-KR/Trammel", Map.Trammel );
 
             e.Mobile.SendMessage("Kingdom's Reborn - I decorated.");
         }
@@ -126,7 +126,7 @@ namespace Server.Commands
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateDeleteML", prefix ) );
 			//Nerun's Distro custom decoration
-			DecorateDelete.Remove( "Data/Decoration/Nerun/08-KR/Trammel", Map.Trammel );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/08-KR/Trammel", Map.Trammel );
         }
     }
 
@@ -180,8 +180,8 @@ namespace Server.Commands
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateKRsecondAge", prefix ) );
 			//Nerun's Distro custom decoration
-			Decorate.Generate( "Data/Decoration/Nerun/09-SA/TerMur", Map.TerMur );
-			Decorate.Generate( "Data/Decoration/Nerun/09-SA/Trammel", Map.Trammel );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/09-SA/TerMur", Map.TerMur );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/09-SA/Trammel", Map.Trammel );
 
             e.Mobile.SendMessage("Stygian Abyss decorated.");
         }
@@ -193,8 +193,8 @@ namespace Server.Commands
         {
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateDeleteKRsecondAge", prefix ) );
-			DecorateDelete.Remove( "Data/Decoration/Nerun/09-SA/TerMur", Map.TerMur );
-			DecorateDelete.Remove( "Data/Decoration/Nerun/09-SA/Trammel", Map.Trammel );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/09-SA/TerMur", Map.TerMur );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/09-SA/Trammel", Map.Trammel );
         }
     }
 
@@ -214,7 +214,7 @@ namespace Server.Commands
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateSA", prefix ) );
 			//Nerun's Distro custom decoration
-			Decorate.Generate( "Data/Decoration/Nerun/10-HS/Britannia", Map.Trammel, Map.Felucca );
+			Decorate.Generate( "Data/Nerun's Distro/Decoration/10-HS/Britannia", Map.Trammel, Map.Felucca );
 
             e.Mobile.SendMessage("High Seas - I decorated.");
         }
@@ -226,7 +226,7 @@ namespace Server.Commands
         {
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateDeleteSA", prefix ) );
-			DecorateDelete.Remove( "Data/Decoration/Nerun/10-HS/Britannia", Map.Trammel, Map.Felucca );
+			DecorateDelete.Remove( "Data/Nerun's Distro/Decoration/10-HS/Britannia", Map.Trammel, Map.Felucca );
         }
     }
 

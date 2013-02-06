@@ -1,5 +1,4 @@
-// By Nerun
-// Engine r25
+// Engine r117
 using System;
 using System.Collections;
 using System.IO;
@@ -88,7 +87,7 @@ namespace Server.Gumps
 			AddButton( 140, 32, 0x15E1, 0x15E5, 101, GumpButtonType.Reply, 0 );
 
 			AddLabel( 15, 60, 52, "Tip:" );
-			AddHtml( 15, 80, 200, 110, "This will SAVE the spawners, in a specified region, to Data/Monsters/'region name'.map. Type [where if you don't know the region you are. Copy to the text box the name of the region. You also can open Data/Regions.xml to a full list of regions.<BR>Example: you type [where and appear 'your region is town of Britain'. Type 'Britain' in text box.", true, true );
+			AddHtml( 15, 80, 200, 110, "This will SAVE the spawners, in a specified region, to Data/Nerun's Distro/Spawns/'region name'.map. Type [where if you don't know the region you are. Copy to the text box the name of the region. You also can open Data/Regions.xml to a full list of regions.<BR>Example: you type [where and appear 'your region is town of Britain'. Type 'Britain' in text box.", true, true );
 		}
 
 		public override void OnResponse(NetState state, RelayInfo info)
