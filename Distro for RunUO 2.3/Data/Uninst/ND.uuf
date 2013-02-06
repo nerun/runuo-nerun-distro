@@ -5,8 +5,6 @@
 # - don't edit it!                      #
 #                                       #
 #########################################
-rm/Data/signs.cfg
-rn/Data/signs.cfg.bak
 rm/Data/treasure.cfg
 rn/Data/treasure.cfg.bak
 rm/Data/Locations/felucca.xml
