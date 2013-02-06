@@ -1,4 +1,4 @@
-// Engine r114
+// Engine r119
 using System;
 using System.Collections;
 using System.IO;
@@ -133,7 +133,7 @@ namespace Server.Gumps
 
 		public static void DoEnd( Mobile from )
 		{
-			DoThis( from, "SignGen" );
+			DoThis( from, "SignPut" ); // Replaces [SignGen
 			DoThis( from, "TelGen" );
 			DoThis( from, "GenGauntlet" );
 			DoThis( from, "GenChampions" );
@@ -173,12 +173,15 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateKRfirstAge" );
 					DoEnd( from );
+					DoThis( from, "SignDel KR1" );
 					break;
 				}
 				case 13:
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateKRsecondAge" );
+					DoThis( from, "SignDel KR1" );
+					DoThis( from, "SignDel KR2" );
 					DoEnd( from );
 					break;
 				}
@@ -186,6 +189,8 @@ namespace Server.Gumps
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateSA" );
+					DoThis( from, "SignDel KR1" );
+					DoThis( from, "SignDel KR2" );
 					DoEnd( from );
 					break;
 				}
@@ -193,6 +198,8 @@ namespace Server.Gumps
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateHSfirstAge" );
+					DoThis( from, "SignDel KR1" );
+					DoThis( from, "SignDel KR2" );
 					DoEnd( from );
 					break;
 				}
@@ -200,6 +207,8 @@ namespace Server.Gumps
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateHSsecondAge" );
+					DoThis( from, "SignDel KR1" );
+					DoThis( from, "SignDel KR2" );
 					DoEnd( from );
 					break;
 				}
