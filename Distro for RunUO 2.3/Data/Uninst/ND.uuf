@@ -9,7 +9,6 @@ rm/Data/signs.cfg
 rn/Data/signs.cfg.bak
 rm/Data/treasure.cfg
 rn/Data/treasure.cfg.bak
-sh/Data/Decoration/Nerun
 rm/Data/Locations/felucca.xml
 rn/Data/Locations/felucca.xml.bak
 rm/Data/Locations/termur.xml
@@ -17,7 +16,7 @@ rm/Data/Locations/trammel.xml
 rn/Data/Locations/trammel.xml.bak
 rm/Data/Locations/malas.xml
 rn/Data/Locations/malas.xml.bak
-sh/Data/Monsters
+sh/Data/Nerun's Distro
 rm/Scripts/Commands/GenTeleporter.cs
 rn/Scripts/Commands/GenTeleporter.cs.bak
 sh/Scripts/Customs/Nerun's Distro
