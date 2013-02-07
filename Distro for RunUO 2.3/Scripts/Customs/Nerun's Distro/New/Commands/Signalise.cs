@@ -105,7 +105,7 @@ namespace Server.Commands
 
 					while ( (line = ip.ReadLine()) != null )
 					{
-						if ( !line.StartsWith("#") && !string.IsNullOrWhiteSpace( line ) ) // If not comment or blank Line
+						if ( !line.StartsWith("#") && line != null && line != "" && line != " " ) // If not comment or blank Line
 						{
 							string[] split = line.Split( ' ' );
 

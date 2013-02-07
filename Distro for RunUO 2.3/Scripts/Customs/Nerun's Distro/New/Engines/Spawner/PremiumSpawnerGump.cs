@@ -1,4 +1,4 @@
-//Engine r73
+//Engine r120
 using System;
 using System.Collections;
 using Server.Network;
@@ -30,7 +30,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 1001, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1000, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -80,7 +80,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 1002, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1000, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -129,7 +129,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 1003, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1000, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -178,7 +178,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 1004, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1000, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -227,7 +227,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 1005, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1000, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -276,7 +276,7 @@ namespace Server.Mobiles
 			AddLabel( 215, 3, 52, "PREMIUM SPAWNER" );
 			AddBlackAlpha( 213, 23, 125, 270 );
 
-			AddButton( 260, 40, 0xFB7, 0xFB9, 1006, GumpButtonType.Reply, 0 );
+			AddButton( 260, 40, 0xFB7, 0xFB9, 1000, GumpButtonType.Reply, 0 );
 			AddLabel( 260, 60, 52, "Okay" );
 
 			AddButton( 260, 90, 0xFB4, 0xFB6, 200, GumpButtonType.Reply, 0 );
@@ -354,7 +354,7 @@ namespace Server.Mobiles
 			TextRelay entry = info.GetTextEntry( Type );
 			return entry.Text;
 		}
-
+		
 		public override void OnResponse( NetState state, RelayInfo info )
 		{
 			if ( m_Spawner.Deleted )
@@ -371,9 +371,18 @@ namespace Server.Mobiles
 					m_Spawner.BringToHome();
 					break;
 				}
-				case 300: // Complete respawn
+				case 300: // Total respawn
 				{
+					// 1st save changes
+					m_Spawner.CreaturesName = CreateArray( info, state.Mobile, 100 );
+					m_Spawner.SubSpawnerA = CreateArray( info, state.Mobile, 200 );
+					m_Spawner.SubSpawnerB = CreateArray( info, state.Mobile, 300 );
+					m_Spawner.SubSpawnerC = CreateArray( info, state.Mobile, 400 );
+					m_Spawner.SubSpawnerD = CreateArray( info, state.Mobile, 500 );
+					m_Spawner.SubSpawnerE = CreateArray( info, state.Mobile, 600 );
+					// then respwan
 					m_Spawner.Respawn();
+					m_Spawner.Running = true;
 					break;
 				}
 				case 400: // Props
@@ -382,38 +391,19 @@ namespace Server.Mobiles
 					state.Mobile.SendGump( new PremiumSpawnerGump( m_Spawner ) );
 					break;
 				}
-				case 500: // Cancel (button "Cancel")
+				case 500: // Cancel button
 				{
 					break;
 				}
-				case 1001: // Okay
+				case 1000: // Okay
 				{
 					m_Spawner.CreaturesName = CreateArray( info, state.Mobile, 100 );
-					break;
-				}
-				case 1002: // Okay
-				{
 					m_Spawner.SubSpawnerA = CreateArray( info, state.Mobile, 200 );
-					break;
-				}
-				case 1003: // Okay
-				{
 					m_Spawner.SubSpawnerB = CreateArray( info, state.Mobile, 300 );
-					break;
-				}
-				case 1004: // Okay
-				{
 					m_Spawner.SubSpawnerC = CreateArray( info, state.Mobile, 400 );
-					break;
-				}
-				case 1005: // Okay
-				{
 					m_Spawner.SubSpawnerD = CreateArray( info, state.Mobile, 500 );
-					break;
-				}
-				case 1006: // Okay
-				{
 					m_Spawner.SubSpawnerE = CreateArray( info, state.Mobile, 600 );
+					m_Spawner.Running = true;
 					break;
 				}
 				default:
@@ -495,6 +485,7 @@ namespace Server.Mobiles
 						m_Spawner.SubSpawnerC = CreateArray( info, state.Mobile, 400 );
 						m_Spawner.SubSpawnerD = CreateArray( info, state.Mobile, 500 );
 						m_Spawner.SubSpawnerE = CreateArray( info, state.Mobile, 600 );
+						m_Spawner.Running = true;
 					}
 
 					break;
