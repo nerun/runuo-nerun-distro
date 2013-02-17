@@ -145,6 +145,8 @@ namespace Server.Commands
         {
 			string prefix = Server.Commands.CommandSystem.Prefix;
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateKRfirstAge", prefix ) );
+			//Decorate.Generate( "Data/Decoration/RuinedMaginciaTram", Map.Trammel );
+			//Decorate.Generate( "Data/Decoration/RuinedMaginciaFel", Map.Felucca );
 			CommandSystem.Handle( e.Mobile, String.Format( "{0}DecorateMag", prefix ) );
 			//Remove some default decorations
 			DecorateDelete.RemoveOne( "Data/Decoration/Britannia", "magincia.cfg", Map.Trammel, Map.Felucca );

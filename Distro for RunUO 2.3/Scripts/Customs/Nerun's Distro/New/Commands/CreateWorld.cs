@@ -1,4 +1,4 @@
-// Engine r119
+// Engine r121
 using System;
 using System.Collections;
 using System.IO;
@@ -140,7 +140,6 @@ namespace Server.Gumps
 			DoThis( from, "GenKhaldun" );
 			DoThis( from, "GenerateFactions" );
 			DoThis( from, "GenStealArties" );
-			DoThis( from, "SHTelGen" );
 			DoThis( from, "SecretLocGen" );
 		}
 
@@ -180,36 +179,36 @@ namespace Server.Gumps
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateKRsecondAge" );
+					DoEnd( from );
 					DoThis( from, "SignDel KR1" );
 					DoThis( from, "SignDel KR2" );
-					DoEnd( from );
 					break;
 				}
 				case 14:
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateSA" );
+					DoEnd( from );
 					DoThis( from, "SignDel KR1" );
 					DoThis( from, "SignDel KR2" );
-					DoEnd( from );
 					break;
 				}
 				case 15:
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateHSfirstAge" );
+					DoEnd( from );
 					DoThis( from, "SignDel KR1" );
 					DoThis( from, "SignDel KR2" );
-					DoEnd( from );
 					break;
 				}
 				case 16:
 				{
 					DoBegin( from );
 					DoThis( from, "DecorateHSsecondAge" );
+					DoEnd( from );
 					DoThis( from, "SignDel KR1" );
 					DoThis( from, "SignDel KR2" );
-					DoEnd( from );
 					break;
 				}
 			} 
