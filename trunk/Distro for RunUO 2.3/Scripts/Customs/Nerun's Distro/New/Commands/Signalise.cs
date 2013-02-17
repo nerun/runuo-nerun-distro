@@ -1,4 +1,4 @@
-// Engine r119
+// Engine r121
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,7 +43,7 @@ namespace Server.Commands
 				Parse( c.Mobile, "", false ); // Data/signs.cfg
 			}
 			//[SignPut SE (or ML, KR1, KR2, SA, HS1, HS2)
-			else if ( HasIt( c.Arguments[0] ) == true  )
+			else if ( Lib.IsValidExpansion( c.Arguments[0] ) == true  )
 			{
 				Parse( c.Mobile, c.Arguments[0], false );
 			}
@@ -54,39 +54,22 @@ namespace Server.Commands
 			}
 		}
 		
-		public static bool HasIt( string args )
-		{
-			List<string> yes = new List<string>();
-			string[] exp = new string[]{ "se", "ml", "kr1", "kr2", "sa", "hs1", "hs2" };
-			
-			foreach ( string s in exp )
-			{
-				if ( args == s )
-					yes.Add( args );
-			}
-			
-			if ( yes.Count > 0 )
-				return true;
-			else
-				return false;
-		}
-
 		public static void Parse( Mobile from, string filename, bool AddOrDel )
 		{
-			string ThisPath;
+			string ThisFile;
 			
 			if ( filename == null || filename == "" )
 			{
-				ThisPath = "Data/signs.cfg";
+				ThisFile = "Signs.cfg";
 			}
 			else
 			{
-				ThisPath = "Data/Nerun's Distro/Signs/Signs" + filename.ToUpper() + ".cfg";
+				ThisFile = "Signs" + filename.ToUpper() + ".cfg";
 			}
 			
-			string cfg = Path.Combine( Core.BaseDirectory, ThisPath );
+			List<string> line = new List<string>( Lib.ListOfLines( "Data/Nerun's Distro/Signs", ThisFile ) );
 
-			if ( File.Exists( cfg ) )
+			if ( line.Count > 1 ) // File Exists
 			{
 				List<SignEntry> list = new List<SignEntry>();
 
@@ -99,23 +82,17 @@ namespace Server.Commands
 					from.SendMessage( "Generating signs, please wait." );
 				}
 
-				using ( StreamReader ip = new StreamReader( cfg ) )
+				for ( int i = 0; i < line.Count; ++i )
 				{
-					string line;
-
-					while ( (line = ip.ReadLine()) != null )
+					string lineA = Convert.ToString( line[i] );
+					
+					if ( !lineA.StartsWith("#") && Lib.IsNumber( Convert.ToString( lineA[0] ) ) && lineA != null && lineA != "" && lineA != " " ) // If not comment or blank Line
 					{
-						if ( !line.StartsWith("#") && line != null && line != "" && line != " " ) // If not comment or blank Line
-						{
-							string[] split = line.Split( ' ' );
+						string[] split = lineA.Split( ' ' );
 
-							SignEntry e = new SignEntry(
-								line.Substring( split[0].Length + 1 + split[1].Length + 1 + split[2].Length + 1 + split[3].Length + 1 + split[4].Length + 1 ),
-								new Point3D( Utility.ToInt32( split[2] ), Utility.ToInt32( split[3] ), Utility.ToInt32( split[4] ) ),
-								Utility.ToInt32( split[1] ), Utility.ToInt32( split[0] ) );
+						SignEntry e = new SignEntry( lineA.Substring( split[0].Length + 1 + split[1].Length + 1 + split[2].Length + 1 + split[3].Length + 1 + split[4].Length + 1 ), new Point3D( Utility.ToInt32( split[2] ), Utility.ToInt32( split[3] ), Utility.ToInt32( split[4] ) ), Utility.ToInt32( split[1] ), Utility.ToInt32( split[0] ) );
 
-							list.Add( e );
-						}
+						list.Add( e );
 					}
 				}
 
@@ -169,7 +146,7 @@ namespace Server.Commands
 			}
 			else
 			{
-				from.SendMessage( "{0} not found!", cfg );
+				from.SendMessage( "{0} not found!", line[0] ); // line[0] = path + file name
 			}
 		}
 
@@ -243,7 +220,7 @@ namespace Server.Commands
 				SignPut.Parse( c.Mobile, "", true ); // Data/signs.cfg
 			}
 			//[SignDel SE (or ML, KR1, KR2, SA, HS1, HS2)
-			else if ( SignPut.HasIt( c.Arguments[0] ) == true  )
+			else if ( Lib.IsValidExpansion( c.Arguments[0] ) == true  )
 			{
 				SignPut.Parse( c.Mobile, c.Arguments[0], true );
 			}
