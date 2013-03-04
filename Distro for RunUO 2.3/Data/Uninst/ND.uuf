@@ -15,8 +15,6 @@ rn/Data/Locations/trammel.xml.bak
 rm/Data/Locations/malas.xml
 rn/Data/Locations/malas.xml.bak
 sh/Data/Nerun's Distro
-rm/Scripts/Commands/GenTeleporter.cs
-rn/Scripts/Commands/GenTeleporter.cs.bak
 sh/Scripts/Customs/Nerun's Distro
 rm/Scripts/Engines/Quests/Core/QuestSystem.cs
 rn/Scripts/Engines/Quests/Core/QuestSystem.cs.bak

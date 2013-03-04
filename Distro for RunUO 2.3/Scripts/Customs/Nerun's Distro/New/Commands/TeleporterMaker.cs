@@ -1,4 +1,4 @@
-// Engine r121
+// Engine r123
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,11 +26,6 @@ namespace Server.Commands
 		{
 			e.Mobile.SendMessage( "Generating teleporters, please wait." );
 			
-			//[TelMake
-			if ( e.ArgString.Length == 0 )
-			{
-				Generate( "Teleporters.cfg", e.Mobile );
-			}
 			//[TelMake SE (or ML, KR1, KR2, SA, HS1, HS2)
 			else if ( Lib.IsValidExpansion( e.Arguments[0] ) == true  )
 			{
@@ -41,7 +36,7 @@ namespace Server.Commands
 			//wrong use
 			else
 			{
-				e.Mobile.SendMessage( "Usage: 'TelMake' or 'TelMake SE' (or ML, KR1, KR2, SA, HS1, HS2)" );
+				e.Mobile.SendMessage( "Usage: 'TelMake SE' (or ML, KR1, KR2, SA, HS1, HS2)" );
 			}
 		}
 		
@@ -88,7 +83,12 @@ namespace Server.Commands
 
 						if ( split.Length == 9 )
 						{
-							PlaceTeleporter( Convert.ToString( split[0] ), Convert.ToString( split[1] ), Convert.ToString( split[2] ), Convert.ToString( split[3] ), Convert.ToString( split[4] ), Convert.ToString( split[5] ), Convert.ToString( split[6] ), Convert.ToString( split[7] ), Convert.ToString( split[8][0] ) );
+							PlaceTeleporter( Convert.ToString( split[0] ), Convert.ToString( split[1] ), Convert.ToString( split[2] ), Convert.ToString( split[3] ), Convert.ToString( split[4] ), Convert.ToString( split[5] ), Convert.ToString( split[6] ), Convert.ToString( split[7] ), Convert.ToString( split[8][0] ), "do" );
+						}
+						
+						if ( split.Length == 10 && Convert.ToString( split[9] ) == "remove" )
+						{
+							PlaceTeleporter( Convert.ToString( split[0] ), Convert.ToString( split[1] ), Convert.ToString( split[2] ), Convert.ToString( split[3] ), Convert.ToString( split[4] ), Convert.ToString( split[5] ), Convert.ToString( split[6] ), Convert.ToString( split[7] ), Convert.ToString( split[8][0] ), "undo" );
 						}
 					}
 				}
@@ -102,8 +102,8 @@ namespace Server.Commands
 				from.SendMessage( "{0} not found!", line[0] ); // line[0] = path + file name
 			}
 		}
-		
-		public static void PlaceTeleporter( string xLoc, string yLoc, string zLoc, string xDest, string yDest, string zDest, string mapLoc, string mapDest, string back )
+
+		public static void PlaceTeleporter( string xLoc, string yLoc, string zLoc, string xDest, string yDest, string zDest, string mapLoc, string mapDest, string back, string DoOrNot )
 		{
 			// IDENTIFY OPERATION
 
@@ -126,8 +126,6 @@ namespace Server.Commands
 
 			if ( back.ToLower() == "t" )
 				BackOrNot = true;
-			else if ( back.ToLower() == "f" )
-				BackOrNot = false;
 			else
 				BackOrNot = false;
 			
@@ -165,40 +163,43 @@ namespace Server.Commands
 			{
 				if ( !BackOrNot ) // Don't put way back
 				{
-					Make( mapLocation, mapDestination, pointLocation, pointDestination );
+					Make( mapLocation, mapDestination, pointLocation, pointDestination, DoOrNot );
 				}
 				else
 				{
-					Make( mapLocation, mapDestination, pointLocation, pointDestination ); // Go
-					Make( mapDestination, mapLocation, pointDestination, pointLocation ); // Back
+					Make( mapLocation, mapDestination, pointLocation, pointDestination, DoOrNot ); // Go
+					Make( mapDestination, mapLocation, pointDestination, pointLocation, DoOrNot ); // Back
 				}
 			}
 			else // Felucca + Trammel
 			{
 				if ( !BackOrNot ) // Don't put way back
 				{
-					Make( mapDestination, mapDestination, pointLocation, pointDestination ); // Trammel
-					Make( mapLocation, mapLocation, pointLocation, pointDestination ); // Felucca
+					Make( mapDestination, mapDestination, pointLocation, pointDestination, DoOrNot ); // Trammel
+					Make( mapLocation, mapLocation, pointLocation, pointDestination, DoOrNot ); // Felucca
 				}
 				else
 				{
 					// Trammel
-					Make( mapDestination, mapDestination, pointLocation, pointDestination ); // Go
-					Make( mapDestination, mapDestination, pointDestination, pointLocation ); // Back
+					Make( mapDestination, mapDestination, pointLocation, pointDestination, DoOrNot ); // Go
+					Make( mapDestination, mapDestination, pointDestination, pointLocation, DoOrNot ); // Back
 					// Felucca
-					Make( mapLocation, mapLocation, pointLocation, pointDestination ); // Go
-					Make( mapLocation, mapLocation, pointDestination, pointLocation ); // Back
+					Make( mapLocation, mapLocation, pointLocation, pointDestination, DoOrNot ); // Go
+					Make( mapLocation, mapLocation, pointDestination, pointLocation, DoOrNot ); // Back
 				}
 			}
 		}
-		
-		public static void Make( Map mapA, Map mapB, Point3D ptA, Point3D ptB )
+
+		public static void Make( Map mapA, Map mapB, Point3D ptA, Point3D ptB, string DoOrNot )
 		{
-			if ( !FindTeleporter( mapA, ptA ) )
+			if ( !FindTeleporter( mapA, ptA ) ) // remove old teleporters in that spot first
 			{
-				Teleporter tel = new Teleporter( ptB, mapB );
-				tel.MoveToWorld( ptA, mapA );
-				m_Count++;
+				if ( DoOrNot == "do" ) // then create new ones if not marked as "undo only" (...|remove termination)
+				{
+					Teleporter tel = new Teleporter( ptB, mapB );
+					tel.MoveToWorld( ptA, mapA );
+					m_Count++;
+				}
 			}
 		}
 	}
