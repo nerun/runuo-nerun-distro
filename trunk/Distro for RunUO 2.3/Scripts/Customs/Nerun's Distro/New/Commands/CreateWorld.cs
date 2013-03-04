@@ -1,4 +1,4 @@
-// Engine r124
+// Engine r125
 using System;
 using System.Collections;
 using System.IO;
@@ -200,6 +200,7 @@ namespace Server.Gumps
 					DoThis( from, "DecorateSA" );
 					DoEnd( from );
 					DoThis( from, "DoKRPackage" );
+					DoThis( from, "TelMake SA" );
 					break;
 				}
 				case 15:
@@ -208,6 +209,7 @@ namespace Server.Gumps
 					DoThis( from, "DecorateHSfirstAge" );
 					DoEnd( from );
 					DoThis( from, "DoKRPackage" );
+					DoThis( from, "TelMake SA" );
 					break;
 				}
 				case 16:
@@ -216,6 +218,7 @@ namespace Server.Gumps
 					DoThis( from, "DecorateHSsecondAge" );
 					DoEnd( from );
 					DoThis( from, "DoKRPackage" );
+					DoThis( from, "TelMake SA" );
 					break;
 				}
 			} 
