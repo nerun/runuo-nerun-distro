@@ -1,4 +1,4 @@
-// Engine r123
+// Engine r124
 using System;
 using System.Collections;
 using System.IO;
@@ -134,13 +134,21 @@ namespace Server.Gumps
 		public static void DoEnd( Mobile from )
 		{
 			DoThis( from, "SignPut" ); // Replaces [SignGen
-			//DoThis( from, "TelGen" ); // Replaced by [TelMake
+			DoThis( from, "TelMake SE" ); // Replaces [TelGen
 			DoThis( from, "GenGauntlet" );
 			DoThis( from, "GenChampions" );
 			DoThis( from, "GenKhaldun" );
 			DoThis( from, "GenerateFactions" );
 			DoThis( from, "GenStealArties" );
 			DoThis( from, "SecretLocGen" );
+		}
+		
+		public static void DoKRPackage( Mobile from )
+		{
+			DoThis( from, "TelMake ML" );
+			DoThis( from, "TelMake KR1" );
+			DoThis( from, "SignDel KR1" );
+			DoThis( from, "SignDel KR2" );
 		}
 
 		public override void OnResponse( NetState sender, RelayInfo info ) 
@@ -158,7 +166,6 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateSE" );
 					DoEnd( from );
-					DoThis( from, "TelMake SE" );
 					break;
 				}
 				case 11:
@@ -174,6 +181,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateKRfirstAge" );
 					DoEnd( from );
+					DoThis( from, "TelMake ML" );
 					DoThis( from, "TelMake KR1" );
 					DoThis( from, "SignDel KR1" );
 					break;
@@ -183,9 +191,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateKRsecondAge" );
 					DoEnd( from );
-					DoThis( from, "TelMake KR1" );
-					DoThis( from, "SignDel KR1" );
-					DoThis( from, "SignDel KR2" );
+					DoThis( from, "DoKRPackage" );
 					break;
 				}
 				case 14:
@@ -193,9 +199,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateSA" );
 					DoEnd( from );
-					DoThis( from, "TelMake KR1" );
-					DoThis( from, "SignDel KR1" );
-					DoThis( from, "SignDel KR2" );
+					DoThis( from, "DoKRPackage" );
 					break;
 				}
 				case 15:
@@ -203,9 +207,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateHSfirstAge" );
 					DoEnd( from );
-					DoThis( from, "TelMake KR1" );
-					DoThis( from, "SignDel KR1" );
-					DoThis( from, "SignDel KR2" );
+					DoThis( from, "DoKRPackage" );
 					break;
 				}
 				case 16:
@@ -213,9 +215,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateHSsecondAge" );
 					DoEnd( from );
-					DoThis( from, "TelMake KR1" );
-					DoThis( from, "SignDel KR1" );
-					DoThis( from, "SignDel KR2" );
+					DoThis( from, "DoKRPackage" );
 					break;
 				}
 			} 
