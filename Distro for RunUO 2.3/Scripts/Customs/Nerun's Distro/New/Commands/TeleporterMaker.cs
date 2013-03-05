@@ -1,4 +1,4 @@
-// Engine r123
+// Engine r125
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace Server.Commands
 			e.Mobile.SendMessage( "Generating teleporters, please wait." );
 			
 			//[TelMake SE (or ML, KR1, KR2, SA, HS1, HS2)
-			else if ( Lib.IsValidExpansion( e.Arguments[0] ) == true  )
+			if ( Lib.IsValidExpansion( e.Arguments[0] ) == true  )
 			{
 				string args = e.Arguments[0].ToUpper();
 				string tele = "Teleporters" + args + ".cfg";
