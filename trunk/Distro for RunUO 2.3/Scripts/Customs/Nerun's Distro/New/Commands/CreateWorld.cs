@@ -1,4 +1,4 @@
-// Engine r125
+// Engine r128
 using System;
 using System.Collections;
 using System.IO;
@@ -191,7 +191,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateKRsecondAge" );
 					DoEnd( from );
-					DoThis( from, "DoKRPackage" );
+					DoKRPackage( from );
 					break;
 				}
 				case 14:
@@ -199,7 +199,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateSA" );
 					DoEnd( from );
-					DoThis( from, "DoKRPackage" );
+					DoKRPackage( from );
 					DoThis( from, "TelMake SA" );
 					break;
 				}
@@ -208,7 +208,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateHSfirstAge" );
 					DoEnd( from );
-					DoThis( from, "DoKRPackage" );
+					DoKRPackage( from );
 					DoThis( from, "TelMake SA" );
 					break;
 				}
@@ -217,7 +217,7 @@ namespace Server.Gumps
 					DoBegin( from );
 					DoThis( from, "DecorateHSsecondAge" );
 					DoEnd( from );
-					DoThis( from, "DoKRPackage" );
+					DoKRPackage( from );
 					DoThis( from, "TelMake SA" );
 					break;
 				}
