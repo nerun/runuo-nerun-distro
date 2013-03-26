@@ -1,4 +1,4 @@
-// Engine r125
+// Engine r129
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -77,7 +77,7 @@ namespace Server.Commands
 				{
 					string lineA = Convert.ToString( line[i] );
 
-					if ( Lib.IsNumber( Convert.ToString( lineA[0] ) ) && lineA.Contains("|") )
+					if ( lineA != "" && lineA.Contains("|") && Lib.IsNumber( Convert.ToString( lineA[0] ) ) )
 					{
 						string[] split = lineA.Split( '|' );
 
