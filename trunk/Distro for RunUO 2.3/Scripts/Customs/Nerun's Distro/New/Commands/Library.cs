@@ -1,7 +1,7 @@
-/********************************
-* Nerun's Library - Version 0.4 *
-* Collection of usefull methods *
-*********************************/
+/*********************************
+* Nerun's Library - Version 0.41 *
+* Collection of usefull methods  *
+**********************************/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,8 +52,7 @@ namespace Server
 		public static List<string> ListOfLines( string WorkingFolder, string FileName ) // = "Data/MyExamples" and "Example.cfg"
 		{
 			string folders = WorkingFolder + "/" + FileName; // = "Data/MyExamples/Example.cfg"
-			string basic_path = Path.Combine( Core.BaseDirectory, folders ); // = "C:/RunUO/Data/MyExamples/Example.cfg"
-			string path = basic_path.Replace("/","\\"); // = "C:\RunUO\Data\MyExamples\Example.cfg"
+			string path = Path.Combine( Core.BaseDirectory, folders ); // = "C:/RunUO/Data/MyExamples/Example.cfg"
 			
 			if ( File.Exists( path ) )
 			{
