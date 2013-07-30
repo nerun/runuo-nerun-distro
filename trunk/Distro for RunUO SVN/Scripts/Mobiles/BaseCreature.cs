@@ -1,4 +1,4 @@
-// Nerun's Distro changes at lines 53-5; 2440-52.
+// Nerun's Distro changes at lines 53-5; 2426-38.
 using System;
 using System.Collections.Generic;
 using Server.Regions;
@@ -1522,20 +1522,6 @@ namespace Server.Mobiles
 
 		public virtual void AlterMeleeDamageFrom( Mobile from, ref int damage )
 		{
-			#region Mondain's Legacy
-			if ( from != null && from.Talisman is BaseTalisman )
-			{
-				BaseTalisman talisman = (BaseTalisman)from.Talisman;
-
-				if ( talisman.Killer != null && talisman.Killer.Type != null )
-				{
-					Type type = talisman.Killer.Type;
-
-					if ( type.IsAssignableFrom( GetType() ) )
-						damage = (int)( damage * ( 1 + (double)talisman.Killer.Amount / 100 ) );
-				}
-			}
-			#endregion
 		}
 
 		public virtual void AlterMeleeDamageTo( Mobile to, ref int damage )
