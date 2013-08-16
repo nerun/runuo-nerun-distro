@@ -1,4 +1,4 @@
-// Engine r93
+// Engine r133
 #define RunUo2_0
 using System;
 using System.Collections.Generic;
@@ -234,11 +234,11 @@ namespace Server.Gumps
 			AddBlackAlpha(246, 292, 174, 117);
 			AddLabel(253, 272, 200, @"TER MUR");
 			AddLabel(253, 295, 52, @"Abyss");
-			AddLabel(253, 314, 52, @"TerMur");
+			AddLabel(253, 316, 52, @"TerMur");
 			AddLabel(253, 337, 52, @"Underworld");
 			AddLabel(253, 358, 52, @"Vendors");
 			AddCheck(394, 296, 210, 211, true, 601);
-			AddCheck(394, 315, 210, 211, true, 602);
+			AddCheck(394, 317, 210, 211, true, 602);
 			AddCheck(394, 338, 210, 211, true, 603);
 			AddCheck(394, 359, 210, 211, true, 604);
 			//END

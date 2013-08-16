@@ -8,9 +8,9 @@
 *Revision Date: 01/22/07              *
 ***************************************
 *Changed by Nerun                     *
-*For use with RunUO 2.1 and 2.2       *
+*For use with RunUO 2.1, 2.2 and 2.3  *
 *Client Tested with: from 7.0.8.2 up  *
-*                    to 7.0.18.0      *
+*                    to 7.0.29.2      *
 **************************************/
 using System;
 using System.Collections;
@@ -351,15 +351,16 @@ namespace Joeku
 					entries.Add("[Where"); entries.Add("[who"); entries.Add("[Self Hide"); entries.Add("[Self Unhide");
 					break;
 				case 2: // GameMaster
-					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[Props"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 2; j++ ){entries.Add("-");}
-					entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Kill"); entries.Add("[Recover"); entries.Add("[Self Unhide");
+					entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); entries.Add("[Self Unhide"); entries.Add("[Recover"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
+					entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Props"); entries.Add("[Get Location"); entries.Add("[Get ItemID"); entries.Add("[AddStairs"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
+					entries.Add("[AddDoor"); entries.Add("[ViewEquip"); entries.Add("[Skills"); entries.Add("[Kick"); entries.Add("[Kill");
 					break;
 				case 3: // Seer
 					goto case 2;
 				case 4: // Administrator
 					entries.Add("[Admin"); entries.Add("[GMBody"); entries.Add("[StaffRunebook"); entries.Add("[StaEx MyDeco"); entries.Add("[M Tele"); entries.Add("[Where"); entries.Add("[Who"); entries.Add("[Self Hide"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
 					entries.Add("[PremiumSpawner"); entries.Add("[SpawnEditor"); entries.Add("[Move"); entries.Add("[M Remove"); entries.Add("[Wipe"); entries.Add("[Props"); entries.Add("[Recover"); entries.Add("[Self Unhide"); for( int j = 0; j < 1; j++ ){entries.Add("-");}
-					entries.Add("[AddonGen"); entries.Add("[Get Location"); entries.Add("[Get ItemID"); entries.Add("[AddDoor");
+					entries.Add("[AddonGen"); entries.Add("[Get Location"); entries.Add("[Get ItemID"); entries.Add("[AddDoor"); entries.Add("[AddStairs");
 					break;
 				case 5: // Developer
 					goto case 4;
@@ -368,7 +369,7 @@ namespace Joeku
 			}
 			return entries;
 		}
-		
+
 		public static List<int> DefaultDimensions( int i )
 		{
 			List<int> dimensions = new List<int>();
