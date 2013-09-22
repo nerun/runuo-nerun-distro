@@ -317,6 +317,7 @@ namespace Server.Mobiles
 		public virtual Faction FactionAllegiance{ get{ return null; } }
 		public virtual int FactionSilverWorth{ get{ return 30; } }
 
+
 		#region ML Quest System
 
 		private List<MLQuest> m_MLQuests;
@@ -2592,6 +2593,7 @@ namespace Server.Mobiles
 		{
 			get
 			{
+
 				if ( m_TargetLocation != null )
 					return 0.3;
 
@@ -3366,6 +3368,15 @@ namespace Server.Mobiles
 		{
 			if ( m is BaseCreature && !((BaseCreature)m).Controlled )
 				return ( !Alive || !m.Alive || IsDeadBondedPet || m.IsDeadBondedPet ) || ( Hidden && AccessLevel > AccessLevel.Player );
+			#region Dueling
+			if ( Region.IsPartOf( typeof( Engines.ConPVP.SafeZone ) ) && m is PlayerMobile )
+			{
+				PlayerMobile pm = (PlayerMobile) m;
+
+				if ( pm.DuelContext == null || pm.DuelPlayer == null || !pm.DuelContext.Started || pm.DuelContext.Finished || pm.DuelPlayer.Eliminated )
+					return true;
+			}
+			#endregion
 
 			return base.OnMoveOver( m );
 		}
