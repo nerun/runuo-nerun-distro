@@ -1,0 +1,33 @@
+#######################
+## By Matador Doidão ##
+## revised by Nerun  ##
+#######################
+overrideid 403
+overridemintime 5
+overridemaxtime 15
+##
+## Orc Forts Malas
+##
+## Main Orc Fort (Near Hanse's Hotel)
+*|orc||||||1343|1248|-90|4|5|10|4|4|1|2|0|0|0|0|0
+*|orc||||||1343|1196|-90|4|5|10|4|4|1|2|0|0|0|0|0
+*|orcbrute|orcishlord|orc|orcishmage|orcbomber||1372|1225|-90|4|5|15|40|20|1|1|2|4|2|1|0
+*|orcbrute|orcishlord|orc|orcishmage|orcbomber||1322|1225|-90|4|5|15|40|20|1|1|2|4|2|1|0
+##
+## North
+##
+## Orc Fort #1
+*|orc|orcishlord|orcishmage||||911|194|-79|4|5|15|15|4|1|2|1|1|0|0|0
+## Orc Fort #2
+*|orc|orcishlord|orcishmage||||1665|356|-50|4|5|15|25|4|1|2|1|1|0|0|0
+## Orc Fort #3
+*|orc|orcishlord|orcishmage||||1364|596|-86|4|5|15|15|4|1|2|1|1|0|0|0
+## Orc Fort #4
+*|orc|orcishlord|orcishmage||||1205|700|-88|4|5|15|20|4|1|2|1|1|0|0|0
+##
+##South
+##
+## Orc Fort #5
+*|orc|orcishlord|orcishmage||||1257|1326|-90|4|5|15|15|4|1|2|1|1|0|0|0
+## Orc Fort #6
+*|orc|orcishlord|orcishmage||||1598|1819|-110|4|5|15|15|4|1|2|1|1|0|0|0

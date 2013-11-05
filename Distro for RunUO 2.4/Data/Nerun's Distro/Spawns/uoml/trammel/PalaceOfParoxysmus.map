@@ -1,0 +1,25 @@
+##############################
+##   XML Spawns by Erica    ##
+## Convert/Adapted By Nerun ##
+##############################
+overrideid 2115
+overridemap 2
+overridemintime 5
+overridemaxtime 10
+##
+## Palace of Paroxysmus
+##
+*|daemon:succubus|InterredGrizzle:poisonelemental|plaguebeast:plaguespawn|corrosiveslime|putrefier|plaguebeastlord|6295|616|-50|1|5|10|50|50|1|6|6|6|3|3|3
+*|InterredGrizzle|corrosiveslime|poisonelemental|balron:succubus:daemon|plaguebeastlord:plaguebeast:plaguespawn||6384|580|-50|1|5|10|30|30|1|4|4|3|9|11|0
+*|poisonelemental||||||6328|517|-50|1|5|10|10|10|1|4|0|0|0|0|0
+*|plaguebeast:corrosiveslime|poisonelemental:plaguespawn|||||6354|455|-40|1|5|10|20|20|1|5|5|0|0|0|0
+*|plaguebeast:plaguespawn|AcidElemental:corrosiveslime|||||6416|447|-40|1|5|10|20|20|1|8|7|0|0|0|0
+*|balron:succubus:daemon|corrosiveslime|plaguebeastlord:plaguebeast:plaguespawn|InterredGrizzle:poisonelemental|||6466|543|-50|1|5|10|30|30|1|6|3|8|5|0|0
+*|chaosdaemon:moloch|succubus:daemon|balron||||6292|462|-50|1|5|10|40|40|1|7|7|4|0|0|0
+*|earthelemental:corrosiveslime||||||6298|395|60|1|5|10|8|8|1|2|0|0|0|0|0
+*|AcidElemental:plaguespawn|AcidElemental|plaguespawn||||6404|378|-40|1|5|10|18|18|1|2|1|1|0|0|0
+*|plaguespawn:plaguebeast:AcidElemental:corrosiveslime:poisonelemental|plaguespawn|plaguebeast|AcidElemental|corrosiveslime|poisonelemental|6418|358|-40|1|5|10|25|25|1|12|2|2|2|2|2
+*|earthelemental:corrosiveslime:AcidElemental:plaguespawn|earthelemental|corrosiveslime|AcidElemental|plaguespawn||6319|348|60|1|5|10|20|20|1|5|1|1|1|1|0
+*|AcidElemental:earthelemental:corrosiveslime|AcidElemental|earthelemental|corrosiveslime|||6249|352|60|1|5|10|15|15|1|6|1|1|1|0|0
+*|poisonelemental||||||6285|353|60|1|5|10|5|5|1|1|0|0|0|0|0
+*|earthelemental:corrosiveslime||||||6353|400|60|1|5|10|10|10|1|4|0|0|0|0|0

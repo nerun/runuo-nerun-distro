@@ -1,0 +1,74 @@
+############
+## TerMur ##
+#################
+## By KHzspeed ##
+#################
+overrideid 602
+overridemap 6
+##overridemintime 5
+##overridemaxtime 10
+*|GiantBlackWidow:GiantSpider||||||1109|3744|-34|6|5|10|50|50|1|18|0|0|0|0|0
+*|TrapdoorSpider||||||1088|3732|-43|6|5|10|5|5|1|2|0|0|0|0|0
+*|TrapdoorSpider||||||1126|3714|-43|6|5|10|5|5|1|2|0|0|0|0|0
+*|ChickenLizard:GreaterMongbat:Mongbat:RuddyBoura:SilverSerpent:Slith:Bird||||||1134|3483|-42|6|5|10|100|100|1|18|0|0|0|0|0
+*|ChickenLizard:GreaterMongbat:Mongbat:SilverSerpent:Slith:Bird||||||1118|3416|-42|6|5|10|100|100|1|15|0|0|0|0|0
+*|Rabbit:Bird||||||1112|3624|-45|6|5|10|100|100|1|15|0|0|0|0|0
+*|Skree:Snake||||||1036|3670|0|6|5|10|30|30|1|8|0|0|0|0|0
+*|Skree:Snake||||||1012|3652|-30|6|5|10|30|30|1|5|0|0|0|0|0
+*|Hind:Horse:JackRabbit:Rabbit:MongBat:Rat:RidableLlama:Snake:Timberwolf:ChickenLizard||||||996|3406|-43|6|5|10|50|50|1|19|0|0|0|0|0
+*|Hind:Horse:JackRabbit:Rabbit:MongBat:Rat:RidableLlama:Snake:Timberwolf:ChickenLizard||||||851|3642|-43|6|5|10|50|50|1|19|0|0|0|0|0
+*|Hind:Horse:JackRabbit:Rabbit:MongBat:Rat:RidableLlama:Snake:Timberwolf:ChickenLizard||||||934|3564|-43|6|5|10|50|50|1|19|0|0|0|0|0
+*|Hind:Horse:JackRabbit:Rabbit:MongBat:Rat:RidableLlama:Snake:Timberwolf:ChickenLizard||||||965|3489|-43|6|5|10|50|50|1|19|0|0|0|0|0
+*|Rabbit:Bird||||||858|3532|-43|6|5|10|40|40|1|6|0|0|0|0|0
+*|Rabbit:Bird||||||981|3318|-42|6|5|10|50|50|1|9|0|0|0|0|0
+*|Rabbit:Bird||||||881|3344|-43|6|5|10|50|50|1|9|0|0|0|0|0
+*|Sewerrat:GreaterMongbat:Mongbat:RuddyBoura:SilverSerpent:Slith:ToxicSlith:Bird||||||1073|3322|-42|6|5|10|50|50|1|18|0|0|0|0|0
+*|Rabbit:Bird||||||981|3574|-43|6|5|10|40|40|1|6|0|0|0|0|0
+*|Rabbit:Rat:Timberwolf:HighPlainsBoura:Hind:Horse:JackRabbit:KepetchAmbusher||||||909|3235|38|6|5|10|50|50|1|19|0|0|0|0|0
+*|Rabbit:Rat:Timberwolf:HighPlainsBoura:Hind:Horse:JackRabbit:KepetchAmbusher||||||802|3231|40|6|5|10|50|50|1|19|0|0|0|0|0
+*|Rabbit:Rat:Hind:Horse:JackRabbit||||||679|3248|38|6|5|10|50|50|1|16|0|0|0|0|0
+*|Rabbit:Rat:Timberwolf:HighPlainsBoura:Hind:Horse:JackRabbit:KepetchAmbusher||||||588|3267|37|6|5|10|50|50|1|19|0|0|0|0|0
+*|ChickenLizard:Hind:Horse:SilverSerpent:Rabbit:Bird||||||521|3355|38|6|5|10|50|50|1|18|0|0|0|0|0
+*|Hind:Rabbit:Bird||||||511|3273|36|6|5|10|40|40|1|15|0|0|0|0|0
+*|ChickenLizard:Hind:Horse:SilverSerpent:Rabbit:Bird||||||547|3421|37|6|5|10|50|50|1|18|0|0|0|0|0
+*|Hind:Rabbit:Bird||||||571|3506|38|6|5|10|30|30|1|15|0|0|0|0|0
+*|Sewerrat:GreaterMongbat:Mongbat:RuddyBoura:SilverSerpent:Slith:Bird||||||1169|3338|-42|6|5|10|50|50|1|18|0|0|0|0|0
+*|Rabbit:Bird:Rat:SewerRat:Snake||||||689|3711|-43|6|5|10|50|50|1|19|0|0|0|0|0
+*|Rabbit:Bird:Rat:SewerRat:Snake||||||761|3650|-43|6|5|10|50|50|1|19|0|0|0|0|0
+*|Reaper:Rat:Bird||||||616|3684|-43|6|5|10|30|30|1|10|0|0|0|0|0
+*|Raptor:Bird:Rat:Mongbat||||||668|3831|-31|6|5|10|40|40|1|18|0|0|0|0|0
+*|TrapdoorSpider||||||680|3788|-43|6|5|10|5|5|1|2|0|0|0|0|0
+*|Horse:Mongbat:Raptor:Skree:Rat:Bird||||||760|3810|-42|6|5|10|50|50|1|18|0|0|0|0|0
+*|Horse:Mongbat:Raptor:Skree:Rat:Bird:ToxicSlith||||||826|3762|-43|6|5|10|50|50|1|18|0|0|0|0|0
+*|TrapdoorSpider||||||795|3827|-19|6|5|10|5|5|1|2|0|0|0|0|0
+*|Horse:Mongbat:Raptor:Skree:Rat:Bird:ToxicSlith||||||799|3863|48|6|5|10|50|50|1|18|0|0|0|0|0
+*|GreaterMongbat:Mongbat:Raptor:SilverSerpent:Bird:Rabbit||||||763|3991|-42|6|5|10|50|50|1|18|0|0|0|0|0
+*|Sewerrat:GreaterMongbat:Mongbat:Slith:Bird||||||1129|3163|-42|6|5|10|40|40|1|7|0|0|0|0|0
+*|TrapdoorSpider||||||687|3917|-43|6|5|10|5|5|1|2|0|0|0|0|0
+*|GreaterMongbat:Mongbat:Raptor:SilverSerpent:Bird:Rabbit||||||641|3922|-43|6|5|10|50|50|1|18|0|0|0|0|0
+*|CoralSnake:DesertOstard:KepetchAmbusher:SandVortex:Scorpion||||||1065|2996|74|6|5|10|40|40|1|16|0|0|0|0|0
+*|ToxicSlith||||||1099|3010|50|6|5|10|3|3|1|1|0|0|0|0|0
+*|ToxicSlith||||||1053|2971|50|6|5|10|3|3|1|2|0|0|0|0|0
+*|ToxicSlith||||||1062|3026|50|6|5|10|3|3|1|1|0|0|0|0|0
+*|Rabbit:Bird:RuddyBoura:SilverSerpent:Slith:StoneSlith:TimberWolf:FeralTreefellow||||||762|3073|105|6|5|10|60|60|1|20|0|0|0|0|0
+*|Rabbit:Bird:RuddyBoura:SilverSerpent:Slith:StoneSlith:TimberWolf:FeralTreefellow||||||917|3088|37|6|5|10|60|60|1|20|0|0|0|0|0
+*|Rabbit:Bird:RuddyBoura:SilverSerpent:Slith:StoneSlith:TimberWolf:FeralTreefellow||||||839|3086|83|6|5|10|60|60|1|20|0|0|0|0|0
+*|HighPlainsBoura:Horse:StoneSlith:Bird:Rabbit||||||817|2960|76|6|5|10|60|60|1|18|0|0|0|0|0
+*|ToxicSlith:Slith||||||1106|3138|-43|6|5|10|10|10|1|4|0|0|0|0|0
+*|HighPlainsBoura:Horse:StoneSlith:Bird:Rabbit||||||861|2923|38|6|5|10|60|60|1|18|0|0|0|0|0
+*|Hind:Horse:Rat:Slith:Timberwolf:Bird:Rabbit||||||648|3131|38|6|5|10|55|55|1|19|0|0|0|0|0
+*|Bird:Eagle||||||622|3045|35|6|5|10|100|100|1|15|0|0|0|0|0
+*|GiantRat:ToxicSlith:Rat:Bird||||||685|2901|36|6|5|10|50|50|1|18|0|0|0|0|0
+*|Kepetch:SilverSerpent:TreeFellow:Bird||||||562|2942|36|6|5|10|40|40|1|16|0|0|0|0|0
+*|Hind:Bird:Rabbit||||||486|3211|38|6|5|10|35|35|1|14|0|0|0|0|0
+*|Kepetch:Rat:Snake:StoneSlith:Bird||||||426|3190|38|6|5|10|50|50|1|17|0|0|0|0|0
+*|Bird:Rabbit||||||354|3283|57|6|5|10|50|50|1|9|0|0|0|0|0
+*|Bird:Rabbit||||||453|3632|37|6|5|10|60|60|1|14|0|0|0|0|0
+*|Bird:Rabbit||||||387|3524|38|6|5|10|50|50|1|14|0|0|0|0|0
+*|Sewerrat:GreaterMongbat:Mongbat:SilverSerpent:Slith:Bird||||||1130|3240|-42|6|5|10|50|50|1|10|0|0|0|0|0
+*|Sewerrat:GreaterMongbat:Mongbat:Bird||||||1054|3215|38|6|5|10|50|50|1|10|0|0|0|0|0
+*|Sewerrat:GreaterMongbat:Mongbat:Slith:Bird||||||1057|3167|38|6|5|10|50|50|1|15|0|0|0|0|0
+*|Hind:LowlandBoura:Horse:Snake||||||1186|3558|-42|6|5|10|40|40|1|5|0|0|0|0|0
+*|UndeadGuardian:SilverSerpent||||||35|99|-5|6|5|10|15|15|1|10|0|0|0|0|0
+*|undeadguardian:gargoyleshade:putridundeadguardian||||||35|159|0|6|5|10|40|40|1|13|0|0|0|0|0
+*|Niporailem||||||143|158|-20|6|5|10|5|5|1|1|0|0|0|0|0

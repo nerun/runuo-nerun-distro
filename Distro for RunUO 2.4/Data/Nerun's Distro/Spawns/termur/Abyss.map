@@ -1,0 +1,31 @@
+###########
+## Abyss ##
+#################
+## By KHzspeed ##
+#################
+overrideid 601
+overridemap 6
+##overridemintime 5
+##overridemaxtime 10
+*|Hydra||||||795|753|53|6|5|10|15|15|1|8|0|0|0|0|0
+*|MaddeningHorror||||||745|739|16|6|5|10|5|5|1|1|0|0|0|0|0
+*|SlasherOfVeils||||||749|475|-17|6|5|10|20|20|1|1|0|0|0|0|0
+*|StygianDragon||||||326|159|20|6|5|10|10|10|1|1|0|0|0|0|0
+*|Snake:LavaSnake:CoralSnake:GiantSerpent:Coil||||||716|720|-11|6|5|10|25|25|1|24|0|0|0|0|0
+*|GreaterMongbat:Imp:Daemon:PitFiend:DevourerRenowned||||||992|337|9|6|5|10|20|20|1|35|0|0|0|0|0
+*|ClanChitterAssistant:ClanChitterTinkerer:RakktaviRenowned||||||982|491|-12|6|5|10|18|18|1|15|0|0|0|0|0
+*|ClockworkScorpion||||||981|491|-12|6|5|10|18|18|1|16|0|0|0|0|0
+*|ClanRibbonSupplicant:ClanRibbonCourtier:VitaviRenowned||||||919|502|-12|6|5|10|20|20|1|15|0|0|0|0|0
+*|ClanRibbonPlagueRat||||||918|502|-12|6|5|10|20|20|1|15|0|0|0|0|0
+*|ClanScratchScrounger:ClanScratchHenchrat:TikitaviRenowned||||||949|555|-14|6|5|10|20|20|1|15|0|0|0|0|0
+*|ClanScratchSavageWolf||||||950|555|-14|6|5|10|20|20|1|18|0|0|0|0|0
+*|FireAnt:LavaSnake:LavaLizard:FireGargoyle:Efreet:LavaElemental:FireDaemon:FireElementalRenowned||||||974|161|-11|6|5|10|25|25|1|18|0|0|0|0|0
+*|EnslavedGrayGoblin:EnslavedGreenGoblin:EnslavedGoblinScout:EnslavedGoblinKeeper:EnslavedGreenGoblinAlchemist:EnslavedGoblinMage:GrayGoblinMageRenowned:GreenGoblinAlchemistRenowned||||||581|815|-45|6|5|10|25|25|1|30|0|0|0|0|0
+*|LavaLizard:LavaSnake:FireAnt:HellCat:LavaSerpent:HellHound:LavaElemental:FireDaemon:FireDaemonRenowned||||||526|766|-92|6|5|10|20|20|1|25|0|0|0|0|0
+*|Skeleton:Wraith:SkeletalMage:WailingBanshee:SkeletalLich:RottingCorpse:AncientLichRenowned||||||536|657|8|6|5|10|34|34|1|35|0|0|0|0|0
+*|LavaLizard:LavaSnake:FireAnt:HellHound:LavaSerpent:LavaElemental:FireDaemon:FireDaemonRenowned||||||601|905|-60|6|5|10|35|35|1|38|0|0|0|0|0
+*|Medusa||||||818|927|-15|6|5|10|15|15|1|1|0|0|0|0|0
+*|CorrosiveSlime:AcidSlug:AcidElemental:InterredGrizzle:AcidElementalRenowned||||||684|579|-15|6|5|10|35|35|1|32|0|0|0|0|0
+*|Pixie:Wisp:DarkWisp:PixieRenowned||||||440|708|24|6|5|10|35|35|1|30|0|0|0|0|0
+*|Skeleton:PatchworkSkeleton:SkeletalKnight:BoneKnight:SkeletalMage:BoneMagi:SkeletalLich:SkeletalDragonRenowned||||||674|828|-109|6|5|10|25|25|1|30|0|0|0|0|0
+*|FairyDragon:Wyvern:ForgottenServant:WyvernRenowned||||||887|277|3|6|5|10|20|20|1|35|0|0|0|0|0
