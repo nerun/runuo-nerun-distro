@@ -1,1 +1,0 @@
-// Added by default in SVN tree after SVN 985.
