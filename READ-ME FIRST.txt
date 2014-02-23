@@ -1,35 +1,17 @@
 NERUN'S DISTRO
 
-Support for RunUO 2.3, RunUO SVN and RunUO 2.4.
+Support for RunUO 2.4 and 2.5.
 
 ----------------------------------------------------
 
-There are 3 folders:
+There one folder:
 
-	../Distro for RunUO 2.3
-	../Distro for RunUO 2.4
-	../Distro for RunUO SVN
+	../Distro for RunUO 2.5
 
 ----------------------------------------------------
 
-IF YOU WANT TO INSTALL THIS PACKAGE FOR RunUO 2.3:
+IF YOU WANT TO INSTALL THIS PACKAGE FOR RunUO 2.4 or 2.5:
 
-	1st. Look inside Distro for RunUO 2.3;
-
-	2nd. Follow forum instructions.
-
-----------------------------------------------------
-
-IF YOU WANT TO INSTALL THIS PACKAGE FOR RunUO SVN:
-
-	1st. Install Distro for RunUO 2.3;
-
-	2nd. Install Distro for RunUO SVN over Distro for RunUO 2.3 installation;
-
-----------------------------------------------------
-
-IF YOU WANT TO INSTALL THIS PACKAGE FOR RunUO 2.4:
-
-	1st. Look inside Distro for RunUO 2.4;
+	1st. Look inside Distro for RunUO 2.5;
 
 	2nd. Follow forum instructions.

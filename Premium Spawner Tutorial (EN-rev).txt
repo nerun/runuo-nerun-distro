@@ -3,13 +3,13 @@
                +----------------------------------+
 
                                         -------------------------------
-					English last revision: Jan/2013
+                                          English last update: Feb/2014
                                         -------------------------------
 
 	Premium Spawner project was born as a "mod" of "Ultimate Spawner"
 script created by a brazilian scripter called Atomic, who had a SHARD
 called AtomicShard. It was based on a script that reads the spawns
-information from a bunch of "maps" files and then place it in the
+information from a bunch of "map" files and then place it in the
 world. The original script was modified by Nerun (myself) and when the
 number of changes to the original script became great, i changed the
 name of my version. The Premium is the successor of the Ultimate Spawner
@@ -40,9 +40,9 @@ the world from scratch. You will have to place more than ten thousand
 spawns, by hand, again? NO! You just use a command prompt, everything
 will be generated again, and without effort. All effort is done in the
 process of map file creation (that you can do in-game).
-	The current release is in version 5.2.x, and is considered very
-mature (in terms of stability, reliability, features and ease of use)
-and complete (in terms of world spawns).
+	The current release is considered very mature (in terms of stability,
+reliability, features and ease of use) and complete (in terms of world
+spawns).
 
 
 INDEX:
@@ -69,19 +69,7 @@ spawns maps for use with this system, as gumps (menus) easy to use to further
 facilitate the settlement of your world. This distro can be found in the
 RunUO forum at http://www.runuo.com/.
 
-To install the distro:
-
-1) Unrar "NerunsDistro-rx.rar".
-
-2) You will se two folders inside: "Data" and "Scripts". Plus some files
-   (including this tutiorial, changes history, benchmark tests, SpawnsID of
-    all maps etc). Read the files for more usefull information if you want.
-
-3) Cut the folders "Data" and "Scripts".
-
-4) Go to "c:\RunUO 2.2\" (or where you install it) and paste it there. Windows
-   Explorer will say that those folders already exists, and will ask if you
-   want to overwrite, click "yes to all".
+To install the distro open READ-ME FIRST.txt and follow its instructions.
 
 
 >>>>>>>>>>>>>>>>>>
@@ -167,15 +155,10 @@ Graveyard. Let's analyze it:
 
 	Spawner 1: Spectre OR Wraith (the ":" serves to add several
                  creatures in a random list)
-
 	Spawner 2: Skeleton
-
 	Spawner 3: Zombie
-
 	Spawner 4: Empty (none)
-
 	Spawner 5: Empty (none)
-
 	Spawner 6: Empty (none)
 
    Each of them are called "Fake Spawner": are 6 spawners inside only
@@ -188,20 +171,14 @@ Graveyard. Let's analyze it:
    X = 1369, Y = 1475 and Z = 10. If you type "[go 1369 1475 10" you will
    go to the place where this Spawner will appear.
 
-
 -  The fourth number says in wich facet the Spawner will be placed. Note
    that this number is 2. The definition of the maps follow this pattern:
 
 	0 = Felucca AND Trammel
-
 	1 = Felucca
-
 	2 = Trammel
-
 	3 = Ilshenar
-
 	4 = Malas
-
 	5 = Tokuno
 
    So deduct that the spawner will be placed in Trammel, because the room
@@ -263,7 +240,6 @@ SUMMARIZING
 WalkingRange|HomeRange|SpawnID|Count1|Count2|Count3|Count4|Count5|Count6
 
 
-
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 PART III - Using Maps "In-Game" (Básics)
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -293,7 +269,6 @@ folder, you can use the following commands:
 	It will DELETE all PremiumSpawners of actual facet (that one
 	where your character is standing). Other facets will remain
 	spawned.
-
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -397,7 +372,6 @@ overridemap 0
 
 	The delays (min 5 and max 10 minutes) will be read as 10 and 20
 minutes.
-
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -525,11 +499,12 @@ PART VI - Edition Options
 	your backpack. You always set your body to human body. You add
 	titles to [GM], [Admin], etc.
 
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
 PART VII - SPAWNS' OVERSEER
 <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-Revision 22 has added Spawners’ Overseer engine, the new incarnation of
+Revision 22 has added Spawners' Overseer engine, the new incarnation of
 Smart Player Range Sensitive.
 
 How it works:
@@ -541,14 +516,14 @@ Members are hidden, but in range) it will disable all PremiumSpawners in
 range, deleting mobiles and items in range, and it will check for
 players every 5 seconds.
 
-[GenSeers – generates Overseers crystal by reading configuration files
+[GenSeers - generates Overseers crystal by reading configuration files
             at Data\Monsters\Overseers.
 
 There is no OverSeers configuration files yet. So it generates no
 OverSeers. The engine is done, it is working, but you need a config file
 to tells the engine where to place OverSeers.
 
-[RemSeers – removes all Overseers.
+[RemSeers - removes all Overseers.
 
 
 >>>>>> ADDING >>>>>>
