@@ -3,7 +3,7 @@
                +-----------------------------------+
 
                                                ------------------------
-					       Última revisão: Jan/2013
+                                               Última revisão: Fev/2014
                                                ------------------------
 
 	Premium Spawner nasceu como um "mod" do script Ultimate Spawner,
@@ -29,15 +29,19 @@ são:
    padrão que vem com o RunUO, ele utiliza ao invés, o "PremiumSpawner".
    Você pode usar ambos os sistemas simultaneamente.
 
+  - "Premium" possui arquivos de mapa (Ultimate não tinha).
+
+  - "Premium" é amigável e fácil de usar.
+
 	O básico do básico que é preciso saber, é que este Sistema de
 spawner é útil para se manter "salvo" em um arquivo (o mapa) os spawners
-que você criou até agora. Pois supomos que você tenha de apagar tudo e
+que você criou até agora. Supomos que você tenha de apagar tudo e
 recomeçar o mundo do zero. Terá de colocar mais de dez mil spawns denovo?!
 NÃO! Apenas usa um comando e pronto, tudo gerado denovo, e sem esforço,
 que se dá apenas no processo de criação do mapa.
-	O sistema atual está na versão 5.2.x, e é considerada bastante
-madura (do ponto de vista da estabilidade, recursos e facilidade de uso)
-e completa (do ponto de vista do povoamento do mundo).
+	O sistema atual é considerado bastante maduro (do ponto de vista da
+estabilidade, recursos e facilidade de uso) e completo (do ponto de vista
+do povoamento do mundo).
 
 
 ÍNDICE:
@@ -65,15 +69,8 @@ sistema. Assim como gumps (menus) fáceis de usar para facilitar ainda
 mais o povoamento do seu mundo. Esta distro pode ser encontrada no forum
 do RunUO: http://www.runuo.com/.
 
-Para instalar a distro:
-
-1) Descompacte com WinRAR o arquivo "NerunsDistro-rx.rar".
-2) Depois você verá duas pastas: "Data" e "Scripts". E alguns arquivos.
-3) Corte as pastas "Data" e "Scripts".
-4) Vá para "c:\RunUO 2.2\" (diretório raiz do RunUO) e cole-as lá, o
-   Windows Explorer perguntará se você deseja sobrescrever, clique "sim
-   para todos".
-
+Para instalar a distro abra o arquivo READ-ME FIRST.txt e siga as
+instruções.
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -508,7 +505,7 @@ PARTE VI - Opções de Edição
 PART VII - SPAWNS' OVERSEER
 <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-A Revisão 22 adicionou o "Spawners’ Overseer": a nova encarnação do
+A Revisão 22 adicionou o "Spawners' Overseer": a nova encarnação do
 "Smart Player Range Sensitive", que permitia reduzir o lag, o uso da CPU,
 o tempo de save do jogo, e o tamanho dos arquivos salvos.
 
@@ -522,7 +519,7 @@ os membros da staff estiverem ao alcance, mas ocultos) ele desabilitará
 todos os PremiumSpawners na área, apagando mobiles e itens, e voltará a
 checar por players a cada 5 segundos.
 
-[GenSeers – gera Overseers lendo arquivos de configuração em
+[GenSeers - gera Overseers lendo arquivos de configuração em
             Data\Monsters\Overseers.
 
 Não há arquivos de configuração para Overseers ainda. Então nada é gerado
@@ -530,7 +527,7 @@ com esse comando ainda. A engine está feita e está funcionando, mas ainda
 precisa de arquivos de configuração para dizer à engine onde colocar os
 overseers.
 
-[RemSeers – remove todos os Overseers.
+[RemSeers - remove todos os Overseers.
 
 
 >>>>>> ADICIONADO >>>>>>
