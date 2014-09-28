@@ -4,7 +4,7 @@ Support for RunUO 2.4 and 2.5.
 
 ----------------------------------------------------
 
-There one folder:
+There is one folder:
 
 	../Distro for RunUO 2.5
 
