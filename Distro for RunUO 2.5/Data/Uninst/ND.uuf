@@ -18,6 +18,8 @@ sh/Data/Nerun's Distro
 sh/Scripts/Customs/Nerun's Distro
 rm/Scripts/Engines/Quests/Core/QuestSystem.cs
 rn/Scripts/Engines/Quests/Core/QuestSystem.cs.bak
+rm/Scripts/Engines/CannedEvil/ChampionSpawn.cs
+rn/Scripts/Engines/CannedEvil/ChampionSpawn.cs.bak
 rm/Scripts/Gumps/ConfirmReleaseGump.cs
 rn/Scripts/Gumps/ConfirmReleaseGump.cs.bak
 rm/Scripts/Gumps/Go/GoGump.cs
