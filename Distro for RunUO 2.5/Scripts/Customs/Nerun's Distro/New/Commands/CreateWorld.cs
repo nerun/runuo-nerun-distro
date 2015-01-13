@@ -1,4 +1,4 @@
-// Engine r128
+// Engine r143
 using System;
 using System.Collections;
 using System.IO;
@@ -135,6 +135,7 @@ namespace Server.Gumps
 		{
 			DoThis( from, "SignPut" ); // Replaces [SignGen
 			DoThis( from, "TelMake SE" ); // Replaces [TelGen
+			DoThis( from, "SHtelgen" ); // Solen Hive (forgot it in engine 128)
 			DoThis( from, "GenGauntlet" );
 			DoThis( from, "GenChampions" );
 			DoThis( from, "GenKhaldun" );
