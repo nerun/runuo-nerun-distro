@@ -17,8 +17,8 @@ namespace Server.Engines.CannedEvil
 		private ArrayList m_LostLandsSpawn;
 		private ArrayList m_IlshenarSpawn;
 		private ArrayList m_TokunoSpawn;
+		private ArrayList m_MalasSpawn;
 
-		//private int m_SpawnRange;
 		private TimeSpan m_ExpireDelay;
 		private TimeSpan m_RestartDelay;
 
@@ -73,12 +73,19 @@ namespace Server.Engines.CannedEvil
 		{
 			new SpawnRecord( 0xff, 382, 328, -30 ), // Valor
 			new SpawnRecord( 0xff, 462, 926, -67 ), // Humility
-		        new SpawnRecord( (int)ChampionSpawnType.ForestLord, 1645, 1107, 8 ), // Spirituality
-            };
+			new SpawnRecord( (int)ChampionSpawnType.ForestLord, 1645, 1107, 8 ), // Spirituality
+			new SpawnRecord( (int)ChampionSpawnType.Glade, 2210, 1260, 23 ), // Twisted Glade
+		};
 
 		private SpawnRecord[] m_Tokuno = new SpawnRecord[]
 		{
 			new SpawnRecord( (int)ChampionSpawnType.SleepingDragon, 948, 434, 29 ), // Isamu Jima
+		};
+
+		private SpawnRecord[] m_Malas = new SpawnRecord[]
+		{
+			new SpawnRecord( (int)ChampionSpawnType.Pestilence, 174, 1629, 10 ), // Bedlam cemetery
+			// Minotaur champ not scripted by RunUO team yet.
 		};
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -111,24 +118,6 @@ namespace Server.Engines.CannedEvil
 				m_ActiveAltars = value;
 			}
 		}
-
-		/*[CommandProperty( AccessLevel.GameMaster )]
-		public int SpawnRange
-		{
-			get
-			{
-				return m_SpawnRange;
-			}
-			set
-			{
-				m_SpawnRange = value;
-
-				foreach( ChampionSpawn cs in m_AllSpawn )
-				{
-					cs.SpawnRange = m_SpawnRange;
-				}
-			}
-		}*/
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public TimeSpan ExpireDelay
@@ -168,6 +157,11 @@ namespace Server.Engines.CannedEvil
 				{
 					cs.RestartDelay = m_RestartDelay;
 				}
+
+				foreach( ChampionSpawn cs in m_MalasSpawn )
+				{
+					cs.RestartDelay = m_RestartDelay;
+				}
 			}
 		}
 
@@ -185,7 +179,7 @@ namespace Server.Engines.CannedEvil
 		}
 
 		[Constructable]
-		public ChampionSpawnController() : base( 0x1B7A )
+		public ChampionSpawnController() : base( 0x3EDD )
 		{
 			if ( Check() )
 			{
@@ -205,10 +199,10 @@ namespace Server.Engines.CannedEvil
 			m_LostLandsSpawn = new ArrayList();
 			m_IlshenarSpawn = new ArrayList();
 			m_TokunoSpawn = new ArrayList();
+			m_MalasSpawn = new ArrayList();
 
 			m_ActiveAltars = 1;
 
-			//m_SpawnRange = 24;
 			m_ExpireDelay = TimeSpan.FromMinutes( 10.0 );
 			m_RestartDelay = TimeSpan.FromMinutes( 5.0 );
 
@@ -317,6 +311,14 @@ namespace Server.Engines.CannedEvil
 				m_TokunoSpawn.Add( cs );
 				m_AllSpawn.Add( cs );
 			}
+
+			for ( i = 0; i<m_Malas.Length; i++ )
+			{
+				ChampionSpawn cs = CreateAltar( m_Malas[i], Map.Malas, false );
+			
+				m_MalasSpawn.Add( cs );
+				m_AllSpawn.Add( cs );
+			}
 		}
 
 		public ChampionSpawnController( Serial serial ) : base( serial )
@@ -373,6 +375,12 @@ namespace Server.Engines.CannedEvil
 			}
 
 			foreach( ChampionSpawn cs in m_TokunoSpawn )
+			{
+				if ( !cs.Deleted )
+					cs.Active = true;
+			}
+
+			foreach( ChampionSpawn cs in m_MalasSpawn )
 			{
 				if ( !cs.Deleted )
 					cs.Active = true;
@@ -457,6 +465,7 @@ namespace Server.Engines.CannedEvil
 			writer.WriteItemList( m_LostLandsSpawn );
 			writer.WriteItemList( m_IlshenarSpawn );
 			writer.WriteItemList( m_TokunoSpawn );
+			writer.WriteItemList( m_MalasSpawn );
 
 			writer.Write( m_RandomizeDelay );
 
@@ -475,12 +484,12 @@ namespace Server.Engines.CannedEvil
 			m_LostLandsSpawn = reader.ReadItemList();
 			m_IlshenarSpawn = reader.ReadItemList();
 			m_TokunoSpawn = reader.ReadItemList();
+			m_MalasSpawn = reader.ReadItemList();
 
 			m_RandomizeDelay = reader.ReadTimeSpan();
 
 			m_ActiveAltars = reader.ReadInt();
 
-			//m_SpawnRange = 24;
 			m_ExpireDelay = TimeSpan.FromMinutes( 10.0 );
 			m_RestartDelay = TimeSpan.FromMinutes( 5.0 );
 
