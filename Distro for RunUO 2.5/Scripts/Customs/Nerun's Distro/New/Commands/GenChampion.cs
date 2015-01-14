@@ -18,7 +18,7 @@ namespace Server.Commands
 		}
 
 		[Usage( "GenChampions" )]
-		[Description( "Install ChampionSpawnController at 1415 1695." )]
+		[Description( "Install ChampionSpawnController at 1412 1697." )]
 		public static void Champ_OnCommand( CommandEventArgs e )
 		{
 			Map map1 = Map.Felucca;
@@ -26,9 +26,10 @@ namespace Server.Commands
 			ChampionSpawnController controller = new ChampionSpawnController();
 
 			controller.Active = true;
-			controller.MoveToWorld( new Point3D( 1415, 1695, 0 ), map1 );
 
-			e.Mobile.SendMessage( "Done. Look for ChampionSpawnController at 1415 1695." );
+			controller.MoveToWorld( new Point3D( 1412, 1697, -5 ), map1 );
+
+			e.Mobile.SendMessage( "Done. Look for ChampionSpawnController at 1412 1697." );
 		}
 	}
 }
