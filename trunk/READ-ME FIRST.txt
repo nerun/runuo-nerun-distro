@@ -1,17 +1,33 @@
 NERUN'S DISTRO
 
-Support for RunUO 2.4 and 2.5.
+Support for RunUO 2.3, 2.4 and 2.5.
 
-----------------------------------------------------
+--------------------------------------------------------------------------------
 
-There is one folder:
+There are two folders:
 
 	../Distro for RunUO 2.5
+	../Patch for RunUO 2.3
 
-----------------------------------------------------
+--------------------------------------------------------------------------------
 
-IF YOU WANT TO INSTALL THIS PACKAGE FOR RunUO 2.4 or 2.5:
+INSTALLATION (RunUO 2.3):
 
-	1st. Look inside Distro for RunUO 2.5;
+	1st. Copy folders inside "Distro for RunUO 2.5" and paste them inside your
+		RunUO folder (overwrite);
 
-	2nd. Follow forum instructions.
+	2nd. Copy folders inside "Patch for RunUO 2.3" and paste them inside your
+		RunUO folder (overwrite);
+
+	3rd. Follow forum instructions for more details.
+
+PS.: you need both folders! But copy/paste folder 2.5 1st, then 2.3 over 2.5!
+
+--------------------------------------------------------------------------------
+
+INSTALLATION (RunUO 2.4 and 2.5):
+
+	1st. Copy folders inside "Distro for RunUO 2.5" and paste them inside your
+		RunUO folder (overwrite);
+
+	2nd. Follow forum instructions for more details.
