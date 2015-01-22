@@ -63,7 +63,7 @@ namespace Server.Mobiles
 				if ( i < spawner.CreaturesName.Count )
 				{
 					str = (string)spawner.CreaturesName[i];
-					int count = m_Spawner.CountCreatures( str );
+					int count = m_Spawner.CountCreatures( m_Spawner.Creatures, str );
 
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
@@ -112,7 +112,7 @@ namespace Server.Mobiles
 				if ( i < spawner.SubSpawnerA.Count )
 				{
 					str = (string)spawner.SubSpawnerA[i];
-					int count = m_Spawner.CountCreaturesA( str );
+					int count = m_Spawner.CountCreatures( m_Spawner.CreaturesA, str );
 
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
@@ -161,7 +161,7 @@ namespace Server.Mobiles
 				if ( i < spawner.SubSpawnerB.Count )
 				{
 					str = (string)spawner.SubSpawnerB[i];
-					int count = m_Spawner.CountCreaturesB( str );
+					int count = m_Spawner.CountCreatures( m_Spawner.CreaturesB, str );
 
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
@@ -210,7 +210,7 @@ namespace Server.Mobiles
 				if ( i < spawner.SubSpawnerC.Count )
 				{
 					str = (string)spawner.SubSpawnerC[i];
-					int count = m_Spawner.CountCreaturesC( str );
+					int count = m_Spawner.CountCreatures( m_Spawner.CreaturesC, str );
 
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
@@ -259,7 +259,7 @@ namespace Server.Mobiles
 				if ( i < spawner.SubSpawnerD.Count )
 				{
 					str = (string)spawner.SubSpawnerD[i];
-					int count = m_Spawner.CountCreaturesD( str );
+					int count = m_Spawner.CountCreatures( m_Spawner.CreaturesD, str );
 
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
@@ -308,7 +308,7 @@ namespace Server.Mobiles
 				if ( i < spawner.SubSpawnerE.Count )
 				{
 					str = (string)spawner.SubSpawnerE[i];
-					int count = m_Spawner.CountCreaturesE( str );
+					int count = m_Spawner.CountCreatures( m_Spawner.CreaturesE, str );
 
 					AddLabel( 192, ( 22 * i ) + 20, 0, count.ToString() );
 				}
@@ -416,63 +416,63 @@ namespace Server.Mobiles
 					if ( (ID >= 1) && (ID <= 15) )
 					{
 						Type += 100 + ID;
-						m_Spawner.Spawn( GetEntry(Type, info) );
+						m_Spawner.SpawnFromGump( m_Spawner.CreaturesName, m_Spawner.Creatures, m_Spawner.Count, m_Spawner.CreaturesNameCount, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 16) && (ID <= 30) )
 					{
 						Type += 200 + ID - 15;
-						m_Spawner.SpawnA( GetEntry(Type, info) );
+						m_Spawner.SpawnFromGump( m_Spawner.SubSpawnerA, m_Spawner.CreaturesA, m_Spawner.CountA, m_Spawner.CreaturesNameCountA, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 31) && (ID <= 45) )
 					{
 						Type += 300 + ID - 30;
-						m_Spawner.SpawnB( GetEntry(Type, info) );
+						m_Spawner.SpawnFromGump( m_Spawner.SubSpawnerB, m_Spawner.CreaturesB, m_Spawner.CountB, m_Spawner.CreaturesNameCountB, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 46) && (ID <= 60) )
 					{
 						Type += 400 + ID - 45;
-						m_Spawner.SpawnC( GetEntry(Type, info) );
+						m_Spawner.SpawnFromGump( m_Spawner.SubSpawnerC, m_Spawner.CreaturesC, m_Spawner.CountC, m_Spawner.CreaturesNameCountC, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 61) && (ID <= 75) )
 					{
 						Type += 500 + ID - 60;
-						m_Spawner.SpawnD( GetEntry(Type, info) );
+						m_Spawner.SpawnFromGump( m_Spawner.SubSpawnerD, m_Spawner.CreaturesD, m_Spawner.CountD, m_Spawner.CreaturesNameCountD, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 76) && (ID <= 90) )
 					{
 						Type += 600 + ID - 75;
-						m_Spawner.SpawnE( GetEntry(Type, info) );
+						m_Spawner.SpawnFromGump( m_Spawner.SubSpawnerE, m_Spawner.CreaturesE, m_Spawner.CountE, m_Spawner.CreaturesNameCountE, GetEntry(Type, info) );
 					}
 					// Remove creature
 					else if ( (ID >= 91) && (ID <= 105) )
 					{
 						Type += 100 + ID - 90;
-						m_Spawner.RemoveCreatures( GetEntry(Type, info) );
+						m_Spawner.RemoveCreaturesFromGump( m_Spawner.Creatures, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 106) && (ID <= 120) )
 					{
 						Type += 200 + ID - 105;
-						m_Spawner.RemoveCreaturesA( GetEntry(Type, info) );
+						m_Spawner.RemoveCreaturesFromGump( m_Spawner.CreaturesA, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 121) && (ID <= 135) )
 					{
 						Type += 300 + ID - 120;
-						m_Spawner.RemoveCreaturesB( GetEntry(Type, info) );
+						m_Spawner.RemoveCreaturesFromGump( m_Spawner.CreaturesB, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 136) && (ID <= 150) )
 					{
 						Type += 400 + ID - 135;
-						m_Spawner.RemoveCreaturesC( GetEntry(Type, info) );
+						m_Spawner.RemoveCreaturesFromGump( m_Spawner.CreaturesC, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 151) && (ID <= 165) )
 					{
 						Type += 500 + ID - 150;
-						m_Spawner.RemoveCreaturesD( GetEntry(Type, info) );
+						m_Spawner.RemoveCreaturesFromGump( m_Spawner.CreaturesD, GetEntry(Type, info) );
 					}
 					else if ( (ID >= 166) && (ID <= 180) )
 					{
 						Type += 600 + ID - 165;
-						m_Spawner.RemoveCreaturesE( GetEntry(Type, info) );
+						m_Spawner.RemoveCreaturesFromGump( m_Spawner.CreaturesE, GetEntry(Type, info) );
 					}
 
 					string entry = GetEntry(Type, info);

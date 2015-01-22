@@ -131,7 +131,7 @@ namespace Server.Gumps
 			AddAlphaRegion( 260, 50, 332, 396 );
 			AddLabel( 220, 20, 52, "PREMIUM SPAWNER EDITOR" );
 			AddButton( 550, 405, 0x158A, 0x158B, 10002, GumpButtonType.Reply, 1 ); //Quit Button
-			AddButton( 275, 412, 0x845, 0x846, 10008, GumpButtonType.Reply, 0 );
+			AddButton( 275, 412, 0x845, 0x846, 10008, GumpButtonType.Reply, 0 ); // Refresh button
 			AddLabel( 300, 410, 52, "Refresh" );
 
 			if( currentList.Count == 0 )
@@ -792,8 +792,6 @@ namespace Server.Gumps
 
 			if( info.ButtonID > 0 && info.ButtonID < 10000 )
 				buttonNum = 1;
-			else if( info.ButtonID > 20004 )
-				buttonNum = 30000;
 			else
 				buttonNum = info.ButtonID;
 
@@ -833,12 +831,12 @@ namespace Server.Gumps
 					//Close
 					break;
 				}
-				case 10003:
+				case 10003: // Filter to current region only
 				{
 					FilterByRegion( from, tempList, from.Region, from.Map, page );
 					break;
 				}
-				case 10004:
+				case 10004: // Filter by Distance
 				{
 					TextRelay oDis = info.GetTextEntry( 0 );
 					string sDis = ( oDis == null ? "" : oDis.Text.Trim() );
@@ -861,37 +859,37 @@ namespace Server.Gumps
 					}
 					break;
 				}
-				case 10005:
+				case 10005: // Go to Spawner
 				{
 					from.Location = new Point3D( selSpawner.X, selSpawner.Y, selSpawner.Z );
 					SpawnEditor_OnCommand( from, page, currentList, 1, selSpawner );
 					break;
 				}
-				case 10006:
+				case 10006: // Delete Selected Spawner
 				{
 					selSpawner.Delete();
 					SpawnEditor_OnCommand( from );
 					break;
 				}
-				case 10007:
+				case 10007: // Edit Spawns (Premium Sapwner Gump)
 				{
 					from.SendGump( new PremiumSpawnerGump( selSpawner as PremiumSpawner ) );
 					SpawnEditor_OnCommand( from, page, currentList, 1, selSpawner );
 					break;
 				}
-				case 10008:
+				case 10008: // Refresh button
 				{
 					SpawnEditor_OnCommand( from );
 					break;
 				}
-				case 10009:
+				case 10009: // Search Spawners by Creature
 				{
 					TextRelay oSearch = info.GetTextEntry( 1 );
 					string sSearch = ( oSearch == null ? null : oSearch.Text.Trim() );
 					SearchByName( tempList, from, sSearch, page );
 					break;
 				}
-				case 10010:
+				case 10010: // Search Spawners by SpawnID
 				{
 					TextRelay oID = info.GetTextEntry( 2 );
 					string sID = ( oID == null ? "" : oID.Text.Trim() );
@@ -912,56 +910,6 @@ namespace Server.Gumps
 						from.SendMessage( "You must specify a SpawnID" );
 						SpawnEditor_OnCommand( from, page, currentList );
 					}
-					break;
-				}
-				case 20000:
-				{
-					PremiumSpawner spawner = selSpawner as PremiumSpawner;
-					spawner.CreaturesName = CreateArray( info, state.Mobile );
-					break;
-				}
-				case 20001:
-				{
-					PremiumSpawner spawner = selSpawner as PremiumSpawner;
-					SpawnEditor_OnCommand( from, page, currentList, 2, selSpawner );
-					spawner.BringToHome();
-					break;
-				}
-				case 20002:
-				{
-					PremiumSpawner spawner = selSpawner as PremiumSpawner;
-					SpawnEditor_OnCommand( from, page, currentList, 2, selSpawner );
-					spawner.Respawn();
-					break;
-				}
-				case 20003:
-				{
-					PremiumSpawner spawner = selSpawner as PremiumSpawner;
-					SpawnEditor_OnCommand( from, page, currentList, 2, selSpawner );
-					state.Mobile.SendGump( new PropertiesGump( state.Mobile, spawner ) );
-					break;
-				}
-				case 30000:
-				{
-					int buttonID = info.ButtonID - 20004;
-					int index = buttonID / 2;
-					int type = buttonID % 2;
-
-					PremiumSpawner spawner = selSpawner as PremiumSpawner;
-
-					TextRelay entry = info.GetTextEntry( index );
-
-					if ( entry != null && entry.Text.Length > 0 )
-					{
-						if ( type == 0 ) // Spawn creature
-							spawner.Spawn( entry.Text );
-						else // Remove creatures
-							spawner.RemoveCreatures( entry.Text );
-							//spawner.RemoveCreaturesA( entry.Text );
-
-						spawner.CreaturesName = CreateArray( info, state.Mobile );
-					}
-
 					break;
 				}
 			}
