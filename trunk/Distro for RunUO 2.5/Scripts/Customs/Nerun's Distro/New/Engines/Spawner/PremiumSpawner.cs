@@ -1,4 +1,4 @@
-//Engine r91
+//Engine r147
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,8 +16,8 @@ namespace Server.Mobiles
 	public class PremiumSpawner : Item
 	{
 		private int m_Team;
-		private int m_HomeRange;          // = old SpawnRange
-		private int m_WalkingRange = -1;  // = old HomeRange
+		private int m_HomeRange; // = old SpawnRange
+		private int m_WalkingRange = -1; // = old HomeRange
 		private int m_SpawnID = 1;
 		private int m_Count;
 		private int m_CountA;
@@ -28,7 +28,7 @@ namespace Server.Mobiles
 		private TimeSpan m_MinDelay;
 		private TimeSpan m_MaxDelay;
 		private List<string> m_CreaturesName; // creatures to be spawned
-		private List<IEntity> m_Creatures;    // spawned creatures
+		private List<IEntity> m_Creatures; // spawned creatures
 		private List<string> m_CreaturesNameA;
 		private List<IEntity> m_CreaturesA;
 		private List<string> m_CreaturesNameB;
@@ -52,7 +52,7 @@ namespace Server.Mobiles
 		public bool IsFullc{ get{ return ( m_CreaturesC != null && m_CreaturesC.Count >= m_CountC ); } }
 		public bool IsFulld{ get{ return ( m_CreaturesD != null && m_CreaturesD.Count >= m_CountD ); } }
 		public bool IsFulle{ get{ return ( m_CreaturesE != null && m_CreaturesE.Count >= m_CountE ); } }
-		
+
 		public List<string> CreaturesName
 		{
 			get { return m_CreaturesName; }
@@ -125,6 +125,84 @@ namespace Server.Mobiles
 			{
 				m_CreaturesNameE = value;
 				if ( m_CreaturesNameE.Count < 1 )
+					Stop();
+
+				InvalidateProperties();
+			}
+		}
+
+		public List<IEntity> Creatures
+		{
+			get { return m_Creatures; }
+			set
+			{
+				m_Creatures = value;
+				if ( m_Creatures.Count < 1 )
+					Stop();
+
+				InvalidateProperties();
+			}
+		}
+
+		public List<IEntity> CreaturesA
+		{
+			get { return m_CreaturesA; }
+			set
+			{
+				m_CreaturesA = value;
+				if ( m_CreaturesA.Count < 1 )
+					Stop();
+
+				InvalidateProperties();
+			}
+		}
+		
+		public List<IEntity> CreaturesB
+		{
+			get { return m_CreaturesB; }
+			set
+			{
+				m_CreaturesB = value;
+				if ( m_CreaturesB.Count < 1 )
+					Stop();
+
+				InvalidateProperties();
+			}
+		}
+
+		public List<IEntity> CreaturesC
+		{
+			get { return m_CreaturesC; }
+			set
+			{
+				m_CreaturesC = value;
+				if ( m_CreaturesC.Count < 1 )
+					Stop();
+
+				InvalidateProperties();
+			}
+		}
+
+		public List<IEntity> CreaturesD
+		{
+			get { return m_CreaturesD; }
+			set
+			{
+				m_CreaturesD = value;
+				if ( m_CreaturesD.Count < 1 )
+					Stop();
+
+				InvalidateProperties();
+			}
+		}
+
+		public List<IEntity> CreaturesE
+		{
+			get { return m_CreaturesE; }
+			set
+			{
+				m_CreaturesE = value;
+				if ( m_CreaturesE.Count < 1 )
 					Stop();
 
 				InvalidateProperties();
@@ -420,7 +498,7 @@ namespace Server.Mobiles
 				list.Add( 1060661, "speed\t{0} to {1}", m_MinDelay, m_MaxDelay );
 
 				for ( int i = 0; i < 2 && i < m_CreaturesName.Count; ++i )
-					list.Add( 1060662 + i, "{0}\t{1}", m_CreaturesName[i], CountCreatures( m_CreaturesName[i] ) );
+					list.Add( 1060662 + i, "{0}\t{1}", m_CreaturesName[i], CountCreatures( Creatures, m_CreaturesName[i] ) );
 			}
 			else
 			{
@@ -460,6 +538,12 @@ namespace Server.Mobiles
 			{
 				m_Timer.Stop();
 				m_Running = false;
+				RemoveCreatures(m_Creatures);
+				RemoveCreatures(m_CreaturesA);
+				RemoveCreatures(m_CreaturesB);
+				RemoveCreatures(m_CreaturesC);
+				RemoveCreatures(m_CreaturesD);
+				RemoveCreatures(m_CreaturesE);
 			}
 		}
 
@@ -583,75 +667,15 @@ namespace Server.Mobiles
 
 		}
 
-		// Spawn(string anystring) - all this works for PremiumSpawnerGump(line 422) and SpawnEditor(line 957)
-		// But this funcionality is broken in these scripts.
-		public void Spawn( string creatureName )
+		// Used only by PremiumSpawnerGump(line 415-45)
+		// BROKEN
+		public void SpawnFromGump( List<string> m_subspawnName, List<IEntity> m_subspawn, int subCount, int subNameCount, string creatureName )
 		{
-			for ( int i = 0; i < m_CreaturesName.Count; i++ )
+			for ( int i = 0; i < m_subspawnName.Count; i++ )
 			{
-				if ( m_CreaturesName[i] == creatureName )
+				if ( m_subspawnName[i] == creatureName )
 				{
-					SpawnTwo( i, CreaturesNameCount, m_Creatures, m_Count, m_CreaturesName );
-					break;
-				}
-			}
-		}
-
-		public void SpawnA( string creatureNameA )
-		{
-			for ( int i = 0; i < m_CreaturesNameA.Count; i++ )
-			{
-				if ( (string)m_CreaturesNameA[i] == creatureNameA )
-				{
-					SpawnTwo( i, CreaturesNameCountA, m_CreaturesA, m_CountA, m_CreaturesNameA );
-					break;
-				}
-			}
-		}
-
-		public void SpawnB( string creatureNameB )
-		{
-			for ( int i = 0; i < m_CreaturesNameB.Count; i++ )
-			{
-				if ( (string)m_CreaturesNameB[i] == creatureNameB )
-				{
-					SpawnTwo( i, CreaturesNameCountB, m_CreaturesB, m_CountB, m_CreaturesNameB );
-					break;
-				}
-			}
-		}
-
-		public void SpawnC( string creatureNameC )
-		{
-			for ( int i = 0; i < m_CreaturesNameC.Count; i++ )
-			{
-				if ( (string)m_CreaturesNameC[i] == creatureNameC )
-				{
-					SpawnTwo( i, CreaturesNameCountC, m_CreaturesC, m_CountC, m_CreaturesNameC );
-					break;
-				}
-			}
-		}
-
-		public void SpawnD( string creatureNameD )
-		{
-			for ( int i = 0; i < m_CreaturesNameD.Count; i++ )
-			{
-				if ( (string)m_CreaturesNameD[i] == creatureNameD )
-				{
-					SpawnTwo( i, CreaturesNameCountD, m_CreaturesD, m_CountD, m_CreaturesNameD );
-					break;
-				}
-			}
-		}
-
-		public void SpawnE( string creatureNameE )
-		{
-			for ( int i = 0; i < m_CreaturesNameE.Count; i++ )
-			{
-				if ( (string)m_CreaturesNameE[i] == creatureNameE )
-				{
-					SpawnTwo( i, CreaturesNameCountE, m_CreaturesE, m_CountE, m_CreaturesNameE );
+					SpawnTwo( i, subNameCount, m_subspawn, subCount, m_subspawnName );
 					break;
 				}
 			}
@@ -964,93 +988,29 @@ namespace Server.Mobiles
 			}
 		}
 
-		public int CountCreatures( string creatureName )
+		// Used only by PremiumSpawnerGump (except 1st, used here too)
+		public int CountCreatures( List<IEntity> m_subspawn, string creatureName )
 		{
-			Defrag(m_Creatures);
+			Defrag(m_subspawn);
 
 			int count = 0;
 
-			for ( int i = 0; i < m_Creatures.Count; ++i )
-				if ( Insensitive.Equals( creatureName, m_Creatures[i].GetType().Name ) )
+			for ( int i = 0; i < m_subspawn.Count; ++i )
+				if ( Insensitive.Equals( creatureName, m_subspawn[i].GetType().Name ) )
 					++count;
 
 			return count;
 		}
 
-		public int CountCreaturesA( string creatureNameA )
+		// Used only by PremiumSpawnerGump (lines 446-76)
+		// BROKEN
+		public void RemoveCreaturesFromGump( List<IEntity> m_subspawn, string creatureName )
 		{
-			Defrag(m_CreaturesA);
+			Defrag(m_subspawn);
 
-			int count = 0;
-
-			for ( int i = 0; i < m_CreaturesA.Count; ++i )
-				if ( Insensitive.Equals( creatureNameA, m_CreaturesA[i].GetType().Name ) )
-					++count;
-
-			return count;
-		}
-
-		public int CountCreaturesB( string creatureNameB )
-		{
-			Defrag(m_CreaturesB);
-
-			int count = 0;
-
-			for ( int i = 0; i < m_CreaturesB.Count; ++i )
-				if ( Insensitive.Equals( creatureNameB, m_CreaturesB[i].GetType().Name ) )
-					++count;
-
-			return count;
-		}
-
-		public int CountCreaturesC( string creatureNameC )
-		{
-			Defrag(m_CreaturesC);
-
-			int count = 0;
-
-			for ( int i = 0; i < m_CreaturesC.Count; ++i )
-				if ( Insensitive.Equals( creatureNameC, m_CreaturesC[i].GetType().Name ) )
-					++count;
-
-			return count;
-		}
-
-		public int CountCreaturesD( string creatureNameD )
-		{
-			Defrag(m_CreaturesD);
-
-			int count = 0;
-
-			for ( int i = 0; i < m_CreaturesD.Count; ++i )
-				if ( Insensitive.Equals( creatureNameD, m_CreaturesD[i].GetType().Name ) )
-					++count;
-
-			return count;
-		}
-
-		public int CountCreaturesE( string creatureNameE )
-		{
-			Defrag(m_CreaturesE);
-
-			int count = 0;
-
-			for ( int i = 0; i < m_CreaturesE.Count; ++i )
-				if ( Insensitive.Equals( creatureNameE, m_CreaturesE[i].GetType().Name ) )
-					++count;
-
-			return count;
-		}
-
-		// RemoveCreatures(string anystring) - all this works for PremiumSpawnerGump(line 579) and SpawnEditor(line 957)
-		// But this funcionality is broken in these scripts.
-		public void RemoveCreatures( string creatureName )
-		{
-			Defrag(m_Creatures);
-
-			for ( int i = 0; i < m_Creatures.Count; ++i )
+			for ( int i = 0; i < m_subspawn.Count; ++i )
 			{
-				IEntity e = m_Creatures[i];
+				IEntity e = m_subspawn[i];
 
 				if ( Insensitive.Equals( creatureName, e.GetType().Name ) )
 						e.Delete();
@@ -1059,81 +1019,7 @@ namespace Server.Mobiles
 			InvalidateProperties();
 		}
 
-		public void RemoveCreaturesA( string creatureNameA )
-		{
-			Defrag(m_CreaturesA);
-
-			for ( int i = 0; i < m_CreaturesA.Count; ++i )
-			{
-				IEntity e = m_CreaturesA[i];
-
-				if ( Insensitive.Equals( creatureNameA, e.GetType().Name ) )
-						e.Delete();
-			}
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesB( string creatureNameB )
-		{
-			Defrag(m_CreaturesB);
-
-			for ( int i = 0; i < m_CreaturesB.Count; ++i )
-			{
-				IEntity e = m_CreaturesB[i];
-
-				if ( Insensitive.Equals( creatureNameB, e.GetType().Name ) )
-						e.Delete();
-			}
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesC( string creatureNameC )
-		{
-			Defrag(m_CreaturesC);
-
-			for ( int i = 0; i < m_CreaturesC.Count; ++i )
-			{
-				IEntity e = m_CreaturesC[i];
-
-				if ( Insensitive.Equals( creatureNameC, e.GetType().Name ) )
-						e.Delete();
-			}
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesD( string creatureNameD )
-		{
-			Defrag(m_CreaturesD);
-
-			for ( int i = 0; i < m_CreaturesD.Count; ++i )
-			{
-				IEntity e = m_CreaturesD[i];
-
-				if ( Insensitive.Equals( creatureNameD, e.GetType().Name ) )
-						e.Delete();
-			}
-
-			InvalidateProperties();
-		}
-
-		public void RemoveCreaturesE( string creatureNameE )
-		{
-			Defrag(m_CreaturesE);
-
-			for ( int i = 0; i < m_CreaturesE.Count; ++i )
-			{
-				IEntity e = m_CreaturesE[i];
-
-				if ( Insensitive.Equals( creatureNameE, e.GetType().Name ) )
-						e.Delete();
-			}
-
-			InvalidateProperties();
-		}
-		
+		// Used only here
 		public void RemoveCreatures( List<IEntity> m_Creatur )
 		{
 			Defrag(m_Creatur);

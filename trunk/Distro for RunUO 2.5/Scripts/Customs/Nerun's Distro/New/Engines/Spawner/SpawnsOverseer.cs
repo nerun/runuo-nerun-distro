@@ -21,6 +21,7 @@ namespace Server.Items
 		private int m_Overseeing;
 		private CheckTimer m_Timer;
 		private bool m_Enable;
+		private bool m_Gatekeeper;
 		private TimeSpan m_CurrentDelay; // players out dungeon
 		private DateTime m_End;
 
@@ -38,6 +39,13 @@ namespace Server.Items
 
 				InvalidateProperties();
 			}
+		}
+
+		[CommandProperty( AccessLevel.GameMaster )]
+		public bool Gatekeeper
+		{
+			get { return m_Gatekeeper; }
+			set	{ m_Gatekeeper = value;	InvalidateProperties();	}
 		}
 
 		[CommandProperty( AccessLevel.GameMaster )]
@@ -168,6 +176,7 @@ namespace Server.Items
 			Weight = 1;
 			Visible = false;
 			Enable = true;
+			Gatekeeper = false;
 			Range = startrange;
 			CurrentDelay = TimeSpan.FromSeconds( 5 );
 			InRangeDelay = startIRD; //minutes
@@ -221,89 +230,100 @@ namespace Server.Items
 
 		public void OnTickDoThis()
 		{
-			List<Item> ClosePremiumSpawners = new List<Item>();
 
-			List<Mobile> ClosePlayers = new List<Mobile>();
-
-			List<Mobile> MobsCleaning = new List<Mobile>();
-
-			List<Item> ItemsCleaning = new List<Item>();
-
-			foreach ( Item item in this.GetItemsInRange( Range ) ) // para cada item dentro do raio de alcance
+			if ( this.Gatekeeper == false) // Gatekeeper mode OFF
 			{
-				if( item is PremiumSpawner ) // se for um PremiumSpawner
-					ClosePremiumSpawners.Add( item );
-			}
+				List<Item> ClosePremiumSpawners = new List<Item>();
 
-			if ( ClosePremiumSpawners.Count > 0 )
-			{
-				this.Overseeing = ClosePremiumSpawners.Count;
+				List<Mobile> ClosePlayers = new List<Mobile>();
+
+				List<Mobile> MobsCleaning = new List<Mobile>();
+
+				List<Item> ItemsCleaning = new List<Item>();
+
+				foreach ( Item item in this.GetItemsInRange( Range ) )
+				{
+					if( item is PremiumSpawner )
+						ClosePremiumSpawners.Add( item );
+				}
+
+				if ( ClosePremiumSpawners.Count > 0 )
+				{
+					this.Overseeing = ClosePremiumSpawners.Count;
 			
-				foreach ( Mobile m in this.GetMobilesInRange( Range ) ) // para cada mobile dentro do raio de alcance
-				{
-					if( m is PlayerMobile && m.AccessLevel == AccessLevel.Player || m is PlayerMobile && m.AccessLevel > AccessLevel.Player && m.Hidden == false ) //se fôr player ou GM não oculto (hidden)
-						ClosePlayers.Add( m );
-				}
-
-				if ( ClosePlayers.Count > 0 ) // há pelo menos um player próximo
-				{
-					this.CurrentDelay = TimeSpan.FromMinutes( InRangeDelay ); // tempo para nova checagem
-					Restart();
-
-					foreach ( Item pspawner in ClosePremiumSpawners ) // pra cada PremiumSpawner próximo (na lista)
+					foreach ( Mobile m in this.GetMobilesInRange( Range ) )
 					{
-						if ( ((PremiumSpawner)pspawner).Running == false ) // se estiver desativado
+						if( m is PlayerMobile && m.AccessLevel == AccessLevel.Player || m is PlayerMobile && m.AccessLevel > AccessLevel.Player && m.Hidden == false ) // if player or GM not hidden
+							ClosePlayers.Add( m );
+					}
+
+					if ( ClosePlayers.Count > 0 ) // at least one player close
+					{
+						this.CurrentDelay = TimeSpan.FromMinutes( InRangeDelay ); // time to new check
+						Restart();
+
+						foreach ( Item pspawner in ClosePremiumSpawners ) // for each PremiumSpawner close (in the List)
 						{
-							((PremiumSpawner)pspawner).Running = true; // ativar!
-							((PremiumSpawner)pspawner).NextSpawn = TimeSpan.FromSeconds( 1 ); // respawn total!
+							if ( ((PremiumSpawner)pspawner).Running == false ) // if it is inactive
+							{
+								((PremiumSpawner)pspawner).Running = true; // activate it!
+								((PremiumSpawner)pspawner).NextSpawn = TimeSpan.FromSeconds( 1 ); // and do a total respawn of it!
+							}
+						}
+					}
+
+					else if ( ClosePlayers.Count <= 0 ) // nobody close
+					{
+						this.CurrentDelay = TimeSpan.FromSeconds( OutRangeDelay ); // time to new check
+						Restart();
+
+						foreach ( Item pspawner in ClosePremiumSpawners ) // for each PremiumSpawner close (in the List)
+						{
+							if ( ((PremiumSpawner)pspawner).Running == true ) // if it is active
+							{
+								((PremiumSpawner)pspawner).Running = false; // make inactive!
+
+								// NOW delete items and mobiles (not only the spawned, but all movable in range)
+
+								foreach ( Mobile mobdel in this.GetMobilesInRange( Range ) )
+								{
+									if( mobdel is BaseCreature || mobdel is TownCrier )
+										MobsCleaning.Add( mobdel );
+								}
+
+								if ( MobsCleaning.Count > 0 )
+								{
+									foreach ( Mobile mDel in MobsCleaning )
+										mDel.Delete();
+								}
+
+								foreach ( Item itemdel in this.GetItemsInRange( Range ) )
+								{
+									if( itemdel.Movable == true ) //se for um item móvel (não decoração)
+										ItemsCleaning.Add( itemdel );
+								}
+
+								if ( ItemsCleaning.Count > 0 )
+								{
+									foreach ( Item iDel in ItemsCleaning )
+										iDel.Delete();
+								}
+							}
 						}
 					}
 				}
 
-				else if ( ClosePlayers.Count <= 0 ) // não tem ninguém perto
+				else if ( ClosePremiumSpawners.Count <= 0 ) // if SpawnsOverseer has no PremiumSpawner to seer, deactivate it
 				{
-					this.CurrentDelay = TimeSpan.FromSeconds( OutRangeDelay ); // tempo para nova checagem
-					Restart();
-
-					foreach ( Item pspawner in ClosePremiumSpawners ) // pra cada Premium PremiumSpawner próximo (na lista)
-					{
-						if ( ((PremiumSpawner)pspawner).Running == true ) // se estiver ativado
-						{
-							((PremiumSpawner)pspawner).Running = false; // desativar!
-
-							foreach ( Mobile mobdel in this.GetMobilesInRange( Range ) )
-							{
-								if( mobdel is BaseCreature || mobdel is TownCrier )
-									MobsCleaning.Add( mobdel );
-							}
-
-							if ( MobsCleaning.Count > 0 )
-							{
-								foreach ( Mobile mDel in MobsCleaning )
-									mDel.Delete();
-							}
-
-							foreach ( Item itemdel in this.GetItemsInRange( Range ) )
-							{
-								if( itemdel.Movable == true ) //se for um item móvel (não decoração)
-									ItemsCleaning.Add( itemdel );
-							}
-
-							if ( ItemsCleaning.Count > 0 )
-							{
-								foreach ( Item iDel in ItemsCleaning )
-									iDel.Delete();
-							}
-						}
-					}
+					this.Enable = false;
+					this.CurrentDelay = TimeSpan.FromSeconds( OutRangeDelay );
+					this.Overseeing = ClosePremiumSpawners.Count;
 				}
 			}
-
-			else if ( ClosePremiumSpawners.Count <= 0 )
+			
+			else // Gatekeeper mode ON
 			{
-				this.Enable = false;
-				this.CurrentDelay = TimeSpan.FromSeconds( OutRangeDelay );
-				this.Overseeing = ClosePremiumSpawners.Count;
+				
 			}
 		}
 
@@ -321,12 +341,14 @@ namespace Server.Items
 			writer.Write( m_InRangeDelay );
 			writer.Write( m_OutRangeDelay );
 			writer.Write( m_Overseeing );
+			writer.Write( m_Gatekeeper );
 			writer.Write( m_Enable );
 			if ( m_Enable )
 				writer.WriteDeltaTime( m_End );
 		}
 
 		public override void Deserialize( GenericReader reader )
+
 		{
 			base.Deserialize( reader );
 
@@ -336,6 +358,7 @@ namespace Server.Items
 			m_InRangeDelay = reader.ReadInt();
 			m_OutRangeDelay = reader.ReadInt();
 			m_Overseeing = reader.ReadInt();
+			m_Gatekeeper = reader.ReadBool();
 			m_Enable = reader.ReadBool();
 			TimeSpan ts = TimeSpan.Zero;
 			if ( m_Enable )
