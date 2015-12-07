@@ -546,7 +546,7 @@ você mesmo, na mão:
 
 Olhe em:
 
- ...\Data\Monsters\overseers\Trammel\Overseers.cfg
+ ...\Data\Nerun's Distro\Spawns\overseers\trammel\Overseers.cfg
 
 É um arquivo de exemplo:
 
@@ -564,7 +564,7 @@ Você pode colocar ranges diferentes:
  SpawnsOverseer 7966 (Range=50)
  5433 1102 0
 
-Lembre-se que s enão especificado o range padrão é 20.
+Lembre-se que se não especificado o range padrão é 20.
 
 Range é o alcance da visão do seer (o feitor, o vigia). PremiumSpawners
 dentro deste alcance serão vigiados pelo feitor. você pode colocar o
@@ -619,11 +619,11 @@ comando [GenSeers:
 
 Coloque os arquivos de coniguração na pasta certa.
 
-Trammel em:
- ...\Data\Monsters\overseers\Trammel\Overseers.cfg
+Trammel:
+...\Data\Nerun's Distro\Spawns\overseers\trammel\Overseers.cfg
 
-Felucca em:
- ...\Data\Monsters\overseers\Felucca\Overseers.cfg
+Felucca:
+...\Data\Nerun's Distro\Spawns\overseers\felucca\Overseers.cfg
 
 Etc.
 

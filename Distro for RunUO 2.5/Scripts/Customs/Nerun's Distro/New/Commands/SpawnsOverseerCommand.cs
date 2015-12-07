@@ -29,12 +29,12 @@ namespace Server.Commands
 
 			m_Mobile.SendMessage( "Generating Spawns' Overseers, please wait." );
 
-			Generate( "Data/Nerun's Distro/Spawns/overseers/Trammel", Map.Trammel );
-			Generate( "Data/Nerun's Distro/Spawns/overseers/Felucca", Map.Felucca );
-			Generate( "Data/Nerun's Distro/Spawns/overseers/Ilshenar", Map.Ilshenar );
-			Generate( "Data/Nerun's Distro/Spawns/overseers/Malas", Map.Malas );
-			Generate( "Data/Nerun's Distro/Spawns/overseers/Tokuno", Map.Tokuno );
-			Generate( "Data/Nerun's Distro/Spawns/overseers/Termur", Map.TerMur );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/trammel", Map.Trammel );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/felucca", Map.Felucca );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/ilshenar", Map.Ilshenar );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/malas", Map.Malas );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/tokuno", Map.Tokuno );
+			Generate( "Data/Nerun's Distro/Spawns/overseers/termur", Map.TerMur );
 			
 			m_Mobile.SendMessage( "Spawns' Overseers generation complete. {0} seers were generated.", m_Count );
 		}

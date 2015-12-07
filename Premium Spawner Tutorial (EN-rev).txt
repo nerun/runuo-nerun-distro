@@ -541,7 +541,7 @@ One option it to add OverSeers yourself, by hand.
 
 And look at:
 
-...\Data\Monsters\overseers\Trammel\Overseers.cfg
+...\Data\Nerun's Distro\Spawns\overseers\trammel\Overseers.cfg
 
 It is an example of OverSeer config file:
 
@@ -606,10 +606,10 @@ SpawnsOverseer 7966 (Range=50)
 Place the CFG file in the right folder.
 
 Trammel:
-...\Data\Monsters\overseers\Trammel\Overseers.cfg
+...\Data\Nerun's Distro\Spawns\overseers\trammel\Overseers.cfg
 
 Felucca:
-...\Data\Monsters\overseers\Felucca\Overseers.cfg
+...\Data\Nerun's Distro\Spawns\overseers\felucca\Overseers.cfg
 
 etc
 
