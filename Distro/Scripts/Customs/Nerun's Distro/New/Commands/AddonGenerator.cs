@@ -184,7 +184,7 @@ namespace {namespace}
             state[9] = -128;
             state[10] = 127;
             state[11] = state[13] = state[15] = 2;
-            state[12] = state[14] = state[16] = 39212;
+            state[12] = state[14] = state[16] = 40225;
 
             if (e.Arguments.Length > 0)
             {
@@ -237,11 +237,11 @@ namespace {namespace}
             sbyte max = sbyte.MaxValue;
 
             int minStaticID = 2;
-            int maxStaticID = 39212;
+            int maxStaticID = 40225;
             int minItemID = 2;
-            int maxItemID = 39212;
+            int maxItemID = 40225;
             int minTileID = 2;
-            int maxTileID = 39212;
+            int maxTileID = 40225;
 
             try { min = sbyte.Parse(args[9] as string); }
             catch { }
@@ -281,8 +281,8 @@ namespace {namespace}
                         {
                             list.Add(t);
                             
-                            int id = t.ID - 39212;
-                            if (id < 2 || id > 39212)
+                            int id = t.ID - 40225;
+                            if (id < 2 || id > 40225)
                                 remove.Add(t);
                             else if (includeZRange && (t.Z < min || t.Z > max))
                                 remove.Add(t);
@@ -351,7 +351,7 @@ namespace {namespace}
                             continue;
                         else if (i is BaseAddon) // Not a good idea to add a BaseAddOn for obvious reasons
                             continue;
-                        else if (i.ItemID < 2 || i.ItemID > 39212) // This is not an Item within the normal artwork.. multi... etc.. Toss it
+                        else if (i.ItemID < 2 || i.ItemID > 40225) // This is not an Item within the normal artwork.. multi... etc.. Toss it
                             continue;
                         else if (includeZRange && (i.Z < min || i.Z > max))
                             continue;
@@ -475,7 +475,7 @@ namespace {namespace}
                 foreach (StaticTile t in list)
                 {
                     int zOffset = t.Z - center.Z;
-                    int id = t.ID - 39212;
+                    int id = t.ID - 40225;
                     m_SimpleComponents++;
                     simplecount++;
                     m_TotalComponents++;

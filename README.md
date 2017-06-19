@@ -4,9 +4,9 @@ Nerun's Distro is a script for RunUO centered on the settlement of the game, usi
 
 PORTUGUÊS:
 
-Nerun's Distro é um script para RunUO, centrado no povoamento do jogo, usando a engine Premium Spawner. Fácil de usar, esta distribuição inclui spawns para um mundo 100% povoado, e tutoriais em inglês e em português. Inclui também:
+Nerun's Distro é um script para RunUO, centrado no povoamento do jogo, usando a engine Premium Spawner. Fácil de usar, esta distribuição inclui spawns para um mundo 100% povoado, e tutoriais em inglês e português. Inclui também:
 
-    CEO's Yet Another Arya Addon Generator
+    CEO's Yet Another Arya Addon Generator v3.0
     Custom Regions in a Box 4.0
     Joeku's Automatic Speed Booster;
     Joeku's Staff Runebook;
