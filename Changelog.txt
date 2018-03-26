@@ -1,0 +1,1068 @@
+﻿Rev. 153 (26-Mar-2018)
+• Code cleanup at PremiumSpawnerMainGump.
+• README.md unified with READ-ME FIRST.txt and added usage and troubleshooting instructions.
+
+Rev. 152 (19-Jun-2017)
+• Updated CEO's Yet Another Arya Addon Generator to v3.0 (Hammerhand's update) for High Seas support.
+
+Rev. 151 (18-Dec-2015)
+• Renamed folder “Distro for RunUO 2.5” to just “Distro”.
+• Updated READ-ME FIRST.txt changing folder name.
+
+Rev. 150 (07-Dec-2015)
+• Updated tutorials (Overseers' path).
+• Updated SpawnsOverseer's commands to be more Linux friendly.
+
+Rev. 149 (22-Jul-2015)
+• Updated CEO's Yet Another Arya Addon Generator to v2.5 (Hammerhand's update).
+
+Rev. 148 (29-Mar-2015)
+• Moved from Google Code to GitHub.
+• Added “README.md”, for use of GitHub only.
+
+Rev. 147 (22-Jan-2015)
+• Code cleanups (PremiumSpawner, PremiumSpawnerGump and SpawnEditor).
+• Spawns overseer gatekeeper mode addition (work in progress).
+
+Rev. 146 (16-Jan-2015)
+• Restored support for RunUO 2.3 (unfortunately some people still use it).
+
+Rev. 145 (14-Jan-2015)
+• Champion Spawn Controller: changed Item ID to a mast for more visibility (it spawn close to Felucca Britain bank).
+• Champion Spawns: added Ilshenar's Twisted Glade and Malas' Pestilence. Pending only Malas' Minotaur, not scripted by RunUO team yet.
+
+Rev. 144 (13-Jan-2015)
+• Fixed teleporters in Covetous dungeon level 3 (Lake Cave and Torture Chambers). Thanks to TestoTestov.
+
+Rev. 143 (13-Jan-2015)
+• Fixed no Solen Hive's entrances. Thanks to WesleySimmers.
+
+Rev. 142 (10-Jan-2015)
+• Updated ND.uuf uninstalation file.
+
+Rev. 141 (10-Jan-2015)
+• Champion Spawn bugfix. Kolio's fix. Not tested.
+
+Rev. 140 (28-Sep-2014)
+• Read-me instructions updated.
+
+Rev. 139 (23-Feb-2014)
+• Updated changelog, tutorials and “read-me” instructions.
+
+Rev. 138 (22-Feb-2014)
+• Forgot to update revision number and changelog.
+
+Rev. 137 (22-Feb-2014)
+• RunUO 2.3 and SVN is no longer supported;
+• RunUO 2.4 renamed to RunUO 2.5;
+• Updated Joeku's Toolbar to remove need for a command prefix, will use default system prefix instead.
+
+Rev. 136 (11-Nov-2013)
+• Fixed Orc Scout and Green Goblin to work with RunUO 2.4.
+
+Rev. 135 (04-Nov-2013)
+• Added support for RunUO 2.4. RunUO 2.3 and RunUO SVN (at version 1080 today) will be supported for while, because I am a few confused of what is happening to RunUO Team, since there was no official announce of RunUO 2.4 and RunUO Github repository.
+
+Rev. 134 (22-Sep-2013)
+• Updated RunUO SVN support to SVN 1075 (will work in SVN up to 1080).
+
+Rev. 133 (16-Aug-2013)
+• Added Talow’s Stairs Addon. AddStairs command included in Joeku’s Toolbar for Admins and Game Masters;
+• Some other changes to Joeku’s Toolbar for Game Masters;
+• Really small fix in Spawn Maps (cosmetic). Nothing important;
+• Updated CEO's Yet Another Arya Addon Generator to version 2.0 (Hammerhand’s update).
+
+Rev. 132 (30-Jul-2013)
+• Updated RunUO SVN support to SVN 1072.
+
+Rev. 131 (18-Apr-2013)
+• Fixed paths to work properly with Linux (Library.cs).
+
+Rev. 130 (26-Mar-2013)
+• More updates to support SVN 1057.
+
+Rev. 129 (26-Mar-2013)
+• Bug fix in Teleporter Maker to prevent shard crash when it read a blank line;
+• Updated RunUO SVN support to SVN 1057.
+
+Rev. 128 (05-Mar-2013)
+• Still Create World problems, more fixes. Not my day.
+
+Rev. 127 (05-Mar-2013)
+• Emergencial fix in Stygian Abyss teleporters (shard crash).
+
+Rev. 126 (05-Mar-2013)
+• Fixed bug in Teleporter Maker that made it impossible to compile.
+
+Rev. 125 (04-Mar-2013)
+• Forgot “TelMake SA” in Create World.
+
+Rev. 124 (04-Mar-2013)
+• Forgot somethings in Create World.
+
+Rev. 123 (04-Mar-2013)
+• Updated ML teleporters;
+• Updated Teleporter Maker to allow “remove only” mode;
+• Added teleporters’ config file for Kingdom’s Reborn Age I;
+• Updated Create World to replace TelGen with TelMake.
+
+Rev. 122 (04-Mar-2013)
+• Moved teleporters from decorations’ cfg files to teleporters’ cfg files (each thing in its proper place).
+
+Rev. 121 (17-Feb-2013)
+• Removed SHTelGen command from Create World engine, because it is inside TelGen command by default;
+• Fixed signs in Create World (KR1 and KR2 should remove signs after Signs were generated, not before);
+• Added Nerun’s Library v0.4 (collection of methods);
+• Updated Signalise script with Nerun’s Library methods;
+• Added Teleporter Maker to replace RunUO’s TelGen command.
+
+Rev. 120 (07-Feb-2013)
+• Fixed SignPut/Del bug that made it impossible to compile in NET Framework 2;
+• Fixed PremiumSpawnerGump: now if you click OK button, in any page of the gump, it will save the spawn entries that you added in all pages, but will not spawn them. And if you click Total Respawn, all them will be saved and will Total Respawn too.
+
+Rev. 119 (06-Feb-2013)
+• Signalisation:
+o Added custom signs according to the UO expansion chosen;
+o Added two new commands that replaces SignGen:SignPut and SignDel;
+o Note: new signs are placed using Create World gump, no need of user action;
+• Updated Universal Uninstallation File (\Data\Uninst\ND.uuf).
+
+Rev. 118 (05-Feb-2013)
+• Updated Universal Uninstallation File (\Data\Uninst\ND.uuf).
+
+Rev. 117 (05-Feb-2013)
+• Command StaticExport:
+o Bug fix relative to “Sign” type when loaded by [Decorate. Now “Sign” will be saved as “Static”;
+o Improvement: now is possible to enter coordinates in command line ([StaEx MyDeco x1 y1 x2 y2);
+• Data folders reorganization;
+• Updated most of scripts to reflect changes in the folders hierarchy.
+
+Rev. 116 (04-Feb-2013)
+• Code cleanup in Create World engine.
+
+Rev. 115 (04-Feb-2013)
+• Fixed a bug in [CreateWorld command;
+• Updated Universal Uninstallation File (\Data\Uninst\ND.uuf).
+
+Rev. 114 (04-Feb-2013)
+• Fixed “Putrifier” badspawn in Palace of Paroxysmus (right name is “Putrefier”);
+• Total reorganization of the decorations, renaming and changing place of files and folders;
+• [CreateWorld command totally redesigned (now you can choose to create a world based on an expansion of your choice).
+
+Rev. 107-113 (04-Feb-2013)
+• Updated to RunUO 2.3. RunUO 2.2 is no longer supported.
+
+Rev. 106 (04-Feb-2013)
+• GM Stuff:
+o Removed StaffCloak;
+o Added StaffOrb (do the same that StaffCloak, but works better);
+o Changed StaffCloak to StaffOrb in [GMBody command.
+
+Rev. 105 (02-Feb-2013)
+• Updated Create World Gump: added missing [DecorateMag (a default RunUO command to decorate Magincia when it was destroyed in from Client 6.0.4.0 up to 7.0.13.0);
+• Fixed ToxicElemental badspawn issue in RunUO SVN;
+• Small revision in Malas’ Orc Forts.
+
+Rev. 104 (29-Jan-2013)
+• Updated [RemSeers command: after remove Overseers, it will activate all inactive PremiumSpawners and force a total respawn.
+
+Rev. 103 (29-Jan-2013)
+• Updated Overseer’s engine:
+o Overseer crystal will show how many PremiumSpawners are under it’s control (overseeing);
+o Overseer.cfg example for Trammel added overseers for Lost Lands (2 seers controlling 213 PremiumSpawners).
+• English and Portuguese tutorials revised.
+
+Rev. 102 (18-Jan-2013)
+• Updated UO Mondain’s Legacy spawn pack with Heartwood vendors and animals (were missing).
+
+Rev. 100-101 (04-Jan-2013)
+• Updated RunUO SVN support to SVN 985.
+
+Rev. 99 (04-Jan-2013)
+• Updated plant gumps with RunUO SVN official fixes.
+
+Rev. 98 (21-Dec-2012) – “End of the World”
+• Updated RunUO SVN support to SVN 954.
+
+Rev. 97 (30-Sep-2012)
+• Updated RunUO SVN support to SVN 908.Rev. 96 (14-May-2012)
+• Fix to Prism of Light’s mobiles (RunUO 2.2 use my scripts, SVN use RunUO team scripts).
+
+Rev. 95 (14-May-2012)
+• Updated RunUO SVN support to SVN 879;
+• Updated PremiumSpawner engine (again) to fix SeaCreatures spawning over land (thanks to Lixi);
+• Added RunUO SVN official Prism of Light’s mobiles.
+
+Rev. 94 (01-May-2012)
+• Added Labyrinth dungeon to [go menu in Malas.
+
+Rev. 93 (01-May-2012)
+• Added an improvised Bedlam map.
+
+Rev. 92 (29-Apr-2012)
+• Added Bedlam’s entrance (Double-clickable iron maiden) by using [decorate;
+• Added Bedlam dungeon to [go menu in Malas;
+• Added Dock Town (High Seas expansion) to [go menu in Trammel;
+• Updated Nerun’s Distro Universal Uninstallation file.
+
+Rev. 91 (26-Apr-2012)
+• Forgot to update Stealth skill to support SVN 870. Done now;
+• Updated PremiumSpawner engine to fix SeaCreatures spawning over land (thanks to Jack_Dulan).
+
+Rev. 90 (24-Apr-2012)
+• Updated RunUO SVN support to SVN 870.
+
+Rev. 87-89 (19-Mar-2012)
+• Updated RunUO SVN support to SVN 855 (end).
+• Updated Distro's ML mobiles with SVN files.
+
+Rev. 85-86 (08-Mar-2012)
+• Updated RunUO SVN support to SVN 847 (end).
+• Updated Distro's ML mobiles with SVN files.
+
+Rev. 82-84 (07-Mar-2012)
+• Updated RunUO SVN support to SVN 844 (3rd step).
+
+Rev. 81 (26-Feb-2012)
+• Updated uninstallation file (/Data/Uninst/ND.uuf).
+
+Rev. 80 (26-Feb-2012)
+• Fixed some issues in Bedlam’s mobiles for RunUO 2.2;
+• Added ResolvesBridle (Bedlam’s item).
+
+Rev. 79 (26-Feb-2012)
+• Added "void" scripts in RunUO SVN folders for Bedlam’s mobiles, since they were replaced by SVN 834 default scripts.
+
+Rev. 78 (26-Feb-2012)
+• Updated RunUO SVN support to SVN 834;
+• Bedlam’s mobiles replaced by SVN 834 scripts.
+
+Rev. 77 (23-Feb-2012)
+• Updated RunUO SVN support to SVN 832.
+
+Rev. 76 (20-Feb-2012)
+• Tutorials updated.
+
+Rev. 75 (20-Feb-2012)
+• Commands GenSeers and RemSeers was rewritten;
+• Sample file Overseers.cfg was rewritten.
+
+Rev. 74 (20-Feb-2012)
+• Tutorials revised with Spawners’ Overseers tips;
+• Overseers’ folders renamed with small caps;
+• SpawnsOverseer code cleanup.
+
+Rev. 73 (15-Feb-2012)
+• Code cleanups and the last bug fix in PremiumSpawnerGump.
+
+Rev. 72 (14-Feb-2012)
+• Code cleanups in PremiumSpawner and Gump;
+• Small bug fix in PremiumSpawnerGump.
+
+Rev. 71 (13-Feb-2012)
+• Code cleanups in PremiumSpawner item.
+
+Rev. 70 (13-Feb-2012)
+• Sea creatures will no more spawn all over the PremiumSpawner (= when CanSwim true, requireSurface false).
+
+Rev. 69 (12-Feb-2012)
+• Updated RunUO SVN support to SVN 830.
+
+Rev. 68 (11-Feb-2012)
+• Changed a line in StaffRuneBook code to make it more Linux friendly.
+
+Rev. 67 (05-Feb-2012)
+• Fixed class name in DecorateML to work with SVN.
+
+Rev. 66 (05-Feb-2012)
+• Updated RunUO SVN support to SVN 825.
+
+Rev. 65 (01-Nov-2011)
+• Updated TerMur.xml locations.
+
+Rev. 64 (31-Oct-2011)
+• Added more SA mobiles;
+• SA Mobiles folders reorganization.
+
+Rev. 63 (26-Oct-2011)
+• Added spawns for Abyss and TerMur locations;
+• Spawn and Unload gumps updated.
+
+Rev. 62 (01-Oct-2011)
+• Fixed Plant system trivial bugs.
+
+Rev. 61 (23-Sep-2011)
+• Few fixes in Underworld spawns;
+• Few fixes and additions to Britannia and New Haven decorations;
+• StaticExporter changed to Joeku’s revision (very improved);
+• Added [AddDoor to Joeku’s Toolbar.
+
+Rev. 60 (21-Sep-2011)
+• Get back support for RunUO SVN.Rev. 59 (21-Sep-2011)
+• Hireling: added all outstanding speeches.
+
+Rev. 58 (21-Sep-2011)
+• Forgot BaseCreature.
+
+Rev. 57 (21-Sep-2011)
+• Fixed Hirelings: OnClick a gump will appear with options similar to tame creatures (OSI verified);
+• Fixed some HireFighter stats since OSI verification.
+
+Rev. 56 (20-Sep-2011)
+• Fixed a few decorations in Underworld;
+• Added a few commands to Joeku’s Toolbar.
+
+Rev. 55 (16-Sep-2011)
+• Updated SpawnGen to recognize time delay of seconds while saving;
+• Updated SpawnsOverseer to change Arrays to List<>.
+
+Rev. 54 (15-Sep-2011)
+• Added Underworld spawns and decoration file;
+• Added a few Underworld mobiles and items;
+• Updated World Creation and Spawns gump.
+
+Rev. 53 (15-Sep-2011)
+• Fixed Joeku’s Toolbar: toolbar will no more disappear when editing houses;
+• Fixed PremiumSpawners: Wandering and Evil Healers will not spawn over the spawner point, but in HomeRange;
+• Updated SpawnGen engine so we can use TimeDelays in seconds and hours inside the map files:
+o |10s| = ten seconds;
+o |10m| or |10| = ten minutes;
+o |10h| = ten hours.
+
+Rev. 52 (14-Sep-2011)
+• Added CEO's Yet Another Arya Addon Generator;
+• Updated Joeku’s Toolbar;
+• Removed last folder.
+
+Rev. 51 (14-Sep-2011)
+• Updated uninstallation file;
+• Removed one useless folder.
+
+Rev. 50 (14-Sep-2011)
+• Moved all teleporters from decoration files to [TelGen command.
+
+Rev. 43-49 (14-Sep-2011)
+• Update to RunUO 2.2 finished.
+
+Rev. 42 (14-Sep-2011)
+• Updating to RunUO 2.2… First step;
+• Fixed “Elwood McCarrin”, quest giver, double spawn in New Haven.
+
+Rev. 38–41 (14-Sep-2011)
+• Reorganization of files and folders;
+• Removing trash.
+
+Rev. 37 (14-Sep-2011)
+• Forgot to update SVN’s StaticExport.
+
+Rev. 36 (14-Sep-2011)
+• Fixed decoration in Britain Sewer;
+• A few updates to Static Export command;
+• Fixed Bone Magi name, changed to Bone Mage (OSI);
+• Fixed respawn delay in Britain Sewer.
+
+Rev. 35 (10-Sep-2011)
+• Fixed Static Export to RunUO SVN (CreaturesName to SpawnNames).
+
+Rev. 34 (09-Sep-2011)
+• Added Joeku’s Atomatic Speed Booster (will apply SpeedBoost automatically at login if you use GMbody once);
+• Added Nerun’s Static Exporter (export custom decorations targeting two places. Available at Admins’ Toolbar);
+• Fixed warning message at Custom Regions in a Box engine;
+• Updated GMBody to set Auto Speed Booster true at each usage;
+• Updated Joeku’s Toolbar to add new commands.
+
+Rev. 33 (09-Sep-2011)
+• Forgot to update RunUO Spawner Exporter command in Distro for RunUO SVN too.
+
+Rev. 32 (09-Sep-2011)
+• Updated UO Classic spawns (fixed monsters spawning in towns);
+• Updated RunUO Spawner Exporter command to comment inactive and void spawners.
+
+Rev. 31 (08-Sep-2011)
+• Updated to RunUO SVN 748 with BaseCreature changes.
+
+Rev. 30 (08-Sep-2011)
+• I forgot to upload the UO ML spawn maps, have added just the gumps. Uploading now.
+
+Rev. 29 (08-Sep-2011)
+• Added spawns to UO Mondain’s Legacy based on Nerun’s Distro v5.1.6 with a few changes;
+• Updated uninstallation file.
+
+Rev. 28 (08-Sep-2011)
+• High Seas stuff:
+o Added Sea Market (Docktown) decoration and spawners;
+• Uo Classic (pre-T2A):
+o Added option to spawn a pre-T2A server (UO Rebirth spawns);
+• Small fix in Sea Life spawns that was spawning over Fire island;
+• SpawnGen engine small improvements;
+• PremiumSpawner main gump, Spawn gump and Unload gump redesigned, with code cleanups.
+
+Rev. 27 (05-Sep-2011)
+• Fixed SpawnID of Reagents.map in Felucca and Trammel;
+• Updated Joeku’s Toolbar to start toolbar OnDeath;
+• Fixed bad gump in MainPlantGump in Engines\Plants.
+
+Rev. 26 (02-Sep-2011)
+• Few more adjustments in SpawnGen engine ([SpawnRem changed to [spawngen cleanfacet).
+
+Rev. 25 (02-Sep-2011)
+• Code cleanups and few bugfixes in SpawnGen engine;
+• Few updates at PremiumSpawnerGumps’ sizes;
+• Updated some ArrayList<> to List<> here and there.
+
+Rev. 24 (01-Aug-2011)
+• Added Custom Regions in a Box, with a few changes (access by PremiumSpawner gump);
+• Added new command:[Recover. Resurrects and recovers Thirst, Hunger, Hits, Stam and Mana of the targeted at the maximum level;
+• Updated PremiumSpawner gump: added Custom Regions and Smart Player Range Sensitive (Overseers);
+• Updated Joeku’s Toolbar to add new commands.
+
+Rev. 23 (30-Aug-2011)
+• Added Staff Cloak from XMLSpawner, with a few improvements:
+o Title will be automatically removed when equipped and restored when removed;
+o AccessLevel will be restored to your right level, not to Administrator level;
+o You will be automatically hidden when removed the cloak;
+• GMbody command updated to add a Staff Cloak to backpack of Admins and higher levels;
+• Tutorials revised to explain the Spawns’ Overseer system.
+
+Rev. 22 (30- Aug-2011)• Converted Heartwood’s Spawners to PremiumSpawners;
+• Fixed a few issues with RunUOSpawnerExporter;
+• Sea Horses can now swim (not OSI like, but reasonable);
+• Added Spawners’ Overseer engine (new incarnation of Smart Player Range Sensitive):
+o How it works: it has a range, that can be set by a GM or higher. It checks players in range every time the clock time ticks. If there is a player in range (or a non-hidden Staff Member) it will check players again only after 30 min (this time can be changed). If there is no players in range (or if Staff Members are hidden, but in range) it will disable all PremiumSpawners in range, deleting mobiles and items in range, and it will check for players every 5 seconds;
+o [GenSeers – generates Overseers crystal by reading configuration files at Data\Monsters\Overseers;
+o [RemSeers – removes all Overseers;
+o [add SpawnsOverseer – adds an Overseer crystal;
+o PS.:there is no Overseers in the configuration files yet.
+
+Rev. 21 (29- Aug-2011)
+• I forgot to update the BaseCreature, done.
+
+Rev. 20 (29- Aug-2011)
+• Updated wrong files in Rev.19, fixing it.
+
+Rev. 19 (29- Aug-2011)
+• Updated to RunUO SVN 733, that implemented BaseAI changes.
+
+Rev. 18 (27- Aug-2011)
+• Files that have not been updated in the previous version.
+
+Rev. 17 (27-Aug-2011)
+• Added Miniature Mushrooms;
+• Added Escortable Wandering Healers;
+• Updated to work with RunUO up to SVN 728:
+o Updated MonsterStatuette (removed Tormented Minotaur, because SVN added Minotaur);
+o Commented Ferret, Squirrel, TormentedChains, MinotaurHedge and Reptalon;
+o Nerun’s files for RunUO 2.1 versions of these mobiles was updated with RunUO SVN 728 versions;
+o Commented TormentedMinotaurStatuette, because SVN added a Minotaur Statue and I don’t know if it is the same thing.
+
+Rev. 16 (17-Jul-2011)
+• Small changes to Spawn and Unload gumps.
+
+Rev. 15 (09-Jul-2011)
+• Updated patch to work with RunUO SVN 679.
+
+Rev. 14 (06-Jul-2011)
+• Treasure Chests gumps fixed (Obsidian Fire’s file).
+
+Rev. 13 (04-Jun-2011)
+• Added reagents maps for Trammel and Felucca facets (MegaSpawner files);
+• Spawn and Unload Gumps updated.
+
+Rev. 12 (02-Jun-2011)
+• Updated SpawnGen engine: added type “reagents”. Instead of start a premium spawner in a map file with a “*”, start the line with “r”, but do not add creatures. Example:“r|||||||1420|1695|0|0|5|10|100|100|1|100|0|0|0|0|0” will spawn random 100 reagents at coordinates x 1420 y 1695. P.S.:just works in map files, not “in-game”. To add reagents to a spawner in-game, you need to write all the reagents names inside the premium spawner.
+
+Rev. 11 (23-Feb-2011)
+• Fixed bug in Heartwood vendors that were not spawning.
+
+Rev. 10 (28-Jan-2011)
+• Fixed server crash issue with Orc Scout ability to Stealth.
+
+Rev. 9 (11-Jan-2011)
+• South Malas map 100% revised;
+• Added AOS mobile: Sphynx (fortune rewards not working).
+
+Rev. 8 (10-Jan-2011)
+• Malas spawn maps revised for OSI accuracy (mainly animals in South map).
+
+Rev. 7 (09-Jan-2011)
+• Malas spawn maps revised for OSI accuracy (mainly Orc Forts, and small ones at Vendors, North and South);
+• Added Malas Decorations for OSI accuracy (Orc Forts’ doors).
+
+Rev. 6 (07-Jan-2011)
+• Correcting erroneous use of TortoiseSVN in Rev.4:last fix;
+• Sorry for any inconvenience.
+
+Rev. 5 (07-Jan-2011)
+• Correcting erroneous use of TortoiseSVN in the last revision.
+
+Rev. 4 (07-Jan-2011)
+• Added support to RunUO SVN from 657 up to 663 (optional patch).
+
+Rev. 3 (06-Jan-2011)
+• Added support to Universal Uninstaller;
+• Tutorials small revision.
+
+Rev. 2 (06-Jan-2011)
+• Added Ter Mur locations to “Go” gump and to Joeku’s Staff Runebook.
+
+Rev. 1 (05-Jan-2011)
+= Nerun’s Distro v5.2.5 for RunUO 2.1 plus:
+• Fixed "Z" coordinate of Holy City’s healer/healerguildmaster in termur\vendors.map;
+• Fixed wrong comments in \Engines\Spawner\PremiumSpawnerGump.cs(## instead of //).
+Thanks to Callandor2k.
+
+******************
+* OLD VERSIONING *
+******************
+
+Ver. 5.2.5 (04-Jan-2011)
+• \Data\Monsters\termur:
+• Added Vendors.map (by PsYiOn);
+• \Scripts\Customs\Nerun's Distro\New:
+• \Commands:
+• PremiumSpawnerMainGump.cs:
+• Changed main menu version info to v5.2.5;
+• Added Ter Mur to Spawn and Unload Options;
+• SpawnMaps.cs: added Ter Mur gump;
+• UnloadMaps.cs: added Ter Mur gump;
+• \Engines\Spawner:
+• PremiumSpawnerGump.cs:
+• Code cleanups;
+• Updated to add all the fake spawners gumps (from A to E);
+• PremiumSpawnerGumpA.cs removed;
+• PremiumSpawnerGumpB.cs removed;
+• PremiumSpawnerGumpC.cs removed;
+• PremiumSpawnerGumpD.cs removed;
+• PremiumSpawnerGumpE.cs removed.
+
+Ver. 5.2.4 (02-Jan-2011)
+• \Scripts\Customs\Nerun's Distro\New:
+• \Engines\Spawner:
+• PremiumSpawner.cs: fixed deserialization issue (eternal Verifying Account... after spawn and restart);
+• \Commands:
+• PremiumSpawnerMainGump.cs:
+• Changed main menu version info to v5.2.4;
+• General code cleanups;
+• RunUOSpawnerExporter.cs, line 112:updated HomeRange to WalkingRange.
+
+Ver. 5.2.3 (01-Jan-2011)
+• \Scripts\Customs\Nerun's Distro\New:
+• \Mobiles\Hireables:
+• BaseHire.cs, line 94: changed command access level from Administrator to Player (thanks to oiii88);
+• All hirable scripts: Hair and Beard issues fixed (Cleanup: Detected x hair and facial hair items being worn, converting to their virtual counterparts);
+• \Engines\Spawner:
+• PremiumSpawner.cs: fixed issues that spawned one creature at a time, no full respawn, and Fake Spawners (Creatures List from 2 to 6) not working;
+• \Commands:
+• PremiumSpawnerMainGump.cs: changed main menu version info to v5.2.3.
+
+Ver. 5.2.2 (24-Dec-2010) – Merry Christmas!
+• Updated to RunUO 2.1 (based on Nerun’s Distro 5.2.1 for SVN 538);
+• General folder reorganization;
+• Engine updated;
+• Smart Player Range Sensitive system removed;
+• Code cleanups;
+• Tutorials revised: English revision is finally ended.
+
+Ver. 5.2.1a (07-Oct-2010)
+• Bugfix in BrigandCamp.cs
+
+Ver. 5.2.1 (05-Oct-2010)
+• Spawns:
+• Britain Sewers: added missing alligators (OSI);
+• Trammel’s Outdoors map updated (brigand camp changes, see bellow);
+• Spawn System:
+• Linux friendly - renamed 1st letter of Data/Monsters folders from uppercase to lowercase (like Data/Monsters/trammel);
+• Spawngen engine: added Ter Mur map support (map number “6”) – thanks to Admin Aphrodite;
+• Multis/Camps:
+• Human Brigand Camp (added in Distro v5.1.7):replaced by RunUO SVN 538’s Brigand Camp.
+
+Ver. 5.2.0 (09-Jul-2010) – "Il Carro"
+• Spawns:
+• Britain Sewers updated for OSI accuracy;
+• Items:
+• Scripted new item:“Levers” for use in Britain Sewers decoration;
+• Decorations:
+• Britain Sewers updated for OSI accuracy;
+• Haven Island: some old decoration files were renamed to “.cfg.bak” because they are “Old Haven” decoration. Blank files were placed over old ones;
+• Haven’s Quests:
+• Collector Quest – spawner of Elwood McCarrin was moved to New Haven, and the old configuration file was renamed, as for the old decoration above;
+• Uzeraan turmoil quest – simple removed (old file renamed and blank file placed over);
+• Champion Spawn Engine: code cleanups in Champion Spawn Controller (thanks to Kons.snoK).
+
+Ver. 5.1.9 (09-Dec-2009) - "Lo diavolo"
+• Spawns:
+• Tokuno > Isamu-Jima > Icelands - updated Outdoors.map and Wildlife.map for OSI accuracy (and removed unecessary spawners);
+• Trammel/Felucca > Heartwood - added birds and some vendors (Townspeople.map and Townslife.map);
+• Mobiles:
+• removed Ice Hound: is not an OSI mobile (verified in OSI Lake Superior);
+• Items:
+• confirmed: Crystal Ball is really OSI stuff (it spawn inside dungeon treasure chests level 4);
+• a few Staff Ring changes;
+• a few dungeon treasure chests changes: chests will spawn different scrolls and gems, not a lot of same type (example: no more 5 Paralyze scrolls or 4 saphire, now will spawn 5 different scrolls, 4 different gems);
+• Premium Spawner Engine:
+• Team and Group information removed from context menu;
+• renamed Subcount A to E to Count A to E (to easy edit multiple amount of creatures with command line. Example:[set count 5 counta 4 countb 3 );
+• Fcondon's files:
+• Treasure Hunting: added Fcondon's treasure.cfg file (update treasure hunting to New Haven looks. This is a welcome RunUO bugfix);
+• Create World Gump:
+• Nerun's Distro commands are now orange, to distinguish from the standard commands of RunUO;
+• Tutorial revised, but not finished yet.
+
+Ver. 5.1.8 (24-Nov-2009) - "La Temperanza"
+• Bug Fixes:
+• shard crash issue when use [decorate command (bug in Haven Island configuration file);
+• Spawns:
+• Tokuno vendors small update;
+• Fan Dancers Dojo small update.
+
+Ver. 5.1.7 (18-Nov-2009)
+• Spawns:
+• Britain vendors: added new vendors (Britain farmlands) and changed some for more recent OSI accuracy (Vendors.map);
+• Haven Island: added New Haven vendors, Old Haven monsters, Wild Life, Monsters and so on (edited: Vendors.map, Townslife.map, Outdoors.map and Wildlife.map. OSI checked: Legends and Chesapeake);
+• Decoration:
+• Haven Island decorations: New Haven, Old Haven, mining camp, archery butte etc (some Carriehart's files and new ones);
+• Mobiles:
+• added Pappa Smurf's Spectral Spellbinder (OSI like);
+• added Human Brigand Camp (OSI like);
+• Locations:
+• added Mondain's Legacy dungeons to [go command (Blighted Grove, Palace of Paroxysmus, Prism of Light, Sanctuary and Painted Caves);
+• added New Haven and Old Haven locations to Trammel;
+• added Heartwood to Towns menu in [go command;
+• fixed bug in Trammel [go menu, where locations appear in the wrong menu;
+• dungeons and towns menu, in [go command, organized in alphabetic order;
+• Mondain's Legacy Decorations:
+• Painted Caves: removed decoration file, because RunUO 2.0 implemented teleporters;
+• Sanctuary: removed teleporters from decoration file, because RunUO 2.0 implemented teleporters;
+• Misc.cfg file removed (all badspwans, except Timber Wolf, added to Wildlife.map);
+• Commands:
+• updated [Gmbody: now staff will be set to immortal automatically;
+• Carriehart's files:
+• added Carriehart's Sign.cfg and Common.map (removed signs and vendors from Old Haven).
+
+Ver. 5.1.6 (12-Nov-2009)
+• General:
+• updated to RunUO 2.0 Final Release;
+• Spawns:
+• Blighted Grove: turned off Frightened Dryad "badspawn" (this is a quest NPC implemented in Malganis ML pack so we don't need add it here).
+
+Ver. 5.1.5 (09-Jul-2009)
+• Commands fixes
+• added Joeku's Staff Runebook;
+• fixed Save by Coordinates, Save by Region, Remove by ID, Remove by Coordinates and Remove by Region gumps (the field image was above Text Entry making it impossible to use those gumps) (thanks to Mordredrs);
+• added new command:[pscount, that counts the total amount of Premium Spawners in the server;
+• fixed [GMBody command: now all GM items and backpack will be deleted before turn the target in GM style, so you don't need to unequip items to equip the GM Robe and other items;
+• added [SHTelGen, [SecretLocGen and [DecorateML to Creat World Gump;
+• fixed an issue in Creat World Gump: changed place of Decorate and Moongen commands, because Moongen removes all Mongates in the world before create again, removing all moongates generated by Decorate command. Now Moongen works first, and Decorate after;
+• changed [RunUOSpawnerExporter default exportation folder from \Spawnexport to \Export;
+• Hireling updates
+• fixed title of Hire Sailor (from "sailot" to "sailor");
+• small fixes in \Scripts\Customs\New\Mobiles\Hireables\Basehire.cs(Hire context entry on click, plus on speach that says hire cost if it is not hired, if it is, it will says that is already hired);
+• small fixes in hirelings' appearance;
+• Quests Engine
+• Quest button in paperdoll will now open the quest log;• Mondain's Legacy support
+• I will work with Malganis' Mondain's Legacy pack (i will add just a really minimum support);
+• removed all Blighted Grove quests added in previous versions;
+• removed custom decorations of previous version;
+• added Malganis' ML [DecorateML command;
+• added Malganis' ML decorations:
+• removed custom teleporters and other items not implemented in RC2 or SVN;
+• removed some decoration files of spawners with creatures not implemented in RC2 or SVN.
+
+Ver. 5.1.4 (29-Jun-2009)
+• General changes
+• added Joeku's Toolbar v1.3, customized to Nerun's Distro;
+• removed Commands Stones scripts;
+• removed Commands Stones in [GMBody command;
+• updated \Scripts\Customs\SE\Mobiles\Icehound.cs(hue change) (this is not an OSI creature, this is an Ultima IX: Ascension creature, I am considering removing it from the distro);
+• updated \Data\Monsters\Malas\Vendors.map (4 spawners removed. No changes in amount and vendors);
+• Smart Player Range Sensitive
+• updated \Scripts\Customs\New\Engines\Spawner\Premiumspawners.cs(Smart P.R.S. disable by default);
+• added \Scripts\Customs\New\Engines\Spawner\SmartPRSCrystal.cs. This Crystal will reduce the lag generated in the Premium Spawner's Smart P.R.S. System, because instead of 8,500 spawners searching for players and items close to it, only a few Crystals (~200) will do the search. And Admins can place how many Crystals and set ranges for each one as the shard needs;
+• Decoration
+• renamed Blighted Grove.cfg to NERUN-Blightedgrove.cfg;
+• renamed Prismoflight.cfg to NERUN-Prismoflight.cfg;
+• renamed Teleporters - New Dungeons.cfg to NERUN-Teleporters-Newdungeons.cfg;
+• Blighted Grove
+• Quests:
+• Vile Poison (Quest chain 1st part) (90%):everything works, Tainted Tree Sample will be placed inside player's backpack automatically, by Jamal, instead of chop nearest tree for it;
+• A Rock and a Hard Place (Quest chain 2nd part) (90%):everything works, but not exactly as in OSI servers. I made a Collection Bag that will be placed inside player's backpack by Iosep, the Trader. Players put items inside the bag, that updates the system;
+• Sympathetic Magic (Quest chain 3rd part) (90%): same as A Rock and a Hard Place;
+• Already Dead (Quest chain 4th part) (0%, but by the way);
+• Eureka! (Quest chain, part for smiths) (0%, but by the way)
+• Map files:
+• updated \Data\Monsters\Felucca\Blightedgrove.map;
+• updated \Data\Monsters\Trammel\Blightedgrove.map;
+• Deleted junk:
+• removed \Scripts\Customs\ML\Mobiles\Bedlam\Monstrousinterredgrizzle.off
+• removed \Scripts\Customs\ML\Mobiles\Blighted Grove\Ladymelisande.off
+• removed \Scripts\Customs\ML\Mobiles\Palace of Paroxysmus\Chiefparoxysmus.off
+• removed \Scripts\Customs\ML\Mobiles\Prism of Light\Shimmeringeffusion.off
+• removed \Scripts\Customs\ML\Mobiles\The Citadel\Travesty.off
+• removed \Scripts\Customs\ML\Mobiles\Twisted Weald\Dreadhorn.off
+• SVN 329 updates
+• updated \Scripts\Engines\AI\AI\BaseAI.cs;
+• updated \Scripts\Engines\AI\Creature\Basecreature.cs;
+• updated \Scripts\Items\Special\Monsterstatuette.cs(SVN 319 didn't change this file since 321, but i updated anyway);
+• Since SVN 329 introduce ML mobiles, i removed the custom mobiles done by Erica, Makaar, Callandor2k and others:
+• removed custom \Scripts\Customs\ML\Mobiles\Twisted Weald\Cusidhe.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Prism of Light\Fetidessence.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Bedlam\Interredgrizzle.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Twisted Weald\Satyr.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Labyrinth\Minotaur.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Labyrinth\Minotaurcaptain.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Labyrinth\Minotaurscout.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Painted Caves\Troglodyte.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Palace of Paroxysmus\Corrosiveslime.cs
+• removed custom \Scripts\Customs\ML\Mobiles\Labyrinth\Makaar's Labyrinth Unreleased Mobiles\Meraktus.cs• Since SVN 329 mobiles are offical mobiles, so i will not palce them in a custom folder. And by this way you can install v5.1.4 in a RunUO RC2 or SVN 329 without problems:
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Animal\Cusidhe.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Humanoid\Magic\Fetidessence.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Humanoid\Magic\Interredgrizzle .cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Humanoid\Magic\Satyr.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Humanoid\Melee\Minotaur.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Humanoid\Melee\Minotaurcaptain.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Humanoid\Melee\Minotaurscout.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Humanoid\Melee\Troglodyte.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Misc\Melee\Corrosiveslime.cs
+• added official SVN 329 \Scrips\Mobiles\Monsters\ML\Special\Meraktus.cs
+• SVN 335 updates
+• updated \Scripts\Engines\AI\AI\BaseAI.cs;
+• updated \Scripts\Engines\AI\Creature\Basecreature.cs;
+• updated \Scripts\Items\Special\Monsterstatuette.cs.
+
+Ver. 5.1.3 (17-Jun-2009)
+This release was mainly an update of Erica's Mondain's Legacy Dungeon Map v.10, plus a timid implement of Blighted Grove dungeon teleporters, items, mobiles and quest. The idea is to implement Blighted Grove quests in the next release, because i don't want to confuse myself with a lot of changes.
+• new mobiles 
+• added Scripts\Customs\ML\Mobiles\Bedlam\Interredgrizzle.cs;
+• added Scripts\Customs\ML\Mobiles\The Citadel\Magedragonsflamemage.cs;
+• Mobiles changes 
+• updated Scripts\Customs\ML\Mobiles\Eliteninjawarrior.cs;
+• updated Scripts\Customs\ML\Mobiles\The Citadel\Dragonsflamegrandmage.cs;
+• updated Scripts\Customs\ML\Mobiles\The Citadel\Dragonsflamemage.cs;
+• updated Scripts\Customs\ML\Mobiles\The Citadel\Serpentsfangassassin.cs;
+• updated Scripts\Customs\ML\Mobiles\The Citadel\Serpentsfanghighexecutioner.cs;
+• updated Scripts\Customs\ML\Mobiles\The Citadel\Tigersclawmaster.cs;
+• updated Scripts\Customs\ML\Mobiles\The Citadel\Tigersclawthief.cs;
+• AI Ninja implementation 
+• added Scripts\Customs\New\Engines\AI\AI\NinjaAI.cs(AI Ninja itself);
+• updated Scripts\Engines\AI\AI\BaseAI.cs(added AI_Ninja);
+• updated Scripts\Engines\AI\Creature\Basecreature.cs(added AI_Ninja);
+• General Map updating 
+• updated Data\Monsters\Malas\Citadel.map;
+• updated Data\Monsters\Felucca\Palaceofparoxysmus.map;
+• updated Data\Monsters\Trammel\Palaceofparoxysmus.map;
+• Blighted Grove 
+• updated Data\Monsters\Felucca\Blightedgrove.map (added quest items and NPCs);
+• updated Data\Monsters\Trammel\Blightedgrove.map (added quest items and NPCs);
+• added Jamal, the fisherman (quest giver. But Quest doesn't work);
+• added Bone Machete (quest item. Find it in the ground, near Jamal);
+• added Samples Of Corrupted Water (quest item);
+• added Blighted Grove decoration;
+• fixed dungeon teleporters (added Malganis' custom teleporters).
+
+Ver. 5.1.2 (11-Jun-2009)
+• added Makaar's Labyrinth Unreleased Mobiles (Meraktus, Flurry, Tempest, Mistral, Grim), with Callandor2k, Erica and Varchild's suggestions;
+• edited "Scripts\Items\Special\Monsterstatuette.cs";
+• added changes to works properly with RunUO SVN 321 (\Scripts\Engines\AI\Creature\Basecreature.cs);
+• English tutorial revised (not finished yet, but 80% is ok).
+
+Ver. 5.1.1 (07-May-2009)
+• Sealife changes: Seahorses now have your own "sub-spawner":will spawn one at a time;
+• Wildlife changes: Direwolves changed to Greywolves;
+• Painted Caves: Troglodyte\Grobu\Lurg\Giantrat new proportion (3:3:3:3, in a 30x30 area).
+
+Ver. 5.1.0 (26-Oct-2008)
+• added Erica's Orc Scout (badspawns fix) (= BaseCreature.cs and BaseAI.cs changes).
+
+Ver. 5.0.9 (04-May-2008)
+• added "Elite Ninja Warrior" and "Plague Beast Lord" (badspawns fix);
+• small gump fixes (cosmetic changes);
+• Tutorial (PT-BR) revised.
+
+Ver. 5.0.8 – “Erika's files”
+• fixed Prism Of Light dungeon (Felucca \ Trammel);
+• added Blighted Grove dungeon (Felucca \ Trammel);
+• added Painted Caves dungeon (Felucca \ Trammel);
+• added Palace of Paroxysmus dungeon (Felucca \ Trammel);
+• added Sanctuary dungeon (Felucca \ Trammel);
+• added Citadel dungeon (Malas);
+• added Labyrinth dungeon (Malas);
+• added Twisted Weald dungeon (Ilshenar);
+• added Lokai's ML Mobiles (several changes).
+
+Ver. 5.0.7.1
+• Fix: added the forgotten Tokuno's Outdoors.map and Wildlife.map in 5.0.7 release.
+
+Ver. 5.0.7
+• added Prism Of Light dungeon (not OSI like).
+
+Ver. 5.0.6
+• Tokuno maps 65% revised (9 spawners removed);
+• Genstealarties command added to Create World gump.
+
+Ver. 5.0.5
+• shard crash bug fixed:"Save" and "Remove by region" commands fixed.
+
+Ver. 5.0.4
+• Fetid Essence bodyvalue fixed;
+• Premium Spawner engine small improvement;
+• Malas maps 100% revised (81 spawners removed);
+• Spawn Editor updated to show fake spawns (sub spawners).
+
+Ver. 5.0.3 – “Emergencial”
+• don't need to steal items inside the dungeons' Treasure Chests;
+• land creatures will no more spawn in black areas, under ground etc.
+
+Ver. 5.0.2
+• Genchampions updated with Tokuno Sleeping Dragon champion;
+• Champion Spawn Controller added (at Felucca:1415 1695 0);
+• badspawn fix (2185 168 -32 Ilshenar Treasurechestlevel4);
+• GMbody command updated (Etherealhorse removed, now just use [speedboost);
+• bug fix: sea creatures won't spawn all at same point;
+• Ilshenar maps revised (100% now. 197 spawners removed).
+
+Ver. 5.0.1
+• badspawns fixed;
+• bug fix: now Smart P.R.S. is disable for Vendors in towns;
+• more Ilshenar maps revised (53 spawners removed).
+
+Ver. 5.0.0
+• updated to RunUO 2.0 RC1;
+• ML: Minotaur, Troglodyte, Grobu and Lurg changed;
+• Premium Spawner engine updated:"fake spawner" added;
+• Spawngen engine updated;
+• Minor gumps changes;
+• Old maps revised (Trammel, Felucca, and some Ilshenar maps);
+• Tutorial revised.
+
+Ver. 4.1.4
+• Smart P.R.S. command minor fix;• PremiumSpawner Gump minor changes;
+
+Ver. 4.1.3
+• added Mondain's Legacy splash screen on log in;
+• "RunUO to PremiumSpawners Exporter" shard crash bug fixed (when coverting spawners without creatures in list);
+• Smart P.R.S. On/Off switch added to main gump;
+• Smart P.R.S. was enabled for Town's Animals and Escorts (they will despawn);
+
+Ver. 4.1.2
+• badspawn fix (Coil missig);
+
+Ver. 4.1.1
+• "RunUO to PremiumSpawners Exporter" shard crash bug fixed;
+• 6th character slot added;
+• added support for Mondain's Legacy (new map size, teleporters and mobiles);
+• added Mondain's Legacy spawns (Blighted Grove and Painted Caves);
+
+Ver. 4.1.0
+• Smart P.R.S. is now enable by default;
+• small improvement in SmartPRS on/off command;
+• Animal.map updated (Trammel/Felucca: WanderingHealers now has your own PremiumSpawner);
+• Miscellaneous.map updated (Trammel/Felucca: The Bog of Desolation, The Destard Swamps and The Wisp Circle);
+
+Ver. 4.0.9
+• small fixes in GMbody command;
+• Tutorial small revision;
+• Added some chickens, sheeps and cows in farmlands;
+• Wandering healers count at Healing Temple (Ilshenar, 1083 968) was halved, and range increased to 30;
+• Added Solen Infiltrators (Wind, Trinsic and Windemere);
+• Wind spawned (dragons, drakes, demons and liches);
+
+Ver. 4.0.8
+• small fix in Smart P.R.S.;
+• Hireables NPCs added;
+• Jhelom Fighting Pits spawned (Hireable NPCs);
+
+Ver. 4.0.7
+• Smart "Player Range Sensitive" (lag reducer, the default is disable, to enable just use [smartprs);
+• small issue with Staff Ring fixed;
+• Spawn Editor and Yomutso Elder warnings fixed;
+• "overridemintime 5" and "overridemaxtime 10" added to all map files (5-10 min, except OSILight, Medium and Heavy);
+• Added new Commands-Stones (commands shortcut like Hiding Stone): AdminStone ([admin), PropsStone ([props), TeleportStone ([m tele), RemoveStone ([m remove), GoStone ([go) and PremiumStone ([spawner, PremiumSpawner System shortcut). 
+• GMBody command updated (it will add the new stone to GMbody);
+
+Ver. 4.0.6
+• version number added to PremiumSpawner main gump;
+• SE Creatures update to the new L0rdDarkScythe files;
+• SpawnID and SpawnRange added to Spawner gump (GetProperties List);
+• Paragon.cs fix (BaseEscortable, Summoned and Controled can not be paragon);
+• small fix in GMbody.cs (incompatibility issue);
+
+Ver. 4.0.5
+• GM Hide Balls were substituted by GMHidingStone;
+• [gmbody command updated;
+• More sheeps added to Yew farms (Towns.map, Trammel/Felucca);
+• Alchemist in Gargoyle City changed to Glassblower (Vendors.map);
+• Skeletons and Zombies changed from map OSILight.map to Graveyards.map (Trammel/Haven);
+• added Skeletons and Zombies to Haven Graveyard at Felucca too;
+• few changes to other spawns at OSILight.map (at Haven/Occlo);
+
+Ver. 4.0.4
+• BaseVendors spawning as Paragons fixed;• added Stone Crafter to Gargoyle City (Ilshenar);
+• added book of ninjitsu and bushido to [gmbody command;
+• SpawnRem command (finally) fixed;
+
+Ver. 4.0.3
+• All SE monsters fixed (Lagoth's files);
+• Generate Factions command added to CreateWorld gump;
+• ClothSeller fixed (Tyran's File);
+
+Ver. 4.0.2
+• Khaldun ShadowFiend, GrimmochDrummel, LysanderGathenwale, MorgBergen and TavaraSewel enable in khaldun.map;
+• added zombies and skeletons to Haven graveyard (Uzeraal's quest);
+• SolenHive Trammel/Felucca maps updated;
+• EliteNinja, Raiju and KazeKemono fixed;
+• Paragons and PremiumSpawner issue fixed;
+
+Ver. 4.0.1
+• Staff Ring fixed: nighsight ability added;
+• LootNew.cs warnings fixed;
+• PremiumSpawner.cs updated;
+• added tokuno vendors and House Doors (missing in 4.0);
+• Badspawns fixed (except Cloth seller);
+• CreateWorld gump updated (added GenKhaldun);
+
+Ver. 4.0
+• Now Premium spawner coexist with RunUO spawners, do not need delete RunUO spawner, TreasureChests files or Loot file;
+• added RunUO spawner exporter (conversion command: RunUO spawners to Premium Spawners);
+• Trammel\OSILight.map small changes (rise Horde Minions amount in Heaven, for Paladin quest);
+• IceHound changed (Artfist hue change);
+• Tokuno badspawns fixed;
+• Bankercamp at Ilshenar/Southeast.map fixed;
+• Tutorial rewritten;
+
+Ver. 3.0
+• Signs fixed (Walmart file);
+• Doors sound fixed;
+• added Hello_Kitty's Tokuno vendors (japanese names and cloths);
+• Tokuno/Miscellaneous.map splited in 2 maps: Monsters.map and Animals.map (by JadeFist);
+• Tokuno/Vendors.map small fix;
+• Gumps updated;
+• added new samurai armors;
+• Armors Samurai Dealer and Weapons Samurai Dealer updated;
+• added Soul Stone;
+• NPC Ronin updated;
+
+Ver. 2.9
+• added 2 new commands: [clearall (clear all facets) and [gmbody (to set yourself to GM style);
+• Tokuno.xml locations changed (JadeFist file);
+• SpawnMaps.cs and Regions.xml small fix;
+• OSILight, Medium and Heavy maps changed (delay lowered);
+• Ilshenar spawns small changes (now at 100% spawned);
+• Tokuno spawns added (ultimaIX spawns);
+• Tokuno monsters added;
+• Japanese names added (names.xml new file, for Tokuno vendors);
+• Tokuno vendors changed (to add japanese names);
+• SignGen updated to Zento Town (SignParser.cs + Signs.cfg);
+• Japanese doors (Doors.cfg decorate file, plus scripts). 
+
+Ver. 2.8
+• Fixed the loot of new monsters;
+• a few changes at Ilshenar/Southeast.map and Trammel/Felucca OSIMedium.map 
+• added Samurai Empire Pack v1.2 (Tokuno, dungeon teleporters, [go gump, publicmoongate, some NPCs) Ver. 2.7
+• Small fix in GenChampions script;
+• SpawnEditor fixed (spawn locations bug);
+• Added a main gump for the most common funcionalities of Premium Spawner ([PremiumSpawner[/b] or just [Spawner[/b]);
+• bad spawns fix in Ilshenar: northwest.map and northeast.map;
+• Blackthorn Juggernaut fixed (name chaged from BlackthornJg to Blackthorn Juggernaut);
+• added 2 map options: "overridemintime" and "overridemaxtime", to override Min and MaxDelay. 
+
+Ver. 2.6
+• Destard champion implemented;
+• TreasureChestPack updated to v0.99F (chests after opened will be deleted after 2-5 min, then will respawn in 1-2 min);
+• Spawner Editor cosmetic changes;
+• Exodus and Rock dungeon added;
+• Trammel/Felucca vendors small fix;
+• All maps change: Treasures min/max delay changed to 1 and 2 minutes;
+• Missing NPCs added: Arcane Daemon, Blackthorn Juggernaut, Cursed, Exodus Minion, Exodus Overseer, Gargoyle Destroyer, Gargoyle Enforcer, Gargoyle Enslaved and Moloch. 
+
+Ver. 2.5
+• a minor fix in SpawnEditor.cs (shard crash issue);
+• added all champions spawns except Destard;
+• new command: [GenChampion (generates champions spawns: Type=OSI, Actives, SpawnRange=24, Delay=10-20 min) 
+• [GenChampion added to [CreateWorld gump;
+
+Ver. 2.4
+• a few additions to Towns.map and Northwest.map (Ilshenar);
+• a minor fix in Khaldun.map (Felucca, Lost Lands);
+• Spawner.cs changed: BaseVendor now spawn at any point from SpawnRange to HomeRange (it will allow Wandering Healers to spawn at any point);
+• all vendors.map now have SpawnRange = 0 (because default vendors must spawn above spawners);
+• Search By ID added to SpawnEditor;
+• added [CreateWorld command (an easy gump where you can select the commands: Decorate, DoorGen, MoonGen, SignGen or GenGauntlet individually or at same time. I believe it is better than use Admin gump). 
+
+Ver. 2.3
+• added South.map to Malas (Malas 100% spawned) 
+
+Ver. 2.2
+• added North.map to Malas (animals and a few monsters);
+• small fixes in SpawnEditor.cs;
+• Harrower in Khaldun changed to HarrowerTentacles;
+
+Ver. 2.13 (Minor fixes)
+• Bug fixed in SpawnMaps.cs and UnloadMaps.cs (Command Prefix: now any prefix works not just "[");
+• Bug fixed in SpawnMaps.cs (in Felucca, when Orc Caves was selected, was spawned OSI Heavy, and vice-versa);
+• The 4 new Artifacts were removed;
+• Now Distro is just distributed in the zip format. The cab format won't be more used because it has been bringing problems for some people. 
+
+Ver. 2.12 (Minor fixes and maps)
+• Felucca vendors locations updated to RunUO 1.0 RC0;
+• Bug fix: added line "overrideid 250" in vendors.map (Trammel);
+• Felucca: Khaldun dungeon implemented (but entrances was not implemented yet);
+• Ilshenar: Ancient Lair, Mushroom Cave and Ratman Cave implemented;
+• Ilshenar: added Meer to Northeast.map;
+
+Ver. 2.11 (Minor fixes)
+• Malas and Trammel vendors locations updated to RunUO 1.0 RC0;
+• OSILight.map: added Horde minions and mongbats at Haven;
+• Spawner.cs: updated to new corrected David's Spawner2.cs version, delay lowered from 20-40 to 5-10 minutes;
+• Distro fix: folder "Items\Container" renamed to "Items\Containers". 
+
+Ver. 2.1
+• a few Trammel/Felucca vendors changes;• OSIHeavy.map: Orc Fort near cove updated to more OSI accuracy;
+• Miscellaneous.map: added monsters at Yew Fort of The Damned, like OSI;
+• Graveyards corrected;
+• Ilshenar: Northeast.map and Towns.map changes/adds (Savage camp, desert, Controller Tower, Ruined Castle, near ancient lair, swamp near savage camp and more...);
+• Malas: Doom gauntlet removed (already in RunUO by default: [GenGauntlet);
+• TreasureChest updated (version 0.99E): Beverage added to TreasureChestLevel1h;
+• added new command: "[spawngen savebyhand" (to save spawns did by hand to a byhand.map file). 
+
+Ver. 2.0 - RC0
+• Distro v2.0 updated to work with RunUO v1.0 RC0;
+• Orc Caves decoration file has been removed (RC0 already implemented it);
+• Removed changed Trammel/Felucca xml location files (RC0 already include Orc Caves and Solen Hive entrances);
+• BaseCreature.cs with PlayerRangeSensitive set to true has been removed (RC0 has "true" as default). 
+
+Ver. 2.0
+• added property SpawnID to spawner.cs 
+• added command [spawngen unload <spawnid> to "unload" maps;
+• added a changed BaseCreature.cs to set PlayerRangeSensitive to true (less lag);
+• added line "overridemap 1" in Felucca Vendors.map (it was spawning at Trammel AND Felucca, now just Felucca);
+• Fire and Ice dungeon corrected for more OSI accuracy;
+• No more need to go to ChampionSpawns and do a BringToHome, it is done automatically now, but you still need to activate then and set Champion type.
+
+Ver. 1.2
+• a few changes in Trammel, Felucca and Malas vendors;
+• More Ilshenar spawns: nortwest sector plus Sorcerers dungeon (now at 90%);
+• TreasureChest updated to 0.99d (removed artifact loot at level 4 chests for OSI accuracy);
+• removed Staff of Skeletal Summon and Glass Sword (for OSI accuracy);
+
+Ver. 1.1
+• More Ilshenar spawns (now at 70%);
+• Added Felucca Champion spawns in Despise (1), Deceit (1), and all Lost Lands champs (12);
+• Trammel/Felucca graveyards spawns correted;
+• TreasureChest updated to 0.99c (ItemIDs are not fixed now, they can change;and label "a locked treasure chest" has been removed, for more OSI accurate, but the 30% chance of drop Artifacts in level 4 chests still remain;and decay time rised from 1-2 min to 10-15 min);
+
+Ver. 1.02
+• Added Matador Doidao's Malas Spawns (Orc forts and Doom dungeon);
+• Bad spawns corrected in Destard;
+
+Ver. 1.01
+• TreasureChestPack update to version 0.99b ("treasurechestlevel5" removed, added "treasurechestlevel1h").
+
+Ver. 1.0
+• There is no information about this update. This is the first release with the new name “PremiumSpawner”.
+
+***********************
+* ORIGINAL VERSIONING *
+***********************
+
+R1 to R5
+• Originally, PremiumSpawner derived from a script called “Ultimate Spawner”. The first five releases of PremiumSpawner still used Ultimate Spawner name, just adding R1, R2, R3, R4 and R5 to name. There is no information about those updates.
