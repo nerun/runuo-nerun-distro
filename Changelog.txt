@@ -1,3 +1,6 @@
+Rev. 154 (26-Mar-2018)
+• Updated RunUO Spawner Exporter to be Linux friendly.
+
 ﻿Rev. 153 (26-Mar-2018)
 • Code cleanup at PremiumSpawnerMainGump.
 • README.md unified with READ-ME FIRST.txt and added usage and troubleshooting instructions.

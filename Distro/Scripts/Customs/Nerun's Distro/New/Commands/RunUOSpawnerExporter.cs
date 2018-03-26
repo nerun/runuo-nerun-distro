@@ -1,4 +1,4 @@
-//Engine r32
+//Engine r154
 using System;
 using System.IO;
 using System.Text;
@@ -12,6 +12,15 @@ namespace Server.Commands
 	public class RunUOSpawnerExporter
 	{
 		public const bool Enabled = true;
+
+		public static bool IsLinux
+		{
+			get
+			{
+				int p = (int) Environment.OSVersion.Platform;
+				return (p == 4) || (p == 6) || (p == 128);
+			}
+		}
 
 		public static void Initialize()
 		{
@@ -32,10 +41,17 @@ namespace Server.Commands
 			Map map = e.Mobile.Map;
 			List<Item> list = new List<Item>();
 
-			if ( !Directory.Exists( @".\Data\Nerun's Distro\Spawns\" ) )
-				Directory.CreateDirectory( @".\Data\Nerun's Distro\Spawns\" );
+			string bar = "\\";
 
-			using ( StreamWriter op = new StreamWriter( String.Format( @".\Data\Nerun's Distro\Spawns\{0}-exported.map", map ) ) )
+			if (IsLinux == true)
+				bar = "/";
+
+			string path = @"."+bar+"Data"+bar+"Nerun's Distro"+bar+"Spawns"+bar;
+
+			if ( !Directory.Exists( path ) )
+				Directory.CreateDirectory( path );
+
+			using ( StreamWriter op = new StreamWriter( String.Format( path+"{0}-exported.map", map ) ) )
 			{
 
 				if ( map == null || map == Map.Internal )
