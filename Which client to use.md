@@ -1,8 +1,8 @@
 **By Shamino**
 
-[Sphere Community - Thread: CLient versions and UO expansions list](https://forum.spherecommunity.net/Thread-Client-Versions-UO-Expansions-LIST)
+[Sphere Community - Thread: Client versions and UO expansions list](https://forum.spherecommunity.net/Thread-Client-Versions-UO-Expansions-LIST)
 
-*Ported from RunUO forums, credits to nerun.*
+*Ported from RunUO forums, credits to Nerun.*
 
 24.09.1997 - **[1.0.0 to 1.25.35]** - Ultima Online (original game)
 
@@ -40,10 +40,10 @@
 
 Clients after **7.0.24.0** use new file format **.uop**, not more **.mul**, beware of this if you want to add objects or new animations, it may be more difficult or incompatible.
 
-For a server pre .UOP i recommend the 7.0.20.0 client, best stable High Seas version.
+* For a server pre .UOP i recommend the 7.0.20.0 client, best stable High Seas version.
 
-For a server Stygian Abyss i recommend the 7.0.8.2 client, best stable Stygian Abyss version.
+* For a server Stygian Abyss i recommend the 7.0.8.2 client, best stable Stygian Abyss version.
 
-For a server old school, i recommend 4.0.11c or 2.0.3 client.
+* For a server old school, i recommend 4.0.11c or 2.0.3 client.
 
 Regards!
