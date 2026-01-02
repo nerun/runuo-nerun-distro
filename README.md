@@ -1,11 +1,11 @@
 # RunUO is over!!!
-[RunUO](https://github.com/runuo/runuo) is over. Official team abandoned it after version 2.3. Mark Sturgill, after take the reins for a while, officially abandoned it at version 2.6, with a few updates to 2.7 beta. So, and now? Mark Sturgill have recommended move to ServUO. I also recommend. **You will not need Nerun's Distro for ServUO**, it already have a Create World gump plus XMLSpawner by default.
+[RunUO](https://github.com/runuo/runuo) is over. Official team abandoned it after version 2.3. Mark Sturgill, after take the reins for a while, officially abandoned it at version 2.6, with a few updates to 2.7 beta (released as 2.7 in Nov/2021 by Voxpire). So, and now? Mark Sturgill have recommended move to ServUO. I also recommend. **You will not need Nerun's Distro for ServUO**, it already have a Create World gump plus XMLSpawner by default.
 
 * [ServUO on GitHub](https://github.com/ServUO/ServUO)
 
 * [ServUO community](https://www.servuo.com/)
-    
-Just in case you still want to use RunUO to run shards of Ultima Online Classic Era, you can try this fork I made from RunUO. Basically I just updated to remove some annoying warnings and to be able to run it with Mono 5.18+ on Linux.
+
+Just in case you still want to use RunUO to run shards of Ultima Online Classic Era, you can try this fork I made from RunUO. Basically I just updated to remove some annoying warnings and to be able to run it with Mono 5.2+ on Linux. (*I tested all versions of Mono 5 and the only one that compiles and runs RunUO 2.3/2.7 is 5.0.1.1. There no "odd" versions like 5.1*).
 
 * [Nerun's RunUO fork on GitHub](https://github.com/Nerun/runuo)
 
